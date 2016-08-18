@@ -1,0 +1,117 @@
+body {background: transparent; font-size: 13px; height: 100%}
+h1, h2, h3 {color: #3E3D3D; text-shadow: 0px 1px 1px #FFF; font-weight: 300; margin: 0}
+
+.list-group-item {background-color: transparent; border: none; color: #555}
+.list-group-item a {color: #222; text-decoration: none; display: block; padding: 15px; margin: -10px -15px}
+.list-group-item.disabled a {color: #888}
+.list-group-item a:hover {color: #111}
+
+.list-group {box-shadow: inset 0px 1px 1px #ccc; background-color: #e4e4e4; border-radius: 4px}
+.list-group-item:hover {background: rgba(255,255,255,0.3)}
+
+table.table {font-size: 1em}
+
+
+.container.wrap, .container-fluid.wrap {padding: 0; margin: 0}
+
+.container-fluid {padding: 15px; color: #333; border-radius: 0; margin-top:30px; border: none; box-shadow: 0 8px 35px rgba(0,0,0,0.5)}
+
+.containerHeader, .containerHeader a {color: #3E3D3D}
+.containerHeader h1 {margin: 0; font-size: 18px}
+
+/*.footerText {text-align: center; margin: 15px 0 0; text-shadow: 0 1px 0px #aaa;}*/
+.footerText {text-align: center;color: #000;margin: 15px 0 0;background: #f3f3f3; border-radius: 5px 5px 0 0; position: fixed;bottom: 0;left: 50%;width: 500px;margin-left: -250px;padding: 10px; opacity: 0.6; box-shadow: 0 1px 3px #555}
+.footerText:hover {opacity: 1}
+
+a {text-decoration: none; color: #23527C}
+a:hover {color: #153C5D}
+
+.containerHeader {
+  background: #EFEFEF; background: -moz-linear-gradient(top, #EFEFEF 0%, #D5D5D5 100%); background: -webkit-linear-gradient(top, #EFEFEF 0%, #D5D5D5 100%);
+  background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EFEFEF', endColorstr='#D5D5D5',GradientType=0);
+}
+
+/* closer mac styling */
+.containerHeader {padding: 4px 7px 4px; border-bottom: 1px solid #b6b4b6; height:55px; z-index:9; position: fixed; top: 0; width: 100%; -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
+.containerBody {/*background:rgba(255,255,255,0.95);*/ background: #F7F7F7; padding: 10px; margin-top:0; position: fixed; top:55px; bottom: 0; width: 100%; overflow: scroll; overflow-x: hidden;  -webkit-user-select: none}
+
+
+
+
+
+.sidebar {padding: 0; margin: 0}
+.sidebar .nav-pills>li {margin-top: 0}
+.sidebar .nav-pills>li>a {border-radius: 0; padding: 6px 15px}
+
+.sidebar .sidebar-group {margin-left: 15px; padding-top: 10px}
+.sidebar .sidebar-group:first-child {padding-top: 0}
+.sidebar .sidebar-group-heading {padding: 5px 0; font-weight: bold}
+
+.mainContentCol {min-height: 400px; background: rgba(255, 255, 255, 0.95); padding: 0; border-left: 1px solid #c2c2c2; border-radius: 0 0 4px}
+
+ul.list, ul.list li {list-style: none; margin:0; padding: 0}
+ul.list li {list-style: none; background:#fff; padding: 3px 8px}
+ul.list li:nth-child(2n) {background:#f5f5f5}
+ul.list li:last-child {margin-bottom:20px; }
+
+ul.list li.group-name {color: black; background: #ccc; font-weight: bold}
+
+ul.list li .primary {color: black; text-decoration: none}
+
+.containerHeader .back {font-size:30px}
+.containerHeader .btn-default {background:#f0f0f0}
+
+.containerHeader #quicksearch {height: 28px; font-size: 12px; color: #444; padding:8px}
+
+
+
+/* WRAP_CLASS FULL-WIDTH WHITE */
+/*.wrap.full-width-white .containerBody {background: #F7F7F7}
+.wrap.full-width-white .containerBody ul.list {margin: -20px -15px 0}*/
+
+/* WRAP_CLASS FULL-WIDTH TRANSPARENT */
+.wrap.full-width-transparent .containerBody {background: rgba(239, 239, 239, 0.45)}
+
+/* WRAP_CLASS TWO-COL */
+.wrap.two-col .containerBody {background: rgba(239, 239, 239, 0.45); padding-top:0}
+
+
+/*
+@media (max-width:767px) {
+  .containerHeader .col-xs-4 {padding-right:0}
+  .containerHeader .col-xs-4 .dropdown {display:none}
+  .containerHeader, .containerBody {border-radius:0}
+
+  .sidebar {height: 30px; overflow: hidden;}
+  .sidebar .nav-stacked>li {float:left}
+  .sidebar .nav-pills>li>a {padding: 6px}
+
+  ul.list li {padding: 10px}
+}
+*/
+
+
+.padding-10 {padding:10px}
+.padding-0-10 {padding:0 10px}
+
+
+input.urlviewer {width: 100%; background: none; border: none}
+
+/* Window controls */
+.windowControl {display: inline-block; width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
+.windowControl.btnClose {background: #ff3b47; border-color: #f0121d}
+.windowControl.btnMinimize {background: #ffbf00; border-color: #e69e12}
+.windowControl.btnMaximize {background: #00d742; border-color: #12b728}
+.windowControl.btnClose:active {background: #c5343c; border-color: #9a242c}
+.windowControl.btnMinimize:active {background: #c39109; border-color: #a68028}
+.windowControl.btnMaximize:active {background: #129b36; border-color: #2e7c42}
+
+.windowControl.btnSpecial {background: #007ed7; border-color: #0c4aa9; xdisplay: none}
+.windowControl.btnSpecial:active {background: #066bb3}
+
+.titlebar {margin-bottom: 1px}
+.toolbar .fa.fa-fw {margin: 0 -7px}
+.toolbar .btn {padding: 1px 14px; -webkit-app-region: no-drag}
+
+
+html, body, .wrap {height: 100%}
