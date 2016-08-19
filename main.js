@@ -51,7 +51,7 @@ function createSettingsWindow() {
 
 /* background window */
 function createPlayerWindow() {
-  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 140, show: false, frame: false,}});
+  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 120, show: false, frame: false,}});
 }
 
 function showPlayerWindow() {

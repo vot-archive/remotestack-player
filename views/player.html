@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/player.css">
 
   <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
   <script src="assets/js/bootstrap.min.js"></script>
@@ -15,27 +16,37 @@
   <link rel="icon" type="image/png" href="assets/rs.png">
   <link rel="apple-touch-icon" href="assets/rs.png">
 
-  <link rel="import" class="partial" href="partials/wHeaderPlayer.html">
+  <!-- <link rel="import" class="partial" href="partials/wHeaderPlayer.html"> -->
 </head>
 <body>
 
   <!-- window header -->
-  <div id="wContainer" class="container-fluid wrap two-col">
-    <div id="wHeaderPlayer" class="containerHeader"></div>
+  <div id="wContainer" class="container-fluid wrap">
+    <!-- <div id="wHeaderPlayer" class="containerHeader"></div> -->
 
     <div class="containerBody">
+      <div>
+        <span class="windowControl btnClose" onclick="Renderer.ipc.hidePlayer()"></span>
+      </div>
+
+
       <div id="rsPlayerCurrent">
-        <span id="currentArtist">-</span> - <span id="currentTitle">-</span>
+
+        <span id="currentArtist">-</span>
+        <br />
+        <div class="pull-right">
+          <span class="timeElapsed">00:00</span>/<span class="timeTotal">00:00</span>
+        </div>
+        <span id="currentTitle">-</span>
       </div>
 
-      <div id="rsPlayerTimer">
-        <span class="timeElapsed">00:00</span> / <span class="timeTotal">00:00</span>
-      </div>
 
-      <div class="btn-group">
-        <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
-        <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
-        <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
+      <div id="rsPlayerControls">
+        <div class="btn-group">
+          <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
+          <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
+          <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
+        </div>
       </div>
 
       <div id="rsPlayerAudioContainer"></div>
@@ -191,19 +202,14 @@
       },
 
       updateTrackTime: function (track) {
-        var currTimeDiv = $('#rsPlayerTimer .timeElapsed');
-        var durationDiv = $('#rsPlayerTimer .timeTotal');
+        var currTimeDiv = $('.timeElapsed');
+        var durationDiv = $('.timeTotal');
 
         var currTime = Math.floor(track.currentTime).toString();
         var duration = Math.floor(track.duration).toString();
 
         currTimeDiv.text(_formatSecondsAsTime(currTime));
-
-        // if (isNaN(duration)) {
-        //   durationDiv.text('00:00');
-        // } else {
-          durationDiv.text(_formatSecondsAsTime(duration));
-        // }
+        durationDiv.text(_formatSecondsAsTime(duration));
       },
 
       load: function (track) {
@@ -213,7 +219,7 @@
           audioTag.remove();
         }
 
-        var newEntry = '<audio controls preload="true"  ontimeupdate="Player.updateTrackTime(this)">';
+        var newEntry = '<audio preload="true" ontimeupdate="Player.updateTrackTime(this)">';
         newEntry += '<source src="' + track.url + '" type="audio/mpeg">';
         newEntry += '</audio>';
 
