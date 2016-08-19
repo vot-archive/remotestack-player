@@ -28,21 +28,75 @@
         <span id="currentArtist">-</span> - <span id="currentTitle">-</span>
       </div>
 
+      <div id="rsPlayerTimer">
+        <span class="timeElapsed">00:00</span> / <span class="timeTotal">00:00</span>
+      </div>
+
       <div class="btn-group">
         <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
         <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
         <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
       </div>
 
-      <div id="rsPlayerAudio">
-      </div>
+      <div id="rsPlayerAudioContainer"></div>
+
     </div>
   </div>
+
+  <script>
+  function _trailingZero (num, positions) {
+    if (!num) {
+      num = 0;
+    }
+    num = num.toString();
+    var rtn = num;
+    var iterations = positions - num.length;
+
+    if (iterations > 0) {
+      for (i = 0; i < iterations; i++) {
+        rtn = '0' + rtn;
+      }
+    }
+
+    return rtn;
+  }
+
+  function _formatSecondsAsTime (sec) {
+    var s = parseInt(sec);
+
+    var multipliers = {
+      d: 60 * 60 * 24,
+      h: 60 * 60,
+      m: 60
+    };
+
+    var remainder = s;
+
+    var days = Math.floor(remainder / multipliers.d);
+    if (days) remainder -= (days * multipliers.d);
+
+    var hours = Math.floor(remainder / multipliers.h)
+    if (hours) remainder -= (hours * multipliers.h);
+
+    var minutes = Math.floor(remainder / multipliers.m)
+    if (minutes) remainder -= (minutes * multipliers.m);
+
+    var seconds = remainder;
+
+    var rtn = '';
+    if (days) rtn += _trailingZero(days) + ':';
+    if (hours) rtn += _trailingZero(hours, 2) + ':';
+    rtn += _trailingZero(minutes, 2) + ':';
+    rtn += _trailingZero(seconds, 2) + '';
+
+    return rtn;
+  }
+  </script>
 
 
   <script>
     var Player = {
-
+      // state
       queue: [
         {
           'artist': 'Vot',
@@ -61,8 +115,15 @@
         }
       ],
 
+      volume: 100,
+      loopOne: false,
+      loopAll: false,
+      playing: false,
+
+
+      // methods
       getElement: function () {
-        return $('#rsPlayerAudio audio')[0];
+        return $('#rsPlayerAudioContainer audio')[0];
       },
 
       play: function (state) {
@@ -73,9 +134,15 @@
           return;
         }
 
-        // state = state || !audioTag.paused || true;
+        // state = state || audioTag.paused || true;
+        console.log('state:', state)
 
-        if (audioTag.paused) {
+        if (typeof state !== 'boolean') {
+          console.log('audioTag.paused:', audioTag.paused)
+          state = audioTag.paused || false;
+        }
+
+        if (state) {
           console.log('Playing');
           audioTag.play();
           _self.setPlayButton(false);
@@ -90,20 +157,53 @@
         var prevTrack = this.queue.pop();
         this.queue.unshift(prevTrack); // add track to the end of queue
 
+        // var audioTag = this.getElement();
+        // var playState = audioTag ? !audioTag.paused : false;
+
         this.load(prevTrack);
-        this.play(false);
+        // this.play(playState);
       },
 
       next: function () {
         var nextTrack = this.queue.shift();
         this.queue.push(nextTrack); // add track to the end of queue
 
+        var audioTag = this.getElement();
+        var playState = audioTag ? !audioTag.paused : false;
+
         this.load(nextTrack);
-        this.play(false);
+        this.play(playState);
       },
 
       setPlayButton: function (state) {
         $('.fa.fa-play, .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
+      },
+
+      setVolume: function (vol) {
+        if (typeof vol !== 'number') {
+          return;
+        }
+        var _self = this;
+        var audioTag = _self.getElement();
+
+        _self.volume = vol;
+        audioTag.volume = vol / 100;
+      },
+
+      updateTrackTime: function (track) {
+        var currTimeDiv = $('#rsPlayerTimer .timeElapsed');
+        var durationDiv = $('#rsPlayerTimer .timeTotal');
+
+        var currTime = Math.floor(track.currentTime).toString();
+        var duration = Math.floor(track.duration).toString();
+
+        currTimeDiv.text(_formatSecondsAsTime(currTime));
+
+        // if (isNaN(duration)) {
+        //   durationDiv.text('00:00');
+        // } else {
+          durationDiv.text(_formatSecondsAsTime(duration));
+        // }
       },
 
       load: function (track) {
@@ -113,14 +213,17 @@
           audioTag.remove();
         }
 
-        var newEntry = '<audio controls>';
+        var newEntry = '<audio controls preload="true"  ontimeupdate="Player.updateTrackTime(this)">';
         newEntry += '<source src="' + track.url + '" type="audio/mpeg">';
         newEntry += '</audio>';
 
 
-        $('#rsPlayerAudio').append(newEntry);
+        $('#rsPlayerAudioContainer').append(newEntry);
         $('#currentArtist').text(track.artist);
         $('#currentTitle').text(track.title);
+
+        _self.setVolume(_self.volume);
+        _self.updateTrackTime(_self.getElement());
       }
     }
 
