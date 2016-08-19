@@ -15,14 +15,14 @@ var Player = {}
       <h1>RemoteStack</h1>
     </div>
     <div class="col-xs-4 text-right">
-      <span class="windowControl btnSpecial" onclick="Renderer.openSettingsWindowFn()"></span>
+      <!-- <span class="windowControl btnSpecial" onclick="Renderer.ipc.showSettings()"></span> -->
     </div>
   </div>
 
 
   <div class="row toolbar">
     <div class="col-xs-6">
-      <div class="btn-group">
+      <div class="btn-group hide">
         <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
         <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
         <a class="btn btn-default" onclick="Player.pause()"><span class="fa fa-fw fa-stop" title="Library"></span></a>
@@ -37,7 +37,7 @@ var Player = {}
 
       <div class="btn-group">
         <!-- <a class="btn btn-default" href="#" data-toggle="modal" data-target="#addToLibraryModal"><span class="fa fa-fw fa-bookmark" title="Add (batch)"></span></a> -->
-        <a class="btn btn-default" onclick="Renderer.ipc.showPlayer()"><span class="fa fa-fw fa-play"></span></a>
+        <a class="btn btn-default" onclick="Renderer.ipc.showPlayer()"><span class="fa fa-fw fa-youtube-play"></span></a>
         <a class="btn btn-default" onclick="Renderer.ipc.showSettings()"><span class="fa fa-fw fa-cogs"></span></a>
       </div>
 

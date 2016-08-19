@@ -1,9 +1,136 @@
-<script>
-var Renderer = require('../renderer');
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Player</title>
 
-<h1>PLAYER</h1>
-<a onclick="Renderer.ipc.hidePlayer()">Close</a>
-<style>
-background: black; color: white; font-family: 'Helvetica Neue'
-</style>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/app.js"></script>
+
+  <link rel="icon" type="image/png" href="assets/rs.png">
+  <link rel="apple-touch-icon" href="assets/rs.png">
+
+  <link rel="import" class="partial" href="partials/wHeaderPlayer.html">
+</head>
+<body>
+
+  <!-- window header -->
+  <div id="wContainer" class="container-fluid wrap two-col">
+    <div id="wHeaderPlayer" class="containerHeader"></div>
+
+    <div class="containerBody">
+      <div id="rsPlayerCurrent">
+        <span id="currentArtist">-</span> - <span id="currentTitle">-</span>
+      </div>
+
+      <div class="btn-group">
+        <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
+        <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
+        <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
+      </div>
+
+      <div id="rsPlayerAudio">
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    var Player = {
+
+      queue: [
+        {
+          'artist': 'Vot',
+          'title': 'Infused (demo 1.41)',
+          'url': 'http://siliconfen.co/v/mp3/Infused-1.41.mp3'
+        },
+        {
+          'artist': 'Vot',
+          'title': 'Forget me now (6.8.11b)',
+          'url': 'http://siliconfen.co/v/mp3/Forget%20me%20now-6.8.11b.mp3'
+        },
+        {
+          'artist': 'Vot',
+          'title': 'Death and Despair',
+          'url': 'http://siliconfen.co/v/mp3/2016-03-23_death-and-despair-1.mp3'
+        }
+      ],
+
+      getElement: function () {
+        return $('#rsPlayerAudio audio')[0];
+      },
+
+      play: function (state) {
+        var _self = this;
+        var audioTag = _self.getElement();
+        if (!audioTag) {
+          alert('No audio element present')
+          return;
+        }
+
+        // state = state || !audioTag.paused || true;
+
+        if (audioTag.paused) {
+          console.log('Playing');
+          audioTag.play();
+          _self.setPlayButton(false);
+        } else {
+          console.log('Pausing');
+          audioTag.pause();
+          _self.setPlayButton(true);
+        }
+      },
+
+      prev: function () {
+        var prevTrack = this.queue.pop();
+        this.queue.unshift(prevTrack); // add track to the end of queue
+
+        this.load(prevTrack);
+        this.play(false);
+      },
+
+      next: function () {
+        var nextTrack = this.queue.shift();
+        this.queue.push(nextTrack); // add track to the end of queue
+
+        this.load(nextTrack);
+        this.play(false);
+      },
+
+      setPlayButton: function (state) {
+        $('.fa.fa-play, .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
+      },
+
+      load: function (track) {
+        var _self = this;
+        var audioTag = _self.getElement();
+        if (audioTag) {
+          audioTag.remove();
+        }
+
+        var newEntry = '<audio controls>';
+        newEntry += '<source src="' + track.url + '" type="audio/mpeg">';
+        newEntry += '</audio>';
+
+
+        $('#rsPlayerAudio').append(newEntry);
+        $('#currentArtist').text(track.artist);
+        $('#currentTitle').text(track.title);
+      }
+    }
+
+    // Player.load('http://siliconfen.co/v/mp3/Infused-1.41.mp3');
+    Player.next();
+  </script>
+
+  <script>
+    require('../renderer/imports');
+    var Renderer = require('../renderer');
+  </script>
+</body>
+</html>
