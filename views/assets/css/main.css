@@ -1,0 +1,17 @@
+/* Add footer */
+.wrap .containerBody {bottom: 20px; width: 100%}
+.wrap .containerFooter {position: fixed; bottom: 0; height:20px; width: 100%; padding: 0 5px; background: #D5D5D5; border-top: 1px solid #b6b4b6;}
+.wrap .containerFooter a {color: #4c4c4c}
+
+.containerHeader {height:0 !important}
+.containerBody {top:0; overflow: hidden}
+
+
+.mainContentCol {padding-top: 50px}
+.mainContentCol h1 {font-weight: 100; color: white; text-shadow: 0 1px 1px black}
+
+.mainContentCol {background: #333}
+
+.homeMenu {width: 200px; text-align: center; display: inline-block; margin-top: 30px}
+.homeMenu span {border: 1px solid #555; color: white; display: block; padding: 10px; border-radius: 5px; margin-bottom: 3px}
+.homeMenu span:hover {background: rgba(255,255,255,0.2)}

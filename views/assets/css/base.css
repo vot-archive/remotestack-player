@@ -111,7 +111,16 @@ input.urlviewer {width: 100%; background: none; border: none}
 
 .titlebar {margin-bottom: 1px}
 .toolbar .fa.fa-fw {margin: 0 -7px}
-.toolbar .btn {padding: 1px 14px; -webkit-app-region: no-drag}
+.titlebar .btn, .toolbar .btn {padding: 1px 14px; -webkit-app-region: no-drag}
 
 
 html, body, .wrap {height: 100%}
+
+
+
+
+
+.wrap.smallHeader .containerHeader .toolbar {display: none}
+.wrap.smallHeader h1 {font-size: 14px; font-weight: 400; margin-top: 1px}
+.wrap.smallHeader .containerHeader {height: 25px}
+.wrap.smallHeader .containerBody {top: 25px}

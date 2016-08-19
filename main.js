@@ -24,7 +24,14 @@ function createWindow (name, opts) {
     icon: __dirname + '/views/public/rs.ico'
   };
   var windowOpts = _.merge({}, defaultWindowOpts, opts.windowOpts);
-  console.log('Created window:', name, ' | options:', JSON.stringify(windowOpts));
+
+  function replacerFn (k, v) {
+    if (v.icon) {
+      delete v.icon;
+    }
+    return v
+  }
+  console.log('Created window "' + name + '":', JSON.stringify(windowOpts, replacerFn, 0));
 
 
   RS.windows[name] = new BrowserWindow(windowOpts);
@@ -41,7 +48,7 @@ function createWindow (name, opts) {
 
 /* Main window */
 function createMainWindow () {
-  createWindow('main', {template: 'main', windowOpts: {minWidth: 300, minHeight: 54, frame: false}});
+  createWindow('main', {template: 'main', windowOpts: {minWidth: 300, minHeight: 54, frame: true}});
 }
 
 /* Settings window */
@@ -51,7 +58,7 @@ function createSettingsWindow() {
 
 /* background window */
 function createPlayerWindow() {
-  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 120, show: false, frame: false,}});
+  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 120, show: false, frame: false, closable: false, resizable: false}});
 }
 
 function showPlayerWindow() {
