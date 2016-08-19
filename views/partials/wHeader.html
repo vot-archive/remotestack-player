@@ -36,30 +36,10 @@ var Player = {}
       </div>
 
       <div class="btn-group">
-        <a class="btn btn-default" href="#" data-toggle="modal" data-target="#addToLibraryModal"><span class="fa fa-fw fa-bookmark" title="Add (batch)"></span></a>
+        <!-- <a class="btn btn-default" href="#" data-toggle="modal" data-target="#addToLibraryModal"><span class="fa fa-fw fa-bookmark" title="Add (batch)"></span></a> -->
+        <a class="btn btn-default" onclick="Renderer.ipc.showPlayer()"><span class="fa fa-fw fa-play"></span></a>
+        <a class="btn btn-default" onclick="Renderer.ipc.showSettings()"><span class="fa fa-fw fa-cogs"></span></a>
       </div>
 
-
-
-      <a class="btn btn-default" href="#" data-toggle="dropdown"><span class="fa fa-fw fa-bars"></span></a>
-      <ul class="dropdown-menu dropdown-menu-right">
-        <li class="dropdown-header">
-          RemoteStack 0.1.0
-        </li>
-
-        <li role="separator" class="divider"></li>
-
-        <li><a href="/settings" ><span class="fa fa-fw fa-sliders"></span> &nbsp; Settings</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#debugModal"><span class="fa fa-fw fa-code"></span> &nbsp; Debug info</a></li>
-        <li><a href="#" data-toggle="modal" data-target="#modalSystemInfo"><span class="fa fa-fw fa-cogs"></span> &nbsp; System info</a></li>
-
-        <li role="separator" class="divider"></li>
-
-        <li class="dropdown-header"><small>Currently playing:</small></li>
-        <li><a><small>
-          <span class="fa fa-fw fa-empty"></span>---
-        </small></a></li>
-      </ul>
-    </div>
   </div>
 </partial>

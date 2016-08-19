@@ -42,13 +42,23 @@ function windowCloseFn(){
   window.close();
 }
 
-function openSettingsWindowFn() {
-  ipcRenderer.send('open-settings-window');
+function showSettings() {
+  ipcRenderer.send('show-settings');
+}
+function showPlayer() {
+  ipcRenderer.send('show-player');
+}
+function hidePlayer() {
+  ipcRenderer.send('hide-player');
 }
 
 module.exports = {
   windowMinimizeFn: windowMinimizeFn,
   windowMaximizeFn: windowMaximizeFn,
   windowCloseFn: windowCloseFn,
-  openSettingsWindowFn: openSettingsWindowFn
+  ipc: {
+    showSettings: showSettings,
+    showPlayer: showPlayer,
+    hidePlayer: hidePlayer
+  }
 }

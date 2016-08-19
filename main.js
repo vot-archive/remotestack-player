@@ -50,19 +50,28 @@ function createSettingsWindow() {
 }
 
 /* background window */
-function createBackgroundWindow() {
-  createWindow('background', {template: 'background', windowOpts: {show: false}});
+function createPlayerWindow() {
+  createWindow('player', {template: 'player', windowOpts: {width: 400, height: 300, show: false, frame: false,}});
+}
+
+function showPlayerWindow() {
+  RS.windows.player.show();
+}
+function hidePlayerWindow() {
+  RS.windows.player.hide();
 }
 
 
 function initialise () {
-  createBackgroundWindow();
+  createPlayerWindow();
   createMainWindow();
 }
 
 // This method will be called when Electron has finished
 app.on('ready', initialise);
-ipcMain.on('open-settings-window', createSettingsWindow);
+ipcMain.on('show-settings', createSettingsWindow);
+ipcMain.on('show-player', showPlayerWindow);
+ipcMain.on('hide-player', hidePlayerWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
