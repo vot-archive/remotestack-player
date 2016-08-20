@@ -51,7 +51,10 @@ function createWindow (name, opts) {
 
 /* Main window */
 function createMainWindow () {
-  createWindow('main', {template: 'main', windowOpts: {width: 620, height: 440, minWidth: 300, minHeight: 54, frame: true}});
+  createWindow('main', {template: 'main', windowOpts: {width: 620, height: 440, minWidth: 300, minHeight: 120, frame: true, show: false}});
+  RS.windows.main.once('ready-to-show', function () {
+    RS.windows.main.show();
+  })
 }
 
 /* Settings window */
