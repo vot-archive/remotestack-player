@@ -6,10 +6,7 @@
 .containerHeader, .containerHeader a {color: #3E3D3D}
 .containerHeader h1 {margin: 0; font-size: 18px}
 
-.containerHeader {
-  background: #EFEFEF; background: -moz-linear-gradient(top, #EFEFEF 0%, #D5D5D5 100%); background: -webkit-linear-gradient(top, #EFEFEF 0%, #D5D5D5 100%);
-  background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EFEFEF', endColorstr='#D5D5D5',GradientType=0);
-}
+.containerHeader {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
 
 .containerHeader {padding: 4px 7px 4px; border-bottom: 1px solid #b6b4b6; height:55px; z-index:9; position: fixed; top: 0; width: 100%; -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
 

@@ -4,7 +4,10 @@ body {background: transparent; font-size: 12px}
 h1, h2, h3 {color: #3E3D3D; text-shadow: 0px 1px 1px #FFF; font-weight: 300; margin: 0}
 table.table {font-size: 1em}
 
-h2 {font-size: 18px; text-transform: uppercase; text-decoration: underline; padding: 0 0 10px;}
+h2 {font-size: 18px; margin: -10px -10px 0; padding: 10px 10px 10px; background: #DDD; text-decoration: none;}
+h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
+.solidBg.dark h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: white; text-shadow: none}
+
 a {text-decoration: none; color: #23527C}
 a:hover {color: #153C5D}
 a, a:hover, a:focus {text-decoration: none; outline: none}
@@ -41,46 +44,25 @@ ul.list li .primary {color: black; text-decoration: none}
 .navContent {display: none; height: 100%}
 .navContent.active {display: block}
 /*.navContent.solidBg {background: #E7E7E7}*/
-.navContent.solidBg {
-  background: #EFEFEF; background: -moz-linear-gradient(top, #EFEFEF 0%, #D5D5D5 100%); background: -webkit-linear-gradient(top, #EFEFEF 0%, #D5D5D5 100%);
-  background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EFEFEF', endColorstr='#D5D5D5',GradientType=0);
-}
+.navContent.solidBg {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
+.navContent.solidBg.dark {background: linear-gradient(to bottom, #444 0%, #111 100%)}
 
 
 /* Navigation */
 /*.nav>li>a:focus, .nav>li>a:hover {background-color: #E7E7E7; color: #169bb9;}*/
 
-
 .containerBody {padding: 0 10px; position: fixed; top:0; bottom: 0; width: 100%; overflow: hidden; -webkit-user-select: none}
-
 .containerBody {background: transparent}
 .containerBody ul.list {margin: 0 -10px}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Backgrounds */
 #wContainer {background: url('../img/rapciu_pearl.png'); background-size: cover}
-
-
 /*#wContainer {background: url('http://edmullen.net/test/rc.jpg'); background-size: cover}*/
 
 .sidebar {background: rgba(255, 255, 255, 0.5)}
 .navContent {background: rgba(50, 50, 50, 0.3)}
-
 
 /* Sidebar */
 .sidebar {width:140px;position:fixed;left:-140px}
