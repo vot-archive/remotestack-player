@@ -73,7 +73,8 @@ ul.list li .primary {color: black; text-decoration: none}
 .wrap.full-width-transparent .containerBody {background: rgba(239, 239, 239, 0.45)}
 
 /* WRAP_CLASS TWO-COL */
-.wrap.two-col .containerBody {background: rgba(239, 239, 239, 0.45); padding-top:0}
+.wrap.two-col .containerBody {background: rgba(239, 239, 239, 0.45); padding-top:0; padding-bottom:0}
+
 
 
 /*
@@ -124,3 +125,7 @@ html, body, .wrap {height: 100%}
 .wrap.smallHeader h1 {font-size: 14px; font-weight: 400; margin-top: 1px}
 .wrap.smallHeader .containerHeader {height: 25px}
 .wrap.smallHeader .containerBody {top: 25px}
+
+
+
+a, a:hover, a:focus {text-decoration: none; outline: none}

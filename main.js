@@ -29,7 +29,7 @@ function createWindow (name, opts) {
     if (v.icon) {
       delete v.icon;
     }
-    return v
+    return v;
   }
   console.log('Created window "' + name + '":', JSON.stringify(windowOpts, replacerFn, 0));
 
@@ -42,8 +42,11 @@ function createWindow (name, opts) {
   }
 
   RS.windows[name].on('closed', function () {
+    RS.windows[name].destroy();
     RS.windows[name] = null;
+    console.log('Destroyed window "' + name + '"');
   });
+
 }
 
 /* Main window */
@@ -58,16 +61,23 @@ function createSettingsWindow() {
 
 /* background window */
 function createPlayerWindow() {
-  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 120, show: false, frame: false, closable: false, resizable: false}});
+  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 120, show: false, frame: true, closable: true, resizable: false, x: 1040, y: 700}});
+
+  RS.windows['player'].on('closed', function () {
+    // RS.windows[name].destroy();
+    console.log('Closing "player" window - shutting down the app');
+    RS.windows.player = null;
+    app.quit();
+  });
 }
 
 function showPlayerWindow() {
   RS.windows.player.show();
 }
+
 function hidePlayerWindow() {
   RS.windows.player.hide();
 }
-
 
 function initialise () {
   createPlayerWindow();
@@ -81,10 +91,18 @@ ipcMain.on('show-player', showPlayerWindow);
 ipcMain.on('hide-player', hidePlayerWindow);
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
-    app.quit();
+// app.on('window-all-closed', function () {
+//   if (process.platform !== 'darwin') {
+//     app.quit();
+//   }
+// });
+
+app.on('will-quit', function () {
+  if (RS.windows.player) {
+    RS.windows.player.setClosable(true);
+    RS.windows.player.close();
   }
+  app.quit();
 });
 
 app.on('activate', function () {
