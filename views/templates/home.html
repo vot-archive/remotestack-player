@@ -1,18 +1,24 @@
 <template>
 
-  <div role="tabpanel" class="tab-pane active" id="home">
-    <div class="inner text-center">
+  <div class="navContent" id="home">
+    <div class="inner padding-10 text-center">
 
       <h1>RemoteStack</h1>
 
       <nav class="homeMenu">
-        <a href="#" onclick="">Playlist</a>
-        <a href="#" onclick="">Library</a>
+        <!-- <a href="#" onclick="">Playlist</a> -->
+        <a href="#" onclick="Nav.goto('library')">Library</a>
         <a href="#" onclick="">Open file</a>
-        <a href="#" onclick="">Open URL</a>
+        <a href="#" onclick="Nav.goto('openurl')">Open URL</a>
+        <a href="#" onclick="">Control device</a>
+        <a href="#" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-cogs"></span> Preferences</a>
       </nav>
 
     </div>
   </div>
 
 </template>
+
+<script>
+var Nav = require('../renderer/nav');
+</script>

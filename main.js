@@ -51,13 +51,13 @@ function createWindow (name, opts) {
 
 /* Main window */
 function createMainWindow () {
-  createWindow('main', {template: 'main', windowOpts: {minWidth: 300, minHeight: 54, frame: true}});
+  createWindow('main', {template: 'main', windowOpts: {width: 620, height: 440, minWidth: 300, minHeight: 54, frame: true}});
 }
 
 /* Settings window */
-function createSettingsWindow() {
-  createWindow('settings', {template: 'settings', windowOpts: {width: 300, height: 300}});
-}
+// function createSettingsWindow() {
+//   createWindow('settings', {template: 'settings', windowOpts: {width: 300, height: 300}});
+// }
 
 /* background window */
 function createPlayerWindow() {
@@ -86,7 +86,7 @@ function initialise () {
 
 // This method will be called when Electron has finished
 app.on('ready', initialise);
-ipcMain.on('show-settings', createSettingsWindow);
+// ipcMain.on('show-settings', createSettingsWindow);
 ipcMain.on('show-player', showPlayerWindow);
 ipcMain.on('hide-player', hidePlayerWindow);
 

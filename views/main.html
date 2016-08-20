@@ -21,30 +21,22 @@
   <link rel="import" class="partial" href="partials/wFooter.html">
 
   <link rel="import" class="template" href="templates/home.html">
-  <!-- <link rel="import" class="template" href="templates/library.html">
-  <link rel="import" class="template" href="templates/streams.html"> -->
+  <link rel="import" class="template" href="templates/playlist.html">
+  <link rel="import" class="template" href="templates/library.html">
+  <link rel="import" class="template" href="templates/nowplaying.html">
+  <link rel="import" class="template" href="templates/openurl.html">
+  <link rel="import" class="template" href="templates/preferences.html">
 </head>
 <body>
 
   <!-- window header -->
-  <div id="wContainer" class="container-fluid wrap two-col">
+  <div id="wContainer" class="wrap">
 
     <!-- <div id="wHeader" class="containerHeader"></div> -->
 
     <div class="containerBody">
-
-      <div class="row">
-        <div class="col-xs-3 sidebar">
-          <div id="wSidebar"></div>
-        </div>
-
-        <div class="col-xs-9 mainContentCol">
-          <div class="tab-content">
-            <div id="wBody"></div>
-          </div>
-        </div>
-      </div>
-
+        <div class="sidebar" id="wSidebar"></div>
+        <div class="mainContent" id="wBody"></div>
     </div>
 
     <div id="wFooter" class="containerFooter"></div>
@@ -58,6 +50,7 @@
     // require('./assets/demo-btns')
     // require('./assets/code-blocks')
     // require('./assets/normalize-shortcuts')
+
 
     var Renderer = require('../renderer');
   </script>

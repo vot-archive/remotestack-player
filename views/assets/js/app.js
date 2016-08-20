@@ -5,7 +5,7 @@ Rs.init = function RsInit () {
   $('.btnHideSidebar').click(function () {
     // $('.sidebar').toggleClass('col-sm-3')
     $('.sidebar').toggleClass('hide');
-    $('.mainContentCol').toggleClass('col-sm-9 col-sm-12');
+    $('.mainContent').toggleClass('col-sm-9 col-sm-12');
   });
 };
 

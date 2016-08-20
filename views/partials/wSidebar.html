@@ -1,13 +1,38 @@
+<link rel="stylesheet" href="../assets/css/sidebar.css">
+
+<script>
+var Nav = require('../renderer/nav');
+var UI = require('../renderer/ui');
+
+$(document).ready(function () {
+  Nav.init();
+  setTimeout(UI.applySidebarSetting, 300);
+});
+
+// $(window).on('load', function () {
+//   setTimeout(UI.applySidebarSetting, 300);
+// });
+</script>
+
+
 <partial>
-  <div class="sidebar-group">
-    <div class="sidebar-group-heading">Categories</div>
-  </div>
-  <ul class="nav nav-pills nav-stacked" role="tablist">
-    <li role="presentation" class="xactive"><a href="#links" aria-controls="links" role="tab" data-toggle="tab">Links</a></li>
-    <li role="presentation"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Video</a></li>
-    <li role="presentation"><a href="#audio" aria-controls="audio" role="tab" data-toggle="tab">Audio</a></li>
-    <li role="presentation"><a href="#url" aria-controls="url" role="tab" data-toggle="tab">Open URL</a></li>
+  <ul class="nav nav-pills nav-stacked">
+    <li><a href="#" onclick="Nav.goto('home')">Home</a></li>
+    <li><a href="#" onclick="Nav.goto('nowplaying')">Now playing</a></li>
+    <li><a href="#" onclick="Nav.goto('playlist')">Playlist</a></li>
+    <li><a href="#" onclick="Nav.goto('library')">Library</a></li>
+
+    <ul class="nav nav-pills nav-stacked indent1x">
+      <li><a href="#" onclick="Nav.goto('library')">Music</a></li>
+      <li><a href="#" onclick="Nav.goto('library')">Movies</a></li>
+      <li><a href="#" onclick="Nav.goto('library')">TV</a></li>
+      <li><a href="#" onclick="Nav.goto('library')">Online</a></li>
+    </ul>
+
+    <li><a href="#" onclick="Nav.goto('openurl')">Open URL</a></li>
+    <li><a href="#" onclick="Nav.goto('preferences')">Preferences</a></li>
   </ul>
+
 
   <!-- <nav class="nav js-nav">
     <header class="nav-header">

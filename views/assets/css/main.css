@@ -3,14 +3,11 @@
 .wrap .containerFooter {position: fixed; bottom: 0; height:20px; width: 100%; padding: 0 5px; background: #D5D5D5; border-top: 1px solid #b6b4b6;}
 .wrap .containerFooter a {color: #4c4c4c}
 
-.containerHeader {height:0 !important}
-.containerBody {top:0; overflow: hidden}
 
+.navContent#home {padding-top: 30px}
+.navContent#home h1 {font-weight: 100; color: white; text-shadow: 0 1px 1px black}
 
-.mainContentCol {padding-top: 50px}
-.mainContentCol h1 {font-weight: 100; color: white; text-shadow: 0 1px 1px black}
-
-.mainContentCol {background: #333}
+/*.mainContent {background: #333}*/
 
 .homeMenu {width: 200px; text-align: center; display: inline-block; margin-top: 30px}
 .homeMenu a {border: 1px solid #555; color: white; display: block; padding: 10px; border-radius: 5px; margin-bottom: 3px}
@@ -18,15 +15,3 @@
 
 .homeMenu a {background: rgba(42, 42, 42, 0.65); color: #ddd;}
 .homeMenu a:focus, .homeMenu a:hover {background: rgba(7, 94, 144, 0.6); color: #cacaca;}
-
-.nav>li>a:focus, .nav>li>a:hover {background-color: #e2e2e2; color: #169bb9;}
-
-.containerBody, .containerBody > .row, .mainContentCol {height: 100%}
-.wrap.two-col .sidebar {height: 100%}
-
-/*.mainContentCol {background: url('../img/rapciu_pearl_blue.png')}*/
-#wContainer {background: url('../img/rapciu_pearl.png'); background-size: cover}
-
-.wrap.two-col .containerBody {background: none}
-.sidebar {background: rgba(255, 255, 255, 0.5)}
-.mainContentCol {background: rgba(51, 51, 51, 0.5)}

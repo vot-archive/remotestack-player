@@ -1,5 +1,8 @@
+<link rel="stylesheet" href="../assets/css/windowCtl.css">
+
 <script>
 var Renderer = require('../renderer');
+var Nav = require('../nav');
 // var Player = require('../player');
 var Player = {}
 </script>
@@ -37,8 +40,8 @@ var Player = {}
 
       <div class="btn-group">
         <!-- <a class="btn btn-default" href="#" data-toggle="modal" data-target="#addToLibraryModal"><span class="fa fa-fw fa-bookmark" title="Add (batch)"></span></a> -->
-        <a class="btn btn-default" onclick="Renderer.ipc.showPlayer()"><span class="fa fa-fw fa-youtube-play"></span></a>
-        <a class="btn btn-default" onclick="Renderer.ipc.showSettings()"><span class="fa fa-fw fa-cogs"></span></a>
+        <a class="btn btn-default" onclick="Nav.goto('nowplaying')"><span class="fa fa-fw fa-youtube-play"></span></a>
+        <a class="btn btn-default" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-cogs"></span></a>
       </div>
 
   </div>
