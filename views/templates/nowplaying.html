@@ -1,12 +1,43 @@
+<link rel="stylesheet" href="../assets/css/nowplaying.css">
+<script>
+  var Renderer = require('../renderer');
+  var Player = require('../renderer/player');
+
+  $(document).ready(function () {
+    Player.next();
+  });
+</script>
+
 <template>
 
   <div class="navContent solidBg" id="nowplaying">
     <div class="inner padding-10">
 
       <h2>Now playing</h2>
-      <ul class="list">
-        <li>Stream 1</li>
-      </ul>
+
+
+      <div class="rsPlayerControlsGroup">
+        <div id="rsPlayerCurrent">
+
+          <span id="currentArtist"></span>
+          <br />
+          <div class="pull-right">
+            <span class="timeElapsed">00:00</span>/<span class="timeTotal">00:00</span>
+          </div>
+          <span id="currentTitle"></span>
+        </div>
+
+
+        <div id="rsPlayerControls">
+          <div class="btn-group">
+            <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
+            <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
+            <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
+          </div>
+        </div>
+      </div>
+
+      <div id="rsPlayerAudioContainer"></div>
 
     </div>
   </div>

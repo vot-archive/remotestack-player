@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/player.css">
+  <!-- <link rel="stylesheet" href="assets/css/windowCtl.css"> -->
 
   <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
   <script src="assets/js/bootstrap.min.js"></script>
@@ -24,7 +25,7 @@
   <div id="wContainer" class="container-fluid wrap">
     <!-- <div id="wHeaderPlayer" class="containerHeader"></div> -->
 
-    <div class="containerBody">
+    <div class="containerBody xdark">
       <div>
         <span class="windowControl btnClose" onclick="Renderer.ipc.hidePlayer()"></span>
       </div>
@@ -32,12 +33,12 @@
 
       <div id="rsPlayerCurrent">
 
-        <span id="currentArtist"></span>
-        <br />
-        <div class="pull-right">
+        <strong><span id="currentArtist"></span></strong>
+        <span id="currentTitle"></span>
+
+        <div id="rsPlayerTime">
           <span class="timeElapsed">00:00</span>/<span class="timeTotal">00:00</span>
         </div>
-        <span id="currentTitle"></span>
       </div>
 
 
@@ -55,15 +56,10 @@
   </div>
 
   <script>
-    var Player = require('../renderer/player');
-
-    // Player.load('http://siliconfen.co/v/mp3/Infused-1.41.mp3');
-    Player.next();
-  </script>
-
-  <script>
     require('../renderer/imports');
     var Renderer = require('../renderer');
+    var Player = require('../renderer/player');
+    Player.next();
   </script>
 </body>
 </html>

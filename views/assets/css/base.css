@@ -15,6 +15,7 @@ a, a:hover, a:focus {text-decoration: none; outline: none}
 input.urlviewer {width: 100%; background: none; border: none}
 
 .wrap {padding: 0; margin: 0}
+.entry-url {display: block; font-size: 0.8em; font-weight: bold}
 
 /* List group */
 .list-group-item {background-color: transparent; border: none; color: #555}
@@ -36,19 +37,21 @@ ul.list li.group-name {color: black; background: #ccc; font-weight: bold}
 
 ul.list li .primary {color: black; text-decoration: none}
 
-/* Navigation */
-.nav>li>a:focus, .nav>li>a:hover {background-color: #E7E7E7; color: #169bb9;}
-
-
-
-.containerBody {padding: 0 10px; margin-top:0; position: fixed; top:0; bottom: 0; width: 100%; overflow: hidden; -webkit-user-select: none}
-
-
 /* Navigation: Active screen */
 .navContent {display: none; height: 100%}
 .navContent.active {display: block}
-.navContent.solidBg {background: #E7E7E7}
+/*.navContent.solidBg {background: #E7E7E7}*/
+.navContent.solidBg {
+  background: #EFEFEF; background: -moz-linear-gradient(top, #EFEFEF 0%, #D5D5D5 100%); background: -webkit-linear-gradient(top, #EFEFEF 0%, #D5D5D5 100%);
+  background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EFEFEF', endColorstr='#D5D5D5',GradientType=0);
+}
 
+
+/* Navigation */
+/*.nav>li>a:focus, .nav>li>a:hover {background-color: #E7E7E7; color: #169bb9;}*/
+
+
+.containerBody {padding: 0 10px; position: fixed; top:0; bottom: 0; width: 100%; overflow: hidden; -webkit-user-select: none}
 
 .containerBody {background: transparent}
 .containerBody ul.list {margin: 0 -10px}
@@ -76,7 +79,7 @@ ul.list li .primary {color: black; text-decoration: none}
 /*#wContainer {background: url('http://edmullen.net/test/rc.jpg'); background-size: cover}*/
 
 .sidebar {background: rgba(255, 255, 255, 0.5)}
-.mainContent {background: rgba(50, 50, 50, 0.3)}
+.navContent {background: rgba(50, 50, 50, 0.3)}
 
 
 /* Sidebar */
