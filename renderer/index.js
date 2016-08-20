@@ -51,6 +51,9 @@ function showPlayer() {
 function hidePlayer() {
   ipcRenderer.send('hide-player');
 }
+function togglePlayer() {
+  ipcRenderer.send('toggle-player');
+}
 
 module.exports = {
   windowMinimizeFn: windowMinimizeFn,
@@ -59,6 +62,7 @@ module.exports = {
   ipc: {
     showSettings: showSettings,
     showPlayer: showPlayer,
-    hidePlayer: hidePlayer
+    hidePlayer: hidePlayer,
+    togglePlayer: togglePlayer
   }
 }

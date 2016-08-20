@@ -64,7 +64,7 @@ function createMainWindow () {
 
 /* background window */
 function createPlayerWindow() {
-  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 120, show: false, frame: true, closable: true, resizable: false, x: 1040, y: 700}});
+  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 55, minWidth: 300, minHeight: 55, show: false, frame: false, closable: true, resizable: false, x: 1040, y: 700}});
 
   RS.windows['player'].on('closed', function () {
     // RS.windows[name].destroy();
@@ -72,6 +72,14 @@ function createPlayerWindow() {
     RS.windows.player = null;
     app.quit();
   });
+}
+
+function togglePlayerWindow() {
+  if (RS.windows.player.isVisible()) {
+    RS.windows.player.hide();
+  } else {
+    RS.windows.player.show();
+  }
 }
 
 function showPlayerWindow() {
@@ -90,6 +98,7 @@ function initialise () {
 // This method will be called when Electron has finished
 app.on('ready', initialise);
 // ipcMain.on('show-settings', createSettingsWindow);
+ipcMain.on('toggle-player', togglePlayerWindow);
 ipcMain.on('show-player', showPlayerWindow);
 ipcMain.on('hide-player', hidePlayerWindow);
 
