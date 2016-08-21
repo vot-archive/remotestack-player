@@ -7,6 +7,8 @@ const ipcMain = electron.ipcMain;
 
 const _ = require('lodash');
 
+const Shortcuts = require('./lib/shortcuts');
+
 var RS = {
   windows: {},
   debug: false
@@ -64,7 +66,7 @@ function createMainWindow () {
 
 /* background window */
 function createPlayerWindow() {
-  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 55, minWidth: 300, minHeight: 55, show: false, frame: false, closable: true, resizable: false, x: 1040, y: 700}});
+  createWindow('player', {template: 'player', windowOpts: {width: 300, height: 55, minWidth: 300, minHeight: 55, show: false, frame: false, closable: true, resizable: false, focusable: false, x: 1040, y: 700}});
 
   RS.windows['player'].on('closed', function () {
     // RS.windows[name].destroy();
@@ -93,6 +95,7 @@ function hidePlayerWindow() {
 function initialise () {
   createPlayerWindow();
   createMainWindow();
+  Shortcuts.registerAll();
 }
 
 // This method will be called when Electron has finished
@@ -101,6 +104,8 @@ app.on('ready', initialise);
 ipcMain.on('toggle-player', togglePlayerWindow);
 ipcMain.on('show-player', showPlayerWindow);
 ipcMain.on('hide-player', hidePlayerWindow);
+
+
 
 // Quit when all windows are closed.
 // app.on('window-all-closed', function () {
@@ -114,6 +119,7 @@ app.on('will-quit', function () {
     RS.windows.player.setClosable(true);
     RS.windows.player.close();
   }
+  Shortcuts.unregisterAll();
   app.quit();
 });
 

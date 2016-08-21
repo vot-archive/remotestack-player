@@ -1,9 +1,9 @@
-.sidebar {padding: 0; margin: 0; border-right: 1px solid #A7A7A7}
+.sidebar {padding: 0; margin: 0; border-right: 1px solid #A7A7A7; opacity: 0}
 .sidebar .nav-pills>li {margin-top: 0; font-size: 0.95em}
-.sidebar .nav-pills>li>a {border-radius: 0; padding: 3px 15px; color: #333}
+.sidebar .nav-pills>li>a {border-radius: 0; padding: 3px 15px; color: #333; cursor: default}
 .sidebar .nav-pills>li.active>a {color: #fff}
 .sidebar .nav-pills.indent1x>li>a {padding-left: 22px}
 
-.sidebar .sidebar-group {margin-left: 15px; padding-top: 10px}
-.sidebar .sidebar-group:first-child {padding-top: 0}
-.sidebar .sidebar-group-heading {padding: 5px 0; font-weight: bold}
+.sidebar .sidebar-heading {padding: 5px; text-transform: uppercase; font-size: 0.9em; font-weight: 500; color: #555; cursor: default}
+
+.sidebar .nav-pills>li>a{text-overflow: ellipsis; overflow: hidden}

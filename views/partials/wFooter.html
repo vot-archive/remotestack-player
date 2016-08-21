@@ -8,7 +8,10 @@ var UI = require('../renderer/ui');
 
 <partial>
   <a onclick="UI.toggleSidebar()"><span class="fa fa-fw fa-outdent" title="Show/hide sidebar"></span></a>
+  <a onclick="Nav.goto('home')"><span class="fa fa-fw fa-home"></span></a>
+
   <a class="pull-right" onclick=""><span class="fa fa-fw fa-blank"></span></a>
-  <a class="pull-right" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-youtube-play"></span></a>
   <a class="pull-right" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a>
+  <a class="pull-right" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-youtube-play"></span></a>
+  <!-- <a class="pull-right" onclick="Nav.goto('home')"><span class="fa fa-fw fa-home"></span></a> -->
 </partial>

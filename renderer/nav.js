@@ -1,12 +1,22 @@
 var Nav = {
   init: function () {
-    $('#wBody .navContent').removeClass('active');
-    $('#wBody .navContent:first').addClass('active');
+    this.selectFirst();
+  },
+  selectFirst: function () {
+    console.log('Nav.selectFirst');
+    var id = $('#wBody .navContent:first').attr('id');
+    this.goto(id);
   },
   goto: function (id) {
     console.log('Nav.goto:', id);
     $('#wBody .navContent').removeClass('active');
     $('#wBody .navContent#' + id).addClass('active');
+
+    if (id === 'home') {
+      $('.containerFooter .fa.fa-fw.fa-home').fadeOut(100);
+    } else {
+      $('.containerFooter .fa.fa-fw.fa-home').fadeIn(100);
+    }
   }
 };
 

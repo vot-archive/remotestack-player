@@ -20,32 +20,39 @@ var UI = {
       shouldShowNow = showSetting;
     }
 
+    var immediate = !_self.isInitialised;
+
     if (shouldShowNow) {
-      _self.showSidebar();
+      _self.showSidebar(immediate);
     } else {
-      _self.hideSidebar();
+      _self.hideSidebar(immediate);
     }
+    _self.isInitialised = true;
   },
   toggleSidebar: function () {
     var _self = this;
     var showSetting = settings.getSync('ui.sidebar.show');
     _self.applySidebarSetting(!showSetting);
   },
-  showSidebar: function () {
-    // console.log();
+  showSidebar: function (immediate) {
+    // console.log('immediate', immediate);
     settings.setSync('ui.sidebar.show', true);
     var newval = settings.getSync('ui.sidebar.show');
-    console.log('Calling show sidebar', 'newval', newval, 'should be true');
-    $('.sidebar').animate({'left': 0});
-    $('.mainContent').animate({'left': 140});
+
+    var time = immediate ? 200 : 350;
+    // console.log('time', time);
+    $('.sidebar').animate({'left': 0, opacity: 1}, time);
+    $('.mainContent').animate({'left': 140}, time);
   },
-  hideSidebar: function () {
-    // console.log();
+  hideSidebar: function (immediate) {
+    // console.log('immediate', immediate);
     settings.setSync('ui.sidebar.show', false);
     var newval = settings.getSync('ui.sidebar.show');
-    console.log('Calling hide sidebar', 'newval', newval, 'should be false');
-    $('.sidebar').animate({'left': -140});
-    $('.mainContent').animate({'left': 0});
+
+    var time = immediate ? 200 : 350;
+    // console.log('time', time);
+    $('.sidebar').animate({'left': -140, opacity: 0}, time);
+    $('.mainContent').animate({'left': 0}, time);
   }
 };
 
