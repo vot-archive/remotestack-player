@@ -102,6 +102,8 @@ var Player = {
       audioTag.pause();
       _self.setPlayButton(true);
     }
+
+    _self.updatePositionMax(_self.getElement());
   },
 
   prev: function () {
@@ -132,13 +134,55 @@ var Player = {
 
   setVolume: function (vol) {
     if (typeof vol !== 'number') {
-      return;
+      if (typeof vol === 'object') {
+        var obj = $(vol);
+        var objVal = obj.val();
+        if (obj && objVal) {
+          vol = objVal;
+        } else {
+          return;
+        }
+      } else {
+        return;
+      }
     }
-    var _self = this;
-    var audioTag = _self.getElement();
 
-    _self.volume = vol;
-    audioTag.volume = vol / 100;
+    this.volume = vol;
+    this.applyVolumeSetting();
+  },
+
+  applyVolumeSetting: function () {
+    var audioTag = this.getElement();
+    // console.log('setting volume to', this.volume)
+
+    audioTag.volume = this.volume / 100;
+  },
+
+  setPosition: function (sec) {
+    var audioTag = this.getElement();
+
+    if (typeof sec !== 'number') {
+      if (typeof sec === 'object') {
+        var obj = $(sec);
+        var objVal = obj.val();
+        if (obj && objVal) {
+          sec = objVal;
+        } else {
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+    // console.log('jumping to', sec)
+    audioTag.currentTime = sec;
+  },
+
+  updatePositionMax: function () {
+    var audioTag = this.getElement();
+
+    var positionInput = $('#rsPlayerPosition');
+    positionInput.attr('max', Math.floor(audioTag.duration));
   },
 
   updateTrackTime: function (track) {
@@ -150,6 +194,10 @@ var Player = {
 
     currTimeDiv.text(_formatSecondsAsTime(currTime));
     durationDiv.text(_formatSecondsAsTime(duration));
+
+    // update current position on the range element
+    var positionInput = $('#rsPlayerPosition');
+    positionInput.val(Math.floor(currTime));
   },
 
   load: function (track) {

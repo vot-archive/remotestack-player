@@ -34,6 +34,14 @@
             <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
             <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
           </div>
+
+          <br />
+          <strong>Volume</strong>
+          <input type="range" min="0" max="100" value="100" oninput="Player.setVolume(this)" id="rsPlayerVolume">
+
+          <br />
+          <strong>Position</strong>
+          <input type="range" min="0" max="0" value="0" oninput="$(this).data('dragged', true)" onchange="Player.setPosition(this)" id="rsPlayerPosition">
         </div>
       </div>
 
