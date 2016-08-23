@@ -55,6 +55,29 @@ function togglePlayer() {
   ipcRenderer.send('toggle-player');
 }
 
+function bindShortcuts () {
+  const Player = require('./player');
+  console.log('bindShortcuts called');
+  $(document).on('keypress', function(e) {
+    var tag = e.target.tagName.toLowerCase();
+
+    if (tag === 'input' || tag === 'textarea') {
+      return;
+    }
+
+    // 32 === space
+    if (e.which === 32) {
+      console.log('space hit');
+      Player.play();
+      // trigger play on main window
+      return e.preventDefault();
+    }
+
+
+    console.log(e.which);
+  });
+}
+
 module.exports = {
   windowMinimizeFn: windowMinimizeFn,
   windowMaximizeFn: windowMaximizeFn,
@@ -64,5 +87,6 @@ module.exports = {
     showPlayer: showPlayer,
     hidePlayer: hidePlayer,
     togglePlayer: togglePlayer
-  }
+  },
+  bindShortcuts: bindShortcuts
 }
