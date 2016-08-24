@@ -1,3 +1,6 @@
+const ytdl = require('../lib/parsers/ytdl');
+const cache = require('../lib/cache');
+
 function _trailingZero (num, positions) {
   if (!num) {
     num = 0;
@@ -46,25 +49,63 @@ function _formatSecondsAsTime (sec) {
   return rtn;
 }
 
+function _interpretPlaylistItem (item, cb) {
+  var cached = cache.persistent.getJSON('meta-resolved', item.url);
+  if (cached) {
+    return cb(cached);
+  }
+  item.playbackUrl = item.url;
+
+  if (item.source === 'youtube') {
+    return ytdl(item.url, function (err, info) {
+      console.log(info);
+      if (err || !info) {
+        item.playbackUrl = false;
+      } else {
+        item.playbackUrl = info.preferredFormat.url;
+      }
+
+      cache.persistent.setJSON('meta-resolved', item.url, item);
+      return cb(item);
+    });
+  }
+
+  cache.persistent.setJSON('meta-resolved', item.url, item);
+  return cb(item);
+}
+
+function _getPlaylistItem (item, cb) {
+  var key = item.playbackUrl;
+  var cached = cache.persistent.getFile('item', key);
+  if (cached) {
+    return cb(cached);
+  }
+  cache.persistent.fetchFile(key, function (filepath) {
+    return
+  })
+}
+
+var _playlist = [
+  {
+    'url': 'http://siliconfen.co/v/mp3/Infused-1.41.mp3',
+    'source': 'http',
+    'type': 'audio'
+  },
+  {
+    'url': 'http://siliconfen.co/v/mp3/Forget%20me%20now-6.8.11b.mp3',
+    'source': 'http',
+    'type': 'audio'
+  },
+  {
+    'url': 'https://www.youtube.com/watch?v=DZGINaRUEkU',
+    'source': 'youtube',
+    'type': 'audio'
+  }
+];
+
 var Player = {
   // state
-  queue: [
-    {
-      'artist': 'Vot',
-      'title': 'Infused (demo 1.41)',
-      'url': 'http://siliconfen.co/v/mp3/Infused-1.41.mp3'
-    },
-    {
-      'artist': 'Vot',
-      'title': 'Forget me now (6.8.11b)',
-      'url': 'http://siliconfen.co/v/mp3/Forget%20me%20now-6.8.11b.mp3'
-    },
-    {
-      'artist': 'Vot',
-      'title': 'Death and Despair',
-      'url': 'http://siliconfen.co/v/mp3/2016-03-23_death-and-despair-1.mp3'
-    }
-  ],
+  queue: _playlist,
 
   volume: 100,
   loopOne: false,
@@ -78,10 +119,11 @@ var Player = {
   },
 
   play: function (state) {
+    console.log('play(' + state + ')');
     var _self = this;
     var audioTag = _self.getElement();
     if (!audioTag) {
-      alert('No audio element present')
+      console.log('No audio element present');
       return;
     }
 
@@ -200,24 +242,41 @@ var Player = {
     positionInput.val(Math.floor(currTime));
   },
 
-  load: function (track) {
+  load: function (source) {
     var _self = this;
     var audioTag = _self.getElement();
     if (audioTag) {
       audioTag.remove();
     }
 
-    var newEntry = '<audio preload="true" ontimeupdate="Player.updateTrackTime(this)">';
-    newEntry += '<source src="' + track.url + '" type="audio/mpeg">';
-    newEntry += '</audio>';
+    $('#currentArtist').text('Loading');
+    $('#currentTitle').text(source.url);
 
+    _interpretPlaylistItem(source, function (track) {
+      console.log(track);
+      cache.persistent.getFile(track.playbackUrl, function (filepath) {
+        var finalPath = filepath || track.playbackUrl;
 
-    $('#rsPlayerAudioContainer').append(newEntry);
-    $('#currentArtist').text(track.artist);
-    $('#currentTitle').text(track.title);
+        // if (!finalPath) {
+        //   return;
+        // }
 
-    _self.setVolume(_self.volume);
-    _self.updateTrackTime(_self.getElement());
+        var newEntry = '<audio preload="true" ontimeupdate="Player.updateTrackTime(this)">';
+        // newEntry += '<source src="' + track.url + '" type="audio/mpeg">';
+        newEntry += '<source src="' + finalPath + '" type="audio/mpeg">';
+        newEntry += '</audio>';
+
+        $('#rsPlayerAudioContainer').append(newEntry);
+
+        $('#currentArtist').text(track.artist);
+        $('#currentTitle').text(track.title);
+
+        _self.setVolume(_self.volume);
+        _self.updateTrackTime(_self.getElement());
+
+      })
+    });
+
   }
 };
 
