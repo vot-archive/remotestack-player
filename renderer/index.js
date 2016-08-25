@@ -57,7 +57,7 @@ function togglePlayer() {
 
 function bindShortcuts () {
   const Player = require('./player');
-  console.log('bindShortcuts called');
+  Utils.log('bindShortcuts called');
   $(document).on('keypress', function(e) {
     var tag = e.target.tagName.toLowerCase();
 
@@ -67,14 +67,14 @@ function bindShortcuts () {
 
     // 32 === space
     if (e.which === 32) {
-      console.log('space hit');
+      Utils.log('space hit');
       Player.play();
       // trigger play on main window
       return e.preventDefault();
     }
 
 
-    console.log(e.which);
+    Utils.log(e.which);
   });
 }
 

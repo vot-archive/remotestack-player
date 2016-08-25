@@ -1,53 +1,6 @@
 const ytdl = require('../lib/parsers/ytdl');
 const cache = require('../lib/cache');
-
-function _trailingZero (num, positions) {
-  if (!num) {
-    num = 0;
-  }
-  num = num.toString();
-  var rtn = num;
-  var iterations = positions - num.length;
-
-  if (iterations > 0) {
-    for (i = 0; i < iterations; i++) {
-      rtn = '0' + rtn;
-    }
-  }
-
-  return rtn;
-}
-
-function _formatSecondsAsTime (sec) {
-  var s = parseInt(sec);
-
-  var multipliers = {
-    d: 60 * 60 * 24,
-    h: 60 * 60,
-    m: 60
-  };
-
-  var remainder = s;
-
-  var days = Math.floor(remainder / multipliers.d);
-  if (days) remainder -= (days * multipliers.d);
-
-  var hours = Math.floor(remainder / multipliers.h)
-  if (hours) remainder -= (hours * multipliers.h);
-
-  var minutes = Math.floor(remainder / multipliers.m)
-  if (minutes) remainder -= (minutes * multipliers.m);
-
-  var seconds = remainder;
-
-  var rtn = '';
-  if (days) rtn += _trailingZero(days) + ':';
-  if (hours) rtn += _trailingZero(hours, 2) + ':';
-  rtn += _trailingZero(minutes, 2) + ':';
-  rtn += _trailingZero(seconds, 2) + '';
-
-  return rtn;
-}
+var Utils = require('../lib/utils');
 
 function _interpretPlaylistItem (item, cb) {
   var cached = cache.persistent.getJSON('meta-resolved', item.url);
@@ -58,7 +11,7 @@ function _interpretPlaylistItem (item, cb) {
 
   if (item.source === 'youtube') {
     return ytdl(item.url, function (err, info) {
-      console.log(info);
+      Utils.log(info);
       if (err || !info) {
         item.playbackUrl = false;
       } else {
@@ -119,28 +72,28 @@ var Player = {
   },
 
   play: function (state) {
-    console.log('play(' + state + ')');
+    Utils.log('play(' + state + ')');
     var _self = this;
     var audioTag = _self.getElement();
     if (!audioTag) {
-      console.log('No audio element present');
+      Utils.log('Player.play: No audio element present');
       return;
     }
 
     // state = state || audioTag.paused || true;
-    console.log('state:', state)
+    Utils.log('state:', state)
 
     if (typeof state !== 'boolean') {
-      console.log('audioTag.paused:', audioTag.paused)
+      Utils.log('audioTag.paused:', audioTag.paused)
       state = audioTag.paused || false;
     }
 
     if (state) {
-      console.log('Playing');
+      Utils.log('Playing');
       audioTag.play();
       _self.setPlayButton(false);
     } else {
-      console.log('Pausing');
+      Utils.log('Pausing');
       audioTag.pause();
       _self.setPlayButton(true);
     }
@@ -195,7 +148,7 @@ var Player = {
 
   applyVolumeSetting: function () {
     var audioTag = this.getElement();
-    // console.log('setting volume to', this.volume)
+    // Utils.log('setting volume to', this.volume)
 
     audioTag.volume = this.volume / 100;
   },
@@ -216,7 +169,7 @@ var Player = {
         return;
       }
     }
-    // console.log('jumping to', sec)
+    // Utils.log('jumping to', sec)
     audioTag.currentTime = sec;
   },
 
@@ -234,8 +187,8 @@ var Player = {
     var currTime = Math.floor(track.currentTime).toString();
     var duration = Math.floor(track.duration).toString();
 
-    currTimeDiv.text(_formatSecondsAsTime(currTime));
-    durationDiv.text(_formatSecondsAsTime(duration));
+    currTimeDiv.text(Utils.formatSecondsAsTime(currTime));
+    durationDiv.text(Utils.formatSecondsAsTime(duration));
 
     // update current position on the range element
     var positionInput = $('#rsPlayerPosition');
@@ -253,7 +206,7 @@ var Player = {
     $('#currentTitle').text(source.url);
 
     _interpretPlaylistItem(source, function (track) {
-      console.log(track);
+      Utils.log(track);
       cache.persistent.getFile(track.playbackUrl, function (filepath) {
         var finalPath = filepath || track.playbackUrl;
 

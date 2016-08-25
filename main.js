@@ -7,14 +7,16 @@ const ipcMain = electron.ipcMain;
 // const GlobalShortcuts = require('./lib/globalShortcuts');
 const WindowManager = require('./lib/windowManager');
 const StreamManager = require('./lib/streamManager');
+const Utils = require('./lib/utils');
 
 function initialise () {
+  Utils.log('\n--- REMOTESTACK STARTED ---');
   WindowManager.ensure('main', {template: 'main', windowOpts: WindowManager.presets.main});
   // GlobalShortcuts.registerAll();
 }
 
 function preQuitRoutine () {
-  console.log('preQuitRoutine');
+  Utils.log('preQuitRoutine');
   Object.keys(WindowManager.instances).map(function (i) {
     WindowManager.instances[i].hide();
     // WindowManager.instances[i].destroy();
@@ -40,7 +42,7 @@ ipcMain.on('toggle-player', function () {
 
   // test stream mgmt
   // StreamManager.create('audio');
-  // console.log(StreamManager.streams);
+  // Utils.log(StreamManager.streams);
 
 });
 
@@ -58,6 +60,6 @@ app.on('will-quit', preQuitRoutine);
 app.on('ready', initialise);
 
 // app.on('activate', function () {
-//   console.log('app.activate emitted - application brought back from taskbar');
-//   console.log('this should probably ensure the main window exists and give it focus');
+//   Utils.log('app.activate emitted - application brought back from taskbar');
+//   Utils.log('this should probably ensure the main window exists and give it focus');
 // });

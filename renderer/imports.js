@@ -1,8 +1,10 @@
+const Utils = require('../lib/utils');
+
 function populatePartials () {
   var links = document.querySelectorAll('link[rel="import"].partial')
 
   Array.prototype.forEach.call(links, function (link) {
-    console.log('Loaded partial:', link.href);
+    Utils.log('Loaded partial:', link.href);
 
     var filename = link.href.split('/').pop().replace('.html', '');
     var destination = filename;
@@ -23,7 +25,7 @@ function populateTemplates () {
   var links = document.querySelectorAll('link[rel="import"].template')
 
   Array.prototype.forEach.call(links, function (link) {
-    console.log('Loaded template:', link.href);
+    Utils.log('Loaded template:', link.href);
 
     let template = link.import.querySelector('template');
     let clone = document.importNode(template.content, true);
