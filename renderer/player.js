@@ -1,6 +1,20 @@
 const ytdl = require('../lib/parsers/ytdl');
 const cache = require('../lib/cache');
+const playlist = require('../lib/playlist');
+var settings = require('electron-settings');
 var Utils = require('../lib/utils');
+
+function _generatePlayerMarkup(finalPath) {
+  if (!finalPath || typeof finalPath !== 'string') {
+    console.log('Invalid finalPath provided');
+    return false;
+  }
+  var rtn = '<audio preload="true" ontimeupdate="Player.updateTrackTime(this)">';
+  rtn += '<source src="' + finalPath + '" type="audio/mpeg">';
+  rtn += '</audio>';
+
+  return rtn
+}
 
 function _interpretPlaylistItem (item, cb) {
   var cached = cache.persistent.getJSON('meta-resolved', item.url);
@@ -34,31 +48,14 @@ function _getPlaylistItem (item, cb) {
     return cb(cached);
   }
   cache.persistent.fetchFile(key, function (filepath) {
-    return
+    return filepath;
   })
 }
 
-var _playlist = [
-  {
-    'url': 'http://siliconfen.co/v/mp3/Infused-1.41.mp3',
-    'source': 'http',
-    'type': 'audio'
-  },
-  {
-    'url': 'http://siliconfen.co/v/mp3/Forget%20me%20now-6.8.11b.mp3',
-    'source': 'http',
-    'type': 'audio'
-  },
-  {
-    'url': 'https://www.youtube.com/watch?v=DZGINaRUEkU',
-    'source': 'youtube',
-    'type': 'audio'
-  }
-];
-
 var Player = {
   // state
-  queue: _playlist,
+  // queue: settings.getSync('streams.0.playlist'),
+  queue: playlist.initialPlaylist,
 
   volume: 100,
   loopOne: false,
@@ -206,26 +203,25 @@ var Player = {
     $('#currentTitle').text(source.url);
 
     _interpretPlaylistItem(source, function (track) {
-      Utils.log(track);
+      Utils.log('>> _interpretPlaylistItem returned', track);
       cache.persistent.getFile(track.playbackUrl, function (filepath) {
-        var finalPath = filepath || track.playbackUrl;
+        var finalPath = filepath || track.url;
 
-        // if (!finalPath) {
-        //   return;
-        // }
+        //_.get(track, 'resolved.audio', false)
 
-        var newEntry = '<audio preload="true" ontimeupdate="Player.updateTrackTime(this)">';
-        // newEntry += '<source src="' + track.url + '" type="audio/mpeg">';
-        newEntry += '<source src="' + finalPath + '" type="audio/mpeg">';
-        newEntry += '</audio>';
+        Utils.log('>> finalPath', finalPath);
 
-        $('#rsPlayerAudioContainer').append(newEntry);
+        var markup = _generatePlayerMarkup(finalPath);
+        $('#rsPlayerAudioContainer').append(markup);
 
+        console.log('a1');
         $('#currentArtist').text(track.artist);
         $('#currentTitle').text(track.title);
+        console.log('Updated');
 
         _self.setVolume(_self.volume);
         _self.updateTrackTime(_self.getElement());
+        console.log('a3');
 
       })
     });

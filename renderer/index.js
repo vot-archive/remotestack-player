@@ -3,6 +3,8 @@
 const electron = require('electron');
 const ipcRenderer = electron.ipcRenderer;
 const remote = electron.remote;
+
+const Utils = require('../lib/utils');
 // var Menu = remote.require('menu');
 //
 //
