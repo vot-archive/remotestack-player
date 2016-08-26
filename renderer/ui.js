@@ -1,4 +1,5 @@
 const settings = require('electron-settings');
+const Utils = require('../lib/utils');
 // settings.defaults({
 //   'ui': {
 //     'sidebar': {
@@ -8,7 +9,8 @@ const settings = require('electron-settings');
 // });
 // settings.applyDefaultsSync();
 // settings.clearSync();
-console.log('settings:', JSON.stringify(settings.getSync()));
+Utils.log('settingsPath: ', settings.getSettingsFilePath());
+Utils.log('settings:     ', JSON.stringify(settings.getSync()));
 
 var UI = {
   isInitialised: false,
@@ -35,22 +37,22 @@ var UI = {
     _self.applySidebarSetting(!showSetting);
   },
   showSidebar: function (immediate) {
-    // console.log('immediate', immediate);
+    // Utils.log('immediate', immediate);
     settings.setSync('ui.sidebar.show', true);
     var newval = settings.getSync('ui.sidebar.show');
 
     var time = immediate ? 200 : 350;
-    // console.log('time', time);
+    // Utils.log('time', time);
     $('.sidebar').animate({'left': 0, opacity: 1}, time);
     $('.mainContent').animate({'left': 140}, time);
   },
   hideSidebar: function (immediate) {
-    // console.log('immediate', immediate);
+    // Utils.log('immediate', immediate);
     settings.setSync('ui.sidebar.show', false);
     var newval = settings.getSync('ui.sidebar.show');
 
     var time = immediate ? 200 : 350;
-    // console.log('time', time);
+    // Utils.log('time', time);
     $('.sidebar').animate({'left': -140, opacity: 0}, time);
     $('.mainContent').animate({'left': 0}, time);
   }

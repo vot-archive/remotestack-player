@@ -1,5 +1,5 @@
 /*.rsPlayerControlsGroup {position: relative; bottom: 100px; width: 100%}*/
-.rsPlayerControlsGroup {position: fixed; bottom: 30px; right: 10px; left: 150px;}
+/*.rsPlayerControlsGroup {position: fixed; bottom: 30px; right: 10px; left: 150px;}*/
 
 #rsPlayerControls {margin-top: 4px; text-align: center}
 #rsPlayerControls .btn-default {background: none; border: none; padding: 2px; margin: 0 4px;}

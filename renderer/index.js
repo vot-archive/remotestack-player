@@ -1,63 +1,16 @@
-// alert('Hello');
-
 const electron = require('electron');
-const ipcRenderer = electron.ipcRenderer;
-const remote = electron.remote;
-// var Menu = remote.require('menu');
-//
-//
-// var menu = Menu.buildFromTemplate([
-//   {
-//     label: 'RemoteStack',
-//     submenu: [
-//       label: 'Prefs',
-//       click: function () {
-//         ipc.send('open-settings-window')
-//       }
-//     ]
-//   }
-// ]);
-//
-// Menu.setApplicationMenu(menu);
 
+const Utils = require('../lib/utils');
 
-function windowMinimizeFn (e) {
-  var window = remote.getCurrentWindow();
-  window.minimize();
-}
+const ipcEmitters = require('./lib/ipcEmitters');
+const windowFn = require('./lib/windowFn');
+const windowMenu = require('./lib/windowMenu');
 
-function windowMaximizeFn (e) {
-  var window = remote.getCurrentWindow();
-  if (window.isMaximized()) {
-    window.unmaximize();
-  } else {
-    window.maximize();
-  }
-
-  // window.setFullScreen(!window.isFullScreen());
-}
-
-function windowCloseFn(){
-  var window = remote.getCurrentWindow();
-  window.close();
-}
-
-function showSettings() {
-  ipcRenderer.send('show-settings');
-}
-function showPlayer() {
-  ipcRenderer.send('show-player');
-}
-function hidePlayer() {
-  ipcRenderer.send('hide-player');
-}
-function togglePlayer() {
-  ipcRenderer.send('toggle-player');
-}
+// windowMenu.initialise();
 
 function bindShortcuts () {
   const Player = require('./player');
-  console.log('bindShortcuts called');
+  Utils.log('bindShortcuts called');
   $(document).on('keypress', function(e) {
     var tag = e.target.tagName.toLowerCase();
 
@@ -67,26 +20,21 @@ function bindShortcuts () {
 
     // 32 === space
     if (e.which === 32) {
-      console.log('space hit');
+      Utils.log('space hit');
       Player.play();
       // trigger play on main window
       return e.preventDefault();
     }
 
 
-    console.log(e.which);
+    Utils.log(e.which);
   });
 }
 
 module.exports = {
-  windowMinimizeFn: windowMinimizeFn,
-  windowMaximizeFn: windowMaximizeFn,
-  windowCloseFn: windowCloseFn,
-  ipc: {
-    showSettings: showSettings,
-    showPlayer: showPlayer,
-    hidePlayer: hidePlayer,
-    togglePlayer: togglePlayer
-  },
+  windowMinimizeFn: windowFn.minimizeFn,
+  windowMaximizeFn: windowFn.maximizeFn,
+  windowCloseFn: windowFn.closeFn,
+  ipc: ipcEmitters,
   bindShortcuts: bindShortcuts
 }

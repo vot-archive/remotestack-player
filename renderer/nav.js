@@ -1,14 +1,16 @@
+const Utils = require('../lib/utils');
+
 var Nav = {
   init: function () {
     this.selectFirst();
   },
   selectFirst: function () {
-    console.log('Nav.selectFirst');
+    Utils.log('Nav.selectFirst');
     var id = $('#wBody .navContent:first').attr('id');
     this.goto(id);
   },
   goto: function (id) {
-    console.log('Nav.goto:', id);
+    Utils.log('Nav.goto:', id);
     $('#wBody .navContent').removeClass('active');
     $('#wBody .navContent#' + id).addClass('active');
 

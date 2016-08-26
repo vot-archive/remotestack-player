@@ -11,8 +11,8 @@
 /*.mainContent {background: #333}*/
 
 .homeMenu {width: 200px; text-align: center; display: inline-block; margin: 30px 0 20px; background: rgba(0,0,0,0.6); border-radius: 7px; padding: 4px; box-shadow: inset 0 2px 3px rgba(0,0,0,0.5);}
-.homeMenu a {border: 1px solid rgba(117, 117, 117, 0.4); color: white; display: block; padding: 10px; border-radius: 5px; margin-bottom: 3px}
+.homeMenu a {border: 1px solid rgba(140, 140, 140, 0.4); color: white; display: block; padding: 10px; border-radius: 5px; margin-bottom: 3px}
 
 
-.homeMenu a {background: rgba(42, 42, 42, 0.65); color: #ddd;}
+.homeMenu a {background: rgba(120, 120, 120, 0.65); color: #ddd;}
 .homeMenu a:focus, .homeMenu a:hover {background: rgba(255, 255, 255, 0.29); color: #e7e7e7;}
