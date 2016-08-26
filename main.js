@@ -2,7 +2,6 @@
 
 const electron = require('electron');
 const app = electron.app;
-const ipcMain = electron.ipcMain;
 
 // const GlobalShortcuts = require('./lib/globalShortcuts');
 const WindowManager = require('./lib/windowManager');
@@ -13,38 +12,29 @@ function initialise () {
   Utils.log('\n--- REMOTESTACK STARTED ---');
   WindowManager.ensure('main', {template: 'main', windowOpts: WindowManager.presets.main});
   // GlobalShortcuts.registerAll();
+
+  // register IPC listeners
+  require('./lib/ipcListeners');
 }
+
+
 
 function preQuitRoutine () {
   Utils.log('preQuitRoutine');
   Object.keys(WindowManager.instances).map(function (i) {
     WindowManager.instances[i].hide();
-    // WindowManager.instances[i].destroy();
+    // WindowManager.instances.player.setClosable(true);
+    // WindowManager.instances.player.close();
+
+    // WindowManager.instances[i].close();
     // WindowManager.instances[i].destroy();
     // WindowManager.instances[i] = null;
   });
-  // if (WindowManager.instances.player) {
-  //   // WindowManager.instances.player.setClosable(true);
-  //   WindowManager.instances.player.close();
-  // }
-  //
-  // if (WindowManager.instances.main) {
-  //   WindowManager.instances.main.close();
-  // }
+
   // GlobalShortcuts.unregisterAll();
   app.quit();
 }
 
-// register Ipc handlers
-ipcMain.on('toggle-player', function () {
-  WindowManager.ensure('player', {template: 'player', windowOpts: WindowManager.presets.player});
-  WindowManager.instances.player.toggle();
-
-  // test stream mgmt
-  // StreamManager.create('audio');
-  // Utils.log(StreamManager.streams);
-
-});
 
 
 // Quit when all WindowManager are closed.
@@ -59,7 +49,8 @@ app.on('will-quit', preQuitRoutine);
 // This method will be called when Electron has finished
 app.on('ready', initialise);
 
-// app.on('activate', function () {
-//   Utils.log('app.activate emitted - application brought back from taskbar');
-//   Utils.log('this should probably ensure the main window exists and give it focus');
-// });
+app.on('activate', function () {
+  // Utils.log('app.activate emitted - application brought back from taskbar', this should probably ensure the main window exists and give it focus');
+  WindowManager.ensure('main', {template: 'main', windowOpts: WindowManager.presets.main});
+  WindowManager.instances['main'].show();
+});
