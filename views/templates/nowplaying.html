@@ -12,42 +12,32 @@
   <div class="navContent solidBg xdark" id="nowplaying">
     <div class="inner padding-10">
 
-      <h2>Now playing</h2>
-
-
       <div class="rsPlayerControlsGroup">
         <div id="rsPlayerCurrent">
 
           <span id="currentArtist"></span>
-          <br />
+
           <div class="pull-right">
             <span class="timeElapsed">00:00</span>/<span class="timeTotal">00:00</span>
           </div>
           <span id="currentTitle"></span>
         </div>
 
-<!--
+
         <div id="rsPlayerControls">
-          <div class="btn-group">
-            <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
-            <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
-            <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
-          </div>
+          <div style="width: 20%; float: left;">&nbsp;</div>
 
-          <br />
-          <strong>Volume</strong>
-          <input type="range" min="0" max="100" value="100" oninput="Player.setVolume(this)" id="rsPlayerVolume">
+          <input type="range" min="0" max="100" value="100" oninput="Player.setVolume(this)" id="rsPlayerVolume"
+          style="width: 20%; float: right; margin-top:5px" title="Volume">
 
-          <br />
-          <strong>Position</strong>
-          <input type="range" min="0" max="0" value="0" oninput="$(this).data('dragged', true)" onchange="Player.setPosition(this)" id="rsPlayerPosition">
+
+          <a onclick="Player.prev()"><span class="fa fa-fw fa-2x fa-step-backward" title="Previous"></span></a>
+          <a id="WSPlay"><span class="fa fa-fw fa-2x fa-play" title="Play"></span></a>
+          <a onclick="Player.next()"><span class="fa fa-fw fa-2x fa-step-forward" title="Next"></span></a>
         </div>
-         -->
       </div>
-      <br /><br />
-      <a class="btn btn-default" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
+
       <div id="waveform"></div>
-      <!-- <div id="rsPlayerAudioContainer"></div> -->
 
     </div>
   </div>
@@ -62,9 +52,3 @@ $(document).ready(function () {
 
 });
 </script>
-
-<style>
-#waveform {
-  bottom: -20px; position: fixed; width: 100%; margin: 0 -10px;
-}
-</style>

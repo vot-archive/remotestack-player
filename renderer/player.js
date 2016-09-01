@@ -4,24 +4,11 @@ const playlist = require('../lib/playlist');
 var settings = require('electron-settings');
 var Utils = require('../lib/utils');
 
-// function _generatePlayerMarkup(finalPath) {
-//   if (!finalPath || typeof finalPath !== 'string') {
-//     console.log('Invalid finalPath provided');
-//     return false;
-//   }
-//   var rtn = '<audio preload="true" ontimeupdate="Player.updateTrackTime(this)">';
-//   rtn += '<source src="' + finalPath + '" type="audio/mpeg">';
-//   rtn += '</audio>';
-//
-//   return rtn
-// }
-
 function ensureWavesurfer() {
   if (Player.wavesurferObject) {
     return Player.wavesurferObject;
   }
-  // create yourself a new WaveSurfer object
-  // var WaveSurfer = require('../views/assets/js/wavesurfer/wavesurfer.js');
+
   var wavesurfer = WaveSurfer.create({
       container: '#waveform',
       waveColor: '#88a8c6',
@@ -36,24 +23,41 @@ function ensureWavesurfer() {
   });
   // wavesurfer.load('http://siliconfen.co/v/mp3/Infused-1.41.mp3')
 
-  $('#WSPlay').click(function () {
+  $('#WSPlay').off();
+  $('#WSPlay').on('click', function () {
     wavesurfer.playPause();
   })
+
   wavesurfer.on('ready', function () {
     Utils.log('Track ready');
     // wavesurfer.empty();
     wavesurfer.drawBuffer();
     // adjust volume
+    Player.applyVolumeSetting();
+    Player.updateTrackTime();
 
     // if (Player.playing) {
       wavesurfer.play();
     // }
   });
 
+
+
+  wavesurfer.on('audioprocess', function () {
+    Player.updateTrackTime();
+  });
+
+  wavesurfer.on('play', function () {
+    // Utils.log('Play event');
+    Player.setPlayButton(false);
+  });
+  wavesurfer.on('pause', function () {
+    // Utils.log('Pause event');
+    Player.setPlayButton(true);
+  });
+
   $(window).resize(function() {
-    Utils.log('Window resize');
-    //Resize waveform
-    // wavesurfer.empty();
+    // Utils.log('Window resize');
     wavesurfer.drawBuffer();
   });
 
@@ -197,53 +201,28 @@ var Player = {
   },
 
   applyVolumeSetting: function () {
-    var audioTag = this.getElement();
-    // Utils.log('setting volume to', this.volume)
+    Utils.log('setting volume to', this.volume)
 
-    audioTag.volume = this.volume / 100;
+    this.ensureWavesurfer().setVolume(this.volume / 100);
   },
 
-  // setPosition: function (sec) {
-  //   var audioTag = this.getElement();
-  //
-  //   if (typeof sec !== 'number') {
-  //     if (typeof sec === 'object') {
-  //       var obj = $(sec);
-  //       var objVal = obj.val();
-  //       if (obj && objVal) {
-  //         sec = objVal;
-  //       } else {
-  //         return;
-  //       }
-  //     } else {
-  //       return;
-  //     }
-  //   }
-  //   // Utils.log('jumping to', sec)
-  //   audioTag.currentTime = sec;
-  // },
-  //
-  // updatePositionMax: function () {
-  //   var audioTag = this.getElement();
-  //
-  //   var positionInput = $('#rsPlayerPosition');
-  //   positionInput.attr('max', Math.floor(audioTag.duration));
-  // },
 
-  // updateTrackTime: function (track) {
-  //   var currTimeDiv = $('.timeElapsed');
-  //   var durationDiv = $('.timeTotal');
-  //
-  //   var currTime = Math.floor(track.currentTime).toString();
-  //   var duration = Math.floor(track.duration).toString();
-  //
-  //   currTimeDiv.text(Utils.formatSecondsAsTime(currTime));
-  //   durationDiv.text(Utils.formatSecondsAsTime(duration));
-  //
-  //   // update current position on the range element
-  //   var positionInput = $('#rsPlayerPosition');
-  //   positionInput.val(Math.floor(currTime));
-  // },
+  updateTrackTime: function (track) {
+    var currTimeDiv = $('.timeElapsed');
+    var durationDiv = $('.timeTotal');
+
+    var currTime = this.ensureWavesurfer().getCurrentTime();
+    var duration = this.ensureWavesurfer().getDuration();
+
+    // Utils.log('updateCurrentTime', currTime, duration);
+
+    currTimeDiv.text(Utils.formatSecondsAsTime(currTime));
+    durationDiv.text(Utils.formatSecondsAsTime(duration));
+
+    // update current position on the range element
+    var positionInput = $('#rsPlayerPosition');
+    positionInput.val(Math.floor(currTime));
+  },
 
   load: function load (source) {
     var _self = this;
@@ -253,13 +232,14 @@ var Player = {
     $('#currentTitle').text(source.url);
 
     _interpretPlaylistItem(source, function (track) {
-      Utils.log('>> _interpretPlaylistItem returned', track);
-      // cache.persistent.getFile(track.playbackUrl, function (filepath) {
-        // var finalPath = filepath || track.url;
-        var finalPath = track.url;
-        //_.get(track, 'resolved.audio', false)
+      // Utils.log('>> _interpretPlaylistItem returned', track);
+      cache.persistent.getFile(track.playbackUrl, function (filepath) {
+        var finalPath = filepath || track.url;
+        // var finalPath = track.url;
+        //_.get(track, 'resolved.audio', false);
 
         Utils.log('>> finalPath', finalPath);
+        console.log('>> finalPath', finalPath);
 
         // var markup = _generatePlayerMarkup(finalPath);
         // $('#rsPlayerAudioContainer').append(markup);
@@ -276,7 +256,7 @@ var Player = {
         // _self.updateTrackTime(_self.getElement());
         console.log('a3');
 
-      // })
+      })
     });
 
   },
