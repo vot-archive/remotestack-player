@@ -26,11 +26,12 @@ function ensureWavesurfer() {
       container: '#waveform',
       waveColor: '#88a8c6',
       progressColor: '#4a7194',
-      // barWidth: 1,
+      barWidth: 1,
       height: 80,
       // width: 600,
       normalize: true,
-      scrollParent: false
+      scrollParent: false,
+      skipLength: 5
 
   });
   // wavesurfer.load('http://siliconfen.co/v/mp3/Infused-1.41.mp3')
@@ -39,16 +40,29 @@ function ensureWavesurfer() {
     wavesurfer.playPause();
   })
   wavesurfer.on('ready', function () {
-    wavesurfer.empty();
+    Utils.log('Track ready');
+    // wavesurfer.empty();
     wavesurfer.drawBuffer();
     // adjust volume
-    wavesurfer.play();
+
+    // if (Player.playing) {
+      wavesurfer.play();
+    // }
   });
 
   $(window).resize(function() {
+    Utils.log('Window resize');
     //Resize waveform
     // wavesurfer.empty();
     wavesurfer.drawBuffer();
+  });
+
+  wavesurfer.on('finish', function () {
+    Utils.log('Track finished');
+    // Player.wavesurferObject.destroy();
+    // Player.wavesurferObject = null;
+    Player.next();
+    Player.play();
   });
 
   Player.wavesurferObject = wavesurfer;
@@ -103,11 +117,11 @@ var Player = {
 
   ensureWavesurfer: ensureWavesurfer,
   // methods
-  getElement: function () {
+  getElement: function getElement () {
     return $('#rsPlayerAudioContainer audio')[0];
   },
 
-  play: function (state) {
+  play: function play (state) {
     Utils.log('play(' + state + ')');
     var _self = this;
     var audioTag = _self.getElement();
@@ -137,7 +151,7 @@ var Player = {
     _self.updatePositionMax(_self.getElement());
   },
 
-  prev: function () {
+  prev: function prev () {
     var prevTrack = this.queue.pop();
     this.queue.unshift(prevTrack); // add track to the end of queue
 
@@ -148,7 +162,7 @@ var Player = {
     // this.play(playState);
   },
 
-  next: function () {
+  next: function next () {
     var nextTrack = this.queue.shift();
     this.queue.push(nextTrack); // add track to the end of queue
 
@@ -159,11 +173,11 @@ var Player = {
     this.play(playState);
   },
 
-  setPlayButton: function (state) {
+  setPlayButton: function setPlayButton (state) {
     $('.fa.fa-play, .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
   },
 
-  setVolume: function (vol) {
+  setVolume: function setVolume (vol) {
     if (typeof vol !== 'number') {
       if (typeof vol === 'object') {
         var obj = $(vol);
@@ -231,14 +245,9 @@ var Player = {
   //   positionInput.val(Math.floor(currTime));
   // },
 
-  load: function (source) {
+  load: function load (source) {
     var _self = this;
-    var audioTag = _self.getElement();
-    if (audioTag) {
-      audioTag.remove();
-    }
-
-    var wavesurferObject = Player.ensureWavesurfer();
+    var wavesurferObject = _self.ensureWavesurfer();
 
     // $('#currentArtist').text('asdf');
     $('#currentTitle').text(source.url);
@@ -270,6 +279,40 @@ var Player = {
       // })
     });
 
+  },
+
+  bindShortcuts: function bindShortcuts () {
+    const Player = require('./player');
+    Utils.log('bindShortcuts called');
+    $(document).on('keydown', function(e) {
+      var tag = e.target.tagName.toLowerCase();
+
+      if (tag === 'input' || tag === 'textarea') {
+        return;
+      }
+
+      // 32 === space
+      if (e.which === 32) {
+        Utils.log('space hit');
+        Player.ensureWavesurfer().playPause();
+        return e.preventDefault();
+      }
+
+      if (e.which === 37) {
+        // Utils.log('arrow left hit');
+        Player.ensureWavesurfer().skipBackward();
+        return e.preventDefault();
+      }
+
+      if (e.which === 39) {
+        // Utils.log('arrow right hit');
+        Player.ensureWavesurfer().skipForward();
+        return e.preventDefault();
+      }
+
+
+      // Utils.log(e.which);
+    });
   }
 };
 
