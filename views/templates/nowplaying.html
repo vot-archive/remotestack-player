@@ -2,11 +2,10 @@
 <script>
   var Renderer = require('../renderer');
   var Player = require('../renderer/player');
-
-  $(document).ready(function () {
-    Player.next();
-  });
 </script>
+
+<!-- <script src="assets/js/wavesurfer/wavesurfer.min.js"></script> -->
+<script>window.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');</script>
 
 <template>
 
@@ -27,7 +26,7 @@
           <span id="currentTitle"></span>
         </div>
 
-
+<!--
         <div id="rsPlayerControls">
           <div class="btn-group">
             <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
@@ -43,11 +42,29 @@
           <strong>Position</strong>
           <input type="range" min="0" max="0" value="0" oninput="$(this).data('dragged', true)" onchange="Player.setPosition(this)" id="rsPlayerPosition">
         </div>
+         -->
       </div>
-
-      <div id="rsPlayerAudioContainer"></div>
+      <br /><br />
+      <a class="btn btn-default" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
+      <div id="waveform"></div>
+      <!-- <div id="rsPlayerAudioContainer"></div> -->
 
     </div>
   </div>
 
+
 </template>
+
+<script>
+$(document).ready(function () {
+  Player.ensureWavesurfer();
+  Player.next();
+
+});
+</script>
+
+<style>
+#waveform {
+  bottom: -20px; position: fixed; width: 100%; margin: 0 -10px;
+}
+</style>
