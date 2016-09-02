@@ -8,7 +8,7 @@ var Nav = {
     Utils.log('Nav.selectFirst');
     var id = $('#wBody .navContent:first').attr('id');
 
-    Utils.log('Hijacking Nav.selectFirst - substituting "nowplaying"');
+    // Utils.log('Hijacking Nav.selectFirst - substituting "nowplaying"');
     id = 'nowplaying';
     this.goto(id);
   },

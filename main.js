@@ -10,7 +10,7 @@ const Utils = require('./lib/utils');
 
 function initialise () {
   Utils.log('\n--- REMOTESTACK STARTED ---');
-  // Utils.log('> userdata:', app.getPath('userData') + '\n');
+  Utils.log('> userdata:', app.getPath('userData') + '\n');
 
   WindowManager.ensure('main', {template: 'main', windowOpts: WindowManager.presets.main});
   // GlobalShortcuts.registerAll();

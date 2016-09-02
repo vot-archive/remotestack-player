@@ -21,7 +21,6 @@ function ensureWavesurfer() {
       skipLength: 5
 
   });
-  // wavesurfer.load('http://siliconfen.co/v/mp3/Infused-1.41.mp3')
 
   $('#WSPlay').off();
   $('#WSPlay').on('click', function () {
@@ -32,13 +31,12 @@ function ensureWavesurfer() {
     Utils.log('Track ready');
     // wavesurfer.empty();
     wavesurfer.drawBuffer();
-    // adjust volume
     Player.applyVolumeSetting();
     Player.updateTrackTime();
 
-    // if (Player.playing) {
+    if (Player.playing) {
       wavesurfer.play();
-    // }
+    }
   });
 
 
@@ -178,6 +176,7 @@ var Player = {
   },
 
   setPlayButton: function setPlayButton (state) {
+    this.playing = state;
     $('.fa.fa-play, .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
   },
 
@@ -228,34 +227,25 @@ var Player = {
     var _self = this;
     var wavesurferObject = _self.ensureWavesurfer();
 
-    // $('#currentArtist').text('asdf');
+    $('#currentArtist').text('Loading');
     $('#currentTitle').text(source.url);
 
     _interpretPlaylistItem(source, function (track) {
-      // Utils.log('>> _interpretPlaylistItem returned', track);
+      Utils.log('>> _interpretPlaylistItem returned', track);
       cache.persistent.getFile(track.playbackUrl, function (filepath) {
         var finalPath = filepath || track.url;
         // var finalPath = track.url;
         //_.get(track, 'resolved.audio', false);
 
         Utils.log('>> finalPath', finalPath);
-        console.log('>> finalPath', finalPath);
-
-        // var markup = _generatePlayerMarkup(finalPath);
-        // $('#rsPlayerAudioContainer').append(markup);
         wavesurferObject.load(finalPath);
-        // _self.waveformObject.load(finalPath);
 
+        // $('#currentArtist').text(track.artist);
+        // $('#currentTitle').text(track.title);
 
-        console.log('a1');
-        $('#currentArtist').text(track.artist);
-        $('#currentTitle').text(track.title);
-        console.log('Updated');
-
-        // _self.setVolume(_self.volume);
-        // _self.updateTrackTime(_self.getElement());
-        console.log('a3');
-
+        $('#currentArtist').text(track.resolved.meta.canonical.artist);
+        $('#currentTitle').text(track.resolved.meta.canonical.title);
+        Utils.log('Track info updated', track.resolved.meta.canonical.artist, track.resolved.meta.canonical.title);
       })
     });
 
