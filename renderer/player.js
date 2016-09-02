@@ -4,16 +4,70 @@ const playlist = require('../lib/playlist');
 var settings = require('electron-settings');
 var Utils = require('../lib/utils');
 
-function _generatePlayerMarkup(finalPath) {
-  if (!finalPath || typeof finalPath !== 'string') {
-    console.log('Invalid finalPath provided');
-    return false;
+function ensureWavesurfer() {
+  if (Player.wavesurferObject) {
+    return Player.wavesurferObject;
   }
-  var rtn = '<audio preload="true" ontimeupdate="Player.updateTrackTime(this)">';
-  rtn += '<source src="' + finalPath + '" type="audio/mpeg">';
-  rtn += '</audio>';
 
-  return rtn
+  var wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: '#88a8c6',
+      progressColor: '#4a7194',
+      barWidth: 1,
+      height: 80,
+      // width: 600,
+      normalize: true,
+      scrollParent: false,
+      skipLength: 5
+
+  });
+
+  $('#WSPlay').off();
+  $('#WSPlay').on('click', function () {
+    wavesurfer.playPause();
+  })
+
+  wavesurfer.on('ready', function () {
+    Utils.log('Track ready');
+    // wavesurfer.empty();
+    wavesurfer.drawBuffer();
+    Player.applyVolumeSetting();
+    Player.updateTrackTime();
+
+    if (Player.playing) {
+      wavesurfer.play();
+    }
+  });
+
+
+
+  wavesurfer.on('audioprocess', function () {
+    Player.updateTrackTime();
+  });
+
+  wavesurfer.on('play', function () {
+    // Utils.log('Play event');
+    Player.setPlayButton(false);
+  });
+  wavesurfer.on('pause', function () {
+    // Utils.log('Pause event');
+    Player.setPlayButton(true);
+  });
+
+  $(window).resize(function() {
+    // Utils.log('Window resize');
+    wavesurfer.drawBuffer();
+  });
+
+  wavesurfer.on('finish', function () {
+    Utils.log('Track finished');
+    // Player.wavesurferObject.destroy();
+    // Player.wavesurferObject = null;
+    Player.next();
+    Player.play();
+  });
+
+  Player.wavesurferObject = wavesurfer;
 }
 
 function _interpretPlaylistItem (item, cb) {
@@ -61,14 +115,15 @@ var Player = {
   loopOne: false,
   loopAll: false,
   playing: false,
+  waveformObject: null,
 
-
+  ensureWavesurfer: ensureWavesurfer,
   // methods
-  getElement: function () {
+  getElement: function getElement () {
     return $('#rsPlayerAudioContainer audio')[0];
   },
 
-  play: function (state) {
+  play: function play (state) {
     Utils.log('play(' + state + ')');
     var _self = this;
     var audioTag = _self.getElement();
@@ -98,7 +153,7 @@ var Player = {
     _self.updatePositionMax(_self.getElement());
   },
 
-  prev: function () {
+  prev: function prev () {
     var prevTrack = this.queue.pop();
     this.queue.unshift(prevTrack); // add track to the end of queue
 
@@ -109,7 +164,7 @@ var Player = {
     // this.play(playState);
   },
 
-  next: function () {
+  next: function next () {
     var nextTrack = this.queue.shift();
     this.queue.push(nextTrack); // add track to the end of queue
 
@@ -120,11 +175,12 @@ var Player = {
     this.play(playState);
   },
 
-  setPlayButton: function (state) {
+  setPlayButton: function setPlayButton (state) {
+    this.playing = state;
     $('.fa.fa-play, .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
   },
 
-  setVolume: function (vol) {
+  setVolume: function setVolume (vol) {
     if (typeof vol !== 'number') {
       if (typeof vol === 'object') {
         var obj = $(vol);
@@ -144,45 +200,20 @@ var Player = {
   },
 
   applyVolumeSetting: function () {
-    var audioTag = this.getElement();
-    // Utils.log('setting volume to', this.volume)
+    Utils.log('setting volume to', this.volume)
 
-    audioTag.volume = this.volume / 100;
+    this.ensureWavesurfer().setVolume(this.volume / 100);
   },
 
-  setPosition: function (sec) {
-    var audioTag = this.getElement();
-
-    if (typeof sec !== 'number') {
-      if (typeof sec === 'object') {
-        var obj = $(sec);
-        var objVal = obj.val();
-        if (obj && objVal) {
-          sec = objVal;
-        } else {
-          return;
-        }
-      } else {
-        return;
-      }
-    }
-    // Utils.log('jumping to', sec)
-    audioTag.currentTime = sec;
-  },
-
-  updatePositionMax: function () {
-    var audioTag = this.getElement();
-
-    var positionInput = $('#rsPlayerPosition');
-    positionInput.attr('max', Math.floor(audioTag.duration));
-  },
 
   updateTrackTime: function (track) {
     var currTimeDiv = $('.timeElapsed');
     var durationDiv = $('.timeTotal');
 
-    var currTime = Math.floor(track.currentTime).toString();
-    var duration = Math.floor(track.duration).toString();
+    var currTime = this.ensureWavesurfer().getCurrentTime();
+    var duration = this.ensureWavesurfer().getDuration();
+
+    // Utils.log('updateCurrentTime', currTime, duration);
 
     currTimeDiv.text(Utils.formatSecondsAsTime(currTime));
     durationDiv.text(Utils.formatSecondsAsTime(duration));
@@ -192,12 +223,9 @@ var Player = {
     positionInput.val(Math.floor(currTime));
   },
 
-  load: function (source) {
+  load: function load (source) {
     var _self = this;
-    var audioTag = _self.getElement();
-    if (audioTag) {
-      audioTag.remove();
-    }
+    var wavesurferObject = _self.ensureWavesurfer();
 
     $('#currentArtist').text('Loading');
     $('#currentTitle').text(source.url);
@@ -206,26 +234,55 @@ var Player = {
       Utils.log('>> _interpretPlaylistItem returned', track);
       cache.persistent.getFile(track.playbackUrl, function (filepath) {
         var finalPath = filepath || track.url;
-
-        //_.get(track, 'resolved.audio', false)
+        // var finalPath = track.url;
+        //_.get(track, 'resolved.audio', false);
 
         Utils.log('>> finalPath', finalPath);
+        wavesurferObject.load(finalPath);
 
-        var markup = _generatePlayerMarkup(finalPath);
-        $('#rsPlayerAudioContainer').append(markup);
+        // $('#currentArtist').text(track.artist);
+        // $('#currentTitle').text(track.title);
 
-        console.log('a1');
-        $('#currentArtist').text(track.artist);
-        $('#currentTitle').text(track.title);
-        console.log('Updated');
-
-        _self.setVolume(_self.volume);
-        _self.updateTrackTime(_self.getElement());
-        console.log('a3');
-
+        $('#currentArtist').text(track.resolved.meta.canonical.artist);
+        $('#currentTitle').text(track.resolved.meta.canonical.title);
+        Utils.log('Track info updated', track.resolved.meta.canonical.artist, track.resolved.meta.canonical.title);
       })
     });
 
+  },
+
+  bindShortcuts: function bindShortcuts () {
+    const Player = require('./player');
+    Utils.log('bindShortcuts called');
+    $(document).on('keydown', function(e) {
+      var tag = e.target.tagName.toLowerCase();
+
+      if (tag === 'input' || tag === 'textarea') {
+        return;
+      }
+
+      // 32 === space
+      if (e.which === 32) {
+        Utils.log('space hit');
+        Player.ensureWavesurfer().playPause();
+        return e.preventDefault();
+      }
+
+      if (e.which === 37) {
+        // Utils.log('arrow left hit');
+        Player.ensureWavesurfer().skipBackward();
+        return e.preventDefault();
+      }
+
+      if (e.which === 39) {
+        // Utils.log('arrow right hit');
+        Player.ensureWavesurfer().skipForward();
+        return e.preventDefault();
+      }
+
+
+      // Utils.log(e.which);
+    });
   }
 };
 
