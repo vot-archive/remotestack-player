@@ -9,6 +9,7 @@ const StreamManager = require('./lib/streamManager');
 const Utils = require('./lib/utils');
 
 function initialise () {
+  // Utils.log.rotatelog();
   Utils.log('\n--- REMOTESTACK STARTED ---');
   Utils.log('> userdata:', app.getPath('userData') + '\n');
 
