@@ -12,10 +12,6 @@ function ensureWavesurfer() {
   var wavesurfer = WaveSurfer.create({
       container: '#waveform',
 
-      // waveColor: '#88a8c6',
-      // progressColor: '#4a7194',
-
-      // waveColor: '#e4b564',
       waveColor: '#847c71',
       progressColor: '#ffa100',
 
@@ -43,6 +39,11 @@ function ensureWavesurfer() {
     if (Player.playing) {
       wavesurfer.play();
     }
+
+    $(window).resize(function() {
+      // Utils.log('Window resize');
+      wavesurfer.drawBuffer();
+    });
   });
 
 
@@ -58,11 +59,6 @@ function ensureWavesurfer() {
   wavesurfer.on('pause', function () {
     // Utils.log('Pause event');
     Player.setPlayButton(true);
-  });
-
-  $(window).resize(function() {
-    // Utils.log('Window resize');
-    wavesurfer.drawBuffer();
   });
 
   wavesurfer.on('finish', function () {
@@ -231,7 +227,8 @@ var Player = {
 
   load: function load (source) {
     var _self = this;
-    var wavesurferObject = _self.ensureWavesurfer();
+    _self.ensureWavesurfer();
+    var wavesurferObject = _self.wavesurferObject;
 
     $('#currentArtist').text('Loading');
     $('#currentTitle').text(source.url);

@@ -44,7 +44,12 @@ var UI = {
     var time = immediate ? 200 : 350;
     // Utils.log('time', time);
     $('.sidebar').animate({'left': 0, opacity: 1}, time);
-    $('.mainContent').animate({'left': 140}, time);
+    $('.mainContent').animate({'left': 140}, time)
+      .promise().always(function () {
+        $(window).trigger('resize');
+      });
+
+    $(window).trigger('resize');
   },
   hideSidebar: function (immediate) {
     // Utils.log('immediate', immediate);
@@ -54,7 +59,12 @@ var UI = {
     var time = immediate ? 200 : 350;
     // Utils.log('time', time);
     $('.sidebar').animate({'left': -140, opacity: 0}, time);
-    $('.mainContent').animate({'left': 0}, time);
+    $('.mainContent').animate({'left': 0}, time)
+      .promise().always(function () {
+        $(window).trigger('resize');
+      });
+
+
   },
   bindShortcuts: function bindShortcuts () {
     var _self = this;
