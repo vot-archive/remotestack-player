@@ -197,14 +197,18 @@ var Player = {
       }
     }
 
-    this.volume = vol;
-    this.applyVolumeSetting();
+    if (vol > 100) vol = 100;
+    if (vol < 0) vol = 0;
+    if (this.volume !== vol) {
+      this.volume = vol;
+      this.applyVolumeSetting();
+    }
   },
 
   applyVolumeSetting: function () {
     Utils.log('setting volume to', this.volume)
-
     this.ensureWavesurfer().setVolume(this.volume / 100);
+    $('#rsPlayerVolume').val(this.volume);
   },
 
 
@@ -255,7 +259,7 @@ var Player = {
   },
 
   bindShortcuts: function bindShortcuts () {
-    const Player = require('./player');
+    const _self = this;
     Utils.log('bindShortcuts called');
     $(document).on('keydown', function(e) {
       var tag = e.target.tagName.toLowerCase();
@@ -267,25 +271,35 @@ var Player = {
       // 32 === space
       if (e.which === 32) {
         Utils.log('space hit');
-        Player.ensureWavesurfer().playPause();
+        _self.ensureWavesurfer().playPause();
         return e.preventDefault();
       }
 
       if (e.which === 37) {
         // Utils.log('arrow left hit');
-        Player.ensureWavesurfer().skipBackward();
+        _self.ensureWavesurfer().skipBackward();
         return e.preventDefault();
       }
 
       if (e.which === 39) {
         // Utils.log('arrow right hit');
-        Player.ensureWavesurfer().skipForward();
+        _self.ensureWavesurfer().skipForward();
         return e.preventDefault();
       }
 
-
-      // Utils.log(e.which);
     });
+
+    $('#rsPlayerVolume').mousewheel(function(event) {
+      var newVal = parseInt($('#rsPlayerVolume').val()) + event.deltaY;
+      _self.setVolume(newVal);
+    });
+
+    $('#waveform').mousewheel(function(event) {
+      if (event.deltaX) {
+        _self.ensureWavesurfer().skip(event.deltaX/3);
+      }
+    });
+
   }
 };
 
