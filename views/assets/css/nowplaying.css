@@ -15,3 +15,8 @@
 
 .bg .rsPlayerControlsGroup {color: #5a5a5a}
 .bg #rsPlayerControls .btn-default {color: #5a5a5a}
+
+
+.rsPlayerBrowser {position:fixed; top: 110px; width: 100%}
+.rsPlayerBrowser h2 {margin-top: 0}
+.list .url {display: block;font-size: 0.8em; opacity: 0.8}

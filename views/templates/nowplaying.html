@@ -4,6 +4,7 @@
   var Renderer = require('../renderer');
   var Nav = require('../renderer/nav');
   var Player = require('../renderer/player');
+  var NowPlaying = require('../renderer/nowplaying');
 </script>
 
 <script>window.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');</script>
@@ -48,14 +49,14 @@
           <a class="playercontrol big" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
         </div>
 
-        <!--
-        <br /><br />
+      </div>
+
+      <div class="rsPlayerBrowser">
         <h2>PLAYLIST</h2>
 
-        <ul class="list"></ul>
-        -->
-
+        <ul class="list" id="nowplaying-playlist"></ul>
       </div>
+
 
 
     </div>
@@ -69,5 +70,6 @@ $(document).ready(function () {
   Player.ensureWavesurfer();
   Player.next();
 
+  NowPlaying.init();
 });
 </script>
