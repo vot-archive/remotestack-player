@@ -7,6 +7,7 @@ var UI = require('../renderer/ui');
 $(document).ready(function () {
   Nav.init();
   setTimeout(UI.applySidebarSetting, 300);
+  UI.bindShortcuts();
 });
 
 // $(window).on('load', function () {

@@ -55,6 +55,22 @@ var UI = {
     // Utils.log('time', time);
     $('.sidebar').animate({'left': -140, opacity: 0}, time);
     $('.mainContent').animate({'left': 0}, time);
+  },
+  bindShortcuts: function bindShortcuts () {
+    var _self = this;
+    Utils.log('bindShortcuts called');
+    $(document).on('keydown', function(e) {
+      var tag = e.target.tagName.toLowerCase();
+      if (tag === 'input' || tag === 'textarea') {
+        return;
+      }
+      // Ctrl/Cmd + Alt + S
+      if (e.altKey && (e.ctrlKey || e.metaKey) && (e.which === 83)) {
+        Utils.log('Cmd+Alt+S hit');
+        _self.toggleSidebar();
+        return e.preventDefault();
+      }
+    });
   }
 };
 
