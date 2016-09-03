@@ -11,10 +11,16 @@ function ensureWavesurfer() {
 
   var wavesurfer = WaveSurfer.create({
       container: '#waveform',
-      waveColor: '#88a8c6',
-      progressColor: '#4a7194',
+
+      // waveColor: '#88a8c6',
+      // progressColor: '#4a7194',
+
+      // waveColor: '#e4b564',
+      waveColor: '#847c71',
+      progressColor: '#ffa100',
+
       barWidth: 1,
-      height: 80,
+      height: 40,
       // width: 600,
       normalize: true,
       scrollParent: false,

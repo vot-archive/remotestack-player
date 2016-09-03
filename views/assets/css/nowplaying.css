@@ -10,18 +10,8 @@
 
 
 
-.solidBg.dark #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
-.rsPlayerControlsGroup, .solidBg.dark .rsPlayerControlsGroup {color: #fff}
+.bg.dark #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
+.rsPlayerControlsGroup, .bg.dark .rsPlayerControlsGroup {color: #fff}
 
-.solidBg .rsPlayerControlsGroup {color: #5a5a5a}
-.solidBg #rsPlayerControls .btn-default {color: #5a5a5a}
-
-
-#waveform {
-  bottom: -20px; position: fixed; width: 100%; margin: 0 -10px;
-}
-
-@media screen and (max-height: 180px) {
-  .wrap .containerFooter {bottom: -20px}
-  #waveform {bottom: -40px}
-}
+.bg .rsPlayerControlsGroup {color: #5a5a5a}
+.bg #rsPlayerControls .btn-default {color: #5a5a5a}

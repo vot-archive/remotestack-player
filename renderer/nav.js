@@ -17,7 +17,7 @@ var Nav = {
     $('#wBody .navContent').removeClass('active');
     $('#wBody .navContent#' + id).addClass('active');
 
-    if (id === 'home') {
+    if (id === 'nowplaying') {
       $('.containerFooter .fa.fa-fw.fa-home').fadeOut(100);
     } else {
       $('.containerFooter .fa.fa-fw.fa-home').fadeIn(100);
