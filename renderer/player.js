@@ -182,6 +182,7 @@ var Player = {
     $('.fa.fa-play, .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
   },
 
+  // TODO: Support setVolume('+5') syntax
   setVolume: function setVolume (vol) {
     if (typeof vol !== 'number') {
       if (typeof vol === 'object') {
@@ -268,35 +269,74 @@ var Player = {
         return;
       }
 
-      // 32 === space
+
+      // play/pause
       if (e.which === 32) {
-        Utils.log('space hit');
+        // Utils.log('space hit');
         _self.ensureWavesurfer().playPause();
         return e.preventDefault();
       }
 
+
+
+      // track +5s
       if (e.which === 37) {
         // Utils.log('arrow left hit');
         _self.ensureWavesurfer().skipBackward();
         return e.preventDefault();
       }
 
+      // track -5s
       if (e.which === 39) {
         // Utils.log('arrow right hit');
         _self.ensureWavesurfer().skipForward();
         return e.preventDefault();
       }
 
+
+
+      // vol up
+      if (e.which === 38) {
+        // Utils.log('arrow up hit');
+        _self.setVolume(_self.volume + 5);
+        return e.preventDefault();
+      }
+
+      // vol down
+      if (e.which === 40) {
+        // Utils.log('arrow down hit');
+        _self.setVolume(_self.volume - 5);
+        return e.preventDefault();
+      }
+
+
+
+      // prev song
+      if (e.which === 188) {
+        // Utils.log('< hit');
+        _self.prev();
+        return e.preventDefault();
+      }
+
+      // next song
+      if (e.which === 190) {
+        // Utils.log('> hit');
+        _self.next();
+        return e.preventDefault();
+      }
+
     });
 
     $('#rsPlayerVolume').mousewheel(function(event) {
-      var newVal = parseInt($('#rsPlayerVolume').val()) + event.deltaY;
+      var offset = event.deltaX || event.deltaY;
+      var newVal = parseInt($('#rsPlayerVolume').val()) + offset;
       _self.setVolume(newVal);
     });
 
     $('#waveform').mousewheel(function(event) {
-      if (event.deltaX) {
-        _self.ensureWavesurfer().skip(event.deltaX/3);
+      var offset = event.deltaX || event.deltaY;
+      if (offset) {
+        _self.ensureWavesurfer().skip(offset/3);
       }
     });
 

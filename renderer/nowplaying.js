@@ -42,11 +42,13 @@ var NowPlaying = {
   },
   togglePlaylist: function togglePlaylist () {
     var shouldShow = $(window).height() < 111;
+    var currentWidth = $(window).width();
+    var playlistThresholds = [110, 420];
 
     if (shouldShow) {
-      window.resizeTo(300, 420)
+      window.resizeTo(currentWidth, playlistThresholds[1])
     } else {
-      window.resizeTo(300, 110)
+      window.resizeTo(currentWidth, playlistThresholds[0])
     }
   }
 }
