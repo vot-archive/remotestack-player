@@ -1,16 +1,43 @@
 .containerBody {top:0; overflow: hidden; -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
 
 /* Background */
-.containerBody {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
-.containerBody.dark {background: linear-gradient(to bottom, #444 0%, #111 100%)}
+
 
 #rsPlayerControls {margin-top: 2px; text-align: center;-webkit-app-region: no-drag;}
 #rsPlayerControls .btn-default {background: none; border: none; padding: 2px; margin: 0 4px; }
 #rsPlayerControls .btn-default .fa.fa-fw {font-size: 16px}
 
-#rsPlayerCurrent {margin-top:8px; font-size: 0.95em}
+#rsPlayerCurrent {margin-top:0; font-size: 0.95em}
 #rsPlayerTime {float: right; font-size: 0.9em}
 
 
-.containerBody, .containerBody #rsPlayerControls .btn-default {color: #525252}
-.containerBody.dark, .containerBody.dark #rsPlayerControls .btn-default {color: white}
+.bg, .bg #rsPlayerControls .playercontrol {color: #525252}
+.bg.dark, .bg.dark #rsPlayerControls .playercontrol {color: white}
+
+.playercontrol .fa-fw {font-size: 14px}
+.playercontrol.big .fa-fw {font-size: 20px}
+
+
+
+#waveform {margin: 5px -10px 10px; height: 40px; overflow: hidden}
+#waveform wave {overflow: hidden !important}
+/*#waveform {bottom: -20px; position: fixed; width: 100%; margin: 0 -10px;}*/
+
+@media screen and (max-height: 240px) {
+  /*#waveform {bottom: -40px}*/
+  .wrap .containerFooter {bottom: -20px}
+}
+@media screen and (max-height: 100px) {
+  #waveform {height: 20px;}
+  #waveform > * {margin-top: -10px;}
+}
+
+@media screen and (max-height: 90px) {
+  #waveform {height: 10px;}
+  #waveform > * {margin-top: -15px;}
+}
+@media screen and (max-height: 80px) {
+  #waveform {height: 4px;}
+  #waveform > * {margin-top: -18px;}
+  /*#waveform {display: none}*/
+}

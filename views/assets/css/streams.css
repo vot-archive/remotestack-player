@@ -1,12 +1,5 @@
-/* Add footer */
-.wrap .containerBody {bottom: 20px; width: 100%}
-.wrap .containerFooter {position: fixed; bottom: 0; height:20px; width: 100%; padding: 0 5px; background: #D5D5D5; border-top: 1px solid #b6b4b6;}
-.wrap .containerFooter a {color: #4c4c4c}
-.wrap .containerFooter a span.fa-active{color: #d22}
-
-
-.navContent#home {padding-top: 30px}
-.navContent#home h1 {font-weight: 100; color: white; text-shadow: 0 1px 1px black}
+.navContent#streams {padding-top: 30px}
+.navContent#streams h1 {font-weight: 100; color: white; text-shadow: 0 1px 1px black}
 
 /*.mainContent {background: #333}*/
 

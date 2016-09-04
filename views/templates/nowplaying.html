@@ -1,15 +1,17 @@
 <link rel="stylesheet" href="../assets/css/nowplaying.css">
+<link rel="stylesheet" href="../assets/css/player.css">
 <script>
   var Renderer = require('../renderer');
+  var Nav = require('../renderer/nav');
   var Player = require('../renderer/player');
+  var NowPlaying = require('../renderer/nowplaying');
 </script>
 
-<!-- <script src="assets/js/wavesurfer/wavesurfer.min.js"></script> -->
 <script>window.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');</script>
-
+<script src="../assets/js/jquery.mousewheel.js"></script>
 <template>
 
-  <div class="navContent solidBg xdark" id="nowplaying">
+  <div class="navContent bg solid dark" id="nowplaying">
     <div class="inner padding-10">
 
       <div class="rsPlayerControlsGroup">
@@ -23,21 +25,39 @@
           <span id="currentTitle"></span>
         </div>
 
+        <div id="waveform"></div>
 
         <div id="rsPlayerControls">
-          <div style="width: 20%; float: left;">&nbsp;</div>
+          <div style="width: 20%; float: left; text-align: left">
+            <div>
+              <a class="playercontrol" onclick=""><span class="fa fa-fw fa-random"></span></a>
+              <a class="playercontrol" onclick=""><span class="fa fa-fw fa-repeat"></span></a>
+              <!-- <span class="fa fa-fw fa-blank"></span> -->
+              <!-- <a class="playercontrol" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a> -->
+              <!-- <a class="playercontrol" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-thumb-tack"></span></a> -->
+            </div>
+          </div>
 
-          <input type="range" min="0" max="100" value="100" oninput="Player.setVolume(this)" id="rsPlayerVolume"
-          style="width: 20%; float: right; margin-top:5px" title="Volume">
+          <div style="width: 20%; float: right; text-align: right">
+            <input type="range" min="0" max="100" value="100" oninput="Player.setVolume(this)" id="rsPlayerVolume"
+            style=" margin-top:5px" title="Volume">
+          </div>
 
 
-          <a onclick="Player.prev()"><span class="fa fa-fw fa-2x fa-step-backward" title="Previous"></span></a>
-          <a id="WSPlay"><span class="fa fa-fw fa-2x fa-play" title="Play"></span></a>
-          <a onclick="Player.next()"><span class="fa fa-fw fa-2x fa-step-forward" title="Next"></span></a>
+          <a class="playercontrol big" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
+          <a class="playercontrol big" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
+          <a class="playercontrol big" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
         </div>
+
       </div>
 
-      <div id="waveform"></div>
+      <div class="rsPlayerBrowser">
+        <h2>PLAYLIST</h2>
+
+        <ul class="list" id="nowplaying-playlist"></ul>
+      </div>
+
+
 
     </div>
   </div>
@@ -50,5 +70,6 @@ $(document).ready(function () {
   Player.ensureWavesurfer();
   Player.next();
 
+  NowPlaying.init();
 });
 </script>

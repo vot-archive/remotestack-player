@@ -3,31 +3,33 @@
 <head>
   <meta charset="utf-8">
   <title>RemoteStack</title>
-
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-
-  <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
-  <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/app.js"></script>
-
-  <link rel="icon" type="image/png" href="assets/rs.png">
-  <link rel="apple-touch-icon" href="assets/rs.png">
-
-  <!-- <link rel="import" class="partial" href="partials/wHeader.html"> -->
-  <link rel="import" class="partial" href="partials/wSidebar.html">
-  <link rel="import" class="partial" href="partials/wFooter.html">
-
-  <link rel="import" class="template" href="templates/home.html">
-  <link rel="import" class="template" href="templates/playlist.html">
-  <link rel="import" class="template" href="templates/library.html">
-  <link rel="import" class="template" href="templates/nowplaying.html">
-  <link rel="import" class="template" href="templates/openurl.html">
-  <link rel="import" class="template" href="templates/preferences.html">
 </head>
 <body>
+
+  <assets style="display: none">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/streams.css">
+
+    <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <link rel="icon" type="image/png" href="assets/rs.png">
+    <link rel="apple-touch-icon" href="assets/rs.png">
+
+    <!-- <link rel="import" class="partial" href="partials/wHeader.html"> -->
+    <link rel="import" class="partial" href="partials/wSidebar.html">
+    <!-- <link rel="import" class="partial" href="partials/wFooter.html"> -->
+
+    <link rel="import" class="template" href="templates/streams.html">
+    <link rel="import" class="template" href="templates/playlist.html">
+    <link rel="import" class="template" href="templates/library.html">
+    <link rel="import" class="template" href="templates/nowplaying.html">
+    <link rel="import" class="template" href="templates/openurl.html">
+    <link rel="import" class="template" href="templates/preferences.html">
+  </assets>
 
   <!-- window header -->
   <div id="wContainer" class="wrap">
@@ -39,7 +41,7 @@
         <div class="mainContent" id="wBody"></div>
     </div>
 
-    <div id="wFooter" class="containerFooter"></div>
+    <!-- <div id="wFooter" class="containerFooter"></div> -->
 
   </div>
 

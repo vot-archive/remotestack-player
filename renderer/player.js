@@ -11,10 +11,12 @@ function ensureWavesurfer() {
 
   var wavesurfer = WaveSurfer.create({
       container: '#waveform',
-      waveColor: '#88a8c6',
-      progressColor: '#4a7194',
+
+      waveColor: '#847c71',
+      progressColor: '#ffa100',
+
       barWidth: 1,
-      height: 80,
+      height: 40,
       // width: 600,
       normalize: true,
       scrollParent: false,
@@ -37,6 +39,11 @@ function ensureWavesurfer() {
     if (Player.playing) {
       wavesurfer.play();
     }
+
+    $(window).resize(function() {
+      // Utils.log('Window resize');
+      wavesurfer.drawBuffer();
+    });
   });
 
 
@@ -52,11 +59,6 @@ function ensureWavesurfer() {
   wavesurfer.on('pause', function () {
     // Utils.log('Pause event');
     Player.setPlayButton(true);
-  });
-
-  $(window).resize(function() {
-    // Utils.log('Window resize');
-    wavesurfer.drawBuffer();
   });
 
   wavesurfer.on('finish', function () {
@@ -180,6 +182,7 @@ var Player = {
     $('.fa.fa-play, .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
   },
 
+  // TODO: Support setVolume('+5') syntax
   setVolume: function setVolume (vol) {
     if (typeof vol !== 'number') {
       if (typeof vol === 'object') {
@@ -195,14 +198,18 @@ var Player = {
       }
     }
 
-    this.volume = vol;
-    this.applyVolumeSetting();
+    if (vol > 100) vol = 100;
+    if (vol < 0) vol = 0;
+    if (this.volume !== vol) {
+      this.volume = vol;
+      this.applyVolumeSetting();
+    }
   },
 
   applyVolumeSetting: function () {
     Utils.log('setting volume to', this.volume)
-
     this.ensureWavesurfer().setVolume(this.volume / 100);
+    $('#rsPlayerVolume').val(this.volume);
   },
 
 
@@ -225,7 +232,8 @@ var Player = {
 
   load: function load (source) {
     var _self = this;
-    var wavesurferObject = _self.ensureWavesurfer();
+    _self.ensureWavesurfer();
+    var wavesurferObject = _self.wavesurferObject;
 
     $('#currentArtist').text('Loading');
     $('#currentTitle').text(source.url);
@@ -252,7 +260,7 @@ var Player = {
   },
 
   bindShortcuts: function bindShortcuts () {
-    const Player = require('./player');
+    const _self = this;
     Utils.log('bindShortcuts called');
     $(document).on('keydown', function(e) {
       var tag = e.target.tagName.toLowerCase();
@@ -261,28 +269,77 @@ var Player = {
         return;
       }
 
-      // 32 === space
+
+      // play/pause
       if (e.which === 32) {
-        Utils.log('space hit');
-        Player.ensureWavesurfer().playPause();
+        // Utils.log('space hit');
+        _self.ensureWavesurfer().playPause();
         return e.preventDefault();
       }
 
+
+
+      // track +5s
       if (e.which === 37) {
         // Utils.log('arrow left hit');
-        Player.ensureWavesurfer().skipBackward();
+        _self.ensureWavesurfer().skipBackward();
         return e.preventDefault();
       }
 
+      // track -5s
       if (e.which === 39) {
         // Utils.log('arrow right hit');
-        Player.ensureWavesurfer().skipForward();
+        _self.ensureWavesurfer().skipForward();
         return e.preventDefault();
       }
 
 
-      // Utils.log(e.which);
+
+      // vol up
+      if (e.which === 38) {
+        // Utils.log('arrow up hit');
+        _self.setVolume(_self.volume + 5);
+        return e.preventDefault();
+      }
+
+      // vol down
+      if (e.which === 40) {
+        // Utils.log('arrow down hit');
+        _self.setVolume(_self.volume - 5);
+        return e.preventDefault();
+      }
+
+
+
+      // prev song
+      if (e.which === 188) {
+        // Utils.log('< hit');
+        _self.prev();
+        return e.preventDefault();
+      }
+
+      // next song
+      if (e.which === 190) {
+        // Utils.log('> hit');
+        _self.next();
+        return e.preventDefault();
+      }
+
     });
+
+    $('#rsPlayerVolume').mousewheel(function(event) {
+      var offset = event.deltaX || event.deltaY;
+      var newVal = parseInt($('#rsPlayerVolume').val()) + offset;
+      _self.setVolume(newVal);
+    });
+
+    $('#waveform').mousewheel(function(event) {
+      var offset = event.deltaX || event.deltaY;
+      if (offset) {
+        _self.ensureWavesurfer().skip(offset/3);
+      }
+    });
+
   }
 };
 

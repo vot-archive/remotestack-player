@@ -11,6 +11,7 @@
   <!-- <link rel="stylesheet" href="assets/css/windowCtl.css"> -->
 
   <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
+  <script>window.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');</script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/app.js"></script>
 
@@ -25,33 +26,35 @@
   <div id="wContainer" class="container-fluid wrap">
     <!-- <div id="wHeaderPlayer" class="containerHeader"></div> -->
 
-    <div class="containerBody xdark">
-      <div>
-        <span class="windowControl btnClose" onclick="Renderer.ipc.hidePlayer()"></span>
-      </div>
-
-
-      <div id="rsPlayerCurrent">
-
-        <strong><span id="currentArtist"></span></strong>
-        <span id="currentTitle"></span>
-
-        <div id="rsPlayerTime">
-          <span class="timeElapsed">00:00</span>/<span class="timeTotal">00:00</span>
+    <div class="containerBody bg solid">
+      <div class="padding-10">
+        <div>
+          <span class="windowControl btnClose" onclick="Renderer.ipc.hidePlayer()"></span>
         </div>
-      </div>
 
 
-      <div id="rsPlayerControls">
-        <div class="btn-group">
-          <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
-          <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
-          <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
+        <div id="rsPlayerCurrent">
+
+          <strong><span id="currentArtist"></span></strong>
+          <span id="currentTitle"></span>
+
+          <div id="rsPlayerTime">
+            <span class="timeElapsed">00:00</span>/<span class="timeTotal">00:00</span>
+          </div>
         </div>
+
+        <div id="waveform"></div>
+
+        <div id="rsPlayerControls">
+          <div class="btn-group">
+            <a class="btn btn-default playercontrol" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
+            <a class="btn btn-default playercontrol" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
+            <a class="btn btn-default playercontrol" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
+          </div>
+        </div>
+
+
       </div>
-
-      <div id="rsPlayerAudioContainer"></div>
-
     </div>
   </div>
 

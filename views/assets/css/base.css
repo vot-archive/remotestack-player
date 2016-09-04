@@ -6,7 +6,6 @@ h1, h2, h3 {color: #3E3D3D; text-shadow: 0px 1px 1px #FFF; font-weight: 300; mar
 table.table {font-size: 1em}
 
 h2 {font-size: 18px; margin: -10px -10px 0; padding: 10px 10px 10px; background: #DDD; text-decoration: none;}
-h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
 
 a {text-decoration: none; color: #23527C}
 a:hover {color: #153C5D}
@@ -43,9 +42,6 @@ ul.list li .primary {color: black; text-decoration: none}
 /* Navigation: Active screen */
 .navContent {display: none; height: 100%}
 .navContent.active {display: block}
-.navContent.solidBg {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
-.navContent.solidBg.dark {background: linear-gradient(to bottom, #444 0%, #111 100%)}
-.solidBg.dark h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: white; text-shadow: none}
 
 
 /* Navigation */
@@ -69,3 +65,29 @@ ul.list li .primary {color: black; text-decoration: none}
 /* Sidebar */
 .sidebar {width:140px;position:fixed;left:-140px}
 .mainContent {position:fixed;left:0;right:0}
+
+/* Add footer */
+.wrap .containerBody {bottom: 20px; width: 100%}
+.wrap .containerFooter {position: fixed; bottom: 0; height:20px; width: 100%; padding: 0 5px; background: #D5D5D5; border-top: 1px solid #b6b4b6;}
+.wrap .containerFooter a {color: #4c4c4c}
+.wrap .containerFooter a span.fa-active{color: #d22}
+
+
+
+
+/* NEW WINDOW CONCEPT */
+body {-webkit-app-region: drag; -webkit-user-select: none; cursor: default}
+.bg.solid {background: linear-gradient(to bottom, #EFEFEF 0px, #D5D5D5 120px)}
+.bg.solid.dark {background: linear-gradient(to bottom, #222 0px, #111 120px)}
+
+.bg.transparent {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.5) 0%, rgba(239, 239, 239, 0) 100%)}
+.bg.transparent.shine {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.8) 2px, rgba(213, 213, 213, 0.2) 30px)}
+
+
+.bg ul.list li {background: #f5f5f5}
+.bg ul.list li:nth-child(2n) {background: transparent}
+
+.bg h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
+.bg.dark h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: white; text-shadow: none}
+.bg.dark ul.list li {background: #222; color: #eee}
+.bg.dark ul.list li:nth-child(2n) {background: transparent}
