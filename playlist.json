@@ -44,19 +44,11 @@
     "source": "youtube",
     "type": "video",
     "resolved": {
-      "audio": "",
-      "video": "",
-      "cached": {
-        "audio": "",
-        "video": ""
-      },
       "meta": {
         "canonical": {
           "title": "Quantum world",
           "artist": "Symphony of science"
-        },
-        "ytdl": {},
-        "html": {}
+        }
       }
     }
   },
@@ -65,24 +57,16 @@
     "source": "youtube",
     "type": "video",
     "resolved": {
-      "audio": "",
-      "video": "",
-      "cached": {
-        "audio": "",
-        "video": ""
-      },
       "meta": {
         "canonical": {
           "title": "I think you gave me cancer",
           "artist": "Futurama"
-        },
-        "ytdl": {},
-        "html": {}
+        }
       }
     }
   },
   {
-    "url": "https://www.youtube.com/watch?v=6od76UNHt-M",
+    "url": "https://soundcloud.com/littlebigrussia/hateful-love",
     "source": "youtube",
     "type": "video",
     "resolved": {
@@ -90,27 +74,34 @@
         "canonical": {
           "title": "Hateful love",
           "artist": "Little Big"
-        },
-        "ytdl": {},
-        "html": {}
+        }
       }
     }
   },
   {
-    "url": "https://www.youtube.com/watch?v=4U2CHW-uZ0Y",
+    "url": "https://soundcloud.com/littlebigrussia/big-dick",
     "source": "youtube",
     "type": "video",
     "resolved": {
       "meta": {
         "canonical": {
-          "title": "Ego",
-          "artist": "Rysy"
-        },
-        "ytdl": {},
-        "html": {}
+          "title": "Big dick",
+          "artist": "Little Big"
+        }
+      }
+    }
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=zX2uR-KqD8o",
+    "source": "youtube",
+    "type": "video",
+    "resolved": {
+      "meta": {
+        "canonical": {
+          "title": "This is CNN",
+          "artist": "Remy"
+        }
       }
     }
   }
-
-  
 ]
