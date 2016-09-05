@@ -12,9 +12,9 @@
 <template>
 
   <div class="navContent bg solid dark" id="nowplaying">
-    <div class="inner padding-10">
+    <div class="inner">
 
-      <div class="rsPlayerControlsGroup">
+      <div class="rsPlayerControlsGroup padding-10">
         <div id="rsPlayerCurrent">
 
           <span id="currentArtist"></span>
@@ -52,9 +52,15 @@
       </div>
 
       <div class="rsPlayerBrowser">
-        <h2>PLAYLIST</h2>
+        <ul class="tabs">
+          <li class="active">Playlist</li>
+          <li>Browser</li>
+          <li>Track info</li>
+        </ul>
 
-        <ul class="list" id="nowplaying-playlist"></ul>
+        <div class="tabContent">
+          <ul class="list" id="nowplaying-playlist"></ul>
+        </div>
       </div>
 
 

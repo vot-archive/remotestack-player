@@ -19,4 +19,16 @@
 
 .rsPlayerBrowser {position:fixed; top: 110px; width: 100%}
 .rsPlayerBrowser h2 {margin-top: 0}
-.list .url {display: block;font-size: 0.8em; opacity: 0.8}
+.list .url {display: block;font-size: 0.7em; opacity: 0.7; height: 10px; overflow: hidden}
+
+.rsPlayerBrowser .tabs {height: 30px; display: block; background: linear-gradient(to bottom, #EBEBEB 0%, #D5D5D5 100%); margin: 0; padding: 0}
+.rsPlayerBrowser .tabs li {display: inline-block; font-size: 12px; line-height: 12px; padding: 9px 8px; color: #AAA}
+.rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; padding-bottom: 7px; color: #777}
+
+.rsPlayerBrowser .tabContent {position: fixed; top: 140px; bottom: 0; width:100%; overflow: hidden; overflow-y: auto;}
+.containerBody .rsPlayerBrowser ul.list {margin: 0}
+
+
+.bg.dark .rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #222 0%, #111 100%)}
+.bg.dark .rsPlayerBrowser .tabs li {color: #ccc}
+.bg.dark .rsPlayerBrowser .tabs li.active {color: #eee}
