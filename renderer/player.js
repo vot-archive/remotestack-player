@@ -65,6 +65,7 @@ function ensureWavesurfer() {
     Utils.log('Track finished');
     // Player.wavesurferObject.destroy();
     // Player.wavesurferObject = null;
+    Player.updateTrackTime(true);
     Player.next();
     Player.play();
   });
@@ -213,47 +214,56 @@ var Player = {
   },
 
 
-  updateTrackTime: function (track) {
+  updateTrackTime: function (clear) {
+    var _self = this;
     var currTimeDiv = $('.timeElapsed');
     var durationDiv = $('.timeTotal');
+    var wavesurferObject = _self.wavesurferObject;
 
-    var currTime = this.ensureWavesurfer().getCurrentTime();
-    var duration = this.ensureWavesurfer().getDuration();
+    var currTime = '----';
+    var duration = '----';
+
+    if (wavesurferObject && !clear) {
+      currTime = this.ensureWavesurfer().getCurrentTime();
+      duration = this.ensureWavesurfer().getDuration();
+
+      currTime = Utils.formatSecondsAsTime(currTime);
+      duration = Utils.formatSecondsAsTime(duration);
+    }
 
     // Utils.log('updateCurrentTime', currTime, duration);
 
-    currTimeDiv.text(Utils.formatSecondsAsTime(currTime));
-    durationDiv.text(Utils.formatSecondsAsTime(duration));
-
-    // update current position on the range element
-    var positionInput = $('#rsPlayerPosition');
-    positionInput.val(Math.floor(currTime));
+    currTimeDiv.text(currTime);
+    durationDiv.text(duration);
   },
 
   load: function load (source) {
     var _self = this;
+    $('#currentArtist').text('Loading');
+    $('#currentTitle').text(source.url);
+    // reset time
+    _self.updateTrackTime(true);
     _self.ensureWavesurfer();
     var wavesurferObject = _self.wavesurferObject;
 
-    $('#currentArtist').text('Loading');
-    $('#currentTitle').text(source.url);
+    function executeWavesurferLoad (finalPath, trackdata) {
+      Utils.log('>> finalPath', finalPath);
+      wavesurferObject.load(finalPath);
 
-    _interpretPlaylistItem(source, function (track) {
-      Utils.log('>> _interpretPlaylistItem returned', track);
-      cache.persistent.getFile(track.playbackUrl, function (filepath) {
-        var finalPath = filepath || track.url;
-        // var finalPath = track.url;
-        //_.get(track, 'resolved.audio', false);
+      $('#currentArtist').text(trackdata.resolved.meta.canonical.artist);
+      $('#currentTitle').text(trackdata.resolved.meta.canonical.title);
+      Utils.log('Track info updated', trackdata.resolved.meta.canonical.artist, trackdata.resolved.meta.canonical.title);
+    }
 
-        Utils.log('>> finalPath', finalPath);
-        wavesurferObject.load(finalPath);
+    _interpretPlaylistItem(source, function (trackdata) {
+      Utils.log('>> _interpretPlaylistItem returned', trackdata);
+      if (trackdata.source === 'file') {
+        return executeWavesurferLoad(trackdata.playbackUrl, trackdata);
+      }
 
-        // $('#currentArtist').text(track.artist);
-        // $('#currentTitle').text(track.title);
-
-        $('#currentArtist').text(track.resolved.meta.canonical.artist);
-        $('#currentTitle').text(track.resolved.meta.canonical.title);
-        Utils.log('Track info updated', track.resolved.meta.canonical.artist, track.resolved.meta.canonical.title);
+      cache.persistent.getFile(trackdata.playbackUrl, function (filepath) {
+        // var finalPath = filepath || trackdata.url;
+        return executeWavesurferLoad(filepath || trackdata.playbackUrl, trackdata);
       })
     });
 
