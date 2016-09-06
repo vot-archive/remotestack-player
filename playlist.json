@@ -103,5 +103,31 @@
         }
       }
     }
+  },
+  {
+    "url": "https://soundcloud.com/vot-z/young-and-beautiful-remix-preview",
+    "source": "youtube",
+    "type": "audio",
+    "resolved": {
+      "meta": {
+        "canonical": {
+          "title": "Young and beautiful (Vot's remix)",
+          "artist": "Vot"
+        }
+      }
+    }
+  },
+  {
+    "url": "https://soundcloud.com/vot-z/colours-demo",
+    "source": "youtube",
+    "type": "audio",
+    "resolved": {
+      "meta": {
+        "canonical": {
+          "title": "Colours",
+          "artist": "Vot"
+        }
+      }
+    }
   }
 ]
