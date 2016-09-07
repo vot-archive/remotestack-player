@@ -2,6 +2,7 @@ const ytdl = require('../lib/parsers/ytdl');
 const cache = require('../lib/cache');
 const playlist = require('../lib/playlist');
 var settings = require('electron-settings');
+var _ = require('lodash');
 var Utils = require('../lib/utils');
 
 function ensureWavesurfer() {
@@ -250,13 +251,20 @@ var Player = {
       Utils.log('>> finalPath', finalPath);
       wavesurferObject.load(finalPath);
 
-      $('#currentArtist').text(trackdata.resolved.meta.canonical.artist);
-      $('#currentTitle').text(trackdata.resolved.meta.canonical.title);
-      Utils.log('Track info updated', trackdata.resolved.meta.canonical.artist, trackdata.resolved.meta.canonical.title);
+      var artist = _.get(trackdata, 'resolved.meta.canonical.artist', '');
+      var title = _.get(trackdata, 'resolved.meta.canonical.title', '');
+
+      if (!artist.length || !title.length) {
+        title = Playlist.getDisplayTitle(trackdata);
+      }
+
+      $('#currentArtist').text(artist);
+      $('#currentTitle').text(title);
+      Utils.log('Track info updated', artist, title);
     }
 
     _interpretPlaylistItem(source, function (trackdata) {
-      Utils.log('>> _interpretPlaylistItem returned', trackdata);
+      // Utils.log('>> _interpretPlaylistItem returned', trackdata);
       if (trackdata.source === 'file') {
         return executeWavesurferLoad(trackdata.playbackUrl, trackdata);
       }
@@ -322,14 +330,14 @@ var Player = {
 
 
       // prev song
-      if (e.which === 188) {
+      if (!(e.ctrlKey || e.metaKey) && e.which === 188) {
         // Utils.log('< hit');
         _self.prev();
         return e.preventDefault();
       }
 
       // next song
-      if (e.which === 190) {
+      if (!(e.ctrlKey || e.metaKey) && e.which === 190) {
         // Utils.log('> hit');
         _self.next();
         return e.preventDefault();

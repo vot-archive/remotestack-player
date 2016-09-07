@@ -6,13 +6,9 @@ var UI = require('../renderer/ui');
 
 $(document).ready(function () {
   Nav.init();
-  setTimeout(UI.applySidebarSetting, 300);
+  setTimeout(UI.applySidebarSetting, 450);
   UI.bindShortcuts();
 });
-
-// $(window).on('load', function () {
-//   setTimeout(UI.applySidebarSetting, 300);
-// });
 </script>
 
 
@@ -20,49 +16,20 @@ $(document).ready(function () {
   <div class="sidebar-heading">Streams</div>
   <ul class="nav nav-pills nav-stacked">
     <li class="active"><a href="#" onclick="Nav.goto('nowplaying')">Default</a></li>
+    <li><a href="#" onclick="Nav.goto('streams')"><small>(all streams)</small></a></li>
   </ul>
 
-  <div class="sidebar-heading">Utils</div>
+  <div class="sidebar-heading">Collections</div>
   <ul class="nav nav-pills nav-stacked">
-    <li><a href="#" onclick="Nav.goto('streams')">Streams</a></li>
-    <!-- <li><a href="#" onclick="Nav.goto('playlist')">Playlist</a></li> -->
     <li><a href="#" onclick="Nav.goto('library')">Collections</a></li>
-    <li><a href="#" onclick="Nav.goto('openurl')">URL lookup</a></li>
-    <li><a href="#" onclick="Nav.goto('preferences')">Preferences</a></li>
+    <li><a href="#" onclick="Nav.goto('playlist')">Playlist</a></li>
+    <li><a href="#" onclick="Nav.goto('openurl')">Lookup</a></li>
   </ul>
 
-  <div class="sidebar-heading hide">Shortcuts</div>
+  <div class="sidebar-heading">About</div>
+  <ul class="nav nav-pills nav-stacked">
+    <li><a href="#" onclick="Nav.goto('preferences')">Preferences</a></li>
+    <li><a href="#" onclick="Nav.goto('help')">Help</a></li>
+  </ul>
 
-  <ul class="nav nav-pills nav-stacked hide">
-    <li><a href="#" onclick="">Library/Music</a></li>
-    <li><a href="#" onclick="">Library/Movies</a></li>
-    <li><a href="#" onclick="">Library/TV</a></li>
-    <li><a href="#" onclick="">YouTube/LoremIpsum</a></li>
-    <li><a href="#" onclick="">Soundcloud/LoremIpsum</a></li>
-    <li><a href="#" onclick="Nav.goto('nowplaying')">Stream: Default</a></li>
-  </div>
-  <!-- <nav class="nav js-nav">
-    <header class="nav-header">
-      <h1 class="nav-title">Electron <strong>API Demos</strong></h1>
-    </header>
-
-    <div class="nav-item u-category-windows">
-      <h5 class="nav-category">Library</h5>
-      <button type="button" id="button-windows" data-section="windows" class="nav-button">Browse <em>links</em></button>
-      <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">Check <em>stuff</em></button>
-    </div>
-
-    <div class="nav-item u-category-menu">
-      <h5 class="nav-category">Devices</h5>
-      <button type="button" id="button-menus" data-section="menus" class="nav-button">Customize <em>menus</em> </button>
-      <button type="button" id="button-shortcuts" data-section="shortcuts" class="nav-button">Register keyboard <em>shortcuts</em></button>
-    </div>
-
-    <div class="nav-item u-category-native-ui">
-      <h5 class="nav-category">Native User Interface</h5>
-      <button type="button" id="button-ex-links-file-manager" data-section="ex-links-file-manager" class="nav-button">Open <em>external links</em> or system <em>file manager</em></button>
-      <button type="button" id="button-dialogs" data-section="dialogs" class="nav-button">Use system <em>dialogs</em></button>
-      <button type="button" id="button-tray" data-section="tray" class="nav-button">Put your app in the <em>tray</em></button>
-    </div>
-  </nav> -->
 </partial>
