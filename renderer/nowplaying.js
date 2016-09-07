@@ -21,9 +21,11 @@ var NowPlaying = {
     var markup = '';
     if (Array.isArray(list)) {
       // recursively add markup
+      var index = 0;
       list.forEach(function (i) {
         var classname = i.active ? 'active' : '';
-        markup += '<li class="' + classname + '">' + Playlist.getDisplayTitle(i) + '<span class="url">' +  i.url + '</span></li>';
+        markup += '<li class="' + classname + '" onclick="Player.loadByIndex(' + index + ');">' + Playlist.getDisplayTitle(i) + '<span class="url">' +  i.url + '</span></li>';
+        index++;
       });
     }
     $('#nowplaying-playlist').html(markup);
