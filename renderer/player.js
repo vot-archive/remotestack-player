@@ -117,7 +117,7 @@ var Player = {
   // queue: settings.getSync('streams.0.playlist'),
   queue: playlist.get(),
 
-  volume: 100,
+  volume: settings.getSync('settings.volume') || 100,
   loopOne: false,
   loopAll: false,
   playing: false,
@@ -210,6 +210,7 @@ var Player = {
     if (vol < 0) vol = 0;
     if (this.volume !== vol) {
       this.volume = vol;
+      settings.setSync('settings.volume', vol)
       this.applyVolumeSetting();
     }
   },
