@@ -1,4 +1,5 @@
 const Utils = require('../lib/utils');
+const settings = require('electron-settings');
 
 function populatePartials () {
   var links = document.querySelectorAll('link[rel="import"].partial')
@@ -37,7 +38,12 @@ function populateTemplates () {
     // } else {
     //   document.querySelector('.content').appendChild(clone)
     // }
-  })
+  });
+
+  if (settings.getSync('settings.DarkTheme')) {
+    Utils.log('adding dark class');
+    $('.bg').addClass('dark');
+  }
 }
 
 

@@ -1,5 +1,8 @@
 const electron = require('electron');
+const settings = require('electron-settings');
 const shell = electron.shell;
+const path = require('path');
+const os = require('os');
 
 const Utils = require('../lib/utils');
 
@@ -32,11 +35,34 @@ var Nav = {
     const links = document.querySelectorAll('a[href]');
 
     Array.prototype.forEach.call(links, function (link) {
-      const url = link.getAttribute('href');
+      var url = link.getAttribute('href');
+      Utils.log('Caught a click to' + url);
+
       if (url.indexOf('http') === 0) {
         link.addEventListener('click', function (e) {
           e.preventDefault()
           shell.openExternal(url);
+        });
+      }
+
+      if (url.indexOf('file') === 0) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault()
+          url = url.replace('file://', '');
+
+
+          const tmpdir = os.tmpdir();
+          const cachedir = path.join(tmpdir, 'remotestackcache');
+          const appdata = path.join(settings.getSettingsFilePath(), '..');
+
+
+          url = url.replace('$$TMPDIR', tmpdir);
+          url = url.replace('$$CACHE', cachedir);
+          url = url.replace('$$APPDATA', appdata);
+
+
+          // shell.showItemInFolder(url);
+          shell.openItem(url);
         });
       }
     })

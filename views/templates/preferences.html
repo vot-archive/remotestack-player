@@ -5,9 +5,31 @@
 
       <h2>Preferences</h2>
 
-      ...
-
+      <label>
+        <input type="checkbox" value="settings.DarkTheme" onclick="handleCheckbox(this)" />
+        Dark theme
+      </label>
     </div>
   </div>
 
 </template>
+
+
+<script>
+const settings = require('electron-settings');
+function handleCheckbox(input) {
+  var key = $(input).val();
+  var isChecked = $(input).is(':checked');
+  settings.setSync(key, isChecked);
+}
+
+$(document).ready(function () {
+  $('input[type="checkbox"]').each(function () {
+    var key = $(this).val();
+    var isChecked = settings.getSync(key) || false;
+    $(this).prop('checked', isChecked);
+  });
+});
+
+
+</script>
