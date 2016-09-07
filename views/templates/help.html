@@ -1,0 +1,66 @@
+<template>
+
+  <div class="navContent bg solid" id="help">
+    <div class="inner padding-10">
+
+      <h2>Help</h2>
+
+      <h5>Keyboard shortcuts (global)</h5>
+
+      <table>
+        <tr>
+          <th width="130"><strong>F1</strong></th>
+          <td>Show this screen</td>
+        </tr>
+        <tr>
+          <th><strong>Ctrl/Cmd + , <!--(&lt;)--></strong></th>
+          <td>Preferences</td>
+        </tr>
+        <tr>
+          <th><strong>Ctrl/Cmd + . <!--(&gt;)--></strong></th>
+          <td>Default stream</td>
+        </tr>
+        <tr>
+          <th><strong>Ctrl/Cmd + Alt + S</strong></th>
+          <td>Show sidebar</td>
+        </tr>
+      </table>
+
+
+
+      <br />
+      <h5>Keyboard shortcuts (player)</h5>
+
+      <table>
+        <tr>
+          <th width="130"><strong>Space</strong></th>
+          <td>Play/Pause</td>
+        </tr>
+        <tr>
+          <th><strong>&darr;</strong> and <strong>&uarr;</strong></th>
+          <td>-/+ Volume</td>
+        </tr>
+        <tr>
+          <th><strong>&larr;</strong> and <strong>&rarr;</strong></th>
+          <td>-/+5 seconds</td>
+        </tr>
+        <tr>
+          <th><strong>,<!-- (&lt;) --></strong> and <strong>.<!-- (&gt;) --></strong></th>
+          <td>Previous track/Next track</td>
+        </tr>
+        <tr>
+          <th><strong>Ctrl/Cmd + Alt + P</strong></th>
+          <td>Show/hide playlist</td>
+        </tr>
+      </table>
+
+      <br />
+      <h5>Storage</h5>
+      <a href="file://$TMPDIR" class="btn btn-xs btn-default">Open tmp folder</a>
+      <a href="file://$CACHE" class="btn btn-xs btn-default">Open cache folder</a>
+      <a href="file://$USERDATA" class="btn btn-xs btn-default">Open userdata folder</a>
+
+    </div>
+  </div>
+
+</template>

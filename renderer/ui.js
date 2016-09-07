@@ -1,5 +1,6 @@
 const settings = require('electron-settings');
 const Utils = require('../lib/utils');
+const Nav = require('../renderer/nav');
 // settings.defaults({
 //   'ui': {
 //     'sidebar': {
@@ -74,10 +75,29 @@ var UI = {
       if (tag === 'input' || tag === 'textarea') {
         return;
       }
+
       // Ctrl/Cmd + Alt + S
       if (e.altKey && (e.ctrlKey || e.metaKey) && (e.which === 83)) {
         Utils.log('Cmd+Alt+S hit');
         _self.toggleSidebar();
+        return e.preventDefault();
+      }
+      // Ctrl/Cmd + ,
+      if ((e.ctrlKey || e.metaKey) && e.which === 188) {
+        Utils.log('Cmd+, hit');
+        Nav.goto('preferences');
+        return e.preventDefault();
+      }
+      // Ctrl/Cmd + .
+      if ((e.ctrlKey || e.metaKey) && e.which === 190) {
+        Utils.log('Cmd+. hit');
+        Nav.goto('nowplaying');
+        return e.preventDefault();
+      }
+      // F1 [112]
+      if (e.which === 112) {
+        Utils.log('F1 hit');
+        Nav.goto('help');
         return e.preventDefault();
       }
     });

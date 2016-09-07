@@ -58,9 +58,11 @@ var NowPlaying = {
       if (tag === 'input' || tag === 'textarea') {
         return;
       }
-      // P = 80; E = 69
 
-      // Ctrl/Cmd + Alt + P
+      // TODO Ctrl/Cmd + Alt + E (69)    EQ
+      // TODO Ctrl/Cmd + Alt + V (XX)    Video
+
+      // Ctrl/Cmd + Alt + P (80)
       if (e.altKey && (e.ctrlKey || e.metaKey) && (e.which === 80)) {
         Utils.log('Cmd+Alt+P hit');
         _self.togglePlaylist();
@@ -69,6 +71,12 @@ var NowPlaying = {
     });
   },
   togglePlaylist: function togglePlaylist () {
+    var activeId = $('.mainContent .navContent.active').attr('id');
+    var isActive = activeId === 'nowplaying';
+    if (!isActive) {
+      return;
+    }
+
     var shouldShow = $(window).height() < 111;
     var currentWidth = $(window).width();
     var playlistThresholds = [110, 420];
