@@ -112,7 +112,7 @@ function _getPlaylistItem (item, cb) {
 var Player = {
   // state
   // queue: settings.getSync('streams.0.playlist'),
-  queue: playlist.initialPlaylist,
+  queue: playlist.get(),
 
   volume: 100,
   loopOne: false,

@@ -35,8 +35,16 @@ var NowPlaying = {
     holder.ondrop = (e) => {
       e.preventDefault();
       for (let f of e.dataTransfer.files) {
-        Utils.log('File dragged: ', f.path);
-        Playlist.add({url: f.path, source: 'file', type: 'audio'});
+        var filepath = f.path;
+        var filename = filepath.split('/');
+        filename = filename[filename.length - 1];
+
+        Utils.log('File dragged: ', filepath);
+        Playlist.add({url: filepath, source: 'file', type: 'audio',
+          resolved: {
+            meta: {canonical:{artist: ' ', title: filename}}
+          }
+        });
       }
       return false;
     }
