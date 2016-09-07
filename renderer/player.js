@@ -4,6 +4,7 @@ const playlist = require('../lib/playlist');
 var settings = require('electron-settings');
 var _ = require('lodash');
 var Utils = require('../lib/utils');
+var NowPlaying = require('./nowplaying');
 
 function ensureWavesurfer() {
   if (Player.wavesurferObject) {
@@ -36,6 +37,7 @@ function ensureWavesurfer() {
     wavesurfer.drawBuffer();
     Player.applyVolumeSetting();
     Player.updateTrackTime();
+    NowPlaying.populatePlaylist();
 
     if (Player.playing) {
       wavesurfer.play();
@@ -244,6 +246,11 @@ var Player = {
 
   loadByIndex: function loadByIndex (index) {
     Utils.log('loadByIndex', index);
+    if (index === 'active') {
+      index = Playlist.getActive();
+    }
+    Utils.log('index', index);
+
     return this.load(Playlist.get()[index]);
   },
   load: function load (source) {

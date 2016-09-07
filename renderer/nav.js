@@ -23,6 +23,7 @@ var Nav = {
 
     if (id === 'nowplaying') {
       $('.containerFooter .fa.fa-fw.fa-home').fadeOut(100);
+      $(window).trigger('resize');
     } else {
       $('.containerFooter .fa.fa-fw.fa-home').fadeIn(100);
     }
