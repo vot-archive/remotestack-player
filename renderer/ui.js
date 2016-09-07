@@ -30,6 +30,8 @@ var UI = {
     } else {
       _self.hideSidebar(immediate);
     }
+
+    _self.preventDragRedirections();
     _self.isInitialised = true;
   },
   toggleSidebar: function () {
@@ -101,6 +103,18 @@ var UI = {
         return e.preventDefault();
       }
     });
+  },
+
+  preventDragRedirections: function preventDragRedirections() {
+    document.addEventListener('dragover',function(event){
+      event.preventDefault();
+      return false;
+    },false);
+
+    document.addEventListener('drop',function(event){
+      event.preventDefault();
+      return false;
+    },false);
   }
 };
 
