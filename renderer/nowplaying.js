@@ -15,7 +15,7 @@ var NowPlaying = {
     if (Array.isArray(list)) {
       // recursively add markup
       list.forEach(function (i) {
-        markup += '<li>' + i.resolved.meta.canonical.artist + ' - ' + i.resolved.meta.canonical.title + '<span class="url">' +  i.url + '</span></li>';
+        markup += '<li>' + Playlist.getDisplayTitle(i) + '<span class="url">' +  i.url + '</span></li>';
       })
     }
     $('#nowplaying-playlist').append(markup);
@@ -36,15 +36,9 @@ var NowPlaying = {
       e.preventDefault();
       for (let f of e.dataTransfer.files) {
         var filepath = f.path;
-        var filename = filepath.split('/');
-        filename = filename[filename.length - 1];
 
         Utils.log('File dragged: ', filepath);
-        Playlist.add({url: filepath, source: 'file', type: 'audio',
-          resolved: {
-            meta: {canonical:{artist: ' ', title: filename}}
-          }
-        });
+        Playlist.add({url: filepath, source: 'file', type: 'audio'});
       }
       return false;
     }
