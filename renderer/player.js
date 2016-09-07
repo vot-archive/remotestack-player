@@ -158,22 +158,26 @@ var Player = {
   },
 
   prev: function prev () {
-    var prevTrack = this.queue.pop();
-    this.queue.unshift(prevTrack); // add track to the end of queue
+    var playlist = Playlist.get();
+    var playState = this.playing;
+    var nextTrackIndex = Playlist.setActive('prev');
+    console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
+    var nextTrack = playlist[nextTrackIndex];
 
-    // var audioTag = this.getElement();
-    // var playState = audioTag ? !audioTag.paused : false;
+    Utils.log('>>Prev track:', nextTrack);
 
-    this.load(prevTrack);
-    // this.play(playState);
+    this.load(nextTrack);
+    this.play(playState);
   },
 
   next: function next () {
-    var nextTrack = this.queue.shift();
-    this.queue.push(nextTrack); // add track to the end of queue
+    var playlist = Playlist.get();
+    var playState = this.playing;
+    var nextTrackIndex = Playlist.setActive('next');
+    console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
+    var nextTrack = playlist[nextTrackIndex];
 
-    var audioTag = this.getElement();
-    var playState = audioTag ? !audioTag.paused : false;
+    Utils.log('>>Next track:', nextTrack);
 
     this.load(nextTrack);
     this.play(playState);
@@ -238,6 +242,10 @@ var Player = {
     durationDiv.text(duration);
   },
 
+  loadByIndex: function loadByIndex (index) {
+    Utils.log('loadByIndex', index);
+    return this.load(Playlist.get()[index]);
+  },
   load: function load (source) {
     var _self = this;
     $('#currentArtist').text('Loading');

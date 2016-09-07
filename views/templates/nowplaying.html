@@ -89,7 +89,8 @@
 <script>
 $(document).ready(function () {
   Player.ensureWavesurfer();
-  Player.next();
+  // Player.next();
+  Player.loadByIndex(0);
 
   NowPlaying.init();
 });
