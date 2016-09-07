@@ -21,6 +21,25 @@ var NowPlaying = {
     $('#nowplaying-playlist').append(markup);
     // now highlight active
     _self.bindShortcuts();
+    _self.bindFiledrag('filedrag');
+  },
+  bindFiledrag: function bindFiledrag(id) {
+    const holder = document.getElementById(id || 'filedrag');
+
+    holder.ondragover = () => {
+      return false;
+    }
+    holder.ondragleave = holder.ondragend = () => {
+      return false;
+    }
+    holder.ondrop = (e) => {
+      e.preventDefault();
+      for (let f of e.dataTransfer.files) {
+        Utils.log('File dragged: ', f.path);
+        Playlist.add({url: f.path, source: 'file', type: 'audio'});
+      }
+      return false;
+    }
   },
   bindShortcuts: function bindShortcuts () {
     var _self = this;

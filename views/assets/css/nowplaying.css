@@ -34,3 +34,8 @@
 .bg.dark .rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #222 0%, #111 100%)}
 .bg.dark .rsPlayerBrowser .tabs li {color: #ccc}
 .bg.dark .rsPlayerBrowser .tabs li.active {color: #eee}
+
+
+
+.filedrag {padding: 10px; border: 3px solid; color: rgba(0,0,0,0.4); font-size: 14px; font-weight: 700; text-align: center; display: block; background: rgba(255,255,255,0.2); margin: 10px 5px;}
+.filedrag:hover, .filedrag:active, .filedrag:focus {color: rgba(0,0,0,0.7), background: rgba(255,255,255,0.6)}
