@@ -10,8 +10,15 @@ const Utils = require('./lib/utils');
 
 function initialise () {
   // Utils.log.rotatelog();
-  Utils.log('\n--- REMOTESTACK STARTED ---');
-  Utils.log('> userdata:', app.getPath('userData') + '\n');
+  var welcomeBlock = [
+    '\x1b[33m',
+    '#####################################',
+    '######## REMOTESTACK STARTED ########',
+    '#####################################',
+    '\x1b[0m'
+  ];
+  Utils.log(welcomeBlock.join('\n'));
+  Utils.log('userdata:', app.getPath('userData'));
 
   WindowManager.ensure('main', {template: 'main', windowOpts: WindowManager.presets.main});
   // GlobalShortcuts.registerAll();
