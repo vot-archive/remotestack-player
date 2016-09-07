@@ -53,19 +53,31 @@
 
       <div class="rsPlayerBrowser">
         <ul class="tabs">
-          <li class="active">Playlist</li>
-          <li>Browser</li>
-          <li>Track info</li>
+          <li class="active" data-tab-destination="nowplaying-playlist">Playlist</li>
+          <li data-tab-destination="nowplaying-browser">Browser</li>
+          <li data-tab-destination="nowplaying-trackinfo">Track info</li>
         </ul>
 
-        <div class="tabContent">
+        <div class="tabContent" rel="nowplaying-playlist">
           <ul class="list" id="nowplaying-playlist"></ul>
 
           <div id="filedrag" class="filedrag">
             Drag files here
           </div>
-
         </div>
+
+        <div class="tabContent hide" rel="nowplaying-browser">
+          [Browser here]
+        </div>
+
+        <div class="tabContent hide" rel="nowplaying-trackinfo">
+          <div id="nowplaying-trackinfo">
+            [Trackinfo here]
+          </div>
+        </div>
+
+
+
       </div>
 
     </div>
