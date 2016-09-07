@@ -247,8 +247,9 @@ var Player = {
   loadByIndex: function loadByIndex (index) {
     Utils.log('loadByIndex', index);
     if (index === 'active') {
-      index = Playlist.getActive();
+      index = Playlist.setActive('active');
     }
+    index = Playlist.setActive(index);
     Utils.log('index', index);
 
     return this.load(Playlist.get()[index]);
@@ -261,6 +262,8 @@ var Player = {
     _self.updateTrackTime(true);
     _self.ensureWavesurfer();
     var wavesurferObject = _self.wavesurferObject;
+    console.log('hit populatePlaylist from Player.load')
+    NowPlaying.populatePlaylist();
 
     function executeWavesurferLoad (finalPath, trackdata) {
       Utils.log('>> finalPath', finalPath);
