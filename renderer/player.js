@@ -256,6 +256,9 @@ var Player = {
   },
   load: function load (source) {
     var _self = this;
+    if (!source) {
+      return;
+    }
     $('#currentArtist').text('Loading');
     $('#currentTitle').text(source.url);
     // reset time
