@@ -7,20 +7,26 @@
       <br /><br />
       <h2>Select stream</h2>
 
-      <nav class="homeMenu">
-        <a href="#" onclick="Nav.goto('nowplaying')">Default stream</a>
-      </nav>
-      <!-- <nav class="homeMenu">
-        <a href="#" onclick="Nav.goto('nowplaying')">Now playing</a>
-        <!- - <a href="#" onclick="Nav.goto('playlist')">Playlist</a> - ->
-        <a href="#" onclick="Nav.goto('library')">Library</a>
-        <br />
-        <a href="#" onclick="Nav.goto('openurl')">Open...</a>
-        <a href="#" onclick="">Control device</a>
-        <a href="#" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-cogs"></span> Preferences</a>
-      </nav> -->
 
     </div>
+    
+    <table class="table table-striped">
+      <tr>
+        <td class="text-left">
+          <a href="#" onclick="Nav.goto('nowplaying')">Default stream</a>
+          <!-- <br />
+          <small>Currently playing: - (00:00/00:00)</small> -->
+        </td>
+        <td class="text-right">
+          Volume: 75%
+        </td>
+        <td class="text-right">
+          <a class="playercontrol" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
+          <a class="playercontrol" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Play"></span></a>
+          <a class="playercontrol" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
+        </td>
+      </tr>
+    </table>
   </div>
 
 </template>
