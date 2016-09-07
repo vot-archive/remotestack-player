@@ -17,21 +17,17 @@ $(document).ready(function () {
 
 
 <partial>
-  <div class="sidebar-heading">Destinations</div>
+  <div class="sidebar-heading">Streams</div>
+  <ul class="nav nav-pills nav-stacked">
+    <li class="active"><a href="#" onclick="Nav.goto('nowplaying')">Default</a></li>
+  </ul>
+
+  <div class="sidebar-heading">Utils</div>
   <ul class="nav nav-pills nav-stacked">
     <li><a href="#" onclick="Nav.goto('streams')">Streams</a></li>
-    <!-- <li><a href="#" onclick="Nav.goto('nowplaying')">Now playing</a></li>
-    <li><a href="#" onclick="Nav.goto('playlist')">Playlist</a></li> -->
+    <!-- <li><a href="#" onclick="Nav.goto('playlist')">Playlist</a></li> -->
     <li><a href="#" onclick="Nav.goto('library')">Library</a></li>
-
-    <ul class="nav nav-pills nav-stacked indent1x hide">
-      <li><a href="#" onclick="Nav.goto('library')">Music</a></li>
-      <li><a href="#" onclick="Nav.goto('library')">Movies</a></li>
-      <li><a href="#" onclick="Nav.goto('library')">TV</a></li>
-      <li><a href="#" onclick="Nav.goto('library')">Online</a></li>
-    </ul>
-
-    <li><a href="#" onclick="Nav.goto('openurl')">Open URL</a></li>
+    <li><a href="#" onclick="Nav.goto('openurl')">URL lookup</a></li>
     <li><a href="#" onclick="Nav.goto('preferences')">Preferences</a></li>
   </ul>
 
