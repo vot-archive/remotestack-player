@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var Utils = require('../lib/utils');
 var Playlist = require('../lib/playlist');
 
@@ -6,24 +7,29 @@ var NowPlaying = {
   init: function init () {
     _self = this;
     console.log('NowPlaying.init function triggered');
-    // get playlist entries and load them into the appropriate container
-    var list = Playlist.get();
 
-    Utils.log('list', list);
+    _self.populatePlaylist();
+    _self.bindShortcuts();
+    _self.bindFiledrag('filedrag');
+  },
+  populatePlaylist: function populatePlaylist () {
+    // get playlist entries and load them into the appropriate container
+    // TODO: highlight active
+    var list = Playlist.get();
+    Utils.log('populatePlaylist', _.map(list, 'url'));
 
     var markup = '';
     if (Array.isArray(list)) {
       // recursively add markup
       list.forEach(function (i) {
-        markup += '<li>' + Playlist.getDisplayTitle(i) + '<span class="url">' +  i.url + '</span></li>';
-      })
+        var classname = i.active ? 'active' : '';
+        markup += '<li class="' + classname + '">' + Playlist.getDisplayTitle(i) + '<span class="url">' +  i.url + '</span></li>';
+      });
     }
-    $('#nowplaying-playlist').append(markup);
-    // now highlight active
-    _self.bindShortcuts();
-    _self.bindFiledrag('filedrag');
+    $('#nowplaying-playlist').html(markup);
   },
   bindFiledrag: function bindFiledrag(id) {
+    const _self = this;
     const holder = document.getElementById(id || 'filedrag');
 
     holder.ondragover = () => {
@@ -39,6 +45,7 @@ var NowPlaying = {
 
         Utils.log('File dragged: ', filepath);
         Playlist.add({url: filepath, source: 'file', type: 'audio'});
+        _self.populatePlaylist();
       }
       return false;
     }
