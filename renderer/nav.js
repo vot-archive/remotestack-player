@@ -1,8 +1,12 @@
+const electron = require('electron');
+const shell = electron.shell;
+
 const Utils = require('../lib/utils');
 
 var Nav = {
   init: function () {
     this.selectFirst();
+    this.handleExternalLinks();
   },
   selectFirst: function () {
     Utils.log('Nav.selectFirst');
@@ -22,6 +26,19 @@ var Nav = {
     } else {
       $('.containerFooter .fa.fa-fw.fa-home').fadeIn(100);
     }
+  },
+  handleExternalLinks: function () {
+    const links = document.querySelectorAll('a[href]');
+
+    Array.prototype.forEach.call(links, function (link) {
+      const url = link.getAttribute('href');
+      if (url.indexOf('http') === 0) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault()
+          shell.openExternal(url);
+        });
+      }
+    })
   }
 };
 
