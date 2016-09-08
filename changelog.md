@@ -1,3 +1,7 @@
+# 0.0.4
+
+* Added bindings for window close and minimise
+
 # 0.0.3
 
 * Fixed a bug where copy/paste keys wouldn't work
