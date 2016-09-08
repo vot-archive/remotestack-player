@@ -12,11 +12,11 @@
 
 
 
-.bg.dark #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
-.rsPlayerControlsGroup, .bg.dark .rsPlayerControlsGroup {color: #fff}
+#wContainer.dark .bg #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
+.rsPlayerControlsGroup, #wContainer.dark .bg .rsPlayerControlsGroup {color: #fff}
 
-.bg .rsPlayerControlsGroup {color: #5a5a5a}
-.bg #rsPlayerControls .btn-default {color: #5a5a5a}
+#wContainer .bg .rsPlayerControlsGroup {color: #5a5a5a}
+#wContainer .bg #rsPlayerControls .btn-default {color: #5a5a5a}
 
 
 #rsPlayerBrowser {position:fixed; top: 110px; width: 100%}
@@ -31,9 +31,9 @@
 .containerBody #rsPlayerBrowser ul.list {margin: 0}
 
 
-.bg.dark #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #222 0%, #111 100%)}
-.bg.dark #rsPlayerBrowser .tabs li {color: #ccc}
-.bg.dark #rsPlayerBrowser .tabs li.active {color: #eee}
+#wContainer.dark .bg #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #222 0%, #111 100%)}
+#wContainer.dark .bg #rsPlayerBrowser .tabs li {color: #ccc}
+#wContainer.dark .bg #rsPlayerBrowser .tabs li.active {color: #eee}
 
 
 

@@ -13,23 +13,24 @@ $(document).ready(function () {
 
 
 <partial>
-  <div class="sidebar-heading">Streams</div>
-  <ul class="nav nav-pills nav-stacked">
-    <li class="active"><a href="#" onclick="Nav.goto('nowplaying')">Default</a></li>
-    <li><a href="#" onclick="Nav.goto('streams')"><small>(all streams)</small></a></li>
-  </ul>
+  <div id="rsSidebar">
+    <div class="sidebar-heading">Streams</div>
+    <ul class="nav nav-pills nav-stacked">
+      <li class="active"><a href="#" data-nav-goto="nowplaying">Default</a></li>
+      <li><a href="#" data-nav-goto="streams"><small>(all streams)</small></a></li>
+    </ul>
 
-  <div class="sidebar-heading">Collections</div>
-  <ul class="nav nav-pills nav-stacked">
-    <li><a href="#" onclick="Nav.goto('library')">Collections</a></li>
-    <li><a href="#" onclick="Nav.goto('playlist')">Playlist</a></li>
-    <li><a href="#" onclick="Nav.goto('openurl')">Lookup</a></li>
-  </ul>
+    <div class="sidebar-heading">Collections</div>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#" data-nav-goto="library">Collections</a></li>
+      <li><a href="#" data-nav-goto="playlist">Playlist</a></li>
+      <li><a href="#" data-nav-goto="openurl">Lookup</a></li>
+    </ul>
 
-  <div class="sidebar-heading">About</div>
-  <ul class="nav nav-pills nav-stacked">
-    <li><a href="#" onclick="Nav.goto('preferences')">Preferences</a></li>
-    <li><a href="#" onclick="Nav.goto('help')">Help</a></li>
-  </ul>
-
+    <div class="sidebar-heading">About</div>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#" data-nav-goto="preferences">Preferences</a></li>
+      <li><a href="#" data-nav-goto="help">Help</a></li>
+    </ul>
+  </div>
 </partial>

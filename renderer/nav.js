@@ -10,6 +10,7 @@ var Nav = {
   init: function () {
     this.selectFirst();
     this.handleExternalLinks();
+    this.handleGotoDataLinks();
   },
   selectFirst: function () {
     Utils.log('Nav.selectFirst');
@@ -23,6 +24,9 @@ var Nav = {
     Utils.log('Nav.goto:', id);
     $('#wBody .navContent').removeClass('active');
     $('#wBody .navContent#' + id).addClass('active');
+
+    $('*[data-nav-goto]').parents('li').removeClass('active');
+    $('*[data-nav-goto='+ id+ ']').parents('li').addClass('active');
 
     if (id === 'nowplaying') {
       $('.containerFooter .fa.fa-fw.fa-home').fadeOut(100);
@@ -66,7 +70,14 @@ var Nav = {
         });
       }
     })
+  },
+  handleGotoDataLinks: function handleGotoDataLinks () {
+    $('*[data-nav-goto]').click(function () {
+      var destination = $(this).data('navGoto');
+      Nav.goto(destination);
+    })
   }
+
 };
 
 module.exports = Nav;

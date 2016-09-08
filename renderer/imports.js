@@ -42,7 +42,7 @@ function populateTemplates () {
 
   if (settings.getSync('settings.DarkTheme')) {
     Utils.log('adding dark class');
-    $('.bg').addClass('dark');
+    $('#wContainer').addClass('dark');
   }
 }
 
