@@ -24,9 +24,15 @@ var NowPlaying = {
       // recursively add markup
       var index = 0;
       list.forEach(function (i) {
-        var classname = i.active ? 'active' : '';
-        markup += '<li class="' + classname + '" onclick="Player.loadByIndex(' + index + ');">' + Playlist.getDisplayTitle(i) + '<span class="url">' +  i.url + '</span></li>';
-        index++;
+        if (i) {  
+          var classname = i.active ? 'active' : '';
+          markup += '<li class="' + classname + '" onclick="Player.loadByIndex(' + index + ');">';
+          markup += Playlist.getDisplayTitle(i);
+          markup += '<span class="delete pull-right" onclick="Playlist.deleteByIndex(' + index + ')"> <i class="fa fa-fw fa-trash-o"></i> </span>';
+          markup += '<span class="url">' +  i.url + '</span>';
+          markup += '</li>';
+          index++;
+        }
       });
     }
     $('#nowplaying-playlist').html(markup);
