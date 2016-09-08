@@ -37,6 +37,28 @@ var NowPlaying = {
       });
     }
     $('#nowplaying-playlist').html(markup);
+    this.populateTrackinfo();
+  },
+  populateTrackinfo: function populateTrackinfo () {
+    var container = $('#nowplaying-trackinfo');
+    var activeIndex = Playlist.getActive();
+    var playlist = Playlist.get();
+    var currentTrack = playlist[activeIndex];
+    var markup = '';
+
+    if (currentTrack) {
+      // markup = '<pre>' + JSON.stringify(currentTrack, null, 4) + '<pre>';
+      markup = '<table>';
+      _.forEach(Object.keys(currentTrack), function (i) {
+        markup += '<tr>';
+          markup += '<th width="80">' + i + '</th>';
+          markup += '<td>' + currentTrack[i] + '</td>';
+        markup += '</tr>';
+      });
+      markup += '</table>';
+    }
+
+    container.html(markup);
   },
   bindFiledrag: function bindFiledrag(id) {
     const _self = this;

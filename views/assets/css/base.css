@@ -45,6 +45,9 @@ ul.list li .primary {color: black; text-decoration: none}
 .navContent.active {display: block}
 
 
+.navContent {overflow: hidden; overflow-y: auto}
+.navContent#nowplaying {overflow-y: hidden}
+
 /* Navigation */
 /*.nav>li>a:focus, .nav>li>a:hover {background-color: #E7E7E7; color: #169bb9;}*/
 

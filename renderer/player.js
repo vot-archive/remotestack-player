@@ -298,7 +298,9 @@ var Player = {
       cache.persistent.getFile(trackdata.playbackUrl, function (filepath) {
         // var finalPath = filepath || trackdata.url;
         return executeWavesurferLoad(filepath || trackdata.playbackUrl, trackdata);
-      })
+      });
+
+      NowPlaying.populateTrackinfo();
     });
 
   },
