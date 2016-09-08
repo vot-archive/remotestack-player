@@ -11,6 +11,7 @@ var NowPlaying = {
     _self.populatePlaylist();
     _self.bindShortcuts();
     _self.bindFiledrag('filedrag');
+    _self.bindFileinput('urlinput');
   },
   populatePlaylist: function populatePlaylist () {
     // get playlist entries and load them into the appropriate container
@@ -50,6 +51,24 @@ var NowPlaying = {
         _self.populatePlaylist();
       }
       return false;
+    }
+  },
+  bindFileinput: function bindFileinput(id) {
+    const _self = this;
+    const holder = document.getElementById(id || 'urlinput');
+
+    holder.onkeydown = function (e) {
+      if (e.which === 13) {
+        e.preventDefault();
+        var filepath = $(e.target).val();
+        Utils.log('Enter pressed: ', filepath);
+
+        Playlist.add({url: filepath, source: 'youtube', type: 'audio'});
+        _self.populatePlaylist();
+        //reset input
+        $(e.target).val('')
+        return true;
+      }
     }
   },
   bindShortcuts: function bindShortcuts () {
