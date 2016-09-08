@@ -41,7 +41,10 @@
 .filedrag:hover, .filedrag:active, .filedrag:focus {color: rgba(0,0,0,0.7), background: rgba(255,255,255,0.6)}
 
 .urlentry {margin: 5px}
-.urlentry input {width: 100%; color: rgba(0,0,0,0.4); background: rgba(255,255,255,0.2); border: 1px solid;}
+.urlentry input {width: 100%; color: rgba(0,0,0,0.4); background: rgba(255,255,255,0.2); border: 3px solid; padding: 6px; text-align: center}
 .urlentry input:hover, .urlentry input:active, .urlentry input:focus {color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.8); outline: none}
 
 .bg ul.list li.active .title {/*color: #2187bb*/ color: #cc7f2a}
+
+#tips {position: absolute; z-index: 9; top: 30px; width: 90%; margin: 0 5%; padding: 10px; max-height: 70px; text-align: center;
+  background: rgba(255,255,255,0.9); font-weight: 300; font-size: 12px; line-height: 14px; color: #777; border: 1px solid #ccc; overflow: hidden}

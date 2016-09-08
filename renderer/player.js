@@ -256,10 +256,13 @@ var Player = {
     return this.load(Playlist.get()[index]);
   },
   load: function load (source) {
+    console.log('hit populatePlaylist from Player.load')
+    NowPlaying.populatePlaylist();
     var _self = this;
     if (!source) {
       return;
     }
+    $('#tips').fadeOut('fast');
     $('#currentArtist').text('Loading');
     $('#currentTitle').text(source.url);
     $('#waveform').css('visibility', 'hidden');
@@ -267,8 +270,6 @@ var Player = {
     _self.updateTrackTime(true);
     _self.ensureWavesurfer();
     var wavesurferObject = _self.wavesurferObject;
-    console.log('hit populatePlaylist from Player.load')
-    NowPlaying.populatePlaylist();
 
     function executeWavesurferLoad (finalPath, trackdata) {
       Utils.log('>> finalPath', finalPath);
@@ -284,6 +285,7 @@ var Player = {
       $('#currentArtist').text(artist);
       $('#currentTitle').text(title);
       $('#waveform').css('visibility', 'visible');
+
       Utils.log('Track info updated', artist, title);
     }
 
