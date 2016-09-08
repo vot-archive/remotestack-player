@@ -1,6 +1,7 @@
 # 0.0.6
 
 * Fixed volume control lockups
+* New icon
 
 
 # 0.0.5

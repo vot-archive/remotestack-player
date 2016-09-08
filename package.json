@@ -1,6 +1,6 @@
 {
   "name": "com-remotestack",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "RemoteStack client app",
   "main": "main.js",
   "scripts": {
