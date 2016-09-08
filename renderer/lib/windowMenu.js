@@ -8,10 +8,10 @@ function intialise() {
       label: "RemoteStack",
       submenu: [
           { label: "About Application", selector: "orderFrontStandardAboutPanel:" },
-          { label: 'Preferences', click: function () {
-              ipc.send('open-settings-window')
-            }
-          },
+          // { label: 'Preferences', click: function () {
+          //     ipc.send('open-settings-window')
+          //   }
+          // },
           { type: "separator" },
           { label: "Quit", accelerator: "Command+Q", click: function() { app.quit(); }}
       ]
