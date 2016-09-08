@@ -2,7 +2,7 @@
 
 const electron = require('electron');
 const app = electron.app;
-
+process.appdata = app.getPath('userData');
 // const GlobalShortcuts = require('./lib/globalShortcuts');
 const WindowManager = require('./lib/windowManager');
 const StreamManager = require('./lib/streamManager');
