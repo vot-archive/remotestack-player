@@ -54,16 +54,19 @@
 
       </div>
 
-      <div class="rsPlayerBrowser">
+      <div id="rsPlayerBrowser">
         <ul class="tabs">
           <li class="active" data-tab-destination="nowplaying-playlist">Playlist</li>
+          <li data-tab-destination="nowplaying-add">Add</li>
           <!-- <li data-tab-destination="nowplaying-browser">Browser</li> -->
           <!-- <li data-tab-destination="nowplaying-trackinfo">Track info</li> -->
         </ul>
 
         <div class="tabContent" rel="nowplaying-playlist">
           <ul class="list" id="nowplaying-playlist"></ul>
+        </div>
 
+        <div class="tabContent" rel="nowplaying-add">
           <div id="filedrag" class="filedrag">
             Drag files here
           </div>

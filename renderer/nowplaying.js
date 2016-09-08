@@ -12,6 +12,7 @@ var NowPlaying = {
     _self.bindShortcuts();
     _self.bindFiledrag('filedrag');
     _self.bindFileinput('urlinput');
+    _self.bindTabs('rsPlayerBrowser');
   },
   populatePlaylist: function populatePlaylist () {
     // get playlist entries and load them into the appropriate container
@@ -96,6 +97,24 @@ var NowPlaying = {
         return e.preventDefault();
       }
     });
+  },
+  bindTabs: function bindTabs (containerId) {
+    $('.tabContent', container).hide();
+
+    var container = $('#' + containerId);
+    var tabs = $('ul.tabs', container);
+    // var content = $('.tabContent', container);
+
+    $('li', tabs).click(function () {
+      var destination = $(this).data('tabDestination');
+      $('li', tabs).removeClass('active');
+      $(this).addClass('active');
+      console.log('tabDestination', destination);
+      $('.tabContent', container).hide();
+      $('.tabContent[rel=' + destination + ']', container).show();
+    });
+
+    $('ul.tabs li:first', container).trigger('click');
   },
   togglePlaylist: function togglePlaylist () {
     var activeId = $('.mainContent .navContent.active').attr('id');

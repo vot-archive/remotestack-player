@@ -263,8 +263,8 @@ var Player = {
       return;
     }
     $('#tips').fadeOut('fast');
-    $('#currentArtist').text('Loading');
-    $('#currentTitle').text(source.url);
+    $('#currentArtist').text('Loading').addClass('animated pulse');
+    $('#currentTitle').text(source.url).addClass('animated pulse');
     $('#waveform').css('visibility', 'hidden');
     // reset time
     _self.updateTrackTime(true);
@@ -282,8 +282,8 @@ var Player = {
         title = Playlist.getDisplayTitle(trackdata);
       }
 
-      $('#currentArtist').text(artist);
-      $('#currentTitle').text(title);
+      $('#currentArtist').text(artist).removeClass('animated pulse');
+      $('#currentTitle').text(title).removeClass('animated pulse');
       $('#waveform').css('visibility', 'visible');
 
       Utils.log('Track info updated', artist, title);
