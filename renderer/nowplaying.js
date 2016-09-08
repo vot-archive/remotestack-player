@@ -24,10 +24,10 @@ var NowPlaying = {
       // recursively add markup
       var index = 0;
       list.forEach(function (i) {
-        if (i) {  
+        if (i) {
           var classname = i.active ? 'active' : '';
           markup += '<li class="' + classname + '" onclick="Player.loadByIndex(' + index + ');">';
-          markup += Playlist.getDisplayTitle(i);
+          markup += '<span class="title">' + Playlist.getDisplayTitle(i) + '</span>';
           markup += '<span class="delete pull-right" onclick="Playlist.deleteByIndex(' + index + ')"> <i class="fa fa-fw fa-trash-o"></i> </span>';
           markup += '<span class="url">' +  i.url + '</span>';
           markup += '</li>';

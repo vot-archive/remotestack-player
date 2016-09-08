@@ -44,4 +44,4 @@
 .urlentry input {width: 100%; color: rgba(0,0,0,0.4); background: rgba(255,255,255,0.2); border: 1px solid;}
 .urlentry input:hover, .urlentry input:active, .urlentry input:focus {color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.8); outline: none}
 
-.bg ul.list li.active {color: #2187bb}
+.bg ul.list li.active .title {/*color: #2187bb*/ color: #cc7f2a}

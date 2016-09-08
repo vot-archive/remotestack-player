@@ -262,6 +262,7 @@ var Player = {
     }
     $('#currentArtist').text('Loading');
     $('#currentTitle').text(source.url);
+    $('#waveform').css('visibility', 'hidden');
     // reset time
     _self.updateTrackTime(true);
     _self.ensureWavesurfer();
@@ -282,6 +283,7 @@ var Player = {
 
       $('#currentArtist').text(artist);
       $('#currentTitle').text(title);
+      $('#waveform').css('visibility', 'visible');
       Utils.log('Track info updated', artist, title);
     }
 
