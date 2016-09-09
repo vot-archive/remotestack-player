@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 0.0.7
+
+* Track names are picked up correctly
+
+
+
 ## 0.0.6
 
 * Fixed volume control lockups

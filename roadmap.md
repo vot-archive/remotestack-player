@@ -8,7 +8,6 @@
 * Track caching needs a progress meter + lock
 * Repeat isn't bound yet
 * Shuffle isn't bound yet
-* Retrieved track data needs to be stored in playlist
 
 
 ## Planned milestones

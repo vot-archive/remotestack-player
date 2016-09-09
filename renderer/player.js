@@ -81,23 +81,25 @@ function _interpretPlaylistItem (item, cb) {
   if (cached) {
     return cb(cached);
   }
-  item.playbackUrl = item.url;
 
   if (item.source === 'youtube') {
     return ytdl(item.url, function (err, info) {
-      Utils.log(info);
+      Utils.log('resolved info:', info);
       if (err || !info) {
         item.playbackUrl = false;
       } else {
         item.playbackUrl = info.preferredFormat.url;
       }
+      item.raw = info;
 
+      playlist.update({url: item.url}, item);
       cache.persistent.setJSON('meta-resolved', item.url, item);
+      console.log('playlist updated');
       return cb(item);
     });
   }
 
-  cache.persistent.setJSON('meta-resolved', item.url, item);
+  // cache.persistent.setJSON('meta-resolved', item.url, item);
   return cb(item);
 }
 
@@ -286,11 +288,13 @@ var Player = {
       $('#currentTitle').text(title).removeClass('animated pulse');
       $('#waveform').css('visibility', 'visible');
 
-      Utils.log('Track info updated', artist, title);
+      Utils.log('Playlist entry resolved', artist, title);
     }
 
     _interpretPlaylistItem(source, function (trackdata) {
-      // Utils.log('>> _interpretPlaylistItem returned', trackdata);
+      Utils.log('>> _interpretPlaylistItem returned', trackdata);
+      NowPlaying.populateTrackinfo();
+
       if (trackdata.source === 'file') {
         return executeWavesurferLoad(trackdata.playbackUrl, trackdata);
       }
@@ -300,7 +304,6 @@ var Player = {
         return executeWavesurferLoad(filepath || trackdata.playbackUrl, trackdata);
       });
 
-      NowPlaying.populateTrackinfo();
     });
 
   },

@@ -45,6 +45,7 @@ var NowPlaying = {
     var playlist = Playlist.get();
     var currentTrack = playlist[activeIndex];
     var markup = '';
+    console.log('populateTrackinfo', currentTrack);
 
     if (currentTrack) {
       // markup = '<pre>' + JSON.stringify(currentTrack, null, 4) + '<pre>';
@@ -52,7 +53,8 @@ var NowPlaying = {
       _.forEach(Object.keys(currentTrack), function (i) {
         markup += '<tr>';
           markup += '<th width="80">' + i + '</th>';
-          markup += '<td>' + currentTrack[i] + '</td>';
+          var data = currentTrack[i];
+          markup += '<td>' + (typeof data === 'object' ? '<pre>' + JSON.stringify(data, null, 2) + '</pre>': data) + '</td>';
         markup += '</tr>';
       });
       markup += '</table>';
