@@ -80,6 +80,7 @@ var NowPlaying = {
         Utils.log('File dragged: ', filepath);
         Playlist.add({url: filepath, source: 'file', type: 'audio'});
         _self.populatePlaylist();
+        _self.displayNotification('Track added');
       }
       return false;
     }
@@ -96,11 +97,16 @@ var NowPlaying = {
 
         Playlist.add({url: filepath, source: 'youtube', type: 'audio'});
         _self.populatePlaylist();
+        _self.displayNotification('Track added');
         //reset input
         $(e.target).val('')
         return true;
       }
     }
+  },
+  displayNotification: function displayNotification(text) {
+    $('#notifications').text(text).show();
+    $('#notifications').fadeOut(3000);
   },
   bindShortcuts: function bindShortcuts () {
     var _self = this;

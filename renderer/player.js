@@ -262,6 +262,7 @@ var Player = {
     NowPlaying.populatePlaylist();
     var _self = this;
     if (!source) {
+      $('#tips').fadeIn('fast');
       return;
     }
     $('#tips').fadeOut('fast');
@@ -296,7 +297,7 @@ var Player = {
       NowPlaying.populateTrackinfo();
 
       if (trackdata.source === 'file') {
-        return executeWavesurferLoad(trackdata.playbackUrl, trackdata);
+        return executeWavesurferLoad(trackdata.url, trackdata);
       }
 
       cache.persistent.getFile(trackdata.playbackUrl, function (filepath) {

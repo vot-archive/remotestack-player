@@ -46,8 +46,8 @@
 
 .bg ul.list li.active .title {/*color: #2187bb*/ color: #cc7f2a}
 
-#tips {position: absolute; z-index: 9; top: 30px; width: 90%; margin: 0 5%; padding: 10px; max-height: 70px; text-align: center;
-  background: rgba(255,255,255,0.9); font-weight: 300; font-size: 12px; line-height: 14px; color: #777; border: 1px solid #ccc; overflow: hidden}
+#tips, #notifications {position: absolute; z-index: 9; top: 30px; width: 90%; margin: 0 5%; padding: 10px; max-height: 70px; text-align: center;
+  background: rgba(255,255,255,0.9); font-weight: 300; font-size: 12px; line-height: 14px; color: #777; border: 1px solid #ccc; overflow: hidden; display: none}
 
 
 #nowplaying-trackinfo th {vertical-align: top;}

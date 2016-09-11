@@ -1,9 +1,16 @@
 # Changelog
 
 
+## 0.0.8
+
+* Fix for a local source playback
+* Confirmation after adding a track
+
+
+
 ## 0.0.7
 
-* Track names are picked up correctly
+* Track names are picked up correctly from online sources
 
 
 
