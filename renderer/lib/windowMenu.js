@@ -47,25 +47,30 @@ function intialise() {
     //       { label: 'Volume down', accelerator: ''}
     //   ]
     // },
-
-    // {
-    //   label: 'Developer tools',
-    //   submenu: [
-    //     {
-    //       label: 'Reload', accelerator: 'CmdOrCtrl+R',
-    //       click (item, focusedWindow) {
-    //         if (focusedWindow) focusedWindow.reload()
-    //       }
-    //     },
-    //     {
-    //       label: 'Toggle Developer Tools', accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-    //       click (item, focusedWindow) {
-    //         if (focusedWindow) focusedWindow.webContents.toggleDevTools()
-    //       }
-    //     }
-    //   ]
-    // }
   ];
+
+  var runningFromCLI = process.env.PWD && process.env._.endsWith('/electron');
+
+  if (runningFromCLI) {
+    var devToolsGroup = {
+      label: 'Developer tools',
+      submenu: [
+        {
+          label: 'Reload', accelerator: 'CmdOrCtrl+R',
+          click (item, focusedWindow) {
+            if (focusedWindow) focusedWindow.reload()
+          }
+        },
+        {
+          label: 'Toggle Developer Tools', accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+          click (item, focusedWindow) {
+            if (focusedWindow) focusedWindow.webContents.toggleDevTools()
+          }
+        }
+      ]
+    };
+    template.push(devToolsGroup);
+  }
 
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
