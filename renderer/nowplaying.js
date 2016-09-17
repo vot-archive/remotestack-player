@@ -1,7 +1,39 @@
 var _ = require('lodash');
 var Utils = require('../lib/utils');
 var Playlist = require('../lib/playlist');
+var fs = require('fs-extra');
 
+var ignoredFilenames = ['.DS_Store', 'desktop.ini'].map(function (i) {return i.toLowerCase()});
+var ignoredExtensions = ['jpg', 'jpeg', 'png', 'gif', 'zip', 'rar'].map(function (i) {return i.toLowerCase()});
+
+function _isAudioFile (filepath) {
+  var filename = _.last(filepath.split('/')).toLowerCase();
+  var extension = _.last(filename.split('.'));
+
+  if (ignoredFilenames.indexOf(filename) !== -1) return false;
+  if (ignoredExtensions.indexOf(extension) !== -1) return false;
+
+  return true;
+}
+
+
+function _unfoldFiles (path, list) {
+  list = list || [];
+  var stats = fs.statSync(path);
+  var isFile = stats.isFile();
+  var isDir = stats.isDirectory();
+
+  if (isFile) {
+    list.push(path);
+  }
+  if (isDir) {
+    _.each(fs.readdirSync(path), function (i) {
+      return _unfoldFiles(path + '/' + i, list);
+    });
+  }
+
+  return _.filter(list, _isAudioFile);
+}
 
 var NowPlaying = {
   init: function init () {
@@ -14,9 +46,8 @@ var NowPlaying = {
     _self.bindFileinput('urlinput');
     _self.bindTabs('rsPlayerBrowser');
   },
+  // get playlist entries and load them into the appropriate container
   populatePlaylist: function populatePlaylist () {
-    // get playlist entries and load them into the appropriate container
-    // TODO: highlight active
     var list = Playlist.get();
     Utils.log('populatePlaylist', _.map(list, 'url'));
 
@@ -28,8 +59,8 @@ var NowPlaying = {
         if (i) {
           var classname = i.active ? 'active' : '';
           markup += '<li class="' + classname + '" onclick="Player.loadByIndex(' + index + ');">';
-          markup += '<span class="title">' + Playlist.getDisplayTitle(i) + '</span>';
           markup += '<span class="delete pull-right" onclick="Playlist.deleteByIndex(' + index + ')"> <i class="fa fa-fw fa-trash-o"></i> </span>';
+          markup += '<span class="title">' + Playlist.getDisplayTitle(i) + '</span>';
           markup += '<span class="url">' +  i.url + '</span>';
           markup += '</li>';
           index++;
@@ -45,10 +76,9 @@ var NowPlaying = {
     var playlist = Playlist.get();
     var currentTrack = playlist[activeIndex];
     var markup = '';
-    console.log('populateTrackinfo', currentTrack);
+    Utils.log('populateTrackinfo', currentTrack);
 
     if (currentTrack) {
-      // markup = '<pre>' + JSON.stringify(currentTrack, null, 4) + '<pre>';
       markup = '<table>';
       _.forEach(Object.keys(currentTrack), function (i) {
         markup += '<tr>';
@@ -76,11 +106,15 @@ var NowPlaying = {
       e.preventDefault();
       for (let f of e.dataTransfer.files) {
         var filepath = f.path;
+        var allFiles = _unfoldFiles(f.path);
 
-        Utils.log('File dragged: ', filepath);
-        Playlist.add({url: filepath, source: 'file', type: 'audio'});
+        _.each(allFiles, function (file) {
+          Playlist.add({url: file, source: 'file', type: 'audio'});
+        })
+
         _self.populatePlaylist();
-        _self.displayNotification('Track added');
+        var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
+        _self.displayNotification(message);
       }
       return false;
     }
