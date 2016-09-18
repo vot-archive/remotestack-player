@@ -3,6 +3,7 @@ const cache = require('../lib/cache');
 const playlist = require('../lib/playlist');
 var settings = require('electron-settings');
 var _ = require('lodash');
+// var fs = require('fs-extra');
 var Utils = require('../lib/utils');
 var NowPlaying = require('./nowplaying');
 
@@ -30,6 +31,11 @@ function ensureWavesurfer() {
   $('#WSPlay').on('click', function () {
     wavesurfer.playPause();
   })
+
+  wavesurfer.on('error', function (e) {
+    console.log('wavesurfer error', e);
+    return;
+  });
 
   wavesurfer.on('ready', function () {
     Utils.log('Track ready');
@@ -265,6 +271,13 @@ var Player = {
       $('#tips').fadeIn('fast');
       return;
     }
+    // if (source.source === 'file') {
+    //   var filestat = fs.statSync(source.url);
+    //   if (!filestat.isFile()) {
+    //     Utils.log(source.url, 'is not a file');
+    //     return;
+    //   }
+    // }
     $('#tips').fadeOut('fast');
     $('#currentArtist').text('Loading').addClass('animated pulse');
     $('#currentTitle').text(source.url).addClass('animated pulse');

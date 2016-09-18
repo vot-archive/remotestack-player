@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.0.9
+
+* Support for adding folders
+* Double-click to play
+* Track titles displayed consistently in a single line
+* More error logging
+
+
+
 ## 0.0.8
 
 * Fix for a local source playback
