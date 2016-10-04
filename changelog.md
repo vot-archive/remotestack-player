@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 0.0.10
+
+* Refreshing playlist on change (fixes playlist update on deletion)
+
+
+
 ## 0.0.9
 
 * Support for adding folders
