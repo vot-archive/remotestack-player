@@ -1,6 +1,8 @@
+const _ = require('lodash');
 const settings = require('electron-settings');
 const Utils = require('../lib/utils');
 const Nav = require('../renderer/nav');
+
 // settings.defaults({
 //   'ui': {
 //     'sidebar': {
@@ -11,7 +13,7 @@ const Nav = require('../renderer/nav');
 // settings.applyDefaultsSync();
 // settings.clearSync();
 Utils.log('settingsPath: ', settings.getSettingsFilePath());
-Utils.log('settings:     ', JSON.stringify(settings.getSync()));
+Utils.log('settings:     ', JSON.stringify(_.omit(settings.getSync(), 'streams'), null, 2));
 
 var UI = {
   isInitialised: false,

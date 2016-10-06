@@ -83,7 +83,7 @@ var NowPlaying = {
     var playlist = Playlist.get();
     var currentTrack = playlist[activeIndex];
     var markup = '';
-    Utils.log('populateTrackinfo', currentTrack);
+    Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
 
     if (currentTrack) {
       markup = '<table>';

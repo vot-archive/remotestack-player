@@ -90,7 +90,7 @@ function _interpretPlaylistItem (item, cb) {
 
   if (item.source === 'youtube') {
     return ytdl(item.url, function (err, info) {
-      Utils.log('resolved info:', info);
+      // Utils.log('resolved info:', info);
       if (err || !info) {
         item.playbackUrl = false;
       } else {
@@ -306,7 +306,7 @@ var Player = {
     }
 
     _interpretPlaylistItem(source, function (trackdata) {
-      Utils.log('>> _interpretPlaylistItem returned', trackdata);
+      Utils.log('>> _interpretPlaylistItem returned', _.omit(trackdata, 'raw'));
       NowPlaying.populateTrackinfo();
 
       if (trackdata.source === 'file') {
