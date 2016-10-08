@@ -49,7 +49,7 @@ function intialise() {
     // },
   ];
 
-  var runningFromCLI = process.env.PWD && process.env._.endsWith('/electron');
+  var runningFromCLI = process.env.PWD && process.env._ && process.env._.endsWith('/electron');
 
   if (runningFromCLI) {
     var devToolsGroup = {

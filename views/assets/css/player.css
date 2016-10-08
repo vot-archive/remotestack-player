@@ -1,4 +1,4 @@
-.containerBody {top:0; overflow: hidden; -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
+.containerBody {top:0; overflow: hidden; /*-webkit-app-region: drag;*/ -webkit-user-select: none; cursor: default}
 
 /* Background */
 

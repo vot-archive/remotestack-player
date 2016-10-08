@@ -79,7 +79,7 @@ ul.list li .primary {color: black; text-decoration: none}
 
 
 /* NEW WINDOW CONCEPT */
-body {-webkit-app-region: drag; -webkit-user-select: none; cursor: default}
+body {/*-webkit-app-region: drag;*/ -webkit-user-select: none; cursor: default}
 #wContainer .bg.solid {background: linear-gradient(to bottom, #EFEFEF 0px, #D5D5D5 120px)}
 #wContainer.dark .bg.solid {background: linear-gradient(to bottom, #222 0px, #111 120px)}
 

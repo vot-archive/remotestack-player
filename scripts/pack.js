@@ -115,4 +115,4 @@ function pack(targets) {
 
 
 
-pack('mac');
+pack();

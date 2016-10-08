@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 0.0.11
+
+* Only header is now draggable rather than the whole window (fix for Linux & Windows)
+
+
+
 ## 0.0.10
 
 * Refreshing playlist on change (fixes playlist update on deletion)
