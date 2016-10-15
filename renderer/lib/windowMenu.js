@@ -3,6 +3,8 @@ const Menu = electron.Menu;
 const app = electron.app;
 const shell = electron.shell;
 
+const runningFromCLI = process.env.PWD && process.env._ && process.env._.endsWith('/electron');
+
 function intialise() {
   var template = [
     {
@@ -48,8 +50,6 @@ function intialise() {
     //   ]
     // },
   ];
-
-  var runningFromCLI = process.env.PWD && process.env._ && process.env._.endsWith('/electron');
 
   if (runningFromCLI) {
     var devToolsGroup = {
