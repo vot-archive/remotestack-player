@@ -46,15 +46,10 @@ var NowPlaying = {
     _self.bindFiledrag('filedrag');
     _self.bindFileinput('urlinput');
     _self.bindTabs('rsPlayerBrowser');
-
-
-    PreferencesModel.on('streams.default.playlist', evt => {
-      console.log('Playlist changed, refreshing')
-      _self.populatePlaylist();
-    });
   },
   // get playlist entries and load them into the appropriate container
   populatePlaylist: function populatePlaylist () {
+    var _self = this;
     var list = Playlist.get();
     Utils.log('populatePlaylist', _.map(list, 'url'));
 
@@ -75,7 +70,12 @@ var NowPlaying = {
       });
     }
     $('#nowplaying-playlist').html(markup);
-    this.populateTrackinfo();
+    _self.populateTrackinfo();
+
+    PreferencesModel.once('streams.default.playlist', evt => {
+      console.log('Playlist changed, refreshing')
+      _self.populatePlaylist();
+    });
   },
   populateTrackinfo: function populateTrackinfo () {
     var container = $('#nowplaying-trackinfo');

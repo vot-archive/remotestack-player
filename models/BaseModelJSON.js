@@ -71,6 +71,7 @@ function BaseModelJSON(location) {
     var data = this.helpers.readSync();
     var updatedData = _.set(data, key, value);
     this.helpers.writeSync(updatedData);
+    this.emit(key);
     return true;
   }
 
