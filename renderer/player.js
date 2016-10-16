@@ -219,7 +219,7 @@ var Player = {
     if (vol < 0) vol = 0;
     if (this.volume !== vol) {
       this.volume = vol;
-      Preferences.set('settings.volume', vol)
+      PreferencesModel.set('settings.volume', vol)
       this.applyVolumeSetting();
     }
   },
