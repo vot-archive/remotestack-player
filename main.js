@@ -2,7 +2,15 @@
 
 const electron = require('electron');
 const app = electron.app;
-process.appdata = app.getPath('userData');
+
+// set custom user data location
+var appDataPath = app.getPath('appData');
+var newUserDataPath = appDataPath + '/RemoteStack/Player';
+
+app.setPath('userData', newUserDataPath);
+process.env.userData = newUserDataPath;
+
+
 // const GlobalShortcuts = require('./lib/globalShortcuts');
 const WindowManager = require('./lib/windowManager');
 const StreamManager = require('./lib/streamManager');
