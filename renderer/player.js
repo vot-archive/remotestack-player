@@ -2,6 +2,7 @@ const ytdl = require('../lib/parsers/ytdl');
 const cache = require('../lib/cache');
 const playlist = require('../lib/playlist');
 var PreferencesModel = require('../models/preferences');
+// var PlaylistsModel = require('../models/playlists');
 var _ = require('lodash');
 // var fs = require('fs-extra');
 var Utils = require('../lib/utils');
@@ -83,7 +84,7 @@ function ensureWavesurfer() {
 }
 
 function _interpretPlaylistItem (item, cb) {
-  var cached = cache.persistent.getJSON('meta-resolved', item.url);
+  var cached = cache.getJSON('meta-resolved', item.url);
   if (cached) {
     return cb(cached);
   }
@@ -99,30 +100,30 @@ function _interpretPlaylistItem (item, cb) {
       item.raw = info;
 
       playlist.update({url: item.url}, item);
-      cache.persistent.setJSON('meta-resolved', item.url, item);
+      cache.setJSON('meta-resolved', item.url, item);
       console.log('playlist updated');
       return cb(item);
     });
   }
 
-  // cache.persistent.setJSON('meta-resolved', item.url, item);
+  // cache.setJSON('meta-resolved', item.url, item);
   return cb(item);
 }
 
 function _getPlaylistItem (item, cb) {
   var key = item.playbackUrl;
-  var cached = cache.persistent.getFile('item', key);
+  var cached = cache.getFile('item', key);
   if (cached) {
     return cb(cached);
   }
-  cache.persistent.fetchFile(key, function (filepath) {
+  cache.fetchFile(key, function (filepath) {
     return filepath;
   })
 }
 
 var Player = {
   // state
-  // queue: PreferencesModel.get('streams.0.playlist'),
+  // queue: PlaylistsModel.get('default.playlist'),
   queue: playlist.get(),
 
   volume: PreferencesModel.get('settings.volume') || 100,
@@ -313,7 +314,7 @@ var Player = {
         return executeWavesurferLoad(trackdata.url, trackdata);
       }
 
-      cache.persistent.getFile(trackdata.playbackUrl, function (filepath) {
+      cache.getFile(trackdata.playbackUrl, function (filepath) {
         // var finalPath = filepath || trackdata.url;
         return executeWavesurferLoad(filepath || trackdata.playbackUrl, trackdata);
       });

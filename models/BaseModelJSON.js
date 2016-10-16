@@ -10,6 +10,7 @@ function BaseModelJSON(location) {
   console.log('BaseModelJSON appdata', process.env.userData);
   this.location = path.resolve(location);
   this.eventEmitter = new EventEmitter();
+  this.eventEmitter.setMaxListeners(25);
   var _self = this;
 
   this.helpers = {

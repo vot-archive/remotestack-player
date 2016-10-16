@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var Utils = require('../lib/utils');
 var Playlist = require('../lib/playlist');
-var PreferencesModel = require('../models/preferences');
+var PlaylistsModel = require('../models/playlists');
 var fs = require('fs-extra');
 
 var ignoredFilenames = ['.DS_Store', 'desktop.ini'].map(function (i) {return i.toLowerCase()});
@@ -72,7 +72,7 @@ var NowPlaying = {
     $('#nowplaying-playlist').html(markup);
     _self.populateTrackinfo();
 
-    PreferencesModel.once('streams.default.playlist', evt => {
+    PlaylistsModel.once('default.playlist', evt => {
       console.log('Playlist changed, refreshing')
       _self.populatePlaylist();
     });
