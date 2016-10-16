@@ -1,7 +1,7 @@
 {
-  "name": "com-remotestack-player",
-  "version": "0.0.11",
-  "description": "RemoteStack player app",
+  "name": "remotestack-player",
+  "version": "0.0.12",
+  "description": "RemoteStack Player app",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

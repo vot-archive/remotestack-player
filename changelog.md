@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 0.0.12
+
+* Replaced electron-settings with custom BaseModelJSON to allow multi-file storage
+* Updated userData storage location, now logs and cache are stored there as well
+
+
+
 ## 0.0.11
 
 * Only header is now draggable rather than the whole window (fix for Linux & Windows)
