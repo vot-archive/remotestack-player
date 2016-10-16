@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var Utils = require('../lib/utils');
 var Playlist = require('../lib/playlist');
-var settings = require('electron-settings');
+var PreferencesModel = require('../models/preferences');
 var fs = require('fs-extra');
 
 var ignoredFilenames = ['.DS_Store', 'desktop.ini'].map(function (i) {return i.toLowerCase()});
@@ -48,7 +48,7 @@ var NowPlaying = {
     _self.bindTabs('rsPlayerBrowser');
 
 
-    settings.observe('streams.default.playlist', evt => {
+    PreferencesModel.on('streams.default.playlist', evt => {
       console.log('Playlist changed, refreshing')
       _self.populatePlaylist();
     });

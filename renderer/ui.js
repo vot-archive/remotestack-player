@@ -1,19 +1,10 @@
 const _ = require('lodash');
-const settings = require('electron-settings');
+var PreferencesModel = require('../models/preferences');
 const Utils = require('../lib/utils');
 const Nav = require('../renderer/nav');
 
-// settings.defaults({
-//   'ui': {
-//     'sidebar': {
-//       'show': true
-//     }
-//   }
-// });
-// settings.applyDefaultsSync();
-// settings.clearSync();
-Utils.log('settingsPath: ', settings.getSettingsFilePath());
-Utils.log('settings:     ', JSON.stringify(_.omit(settings.getSync(), 'streams'), null, 2));
+Utils.log('settingsPath: ', PreferencesModel.getLocation());
+Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
 
 var UI = {
   isInitialised: false,
@@ -21,7 +12,7 @@ var UI = {
     var _self = UI;
 
     if (typeof shouldShowNow !== 'boolean') {
-      var showSetting = settings.getSync('ui.sidebar.show');
+      var showSetting = PreferencesModel.get('ui.sidebar.show');
       shouldShowNow = showSetting;
     }
 
@@ -38,13 +29,13 @@ var UI = {
   },
   toggleSidebar: function () {
     var _self = this;
-    var showSetting = settings.getSync('ui.sidebar.show');
+    var showSetting = PreferencesModel.get('ui.sidebar.show');
     _self.applySidebarSetting(!showSetting);
   },
   showSidebar: function (immediate) {
     // Utils.log('immediate', immediate);
-    settings.setSync('ui.sidebar.show', true);
-    var newval = settings.getSync('ui.sidebar.show');
+    PreferencesModel.set('ui.sidebar.show', true);
+    var newval = PreferencesModel.get('ui.sidebar.show');
 
     var time = immediate ? 200 : 350;
     // Utils.log('time', time);
@@ -58,8 +49,8 @@ var UI = {
   },
   hideSidebar: function (immediate) {
     // Utils.log('immediate', immediate);
-    settings.setSync('ui.sidebar.show', false);
-    var newval = settings.getSync('ui.sidebar.show');
+    PreferencesModel.set('ui.sidebar.show', false);
+    var newval = PreferencesModel.get('ui.sidebar.show');
 
     var time = immediate ? 200 : 350;
     // Utils.log('time', time);

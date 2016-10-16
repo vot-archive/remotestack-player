@@ -1,7 +1,7 @@
 const ytdl = require('../lib/parsers/ytdl');
 const cache = require('../lib/cache');
 const playlist = require('../lib/playlist');
-var settings = require('electron-settings');
+var PreferencesModel = require('../models/preferences');
 var _ = require('lodash');
 // var fs = require('fs-extra');
 var Utils = require('../lib/utils');
@@ -122,10 +122,10 @@ function _getPlaylistItem (item, cb) {
 
 var Player = {
   // state
-  // queue: settings.getSync('streams.0.playlist'),
+  // queue: PreferencesModel.get('streams.0.playlist'),
   queue: playlist.get(),
 
-  volume: settings.getSync('settings.volume') || 100,
+  volume: PreferencesModel.get('settings.volume') || 100,
   loopOne: false,
   loopAll: false,
   playing: false,
@@ -218,7 +218,7 @@ var Player = {
     if (vol < 0) vol = 0;
     if (this.volume !== vol) {
       this.volume = vol;
-      settings.setSync('settings.volume', vol)
+      Preferences.set('settings.volume', vol)
       this.applyVolumeSetting();
     }
   },

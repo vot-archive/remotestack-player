@@ -1,5 +1,5 @@
 const electron = require('electron');
-const settings = require('electron-settings');
+var PreferencesModel = require('../models/preferences');
 const shell = electron.shell;
 const path = require('path');
 const os = require('os');
@@ -57,7 +57,7 @@ var Nav = {
 
           const tmpdir = os.tmpdir();
           const cachedir = path.join(tmpdir, 'remotestackcache');
-          const appdata = path.join(settings.getSettingsFilePath(), '..');
+          const appdata = path.join(PreferencesModel.getLocation(), '..');
 
 
           url = url.replace('$$TMPDIR', tmpdir);

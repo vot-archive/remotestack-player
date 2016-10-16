@@ -1,5 +1,5 @@
 const Utils = require('../lib/utils');
-const settings = require('electron-settings');
+var PreferencesModel = require('../models/preferences');
 
 function populatePartials () {
   var links = document.querySelectorAll('link[rel="import"].partial')
@@ -40,7 +40,7 @@ function populateTemplates () {
     // }
   });
 
-  if (settings.getSync('settings.DarkTheme')) {
+  if (PreferencesModel.get('settings.DarkTheme')) {
     Utils.log('adding dark class');
     $('#wContainer').addClass('dark');
   }

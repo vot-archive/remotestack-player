@@ -16,17 +16,17 @@
 
 
 <script>
-const settings = require('electron-settings');
+var PreferencesModel = require('../models/preferences');
 function handleCheckbox(input) {
   var key = $(input).val();
   var isChecked = $(input).is(':checked');
-  settings.setSync(key, isChecked);
+  PreferencesModel.set(key, isChecked);
 }
 
 $(document).ready(function () {
   $('input[type="checkbox"]').each(function () {
     var key = $(this).val();
-    var isChecked = settings.getSync(key) || false;
+    var isChecked = PreferencesModel.get(key) || false;
     $(this).prop('checked', isChecked);
   });
 });
