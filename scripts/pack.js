@@ -64,7 +64,7 @@ function packOne (platform, callback) {
   var args = [
     rootdir + '/node_modules/electron-packager/cli.js',
     rootdir,
-    '"RemoteStack"',
+    '"RemoteStack Player"',
     '--version=1.3.3',
     // '--out=dist/' + platform,
     '--out=dist',
