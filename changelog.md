@@ -1,6 +1,14 @@
 # Changelog
 
 
+## 0.0.14
+
+* Few small optimisations (hopefully)
+* Simplified structure and navigation
+* Fixed player-playlist integration
+
+
+
 ## 0.0.13
 
 * Commented out events from base JSON model to troubleshoot
