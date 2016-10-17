@@ -4,13 +4,13 @@
 var _ = require('lodash');
 var fse = require('fs-extra');
 var path = require('path');
-// var EventEmitter = require('events');
+var EventEmitter = require('events');
 
 function BaseModelJSON(location) {
   console.log('BaseModelJSON appdata', process.env.userData);
   this.location = path.resolve(location);
-  // this.eventEmitter = new EventEmitter();
-  // this.eventEmitter.setMaxListeners(25);
+  this.eventEmitter = new EventEmitter();
+  this.eventEmitter.setMaxListeners(15);
   var _self = this;
 
   this.helpers = {
@@ -84,18 +84,18 @@ function BaseModelJSON(location) {
    * @param {String} handler Handler function to trigger on event
    */
   this.on = function eventOn(e, handler) {
-    return;
-    // return this.eventEmitter.on(e, handler);
+    // return;
+    return this.eventEmitter.on(e, handler);
   }
 
   this.once = function eventOnce(e, handler) {
-    return;
-    // return this.eventEmitter.once(e, handler);
+    // return;
+    return this.eventEmitter.once(e, handler);
   }
 
   this.emit = function eventEmit(e) {
-    return;
-    // return this.eventEmitter.emit(e);
+    // return;
+    return this.eventEmitter.emit(e);
   }
 
 
