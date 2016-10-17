@@ -8,60 +8,7 @@ Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'strea
 
 var UI = {
   isInitialised: false,
-  applySidebarSetting: function (shouldShowNow) {
-    var _self = UI;
 
-    if (typeof shouldShowNow !== 'boolean') {
-      var showSetting = PreferencesModel.get('ui.sidebar.show');
-      shouldShowNow = showSetting;
-    }
-
-    var immediate = !_self.isInitialised;
-
-    if (shouldShowNow) {
-      _self.showSidebar(immediate);
-    } else {
-      _self.hideSidebar(immediate);
-    }
-
-    _self.preventDragRedirections();
-    _self.isInitialised = true;
-  },
-  toggleSidebar: function () {
-    var _self = this;
-    var showSetting = PreferencesModel.get('ui.sidebar.show');
-    _self.applySidebarSetting(!showSetting);
-  },
-  showSidebar: function (immediate) {
-    // Utils.log('immediate', immediate);
-    PreferencesModel.set('ui.sidebar.show', true);
-    var newval = PreferencesModel.get('ui.sidebar.show');
-
-    var time = immediate ? 200 : 350;
-    // Utils.log('time', time);
-    $('.sidebar').animate({'left': 0, opacity: 1}, time);
-    $('.mainContent').animate({'left': 140}, time)
-      .promise().always(function () {
-        $(window).trigger('resize');
-      });
-
-    $(window).trigger('resize');
-  },
-  hideSidebar: function (immediate) {
-    // Utils.log('immediate', immediate);
-    PreferencesModel.set('ui.sidebar.show', false);
-    var newval = PreferencesModel.get('ui.sidebar.show');
-
-    var time = immediate ? 200 : 350;
-    // Utils.log('time', time);
-    $('.sidebar').animate({'left': -140, opacity: 0}, time);
-    $('.mainContent').animate({'left': 0}, time)
-      .promise().always(function () {
-        $(window).trigger('resize');
-      });
-
-
-  },
   bindShortcuts: function bindShortcuts () {
     var _self = this;
     Utils.log('bindShortcuts called');
@@ -71,12 +18,6 @@ var UI = {
         return;
       }
 
-      // Ctrl/Cmd + Alt + S
-      if (e.altKey && (e.ctrlKey || e.metaKey) && (e.which === 83)) {
-        Utils.log('Cmd+Alt+S hit');
-        _self.toggleSidebar();
-        return e.preventDefault();
-      }
       // Ctrl/Cmd + ,
       if ((e.ctrlKey || e.metaKey) && e.which === 188) {
         Utils.log('Cmd+, hit');

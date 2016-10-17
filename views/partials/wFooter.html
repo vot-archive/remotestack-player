@@ -1,10 +1,10 @@
 <script>
-// var Renderer = require('../renderer');
 var Nav = require('../renderer/nav');
-var UI = require('../renderer/ui');
 </script>
 
 <partial>
-  <a onclick="UI.toggleSidebar()"><span class="fa fa-fw fa-outdent" title="Show/hide sidebar"></span></a>
+  <!-- <a onclick="Nav.goto('streams')"><span class="fa fa-fw fa-home"></span></a> -->
   <a onclick="Nav.goto('nowplaying')"><span class="fa fa-fw fa-home"></span></a>
+  <a onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-cogs"></span></a>
+  <a onclick="Nav.goto('help')"><span class="fa fa-fw fa-question"></span></a>
 </partial>

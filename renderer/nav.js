@@ -14,10 +14,9 @@ var Nav = {
   },
   selectFirst: function () {
     Utils.log('Nav.selectFirst');
-    var id = $('#wBody .navContent:first').attr('id');
-
+    // var id = $('#wBody .navContent:first').attr('id');
     // Utils.log('Hijacking Nav.selectFirst - substituting "nowplaying"');
-    id = 'nowplaying';
+    var id = 'nowplaying';
     this.goto(id);
   },
   goto: function (id) {
@@ -27,13 +26,6 @@ var Nav = {
 
     $('*[data-nav-goto]').parents('li').removeClass('active');
     $('*[data-nav-goto='+ id+ ']').parents('li').addClass('active');
-
-    if (id === 'nowplaying') {
-      $('.containerFooter .fa.fa-fw.fa-home').fadeOut(100);
-      $(window).trigger('resize');
-    } else {
-      $('.containerFooter .fa.fa-fw.fa-home').fadeIn(100);
-    }
   },
   handleExternalLinks: function () {
     const links = document.querySelectorAll('a[href]');

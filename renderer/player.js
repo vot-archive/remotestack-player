@@ -169,9 +169,9 @@ var Player = {
   },
 
   prev: function prev () {
-    var playlist = Playlist.get();
+    var playlist = playlist.get();
     var playState = this.playing;
-    var nextTrackIndex = Playlist.setActive('prev');
+    var nextTrackIndex = playlist.setActive('prev');
     console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
     var nextTrack = playlist[nextTrackIndex];
 
@@ -182,9 +182,9 @@ var Player = {
   },
 
   next: function next () {
-    var playlist = Playlist.get();
+    var playlist = playlist.get();
     var playState = this.playing;
-    var nextTrackIndex = Playlist.setActive('next');
+    var nextTrackIndex = playlist.setActive('next');
     console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
     var nextTrack = playlist[nextTrackIndex];
 
@@ -257,12 +257,12 @@ var Player = {
   loadByIndex: function loadByIndex (index) {
     Utils.log('loadByIndex', index);
     if (index === 'active') {
-      index = Playlist.setActive('active');
+      index = playlist.setActive('active');
     }
-    index = Playlist.setActive(index);
+    index = playlist.setActive(index);
     Utils.log('index', index);
 
-    return this.load(Playlist.get()[index]);
+    return this.load(playlist.get()[index]);
   },
   load: function load (source) {
     console.log('hit populatePlaylist from Player.load')
@@ -296,7 +296,7 @@ var Player = {
       var title = _.get(trackdata, 'resolved.meta.canonical.title', '');
 
       if (!artist.length || !title.length) {
-        title = Playlist.getDisplayTitle(trackdata);
+        title = playlist.getDisplayTitle(trackdata);
       }
 
       $('#currentArtist').text(artist).removeClass('animated pulse');

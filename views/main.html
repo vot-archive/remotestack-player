@@ -20,17 +20,13 @@
     <link rel="icon" type="image/png" href="assets/rs.png">
     <link rel="apple-touch-icon" href="assets/rs.png">
 
-    <!-- <link rel="import" class="partial" href="partials/wHeader.html"> -->
     <link rel="import" class="partial" href="partials/wHeaderDraggable.html">
-    <link rel="import" class="partial" href="partials/wSidebar.html">
-    <!-- <link rel="import" class="partial" href="partials/wFooter.html"> -->
+    <link rel="import" class="partial" href="partials/wFooter.html">
 
-    <link rel="import" class="template" href="templates/streams.html">
-    <link rel="import" class="template" href="templates/playlist.html">
-    <link rel="import" class="template" href="templates/library.html">
+
     <link rel="import" class="template" href="templates/nowplaying.html">
-    <link rel="import" class="template" href="templates/openurl.html">
     <link rel="import" class="template" href="templates/preferences.html">
+    <link rel="import" class="template" href="templates/status.html">
     <link rel="import" class="template" href="templates/help.html">
   </assets>
 
@@ -41,23 +37,28 @@
     <div id="wHeaderDraggable"></div>
 
     <div class="containerBody">
-        <div class="sidebar" id="wSidebar"></div>
         <div class="mainContent" id="wBody"></div>
     </div>
 
-    <!-- <div id="wFooter" class="containerFooter"></div> -->
+    <div id="wFooter" class="containerFooter"></div>
 
   </div>
 
   <script>
     require('../renderer/imports')
+    var Nav = require('../renderer/nav');
+    var UI = require('../renderer/ui');
 
-    // var Renderer = require('../renderer');
-    var Player = require('../renderer/player');
+    // var Player = require('../renderer/player');
+
     $(document).ready(function () {
       // Renderer.bindShortcuts();
       Player.bindShortcuts();
+
+      Nav.init();
+      UI.bindShortcuts();
     });
+
   </script>
 </body>
 </html>
