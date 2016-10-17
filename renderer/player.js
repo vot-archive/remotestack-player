@@ -1,6 +1,6 @@
 const ytdl = require('../lib/parsers/ytdl');
 const cache = require('../lib/cache');
-const playlist = require('../lib/playlist');
+const playlistLib = require('../lib/playlist');
 var PreferencesModel = require('../models/preferences');
 // var PlaylistsModel = require('../models/playlists');
 var _ = require('lodash');
@@ -99,7 +99,7 @@ function _interpretPlaylistItem (item, cb) {
       }
       item.raw = info;
 
-      playlist.update({url: item.url}, item);
+      playlistLib.update({url: item.url}, item);
       cache.setJSON('meta-resolved', item.url, item);
       console.log('playlist updated');
       return cb(item);
@@ -124,7 +124,7 @@ function _getPlaylistItem (item, cb) {
 var Player = {
   // state
   // queue: PlaylistsModel.get('default.playlist'),
-  queue: playlist.get(),
+  queue: playlistLib.get(),
 
   volume: PreferencesModel.get('settings.volume') || 100,
   loopOne: false,
@@ -169,9 +169,9 @@ var Player = {
   },
 
   prev: function prev () {
-    var playlist = playlist.get();
+    var playlist = playlistLib.get();
     var playState = this.playing;
-    var nextTrackIndex = playlist.setActive('prev');
+    var nextTrackIndex = playlistLib.setActive('prev');
     console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
     var nextTrack = playlist[nextTrackIndex];
 
@@ -182,9 +182,9 @@ var Player = {
   },
 
   next: function next () {
-    var playlist = playlist.get();
+    var playlist = playlistLib.get();
     var playState = this.playing;
-    var nextTrackIndex = playlist.setActive('next');
+    var nextTrackIndex = playlistLib.setActive('next');
     console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
     var nextTrack = playlist[nextTrackIndex];
 
@@ -257,12 +257,12 @@ var Player = {
   loadByIndex: function loadByIndex (index) {
     Utils.log('loadByIndex', index);
     if (index === 'active') {
-      index = playlist.setActive('active');
+      index = playlistLib.setActive('active');
     }
-    index = playlist.setActive(index);
+    index = playlistLib.setActive(index);
     Utils.log('index', index);
 
-    return this.load(playlist.get()[index]);
+    return this.load(playlistLib.get()[index]);
   },
   load: function load (source) {
     console.log('hit populatePlaylist from Player.load')
@@ -296,7 +296,7 @@ var Player = {
       var title = _.get(trackdata, 'resolved.meta.canonical.title', '');
 
       if (!artist.length || !title.length) {
-        title = playlist.getDisplayTitle(trackdata);
+        title = playlistLib.getDisplayTitle(trackdata);
       }
 
       $('#currentArtist').text(artist).removeClass('animated pulse');
