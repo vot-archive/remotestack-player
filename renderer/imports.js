@@ -40,10 +40,9 @@ function populateTemplates () {
     // }
   });
 
-  if (PreferencesModel.get('settings.DarkTheme')) {
-    Utils.log('adding dark class');
-    $('#wContainer').addClass('dark');
-  }
+  var theme = PreferencesModel.get('settings.DarkTheme') ? 'dark' : 'light';
+  Utils.log('adding class: ' + theme);
+  $('#wContainer').addClass(theme);
 }
 
 

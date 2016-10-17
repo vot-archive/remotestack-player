@@ -1,22 +1,17 @@
 /* Defaults */
-html, body, .wrap, .containerBody, .sidebar, .mainContent {height: 100%}
+html, body, .wrap, .containerBody, .mainContent {height: 100%}
 body {background: transparent; font-size: 12px}
 * {cursor: default}
-h1, h2, h3 {color: #3E3D3D; text-shadow: 0px 1px 1px #FFF; font-weight: 300; margin: 0}
 table.table {font-size: 1em}
-label {font-weight: 400}
-
-h2 {font-size: 18px; margin: -10px -10px 0; padding: 10px 10px 10px; background: #DDD; text-decoration: none;}
-
-a {text-decoration: none; color: #23527C}
-a:hover {color: #153C5D}
-a, a:hover, a:focus {text-decoration: none; outline: none}
 
 .padding-5 {padding:5px}
 .padding-10 {padding:10px}
 .padding-0-10 {padding:0 10px}
 
 input.urlviewer {width: 100%; background: none; border: none}
+
+.well {background-color: rgba(66, 66, 66, 0.85); border: 1px solid rgba(0, 0, 0, 0.3)}
+.well a {color: white}
 
 .wrap {padding: 0; margin: 0}
 .entry-url {display: block; font-size: 0.8em; font-weight: bold}
@@ -72,25 +67,65 @@ ul.list li .primary {color: black; text-decoration: none}
 /* Add footer */
 .wrap .containerBody {bottom: 20px; width: 100%}
 .wrap .containerFooter {position: fixed; bottom: 0; height:20px; width: 100%; padding: 0 5px; background: #D5D5D5; border-top: 1px solid #b6b4b6;}
-.wrap .containerFooter a {color: #4c4c4c}
-.wrap .containerFooter a span.fa-active{color: #d22}
-
 
 
 
 /* NEW WINDOW CONCEPT */
 body {/*-webkit-app-region: drag;*/ -webkit-user-select: none; cursor: default}
-#wContainer .bg.solid {background: linear-gradient(to bottom, #EFEFEF 0px, #D5D5D5 120px)}
-#wContainer.dark .bg.solid {background: linear-gradient(to bottom, #222 0px, #111 120px)}
-
-#wContainer .bg.transparent {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.5) 0%, rgba(239, 239, 239, 0) 100%)}
-#wContainer.shine .bg.transparent {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.8) 2px, rgba(213, 213, 213, 0.2) 30px)}
 
 
-#wContainer .bg ul.list li {background: #f5f5f5}
-#wContainer .bg ul.list li:nth-child(2n) {background: transparent}
+/*
+ * COMMON STYLING
+ */
+h1, h2, h3 {font-weight: 300; margin: 0; text-decoration: none}
+h1 {font-weight: 100}
+h2 {font-size: 22px}
+h1 > * {font-weight: inherit !important}
+h1 strong {font-weight: 300 !important}
+h2 strong {font-weight: 400 !important}
+h3 strong {font-weight: 400 !important}
 
-#wContainer .bg h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
-#wContainer.dark .bg h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: white; text-shadow: none}
+label {font-weight: 400}
+
+a {text-decoration: none; color: #23527C}
+a:hover {color: #153C5D}
+a, a:hover, a:focus {text-decoration: none; outline: none}
+
+
+
+
+
+/*
+ * LIGHT THEME
+ */
+
+
+#wContainer.light .bg.cloudy {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.7) 0%, rgba(239, 239, 239, 0.23) 100%); color: black}
+#wContainer.light .bg.solid {background: linear-gradient(to bottom, #EFEFEF 0px, #D5D5D5 120px); color: black}
+#wContainer.light h1, #wContainer.light h2, #wContainer.light h3 {color: #3E3D3D; /*text-shadow: 0px 1px 1px #cecece;*/}
+
+/*#wContainer.light .bg h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}*/
+#wContainer.light .containerFooter a {color: #4c4c4c}
+#wContainer.light .containerFooter a span.fa-active{color: #d22}
+
+#wContainer.light .bg ul.list li {background: #f3f0f0; color: black}
+#wContainer.light .bg ul.list li:nth-child(2n) {background: #e8e7e7}
+
+
+
+
+/*
+ * DARK THEME
+ */
+
+#wContainer.dark .bg.cloudy {background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.55) 100%); color: #EFEFEF}
+#wContainer.dark .bg.solid {background: linear-gradient(to bottom, #222 0px, #111 120px); color: #EFEFEF}
+/*#wContainer.dark .bg h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: #EFEFEF; text-shadow: none}*/
 #wContainer.dark .bg ul.list li {background: #222; color: #eee}
-#wContainer .bg ul.list li:nth-child(2n) {background: transparent}
+#wContainer.dark .bg ul.list li:nth-child(2n) {background: #2e2e2e}
+#wContainer.dark a {color: #cedef3}
+
+#wContainer.dark .containerFooter {background: #1f1f1f; border-top-color: #333;}
+#wContainer.dark .containerFooter a {color: #4c4c4c}
+#wContainer.dark .containerFooter a span.fa-active{color: #d22}
+#wContainer.dark .btn-default {background-color: #222; color: #efefef;}
