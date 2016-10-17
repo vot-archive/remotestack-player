@@ -23,7 +23,7 @@
 #rsPlayerBrowser h2 {margin-top: 0}
 .list .url {display: block;font-size: 0.7em; opacity: 0.7; height: 10px; overflow: hidden}
 
-#rsPlayerBrowser .tabs {height: 30px; display: block; background: linear-gradient(to bottom, #EBEBEB 0%, #D5D5D5 100%); margin: 0; padding: 0}
+#rsPlayerBrowser .tabs {height: 30px; display: block; background: linear-gradient(to bottom, #D5D5D5 0%, #EBEBEB 100%); margin: 0; padding: 0}
 #rsPlayerBrowser .tabs li {display: inline-block; font-size: 12px; line-height: 12px; padding: 9px 8px; color: #AAA}
 #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; padding-bottom: 7px; color: #777}
 
@@ -33,7 +33,7 @@
 
 
 
-#wContainer.dark .bg #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #222 0%, #111 100%)}
+#wContainer.dark .bg #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #111 0%, #1f1f1f 100%)}
 #wContainer.dark .bg #rsPlayerBrowser .tabs li {color: #ccc}
 #wContainer.dark .bg #rsPlayerBrowser .tabs li.active {color: #eee}
 
