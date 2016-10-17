@@ -1,6 +1,13 @@
 # Changelog
 
 
+## 0.0.13
+
+* Commented out events from base JSON model to troubleshoot
+* New icon
+
+
+
 ## 0.0.12
 
 * Replaced electron-settings with custom BaseModelJSON to allow multi-file storage
