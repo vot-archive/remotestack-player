@@ -44,17 +44,17 @@ function packOne (platform, callback) {
   if (platform === 'mac') {
     platformCode = 'darwin';
     archCode = 'x64';
-    icon = 'views/assets/rs.icns';
+    icon = 'views/assets/icons/player.icns';
   }
   if (platform === 'win') {
     platformCode = 'win32';
     archCode = 'ia32';
-    icon = 'views/assets/rs.ico';
+    icon = 'views/assets/icons/player.ico';
   }
   if (platform === 'linux') {
     platformCode = 'linux';
     archCode = 'x64';
-    icon = 'views/assets/rs.png';
+    icon = 'views/assets/icons/player-256.png';
   }
 
   if (!platformCode) {
