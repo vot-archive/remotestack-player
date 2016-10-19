@@ -11,7 +11,7 @@
   "license": "",
   "devDependencies": {
     "clarg": "0.0.3",
-    "electron": "1.3.3",
+    "electron": "1.4.3",
     "electron-packager": "^8.0.0"
   },
   "dependencies": {
