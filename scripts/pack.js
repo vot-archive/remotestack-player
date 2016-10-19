@@ -95,7 +95,7 @@ function packOne (platform, callback) {
 
 function pack(targets) {
   var allTargets = ['mac', 'win', 'linux'];
-  var buildTargets = targets.split(',') || allTargets;
+  var buildTargets = targets ? targets.split(',') : allTargets;
   buildTargets = buildTargets.filter(function (tg) {
     return allTargets.indexOf(tg) !== -1;
   });
