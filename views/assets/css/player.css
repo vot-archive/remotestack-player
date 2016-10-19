@@ -23,7 +23,7 @@
 #waveform wave {overflow: hidden !important}
 /*#waveform {bottom: -20px; position: fixed; width: 100%; margin: 0 -10px;}*/
 
-@media screen and (max-height: 240px) {
+@media screen and (max-height: 120px) {
   /*#waveform {bottom: -40px}*/
   .wrap .containerFooter {bottom: -20px}
 }

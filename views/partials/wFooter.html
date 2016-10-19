@@ -3,8 +3,15 @@ var Nav = require('../renderer/nav');
 </script>
 
 <partial>
-  <!-- <a onclick="Nav.goto('streams')"><span class="fa fa-fw fa-home"></span></a> -->
-  <a onclick="Nav.goto('nowplaying')"><span class="fa fa-fw fa-home"></span></a>
-  <a onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-cogs"></span></a>
-  <a onclick="Nav.goto('help')"><span class="fa fa-fw fa-question"></span></a>
+    <div class="pull-left text-left">
+      <a onclick="Nav.goto('nowplaying')"><span class="fa fa-fw fa-play"></span></a>
+      <a onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-cogs"></span></a>
+      <a onclick="Nav.goto('help')"><span class="fa fa-fw fa-question"></span></a>
+      <!-- <a onclick="Nav.goto('status')"><span class="fa fa-fw fa-home"></span></a> -->
+    </div>
+
+    <div class="pull-right text-right">
+      <a onclick="return false;"><span class="fa fa-fw fa-repeat"></span></a>
+      <a onclick="return false;"><span class="fa fa-fw fa-random"></span></a>
+    </div>
 </partial>

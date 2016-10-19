@@ -101,7 +101,7 @@ a, a:hover, a:focus {text-decoration: none; outline: none}
 
 
 #wContainer.light .bg.cloudy {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.7) 0%, rgba(239, 239, 239, 0.23) 100%); color: black}
-#wContainer.light .bg.solid {background: linear-gradient(to bottom, #EFEFEF 0px, #D5D5D5 120px); color: black}
+#wContainer.light .bg.solid {background: linear-gradient(to bottom, #fafafa 0px, #dadada 120px); color: black}
 #wContainer.light h1, #wContainer.light h2, #wContainer.light h3 {color: #3E3D3D; /*text-shadow: 0px 1px 1px #cecece;*/}
 
 /*#wContainer.light .bg h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}*/
@@ -119,7 +119,7 @@ a, a:hover, a:focus {text-decoration: none; outline: none}
  */
 
 #wContainer.dark .bg.cloudy {background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.55) 100%); color: #EFEFEF}
-#wContainer.dark .bg.solid {background: linear-gradient(to bottom, #222 0px, #111 120px); color: #EFEFEF}
+#wContainer.dark .bg.solid {background: linear-gradient(to bottom, #404040 0px, #101010 120px); color: #EFEFEF}
 /*#wContainer.dark .bg h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: #EFEFEF; text-shadow: none}*/
 #wContainer.dark .bg ul.list li {background: #222; color: #eee}
 #wContainer.dark .bg ul.list li:nth-child(2n) {background: #2e2e2e}
