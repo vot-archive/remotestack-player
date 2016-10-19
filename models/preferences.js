@@ -1,7 +1,10 @@
 var BaseModelJSON = require('./BaseModelJSON');
 var PreferencesModel;
 
-var dataRoot = process.env.userData;
+// var dataRoot = process.env.userData;
+const electron = require('electron');
+const app = electron.app || electron.remote.app;
+const dataRoot = app.getPath('userData');
 var filename = dataRoot + '/Preferences.json';
 
 console.log('PreferencesModel storing at ' + filename);

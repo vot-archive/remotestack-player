@@ -30,7 +30,11 @@
 
 
 <script>
-var PreferencesModel = require('../models/preferences');
+const remote = require('electron').remote;
+// const userDataDir = remote.getGlobal('userDataDir');
+// console.log('data in : ' + userDataDir)
+
+var PreferencesModel = remote.require('./models/preferences');
 function handleCheckbox(input) {
   var key = $(input).val();
   var isChecked = $(input).is(':checked');

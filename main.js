@@ -8,8 +8,9 @@ var appDataPath = app.getPath('appData');
 var newUserDataPath = appDataPath + '/RemoteStack/Player';
 
 app.setPath('userData', newUserDataPath);
-process.env.userData = newUserDataPath;
-
+// process.env.userData = newUserDataPath;
+// global.userDataDir = newUserDataPath;
+// global.getGlobal('userDataDir')
 
 // const GlobalShortcuts = require('./lib/globalShortcuts');
 const WindowManager = require('./lib/windowManager');

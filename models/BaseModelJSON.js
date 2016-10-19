@@ -7,7 +7,7 @@ var path = require('path');
 var EventEmitter = require('events');
 
 function BaseModelJSON(location) {
-  console.log('BaseModelJSON appdata', process.env.userData);
+  console.log('BaseModelJSON location:', location);
   this.location = path.resolve(location);
   this.eventEmitter = new EventEmitter();
   this.eventEmitter.setMaxListeners(15);
