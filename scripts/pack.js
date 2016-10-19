@@ -1,6 +1,7 @@
 const path = require('path');
 const exec = require('child_process').exec;
 const async = require('async');
+const clarg = require('clarg')();
 var rootdir = path.join(__dirname, '..');
 
 var ignoreList = [
@@ -93,17 +94,18 @@ function packOne (platform, callback) {
 
 
 function pack(targets) {
-  clean(function () {
-    var buildTargets = ['mac', 'win', 'linux'];
-    if (targets) {
-      if (typeof targets === 'string') {
-        targets = [targets];
-      }
-      if (Array.isArray(targets)) {
-        buildTargets = targets;
-      }
-    }
+  var allTargets = ['mac', 'win', 'linux'];
+  var buildTargets = targets.split(',') || allTargets;
+  buildTargets = buildTargets.filter(function (tg) {
+    return allTargets.indexOf(tg) !== -1;
+  });
+  if (!buildTargets.length) {
+    console.log('No valid target platforms specified.\nSupported platforms are "mac", "win" and "linux".')
+    process.exit(1);
+  }
+  console.log('Target platforms:', buildTargets.join(', '), '\n');
 
+  clean(function () {
     async.eachSeries(buildTargets, function (i, cb) {
       packOne(i, cb);
     }, function () {
@@ -114,5 +116,5 @@ function pack(targets) {
 }
 
 
-
-pack();
+var targets = clarg.opts.t || clarg.opts.targets;
+pack(targets);
