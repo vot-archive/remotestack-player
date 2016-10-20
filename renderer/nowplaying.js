@@ -58,6 +58,7 @@ var NowPlaying = {
   // get playlist entries and load them into the appropriate container
   populatePlaylist: function populatePlaylist () {
     var _self = this;
+    PlaylistsModel.removeAllListeners('default.playlist');
     var list = Playlist.get();
     Utils.log('populatePlaylist', _.map(list, 'url'));
 

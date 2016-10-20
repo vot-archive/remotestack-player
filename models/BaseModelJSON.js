@@ -10,7 +10,7 @@ function BaseModelJSON(location) {
   console.log('BaseModelJSON location:', location);
   this.location = path.resolve(location);
   this.eventEmitter = new EventEmitter();
-  this.eventEmitter.setMaxListeners(15);
+  this.eventEmitter.setMaxListeners(2);
   var _self = this;
 
   this.helpers = {
@@ -91,6 +91,11 @@ function BaseModelJSON(location) {
   this.once = function eventOnce(e, handler) {
     // return;
     return this.eventEmitter.once(e, handler);
+  }
+
+  this.removeAllListeners = function eventRemoveListeners(e) {
+    // return;
+    return this.eventEmitter.removeAllListeners(e);
   }
 
   this.emit = function eventEmit(e) {
