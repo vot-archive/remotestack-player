@@ -4,17 +4,24 @@ var Playlist = require('../lib/playlist');
 var PlaylistsModel = require('../models/playlists');
 var fs = require('fs-extra');
 
-var ignoredFilenames = ['.DS_Store', 'desktop.ini'].map(function (i) {return i.toLowerCase()});
-var ignoredExtensions = ['jpg', 'jpeg', 'png', 'gif', 'zip', 'rar'].map(function (i) {return i.toLowerCase()});
+// var ignoredFilenames = ['.DS_Store', 'desktop.ini'].map(function (i) {return i.toLowerCase()});
+// var ignoredExtensions = ['jpg', 'jpeg', 'png', 'gif', 'zip', 'rar'].map(function (i) {return i.toLowerCase()});
+var supportedExtensions = ['mp3']
 
 function _isAudioFile (filepath) {
   var filename = _.last(filepath.split('/')).toLowerCase();
   var extension = _.last(filename.split('.'));
 
-  if (ignoredFilenames.indexOf(filename) !== -1) return false;
-  if (ignoredExtensions.indexOf(extension) !== -1) return false;
+  if (filename.startsWith('.')) return false;
+  return supportedExtensions.indexOf(extension) !== -1;
 
-  return true;
+  // var filename = _.last(filepath.split('/')).toLowerCase();
+  // var extension = _.last(filename.split('.'));
+  //
+  // if (ignoredFilenames.indexOf(filename) !== -1) return false;
+  // if (ignoredExtensions.indexOf(extension) !== -1) return false;
+  //
+  // return true;
 }
 
 
@@ -43,8 +50,9 @@ var NowPlaying = {
 
     _self.populatePlaylist();
     _self.bindShortcuts();
-    _self.bindFiledrag('filedrag');
-    _self.bindFileinput('urlinput');
+    // _self.bindFiledrag('filedrag');
+    _self.bindFiledrag();
+    _self.bindURLInput('urlinput');
     _self.bindTabs('rsPlayerBrowser');
   },
   // get playlist entries and load them into the appropriate container
@@ -101,7 +109,12 @@ var NowPlaying = {
   },
   bindFiledrag: function bindFiledrag(id) {
     const _self = this;
-    const holder = document.getElementById(id || 'filedrag');
+    let holder;
+    if (!id) {
+      holder = document;
+    } else {
+      holder = document.getElementById(id || 'filedrag');
+    }
 
     holder.ondragover = () => {
       return false;
@@ -111,6 +124,7 @@ var NowPlaying = {
     }
     holder.ondrop = (e) => {
       e.preventDefault();
+      console.log(e);
       for (let f of e.dataTransfer.files) {
         var filepath = f.path;
         var allFiles = _unfoldFiles(f.path);
@@ -126,7 +140,7 @@ var NowPlaying = {
       return false;
     }
   },
-  bindFileinput: function bindFileinput(id) {
+  bindURLInput: function bindURLInput(id) {
     const _self = this;
     const holder = document.getElementById(id || 'urlinput');
 

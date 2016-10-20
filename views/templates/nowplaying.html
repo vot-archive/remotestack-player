@@ -58,9 +58,9 @@
       <div id="rsPlayerBrowser">
         <ul class="tabs">
           <li class="active" data-tab-destination="nowplaying-playlist">Playlist</li>
-          <li data-tab-destination="nowplaying-add">Add</li>
+          <li data-tab-destination="nowplaying-add">Add URL</li>
           <!-- <li data-tab-destination="nowplaying-browser">Browser</li> -->
-          <li data-tab-destination="nowplaying-trackinfo">Track info</li>
+          <!-- <li data-tab-destination="nowplaying-trackinfo">Track info</li> -->
         </ul>
 
         <div class="tabContent" rel="nowplaying-playlist">
@@ -68,12 +68,17 @@
         </div>
 
         <div class="tabContent" rel="nowplaying-add">
-          <div id="filedrag" class="filedrag">
+          <!-- <div id="filedrag" class="filedrag">
             Drag files here
-          </div>
+          </div> -->
+
+          <p class="padding-10 small text-center">Enter a URL you'd like to add to the playlist below.<br />Most online services are supported.</p>
           <div class="urlentry">
-            <input type="text" value="" placeholder="...or enter a URL here" id="urlinput" />
+            <input type="text" value="" placeholder="Enter a URL here" id="urlinput" />
           </div>
+
+          <br /><br />
+          <p class="padding-10 small text-center"><strong>Tip:</strong><br/> To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.</p>
         </div>
 
         <div class="tabContent hide" rel="nowplaying-browser">
