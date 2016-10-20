@@ -1,6 +1,14 @@
 # Changelog
 
 
+## 0.0.15
+
+* Plenty of visual tweaks
+* Fixed data paths for Linux
+* Improved settings handling
+
+
+
 ## 0.0.14
 
 * Few small optimisations (hopefully)
