@@ -25,14 +25,14 @@ var UI = {
         return e.preventDefault();
       }
       // Ctrl/Cmd + .
-      if ((e.ctrlKey || e.metaKey) && e.which === 190) {
-        Utils.log('Cmd+. hit');
+      if (e.which == 27 || (e.ctrlKey || e.metaKey) && e.which === 190) {
+        Utils.log('Esc or Cmd+. hit');
         Nav.goto('nowplaying');
         return e.preventDefault();
       }
-      // F1 [112]
-      if (e.which === 112) {
-        Utils.log('F1 hit');
+      // F1 [112] || / [191]
+      if (e.which === 112 || e.which === 191) {
+        Utils.log('F1 or / hit');
         Nav.goto('help');
         return e.preventDefault();
       }

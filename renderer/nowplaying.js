@@ -162,10 +162,15 @@ var NowPlaying = {
       // TODO Ctrl/Cmd + Alt + V (XX)    Video
 
       // Ctrl/Cmd + Alt + P (80)
-      if (e.altKey && (e.ctrlKey || e.metaKey) && (e.which === 80)) {
-        Utils.log('Cmd+Alt+P hit');
-        _self.togglePlaylist();
-        return e.preventDefault();
+      // if (e.altKey && (e.ctrlKey || e.metaKey) && (e.which === 80)) {
+
+      // Just P (80)
+      if (e.which === 80) {
+        Utils.log('P hit');
+        if ($('.navContent.active').attr('id') === 'nowplaying') {
+          _self.togglePlaylist();
+          return e.preventDefault();
+        }
       }
     });
   },
@@ -194,9 +199,11 @@ var NowPlaying = {
       return;
     }
 
-    var shouldShow = $(window).height() < 111;
+    // add 35 as a third step and always size forward
+
+    var playlistThresholds = [128, 420];
+    var shouldShow = $(window).height() < playlistThresholds[0]+1;
     var currentWidth = $(window).width();
-    var playlistThresholds = [110, 420];
 
     if (shouldShow) {
       window.resizeTo(currentWidth, playlistThresholds[1])

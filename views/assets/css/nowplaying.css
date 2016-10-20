@@ -21,7 +21,7 @@
 
 #rsPlayerBrowser {position:fixed; top: 110px; width: 100%}
 #rsPlayerBrowser h2 {margin-top: 0}
-.list .url {display: block;font-size: 0.7em; opacity: 0.7; height: 10px; overflow: hidden}
+.list .url {display: block;font-size: 0.85em; opacity: 0.7; height: 12px; overflow: hidden}
 
 #rsPlayerBrowser .tabs {height: 30px; display: block; margin: 0; padding: 0}
 #rsPlayerBrowser .tabs li {display: inline-block; font-size: 12px; line-height: 12px; padding: 9px 8px;}

@@ -33,7 +33,7 @@ function initialise () {
   // GlobalShortcuts.registerAll();
 
   // register IPC listeners
-  require('./lib/ipcListeners');
+  // require('./lib/ipcListeners');
 }
 
 
