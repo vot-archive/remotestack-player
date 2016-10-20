@@ -70,6 +70,7 @@ function packOne (platform, callback) {
     // '--out=dist/' + platform,
     '--out=dist',
     '--platform=' + platformCode,
+    '--asar=true',
     '--arch=' + archCode,
     '--icon=' + icon
   ];
