@@ -29,7 +29,7 @@
 
 #rsPlayerBrowser .tabContent {position: fixed; top: 140px; bottom: 20px; width:100%; overflow: hidden; overflow-y: auto;}
 .containerBody #rsPlayerBrowser ul.list {margin: 0}
-.containerBody #rsPlayerBrowser ul.list li .title{height: 20px; display: list-item; overflow: hidden;}
+.containerBody #rsPlayerBrowser ul.list li .title{height: 16px; display: list-item; overflow: hidden;}
 
 
 

@@ -5,21 +5,40 @@
 
       <h2>Preferences</h2>
 
-      <label>
-        <input type="checkbox" value="settings.DarkTheme" onclick="handleCheckbox(this)" />
-        Dark theme (requires restart)
+      <br />
+      
+      <label class="settings-item">
+        <span class="pull-right">
+          <select name="ui.theme" onchange="handleInputChange(this)">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </span>
+        <strong>Theme</strong>
       </label>
+
+      <label class="settings-item">
+        <span class="pull-right">
+          <input type="checkbox" value="ui.showFullPath" onchange="handleCheckboxChange(this)" />
+        </span>
+        <strong>Show full path in playlist</strong>
+      </label>
+
+      <label class="settings-item">
+        <span class="pull-right">
+          <!-- <a href="file://$$TMPDIR" class="btn btn-xs btn-default">Open tmp folder</a> -->
+          <!-- <a href="file://$$CACHE" class="btn btn-xs btn-default">Open cache folder</a> -->
+          <a href="file://$$APPDATA" class="btn btn-xs btn-default">Open appdata folder</a>
+        </span>
+        <strong>Data storage</strong>
+      </label>
+
+      <br /><br />
+      <hr />
+
+      <p><strong>Currently all changes require a restart to take effect.</strong><br /> This will be fixed in future versions.</p>
 
       <br />
-
-      <label>
-        Data storage
-        <!-- <a href="file://$$TMPDIR" class="btn btn-xs btn-default">Open tmp folder</a> -->
-        <!-- <a href="file://$$CACHE" class="btn btn-xs btn-default">Open cache folder</a> -->
-        <a href="file://$$APPDATA" class="btn btn-xs btn-default">Open appdata folder</a>
-      </label>
-
-      <br /><br /><br />
 
     </div>
   </div>
@@ -28,25 +47,48 @@
 
 </template>
 
+<style>
+label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
+</style>
 
 <script>
 const remote = require('electron').remote;
-// const userDataDir = remote.getGlobal('userDataDir');
-// console.log('data in : ' + userDataDir)
-
 var PreferencesModel = remote.require('./models/preferences');
-function handleCheckbox(input) {
+function handleCheckboxChange(input) {
   var key = $(input).val();
   var isChecked = $(input).is(':checked');
-  PreferencesModel.set(key, isChecked);
+  console.log('setting', key, 'to', isChecked);
+  PreferencesModel.set(key, !!isChecked);
 }
 
-$(document).ready(function () {
-  $('input[type="checkbox"]').each(function () {
+function handleInputChange(input) {
+  var key = $(input).attr('name');
+  var value = $(input).val();
+  PreferencesModel.set(key, value);
+}
+
+function assignCheckboxDefaults() {
+  $('.settings-item input[type="checkbox"]').each(function () {
     var key = $(this).val();
     var isChecked = PreferencesModel.get(key) || false;
     $(this).prop('checked', isChecked);
   });
+}
+
+function assignInputDefaults() {
+  $('.settings-item input, .settings-item select').each(function () {
+    if ($(this).attr('type') === 'checkbox') {
+      return;
+    }
+    var key = $(this).attr('name');
+    var value = PreferencesModel.get(key) || false;
+    $(this).val(value);
+  });
+}
+
+$(document).ready(function () {
+  assignCheckboxDefaults();
+  assignInputDefaults();
 });
 
 

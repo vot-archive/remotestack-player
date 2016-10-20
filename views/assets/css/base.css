@@ -77,13 +77,12 @@ body {/*-webkit-app-region: drag;*/ -webkit-user-select: none; cursor: default}
 /*
  * COMMON STYLING
  */
-h1, h2, h3 {font-weight: 300; margin: 0; text-decoration: none}
+h1, h2, h3, h4, h5 {font-weight: 300; margin: 0; text-decoration: none}
 h1 {font-weight: 100}
 h2 {font-size: 22px}
 h1 > * {font-weight: inherit !important}
 h1 strong {font-weight: 300 !important}
-h2 strong {font-weight: 400 !important}
-h3 strong {font-weight: 400 !important}
+h2 strong, h3 strong, h4 strong, h5 strong {font-weight: 400}
 
 label {font-weight: 400}
 
@@ -91,8 +90,20 @@ a {text-decoration: none; color: #23527C}
 a:hover {color: #153C5D}
 a, a:hover, a:focus {text-decoration: none; outline: none}
 
+hr {margin: 5px 0}
 
 
+@media screen and (max-height: 125px) {
+  .wrap .containerFooter {bottom: -20px}
+}
+
+@media screen and (max-height: 130px) {
+  #rsPlayerBrowser {visibility: hidden}
+}
+
+
+#wContainer .list .url {display:none}
+#wContainer.showFullPath .list .url {display:block}
 
 
 /*
@@ -103,6 +114,7 @@ a, a:hover, a:focus {text-decoration: none; outline: none}
 #wContainer.light .bg.cloudy {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.7) 0%, rgba(239, 239, 239, 0.23) 100%); color: black}
 #wContainer.light .bg.solid {background: linear-gradient(to bottom, #fafafa 0px, #dadada 120px); color: black}
 #wContainer.light h1, #wContainer.light h2, #wContainer.light h3 {color: #3E3D3D; /*text-shadow: 0px 1px 1px #cecece;*/}
+#wContainer.light hr {border-top-color: #bbb}
 
 /*#wContainer.light .bg h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}*/
 #wContainer.light .containerFooter a {color: #4c4c4c}
@@ -124,6 +136,8 @@ a, a:hover, a:focus {text-decoration: none; outline: none}
 #wContainer.dark .bg ul.list li {background: #222; color: #eee}
 #wContainer.dark .bg ul.list li:nth-child(2n) {background: #2e2e2e}
 #wContainer.dark a {color: #cedef3}
+#wContainer.dark hr {#wContainer.light hr {border-top-color: #bbb}}
+
 
 #wContainer.dark .containerFooter {background: #1f1f1f; border-top-color: #333;}
 #wContainer.dark .containerFooter a {color: #4c4c4c}

@@ -40,9 +40,16 @@ function populateTemplates () {
     // }
   });
 
-  var theme = PreferencesModel.get('settings.DarkTheme') ? 'dark' : 'light';
+  const themeSetting = PreferencesModel.get('ui.theme');
+  var theme = themeSetting ? themeSetting : 'light';
   Utils.log('adding class: ' + theme);
   $('#wContainer').addClass(theme);
+
+  const showFullPath = PreferencesModel.get('ui.showFullPath');
+  if (showFullPath) {
+    console.log('showing url lines')
+    $('#wContainer').addClass('showFullPath');
+  }
 }
 
 
