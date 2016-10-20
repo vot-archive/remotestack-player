@@ -1,6 +1,15 @@
 # Changelog
 
 
+## 0.0.16
+
+* Some UI tweaks
+* Sorted out debug mode
+* Fixed dragging files onto player
+* Detaching all events on populatePlaylist calls
+
+
+
 ## 0.0.15
 
 * Plenty of visual tweaks
