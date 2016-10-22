@@ -62,6 +62,7 @@ var NowPlaying = {
     var list = Playlist.get();
     Utils.log('populatePlaylist', _.map(list, 'url'));
 
+
     var markup = '';
     if (Array.isArray(list)) {
       // recursively add markup
@@ -77,6 +78,9 @@ var NowPlaying = {
           index++;
         }
       });
+    }
+    if (markup === '') {
+      markup = '<p class="padding-10 small text-center well subtle"><strong>Tip:</strong><br> To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.</p>'
     }
     $('#nowplaying-playlist').html(markup);
     _self.populateTrackinfo();
@@ -167,6 +171,12 @@ var NowPlaying = {
   bindShortcuts: function bindShortcuts () {
     var _self = this;
     Utils.log('bindShortcuts called');
+
+    $('.togglePlaylistBtn').click(function () {
+      // resize window
+      _self.togglePlaylist();
+    });
+
     $(document).on('keydown', function(e) {
       var tag = e.target.tagName.toLowerCase();
       if (tag === 'input' || tag === 'textarea') {

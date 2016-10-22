@@ -22,7 +22,7 @@ function initialise () {
   var welcomeBlock = [
     '\x1b[33m',
     '#####################################',
-    '######## REMOTESTACK STARTED ########',
+    '######## RemoteStack Player #########',
     '#####################################',
     '\x1b[0m'
   ];

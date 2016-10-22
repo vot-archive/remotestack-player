@@ -47,14 +47,13 @@ var Nav = {
           url = url.replace('file://', '');
 
 
+          const app = electron.app || electron.remote.app;
           const tmpdir = os.tmpdir();
-          const cachedir = path.join(tmpdir, 'remotestackcache');
-          const appdata = path.join(PreferencesModel.getLocation(), '..');
+          const userData = app.getPath('userData');
 
 
           url = url.replace('$$TMPDIR', tmpdir);
-          url = url.replace('$$CACHE', cachedir);
-          url = url.replace('$$APPDATA', appdata);
+          url = url.replace('$$USERDATA', userData);
 
 
           // shell.showItemInFolder(url);

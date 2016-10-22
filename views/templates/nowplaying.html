@@ -14,9 +14,6 @@
 
   <div class="navContent bg solid" id="nowplaying">
     <div class="inner">
-      <div id="tips" class="animated flipInX">
-        <div>Resize&nbsp;this&nbsp;window to reveal&nbsp;playlist.</div>
-      </div>
       <div id="notifications" class="animated flipInX"></div>
       <div class="rsPlayerControlsGroup padding-10">
         <div id="rsPlayerCurrent">
@@ -36,9 +33,9 @@
             <div>
               <!-- <a class="playercontrol" onclick=""><span class="fa fa-fw fa-random" title="No shuffling yet // TODO"></span></a> -->
               <!-- <a class="playercontrol" onclick=""><span class="fa fa-fw fa-repeat" title="Currently repeat is always on // TODO"></span></a> -->
-              <span class="fa fa-fw fa-blank"></span>
               <!-- <a class="playercontrol" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a> -->
               <!-- <a class="playercontrol" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-thumb-tack"></span></a> -->
+              <a class="playercontrol togglePlaylistBtn" onclick="return false;"><span class="fa fa-fw fa-list"></span></a>
             </div>
           </div>
 
@@ -59,7 +56,6 @@
         <ul class="tabs">
           <li class="active" data-tab-destination="nowplaying-playlist">Playlist</li>
           <li data-tab-destination="nowplaying-add">Add URL</li>
-          <!-- <li data-tab-destination="nowplaying-browser">Browser</li> -->
           <!-- <li data-tab-destination="nowplaying-trackinfo">Track info</li> -->
         </ul>
 
@@ -68,21 +64,12 @@
         </div>
 
         <div class="tabContent" rel="nowplaying-add">
-          <!-- <div id="filedrag" class="filedrag">
-            Drag files here
-          </div> -->
-
-          <p class="padding-10 small text-center">Enter a URL you'd like to add to the playlist below.<br />Most online services are supported.</p>
-          <div class="urlentry">
-            <input type="text" value="" placeholder="Enter a URL here" id="urlinput" />
+          <p class="padding-10 small text-center subtle">Enter a URL you'd like to add to the playlist below.<br />Most online services are supported.</p>
+          <div class="urlentry subtle">
+            <input type="text" value="" placeholder="URL" id="urlinput" />
           </div>
 
-          <br /><br />
-          <p class="padding-10 small text-center"><strong>Tip:</strong><br/> To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.</p>
-        </div>
-
-        <div class="tabContent hide" rel="nowplaying-browser">
-          [Browser here]
+          <!-- <p class="padding-10 small text-center well subtle"><strong>Tip:</strong><br/> To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.</p> -->
         </div>
 
         <div class="tabContent" rel="nowplaying-trackinfo">
@@ -91,8 +78,6 @@
             <div id="nowplaying-trackinfo"></div>
           </div>
         </div>
-
-
 
       </div>
 

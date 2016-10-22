@@ -269,7 +269,6 @@ var Player = {
     NowPlaying.populatePlaylist();
     var _self = this;
     if (!source) {
-      $('#tips').fadeIn('fast');
       return;
     }
     // if (source.source === 'file') {
@@ -279,7 +278,6 @@ var Player = {
     //     return;
     //   }
     // }
-    $('#tips').fadeOut('fast');
     $('#currentArtist').text('Loading').addClass('animated pulse');
     $('#currentTitle').text(source.url).addClass('animated pulse');
     $('#waveform').css('visibility', 'hidden');
