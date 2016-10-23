@@ -24,7 +24,10 @@ var Nav = {
     $('#wBody .navContent').removeClass('active');
     $('#wBody .navContent#' + id).addClass('active');
 
+    $('*[data-nav-goto]').removeClass('active');
     $('*[data-nav-goto]').parents('li').removeClass('active');
+
+    $('*[data-nav-goto='+ id+ ']').addClass('active');
     $('*[data-nav-goto='+ id+ ']').parents('li').addClass('active');
   },
   handleExternalLinks: function () {
@@ -63,9 +66,11 @@ var Nav = {
     })
   },
   handleGotoDataLinks: function handleGotoDataLinks () {
-    $('*[data-nav-goto]').click(function () {
+    $('*[data-nav-goto]').click(function (e) {
+      e.preventDefault();
       var destination = $(this).data('navGoto');
       Nav.goto(destination);
+      return true;
     })
   }
 

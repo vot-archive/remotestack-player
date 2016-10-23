@@ -17,7 +17,7 @@
 
 #wContainer .bg .rsPlayerControlsGroup {color: #5a5a5a}
 #wContainer .bg #rsPlayerControls .btn-default {color: #5a5a5a}
-
+.rsPlayerControlsGroup {padding: 0 10px}
 
 #rsPlayerBrowser {position:fixed; top: 120px; width: 100%}
 #rsPlayerBrowser h2 {margin-top: 0}

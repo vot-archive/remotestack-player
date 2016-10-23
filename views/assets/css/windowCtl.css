@@ -11,11 +11,19 @@
   color: white
 }
 
-.navContent {padding-top: 17px;}
+.navContent {padding-top: 25px;}
+.navContent.nowplaying {padding-top: 20px;}
 
 .playbackCtls {margin: 10px 10px 0 0; float: right}
 
-.windowCtls .fa, .navigationCtls .fa, .playbackCtls .fa {color:#5A5A5A; margin-right: -3px}
+.windowCtls .fa, .navigationCtls .fa, .playbackCtls .fa {color: #999; margin-right: -2px; z-index: 99; -webkit-app-region: no-drag}
+
+.windowCtls .fa:active, .windowCtls .fa:hover,
+.navigationCtls .fa:active, .navigationCtls .fa:hover,
+.playbackCtls .fa:active, .playbackCtls .fa:hover {color: #565656}
+
+.windowCtls a.active .fa, .navigationCtls a.active .fa, .playbackCtls a.active .fa {text-shadow: 0 0 2px #333; color:#f3f3f3}
+
 .windowCtls .fa-minus {top: 2px; position: relative;}
 
 /* Mac style */
@@ -35,3 +43,12 @@
 .titlebar .btn, .toolbar .btn {padding: 1px 14px; -webkit-app-region: no-drag}*/
 
 /*.containerBody {top:55px; bottom: 0}*/
+
+
+
+
+@media screen and (max-height: 100px) {
+  .windowCtls, .navigationCtls {top: -30px}
+  .navContent {padding-top: 10px}
+  .timeTotal, .timeSeparator {display: none}
+}
