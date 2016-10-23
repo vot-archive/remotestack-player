@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 0.0.17
+
+* Various UI updates
+
+
+
 ## 0.0.16
 
 * Some UI tweaks
