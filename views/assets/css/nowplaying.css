@@ -47,8 +47,8 @@
 .filedrag:hover, .filedrag:active, .filedrag:focus {color: rgba(0,0,0,0.7), background: rgba(255,255,255,0.6)}
 
 .urlentry {margin: 5px auto; max-width: 500px; text-align: center}
-.urlentry input {border-radius: 5px; padding: 8px 15px;width: 65%%;}
-.urlentry button {border-radius: 5px; width: 15%; min-width: 50px;}
+.urlentry input {border-radius: 5px; padding: 8px 15px;width: 65%;}
+.urlentry button {border-radius: 5px; width: 60px;}
 
 .urlentry input {color: #333; border-style: solid; border-width: 0 0 1px 0; border-color: #aaa; padding: 6px; text-align: left}
 .urlentry input:hover, .urlentry input:active, .urlentry input:focus, .urlentry button:hover, .urlentry button:active, .urlentry button:focus {outline: none; border-color: #ffa100}
