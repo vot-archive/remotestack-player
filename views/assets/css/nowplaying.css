@@ -19,7 +19,7 @@
 #wContainer .bg #rsPlayerControls .btn-default {color: #5a5a5a}
 
 
-#rsPlayerBrowser {position:fixed; top: 110px; width: 100%}
+#rsPlayerBrowser {position:fixed; top: 120px; width: 100%}
 #rsPlayerBrowser h2 {margin-top: 0}
 .list .url {display: block;font-size: 0.85em; opacity: 0.7; height: 12px; overflow: hidden}
 
@@ -27,7 +27,7 @@
 #rsPlayerBrowser .tabs li {display: inline-block; font-size: 12px; line-height: 12px; padding: 9px 8px;}
 #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; padding-bottom: 7px;}
 
-#rsPlayerBrowser .tabContent {position: fixed; top: 140px; bottom: 20px; width:100%; overflow: hidden; overflow-y: auto;}
+#rsPlayerBrowser .tabContent {position: fixed; top: 150px; bottom: 0; width:100%; overflow: hidden; overflow-y: auto;}
 .containerBody #rsPlayerBrowser ul.list {margin: 0}
 .containerBody #rsPlayerBrowser ul.list li .title{height: 16px; display: list-item; overflow: hidden;}
 

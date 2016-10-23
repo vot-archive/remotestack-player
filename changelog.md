@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.18
+
+* UI updates: added window controls, removed footer
+
 
 ## 0.0.17
 

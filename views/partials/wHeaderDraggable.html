@@ -1,7 +1,27 @@
+<link rel="stylesheet" href="../assets/css/windowCtl.css">
+
 <style>
 #wHeaderDraggable {
   width: 100%; height: 30px; top: 0; left: 0; position: fixed; z-index: 9;  -webkit-app-region: drag; -webkit-user-select: none; cursor: default
 }
 </style>
 
-<partial><partial>
+<partial>
+  <div class="windowCtls">
+    <i class="fa fa-times fa-fw" aria-hidden="true" onclick="Renderer.appQuitFn()"></i>
+    <i class="fa fa-minus fa-fw" aria-hidden="true" onclick="Renderer.windowMinimizeFn()"></i>
+    <i class="fa fa-plus fa-fw" aria-hidden="true" onclick="Renderer.windowMaximizeFn()"></i>
+
+    <!-- <span class="windowCtl btnClose" onclick="Renderer.windowCloseFn()"></span>
+    <span class="windowCtl btnMinimize" onclick="Renderer.windowMinimizeFn()"></span>
+    <span class="windowCtl btnMaximize" onclick="Renderer.windowMaximizeFn()"></span> -->
+  </div>
+
+  <div class="navigationCtls">
+    <a onclick="Nav.goto('nowplaying')"><span class="fa fa-fw fa-play"></span></a>
+    <a onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a>
+    <a onclick="Nav.goto('help')"><span class="fa fa-fw fa-question"></span></a>
+  </div>
+
+
+</partial>

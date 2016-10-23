@@ -1,38 +1,37 @@
-.containerHeader .back {font-size:30px}
-.containerHeader .btn-default {background:#f0f0f0}
-
-/*.containerHeader #quicksearch {height: 28px; font-size: 12px; color: #444; padding:8px}*/
-
-.containerHeader, .containerHeader a {color: #3E3D3D}
-.containerHeader h1 {margin: 0; font-size: 18px}
-
-.containerHeader {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}
-
-.containerHeader {padding: 4px 7px 4px; border-bottom: 1px solid #b6b4b6; height:55px; z-index:9; position: fixed; top: 0; width: 100%; -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
-
-
-
 /* Window controls */
-.windowControl {display: inline-block; width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
-.windowControl.btnClose {background: #ff3b47; border-color: #f0121d}
-.windowControl.btnMinimize {background: #ffbf00; border-color: #e69e12}
-.windowControl.btnMaximize {background: #00d742; border-color: #12b728}
-.windowControl.btnClose:active {background: #c5343c; border-color: #9a242c}
-.windowControl.btnMinimize:active {background: #c39109; border-color: #a68028}
-.windowControl.btnMaximize:active {background: #129b36; border-color: #2e7c42}
 
-.windowControl.btnSpecial {background: #007ed7; border-color: #0c4aa9; xdisplay: none}
-.windowControl.btnSpecial:active {background: #066bb3}
+.windowCtls {
+  position: fixed; top: 8px; left: 8px;
+}
 
-.titlebar {margin-bottom: 1px}
+.navigationCtls {
+  position: fixed; top: 8px; right: 8px;
+}
+.navigationCtls .fa {
+  color: white
+}
+
+.navContent {padding-top: 17px;}
+
+.playbackCtls {margin: 10px 10px 0 0; float: right}
+
+.windowCtls .fa, .navigationCtls .fa, .playbackCtls .fa {color:#5A5A5A; margin-right: -3px}
+.windowCtls .fa-minus {top: 2px; position: relative;}
+
+/* Mac style */
+.windowCtl {display: inline-block; width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
+.windowCtl.btnClose {background: #ff3b47; border-color: #f0121d}
+.windowCtl.btnMinimize {background: #ffbf00; border-color: #e69e12}
+.windowCtl.btnMaximize {background: #00d742; border-color: #12b728}
+.windowCtl.btnClose:active {background: #c5343c; border-color: #9a242c}
+.windowCtl.btnMinimize:active {background: #c39109; border-color: #a68028}
+.windowCtl.btnMaximize:active {background: #129b36; border-color: #2e7c42}
+
+/*.windowCtl.btnSpecial {background: #007ed7; border-color: #0c4aa9; xdisplay: none}
+.windowCtl.btnSpecial:active {background: #066bb3}*/
+
+/*.titlebar {margin-bottom: 1px}
 .toolbar .fa.fa-fw {margin: 0 -7px}
-.titlebar .btn, .toolbar .btn {padding: 1px 14px; -webkit-app-region: no-drag}
+.titlebar .btn, .toolbar .btn {padding: 1px 14px; -webkit-app-region: no-drag}*/
 
-.containerBody {top:55px; bottom: 0}
-
-
-/* Small header */
-.wrap.smallHeader .containerHeader .toolbar {display: none}
-.wrap.smallHeader h1 {font-size: 14px; font-weight: 400; margin-top: 1px}
-.wrap.smallHeader .containerHeader {height: 25px}
-.wrap.smallHeader .containerBody {top: 25px}
+/*.containerBody {top:55px; bottom: 0}*/

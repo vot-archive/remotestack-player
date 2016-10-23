@@ -22,9 +22,14 @@ function windowCloseFn(){
   window.close();
 }
 
+function appQuitFn(){
+  remote.app.quit();
+}
+
 
 module.exports = {
   minimizeFn: windowMinimizeFn,
   maximizeFn: windowMaximizeFn,
-  closeFn: windowCloseFn
+  closeFn: windowCloseFn,
+  appQuitFn: appQuitFn
 }

@@ -196,7 +196,7 @@ var Player = {
 
   setPlayButton: function setPlayButton (state) {
     this.playing = state;
-    $('.fa.fa-play, .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
+    $('.playercontrol .fa.fa-play, .playercontrol .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
   },
 
   // TODO: Support setVolume('+5') syntax
