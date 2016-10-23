@@ -106,7 +106,9 @@ hr {margin: 5px 0}
 #wContainer.showFullPath .list .url {display:block}
 
 .well.subtle {margin: 30px auto 20px; max-width: 280px;}
+code.key {font-family: inherit; font-weight: 500; padding: 2px 5px;}
 
+table.spaced th {padding: 3px 1px;}
 
 /*
  * LIGHT THEME
@@ -126,6 +128,7 @@ hr {margin: 5px 0}
 #wContainer.light .bg ul.list li:nth-child(2n) {background: #e8e7e7}
 #wContainer.light .subtle {color: #5a5a5a}
 #wContainer.light .well.subtle {background: rgba(255,255,255,0.4)}
+#wContainer.light code.key {color: #5a5a5a}
 
 
 
@@ -148,3 +151,4 @@ hr {margin: 5px 0}
 #wContainer.dark .btn-default {background-color: #222; color: #efefef;}
 #wContainer.dark .subtle {color: #797979}
 #wContainer.dark .well.subtle {background: rgba(0,0,0,0.15)}
+#wContainer.dark code.key {color: #4c4c4c}

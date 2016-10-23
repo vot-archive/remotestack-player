@@ -1,25 +1,38 @@
+<script>
+var fse = require('fs-extra');
+
+var packageObj = fse.readJsonSync(__dirname + '/../package.json');
+var version = packageObj.version || '';
+
+$(document).ready(function () {
+  $('#versionTag').text(version);
+});
+</script>
+
 <template>
 
   <div class="navContent bg solid" id="help">
     <div class="inner padding-10">
 
-      <h2><strong>RemoteStack</strong> Player<br /><small>(Alpha build)</small></h2>
+      <h2><strong>RemoteStack</strong> Player</h2>
+      <small class="subtle">(Alpha build <span id="versionTag"></span>)</small>
+
 
       <br /><br />
       <h5>Keyboard shortcuts: Navigation</h5>
       <hr />
 
-      <table>
+      <table class="spaced">
         <tr>
-          <th width="130"><strong>F1 or /</strong></th>
+          <th width="150"><code class="key">F1</code> or <code class="key">Ctrl/Cmd + /</code></th>
           <td>Show this screen</td>
         </tr>
         <tr>
-          <th><strong>Ctrl/Cmd + , <!--(&lt;)--></strong></th>
+          <th><code class="key">Ctrl/Cmd + , <!--(&lt;)--></code></th>
           <td>Preferences</td>
         </tr>
         <tr>
-          <th><strong>Ctrl/Cmd + . or Esc<!--(&gt;)--></strong></th>
+          <th><code class="key">Ctrl/Cmd + .</code> or <code class="key">Esc<!--(&gt;)--></code></th>
           <td>Player</td>
         </tr>
       </table>
@@ -30,25 +43,25 @@
       <h5>Keyboard shortcuts: Player control</h5>
       <hr />
 
-      <table>
+      <table class="spaced">
         <tr>
-          <th width="130"><strong>Space</strong></th>
+          <th width="150"><code class="key">Space</code></th>
           <td>Play/Pause</td>
         </tr>
         <tr>
-          <th><strong>&darr;</strong> and <strong>&uarr;</strong></th>
+          <th><code class="key">&darr;</code> and <code class="key">&uarr;</code></th>
           <td>-/+ Volume</td>
         </tr>
         <tr>
-          <th><strong>&larr;</strong> and <strong>&rarr;</strong></th>
+          <th><code class="key">&larr;</code> and <code class="key">&rarr;</code></th>
           <td>-/+5 seconds</td>
         </tr>
         <tr>
-          <th><strong>,<!-- (&lt;) --></strong> and <strong>.<!-- (&gt;) --></strong></th>
+          <th><code class="key">,<!-- (&lt;) --></code> and <code class="key">.<!-- (&gt;) --></code></th>
           <td>Previous track/Next track</td>
         </tr>
         <tr>
-          <th><strong>Ctrl/Cmd + Alt + P</strong></th>
+          <th><code class="key">P</code></th>
           <td>Show/hide playlist</td>
         </tr>
       </table>
