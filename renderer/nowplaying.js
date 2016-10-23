@@ -147,22 +147,28 @@ var NowPlaying = {
   },
   bindURLInput: function bindURLInput(id) {
     const _self = this;
-    const holder = document.getElementById(id || 'urlinput');
+    const inputEl = $('#' + (id || 'urlinput'));
 
-    holder.onkeydown = function (e) {
-      if (e.which === 13) {
-        e.preventDefault();
-        var filepath = $(e.target).val();
-        Utils.log('Enter pressed: ', filepath);
-
-        Playlist.add({url: filepath, source: 'youtube', type: 'audio'});
+    function addURLToPlaylist () {
+      if (inputEl.val()) {
+        Playlist.add({url: inputEl.val(), source: 'youtube', type: 'audio'});
         _self.populatePlaylist();
         _self.displayNotification('Track added');
-        //reset input
-        $(e.target).val('')
+        inputEl.val('');
         return true;
       }
     }
+
+    $('.urlentry .btn').on('click', function () {
+      addURLToPlaylist();
+    });
+
+    inputEl.on('keydown', function (e) {
+      if (e.which === 13) {
+        e.preventDefault();
+        addURLToPlaylist();
+      }
+    });
   },
   displayNotification: function displayNotification(text) {
     $('#notifications').text(text).show();
