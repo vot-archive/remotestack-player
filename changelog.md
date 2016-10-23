@@ -1,8 +1,17 @@
 # Changelog
 
+## 0.0.19
+
+* UI updates: fixed layering for Linux/Windows
+* Navigation code updates
+* Help page update - visual + showing version number
+
+
+
 ## 0.0.18
 
 * UI updates: added window controls, removed footer
+
 
 
 ## 0.0.17
