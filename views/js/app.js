@@ -31,7 +31,7 @@ $(document).ready(function () {
   Player.ensureWavesurfer();
   // Player.next();
   Player.loadByIndex('active');
-  NowPlaying.init();
+  NowPlaying.populatePlaylist();
 
   // Renderer.bindShortcuts();
   Player.bindShortcuts();
@@ -39,6 +39,10 @@ $(document).ready(function () {
   Nav.init();
   UI.bindShortcuts();
   UI.preventDragRedirections();
+
+  UI.bindFiledrag();
+  UI.bindURLInput('urlinput');
+  UI.bindTabs('rsPlayerBrowser');
 
   RS.updateAppVersionInfo();
 });

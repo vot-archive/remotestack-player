@@ -3,20 +3,8 @@ var Utils = require('rs-base/utils');
 var Playlist = require('../lib/playlist');
 var PlaylistsModel = require('../models/playlists');
 var renderer = require('./render');
-var FileUtils = require('rs-base/utils/files');
 
 var NowPlaying = {
-  init: function init () {
-    _self = this;
-    console.log('NowPlaying.init function triggered');
-
-    _self.populatePlaylist();
-    _self.bindShortcuts();
-    // _self.bindFiledrag('filedrag');
-    _self.bindFiledrag();
-    _self.bindURLInput('urlinput');
-    _self.bindTabs('rsPlayerBrowser');
-  },
   // get playlist entries and load them into the appropriate container
   populatePlaylist: function populatePlaylist () {
     var _self = this;
@@ -53,137 +41,8 @@ var NowPlaying = {
     }
 
     container.html(markup);
-  },
-  bindFiledrag: function bindFiledrag(id) {
-    const _self = this;
-    let holder;
-    if (!id) {
-      holder = document;
-    } else {
-      holder = document.getElementById(id || 'filedrag');
-    }
-
-    holder.ondragover = () => {
-      return false;
-    }
-    holder.ondragleave = holder.ondragend = () => {
-      return false;
-    }
-    holder.ondrop = (e) => {
-      e.preventDefault();
-      console.log(e);
-      for (let f of e.dataTransfer.files) {
-        var filepath = f.path;
-        var allFiles = FileUtils.unfoldFiles(f.path);
-
-        _.each(allFiles, function (file) {
-          Playlist.add({url: file, source: 'file', type: 'audio'});
-        })
-
-        _self.populatePlaylist();
-        var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
-        RS.displayNotification(message);
-      }
-      return false;
-    }
-  },
-  bindURLInput: function bindURLInput(id) {
-    const _self = this;
-    const inputEl = $('#' + (id || 'urlinput'));
-
-    function addURLToPlaylist () {
-      if (inputEl.val()) {
-        Playlist.add({url: inputEl.val(), source: 'youtube', type: 'audio'});
-        _self.populatePlaylist();
-        RS.displayNotification('Track added');
-        inputEl.val('');
-        return true;
-      }
-    }
-
-    $('.urlentry .btn').on('click', function () {
-      addURLToPlaylist();
-    });
-
-    inputEl.on('keydown', function (e) {
-      if (e.which === 13) {
-        e.preventDefault();
-        addURLToPlaylist();
-      }
-    });
-  },
-  bindShortcuts: function bindShortcuts () {
-    var _self = this;
-    Utils.log('bindShortcuts called');
-
-    $('.togglePlaylistBtn').click(function () {
-      // resize window
-      _self.togglePlaylist();
-    });
-
-    $(document).on('keydown', function(e) {
-      var tag = e.target.tagName.toLowerCase();
-      if (tag === 'input' || tag === 'textarea') {
-        return;
-      }
-
-      // TODO Ctrl/Cmd + Alt + E (69)    EQ
-      // TODO Ctrl/Cmd + Alt + V (XX)    Video
-
-      // Ctrl/Cmd + Alt + P (80)
-      // if (e.altKey && (e.ctrlKey || e.metaKey) && (e.which === 80)) {
-
-      // Just P (80)
-      if (e.which === 80) {
-        Utils.log('P hit');
-        if ($('.navContent.active').attr('id') === 'nowplaying') {
-          _self.togglePlaylist();
-          return e.preventDefault();
-        }
-      }
-    });
-  },
-  bindTabs: function bindTabs (containerId) {
-    $('.tabContent', container).hide();
-
-    var container = $('#' + containerId);
-    var tabs = $('ul.tabs', container);
-    // var content = $('.tabContent', container);
-
-    $('li', tabs).click(function () {
-      var destination = $(this).data('tabDestination');
-      $('li', tabs).removeClass('active');
-      $(this).addClass('active');
-      console.log('tabDestination', destination);
-      $('.tabContent', container).hide();
-      $('.tabContent[rel=' + destination + ']', container).show();
-    });
-
-    $('ul.tabs li:first', container).trigger('click');
-  },
-  togglePlaylist: function togglePlaylist () {
-    var activeId = $('.mainContent .navContent.active').attr('id');
-    var isActive = activeId === 'nowplaying';
-    if (!isActive) {
-      return;
-    }
-
-    // add 35 as a third step and always size forward
-
-    var playlistThresholds = [128, 420];
-    var shouldShow = $(window).height() < playlistThresholds[0]+1;
-    var currentWidth = $(window).width();
-
-    if (shouldShow) {
-      window.resizeTo(currentWidth, playlistThresholds[1])
-    } else {
-      window.resizeTo(currentWidth, playlistThresholds[0])
-    }
   }
+
 }
-
-
-// Toggle Playlist
-
 
 module.exports = NowPlaying;
