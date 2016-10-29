@@ -108,6 +108,7 @@ hr {margin: 5px 0}
 code.key {font-family: inherit; font-weight: 500; padding: 2px 5px;}
 
 table.spaced th {padding: 3px 1px;}
+label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
 
 /*
  * LIGHT THEME

@@ -1,58 +1,52 @@
+var _ = require('lodash');
 const Utils = require('rs-base/utils');
 var PreferencesModel = require('../models/preferences');
+var renderer = require('../renderer/render');
 
-function populatePartials () {
-  var links = document.querySelectorAll('link[rel="import"].partial')
-
-  Array.prototype.forEach.call(links, function (link) {
-    Utils.log('Loaded partial:', link.href);
-
-    var filename = link.href.split('/').pop().replace('.html', '');
-    var destination = filename;
-
-    let template = link.import.querySelector('partial');
-    let clone = document.importNode(template, true);
-
-
-    var element = document.querySelector('#' + destination);
-    if (element) {
-      element.appendChild(clone);
-    }
-
-  });
-}
-
-function populateTemplates () {
-  var links = document.querySelectorAll('link[rel="import"].template')
-
-  Array.prototype.forEach.call(links, function (link) {
-    Utils.log('Loaded template:', link.href);
-
-    let template = link.import.querySelector('template');
-    let clone = document.importNode(template.content, true);
-
-    document.querySelector('#wBody').appendChild(clone)
-
-    // if (link.href.match('about.html')) {
-    //   document.querySelector('body').appendChild(clone)
-    // } else {
-    //   document.querySelector('.content').appendChild(clone)
-    // }
-  });
-
-  const themeSetting = PreferencesModel.get('ui.theme');
-  var theme = themeSetting ? themeSetting : 'light';
-  Utils.log('adding class: ' + theme);
+/**
+ * Resolves theme and user preferences - i.e. show footer, sidebar
+ */
+function resolveThemeAndPreferences () {
+  var theme = PreferencesModel.get('ui.theme');
+  if (!theme) {
+    theme = 'light';
+  }
+  Utils.log('adding syle class class:', theme);
   $('#wContainer').addClass(theme);
 
-  const showFullPath = PreferencesModel.get('ui.showFullPath');
-  if (showFullPath) {
-    console.log('showing url lines')
-    $('#wContainer').addClass('showFullPath');
+  var showFooter = PreferencesModel.get('ui.showFooter');
+  console.log('showFooter', showFooter);
+  if (typeof showFooter === 'undefined') {
+    showFooter = true;
+    PreferencesModel.set('ui.showFooter', true);
+  }
+
+  if (!showFooter) {
+    $('#wFooter').addClass('hide');
   }
 }
 
+/**
+ * Renders templates and partials and loads them into DOM
+ */
+function loadAppTemplates () {
+  var templates = [
+    'nowplaying', 'preferences', 'status', 'help'
+  ];
 
+  _.forEach(templates, function (item) {
+    var markup = renderer.renderTemplate(item, {});
+    $('#wBody').append(markup);
+  })
 
-populatePartials();
-populateTemplates();
+  // var modalsMarkup = renderer.renderPartial('modals', {});
+  // $('#modals').append(modalsMarkup);
+}
+
+/**
+ * Executes all of the above
+ */
+$(document).ready(function () {
+  resolveThemeAndPreferences();
+  loadAppTemplates();
+});
