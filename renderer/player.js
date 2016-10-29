@@ -1,12 +1,11 @@
+const _ = require('lodash');
+const Utils = require('rs-base/utils');
 const ytdl = require('rs-base/resolvers/lib/ytdl');
 const cache = require('rs-base/lib/filecache');
-const playlistLib = require('../lib/playlist');
-var PreferencesModel = require('../models/preferences');
-// var PlaylistsModel = require('../models/playlists');
-var _ = require('lodash');
-// var fs = require('fs-extra');
-var Utils = require('rs-base/utils');
-var NowPlaying = require('../renderer/nowplaying');
+const PlaylistLib = require('../lib/playlist');
+const PreferencesModel = require('../models/preferences');
+const PlaylistsModel = require('../models/playlists');
+const renderer = require('../renderer/render');
 
 function ensureWavesurfer() {
   if (Player.wavesurferObject) {
@@ -44,7 +43,7 @@ function ensureWavesurfer() {
     wavesurfer.drawBuffer();
     Player.applyVolumeSetting();
     Player.updateTrackTime();
-    NowPlaying.populatePlaylist();
+    Player.populatePlaylist();
 
     if (Player.playing) {
       wavesurfer.play();
@@ -99,7 +98,7 @@ function _interpretPlaylistItem (item, cb) {
       }
       item.raw = info;
 
-      playlistLib.update({url: item.url}, item);
+      PlaylistLib.update({url: item.url}, item);
       cache.setJSON('meta-resolved', item.url, item);
       console.log('playlist updated');
       return cb(item);
@@ -124,7 +123,7 @@ function _getPlaylistItem (item, cb) {
 var Player = {
   // state
   // queue: PlaylistsModel.get('default.playlist'),
-  queue: playlistLib.get(),
+  queue: PlaylistLib.get(),
 
   volume: PreferencesModel.get('settings.volume') || 100,
   loopOne: false,
@@ -169,9 +168,9 @@ var Player = {
   },
 
   prev: function prev () {
-    var playlist = playlistLib.get();
+    var playlist = PlaylistLib.get();
     var playState = this.playing;
-    var nextTrackIndex = playlistLib.setActive('prev');
+    var nextTrackIndex = PlaylistLib.setActive('prev');
     console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
     var nextTrack = playlist[nextTrackIndex];
 
@@ -182,9 +181,9 @@ var Player = {
   },
 
   next: function next () {
-    var playlist = playlistLib.get();
+    var playlist = PlaylistLib.get();
     var playState = this.playing;
-    var nextTrackIndex = playlistLib.setActive('next');
+    var nextTrackIndex = PlaylistLib.setActive('next');
     console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
     var nextTrack = playlist[nextTrackIndex];
 
@@ -257,17 +256,17 @@ var Player = {
   loadByIndex: function loadByIndex (index) {
     Utils.log('loadByIndex', index);
     if (index === 'active') {
-      index = playlistLib.setActive('active');
+      index = PlaylistLib.setActive('active');
     }
-    index = playlistLib.setActive(index);
+    index = PlaylistLib.setActive(index);
     Utils.log('index', index);
 
-    return this.load(playlistLib.get()[index]);
+    return this.load(PlaylistLib.get()[index]);
   },
   load: function load (source) {
     console.log('hit populatePlaylist from Player.load')
-    NowPlaying.populatePlaylist();
     var _self = this;
+    _self.populatePlaylist();
     if (!source) {
       return;
     }
@@ -294,7 +293,7 @@ var Player = {
       var title = _.get(trackdata, 'resolved.meta.canonical.title', '');
 
       if (!artist.length || !title.length) {
-        title = playlistLib.getDisplayTitle(trackdata);
+        title = PlaylistLib.getDisplayTitle(trackdata);
       }
 
       $('#currentArtist').text(artist).removeClass('animated pulse');
@@ -306,7 +305,7 @@ var Player = {
 
     _interpretPlaylistItem(source, function (trackdata) {
       Utils.log('>> _interpretPlaylistItem returned', _.omit(trackdata, 'raw'));
-      NowPlaying.populateTrackinfo();
+      _self.populateTrackinfo();
 
       if (trackdata.source === 'file') {
         return executeWavesurferLoad(trackdata.url, trackdata);
@@ -319,6 +318,43 @@ var Player = {
 
     });
 
+  },
+
+  populatePlaylist: function populatePlaylist () {
+    var _self = this;
+    PlaylistsModel.removeAllListeners('default.playlist');
+    var list = PlaylistLib.get();
+    Utils.log('populatePlaylist', _.map(list, 'url'));
+
+
+    var markup = '';
+    if (Array.isArray(list)) {
+      markup = renderer.renderPartial('playlist', {playlist: list});
+    }
+    if (markup === '') {
+      markup = '<p class="padding-10 small text-center well subtle"><strong>Tip:</strong><br> To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.</p>'
+    }
+    $('#nowplaying-playlist').html(markup);
+    _self.populateTrackinfo();
+
+    PlaylistsModel.once('default.playlist', evt => {
+      console.log('Playlist changed, refreshing')
+      _self.populatePlaylist();
+    });
+  },
+  populateTrackinfo: function populateTrackinfo () {
+    var container = $('#nowplaying-trackinfo');
+    var activeIndex = PlaylistLib.getActive();
+    var playlist = PlaylistLib.get();
+    var currentTrack = playlist[activeIndex];
+    var markup = '';
+    Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
+
+    if (currentTrack) {
+      markup = renderer.renderPartial('trackinfo', {currentTrack: currentTrack});
+    }
+
+    container.html(markup);
   },
 
   bindShortcuts: function bindShortcuts () {

@@ -6,7 +6,7 @@ var renderer = require('../renderer/render');
 /**
  * Resolves theme and user preferences - i.e. show footer, sidebar
  */
-function resolveThemeAndPreferences () {
+function resolveUIPreferences () {
   var theme = PreferencesModel.get('ui.theme');
   if (!theme) {
     theme = 'light';
@@ -29,13 +29,14 @@ function resolveThemeAndPreferences () {
 /**
  * Renders templates and partials and loads them into DOM
  */
-function loadAppTemplates () {
+function loadAppTemplates (data) {
+  data = data || {};
   var templates = [
     'nowplaying', 'preferences', 'status', 'help'
   ];
 
   _.forEach(templates, function (item) {
-    var markup = renderer.renderTemplate(item, {});
+    var markup = renderer.renderTemplate(item, data);
     $('#wBody').append(markup);
   })
 
@@ -46,7 +47,10 @@ function loadAppTemplates () {
 /**
  * Executes all of the above
  */
-$(document).ready(function () {
-  resolveThemeAndPreferences();
-  loadAppTemplates();
-});
+// $(document).ready(function () {
+//   resolveThemeAndPreferences();
+//   loadAppTemplates();
+// });
+
+module.exports.resolveUIPreferences = resolveUIPreferences;
+module.exports.loadAppTemplates = loadAppTemplates;

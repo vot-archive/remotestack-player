@@ -3,7 +3,6 @@ var PreferencesModel = require('../models/preferences');
 const Utils = require('rs-base/utils');
 const FileUtils = require('rs-base/utils/files');
 const Nav = require('../renderer/nav');
-const NowPlaying = require('../renderer/nowplaying');
 
 Utils.log('settingsPath: ', PreferencesModel.getLocation());
 Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
@@ -105,7 +104,7 @@ var UI = {
           Playlist.add({url: file, source: 'file', type: 'audio'});
         })
 
-        NowPlaying.populatePlaylist();
+        Player.populatePlaylist();
         var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
         RS.displayNotification(message);
       }
@@ -119,7 +118,7 @@ var UI = {
     function addURLToPlaylist () {
       if (inputEl.val()) {
         Playlist.add({url: inputEl.val(), source: 'youtube', type: 'audio'});
-        NowPlaying.populatePlaylist();
+        Player.populatePlaylist();
         RS.displayNotification('Track added');
         inputEl.val('');
         return true;
