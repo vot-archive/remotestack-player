@@ -331,8 +331,8 @@ var Player = {
     if (Array.isArray(list)) {
       markup = renderer.renderPartial('playlist', {playlist: list});
     }
-    if (markup === '') {
-      markup = '<p class="padding-10 small text-center well subtle"><strong>Tip:</strong><br> To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.</p>'
+    if (markup.trim() === '') {
+      markup = renderer.renderPartial('playlist-empty');
     }
     $('#nowplaying-playlist').html(markup);
     _self.populateTrackinfo();
