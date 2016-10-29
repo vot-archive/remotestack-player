@@ -2,47 +2,8 @@ var _ = require('lodash');
 var Utils = require('rs-base/utils');
 var Playlist = require('../lib/playlist');
 var PlaylistsModel = require('../models/playlists');
-var fs = require('fs-extra');
 var renderer = require('./render');
-
-// var ignoredFilenames = ['.DS_Store', 'desktop.ini'].map(function (i) {return i.toLowerCase()});
-// var ignoredExtensions = ['jpg', 'jpeg', 'png', 'gif', 'zip', 'rar'].map(function (i) {return i.toLowerCase()});
-var supportedExtensions = ['mp3']
-
-function _isAudioFile (filepath) {
-  var filename = _.last(filepath.split('/')).toLowerCase();
-  var extension = _.last(filename.split('.'));
-
-  if (filename.startsWith('.')) return false;
-  return supportedExtensions.indexOf(extension) !== -1;
-
-  // var filename = _.last(filepath.split('/')).toLowerCase();
-  // var extension = _.last(filename.split('.'));
-  //
-  // if (ignoredFilenames.indexOf(filename) !== -1) return false;
-  // if (ignoredExtensions.indexOf(extension) !== -1) return false;
-  //
-  // return true;
-}
-
-
-function _unfoldFiles (path, list) {
-  list = list || [];
-  var stats = fs.statSync(path);
-  var isFile = stats.isFile();
-  var isDir = stats.isDirectory();
-
-  if (isFile) {
-    list.push(path);
-  }
-  if (isDir) {
-    _.each(fs.readdirSync(path), function (i) {
-      return _unfoldFiles(path + '/' + i, list);
-    });
-  }
-
-  return _.filter(list, _isAudioFile);
-}
+var FileUtils = require('rs-base/utils/files');
 
 var NowPlaying = {
   init: function init () {
@@ -113,7 +74,7 @@ var NowPlaying = {
       console.log(e);
       for (let f of e.dataTransfer.files) {
         var filepath = f.path;
-        var allFiles = _unfoldFiles(f.path);
+        var allFiles = FileUtils.unfoldFiles(f.path);
 
         _.each(allFiles, function (file) {
           Playlist.add({url: file, source: 'file', type: 'audio'});
