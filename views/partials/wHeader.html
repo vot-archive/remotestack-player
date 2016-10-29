@@ -1,44 +1,27 @@
-<link rel="stylesheet" href="../assets/css/windowCtl.css">
+<link rel="stylesheet" href="../css/windowCtl.css">
 
-<script>
-var Renderer = require('../renderer');
-var Nav = require('../nav');
-// var Player = require('../player');
-var Player = {}
-</script>
+<style>
+#wHeader {
+  width: 100%; height: 30px; top: 0; left: 0; position: fixed; z-index: 9;  -webkit-app-region: drag; -webkit-user-select: none; cursor: default
+}
+</style>
 
 <partial>
-  <div class="row titlebar">
-    <div class="col-xs-4">
-      <span class="windowControl btnClose" onclick="Renderer.windowCloseFn()"></span>
-      <span class="windowControl btnMinimize" onclick="Renderer.windowMinimizeFn()"></span>
-      <span class="windowControl btnMaximize" onclick="Renderer.windowMaximizeFn()"></span>
-    </div>
-    <div class="col-xs-4 text-center">
-      <h1>RemoteStack</h1>
-    </div>
-    <div class="col-xs-4 text-right">
-      <!-- <span class="windowControl btnSpecial" onclick="Renderer.ipc.showSettings()"></span> -->
-    </div>
+  <div class="windowCtls">
+    <i class="fa fa-times fa-fw" aria-hidden="true" onclick="Renderer.appQuitFn()"></i>
+    <i class="fa fa-minus fa-fw" aria-hidden="true" onclick="Renderer.windowMinimizeFn()"></i>
+    <i class="fa fa-plus fa-fw" aria-hidden="true" onclick="Renderer.windowMaximizeFn()"></i>
+
+    <!-- <span class="windowCtl btnClose" onclick="Renderer.windowCloseFn()"></span>
+    <span class="windowCtl btnMinimize" onclick="Renderer.windowMinimizeFn()"></span>
+    <span class="windowCtl btnMaximize" onclick="Renderer.windowMaximizeFn()"></span> -->
+  </div>
+
+  <div class="navigationCtls">
+    <a href="#" data-nav-goto="nowplaying"><span class="fa fa-fw fa-play"></span></a>
+    <a href="#" data-nav-goto="preferences"><span class="fa fa-fw fa-sliders"></span></a>
+    <a href="#" data-nav-goto="help"><span class="fa fa-fw fa-question"></span></a>
   </div>
 
 
-  <div class="row toolbar">
-    <div class="col-xs-6">
-      <div class="btn-group hide">
-        <a class="btn btn-default" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Go to main menu"></span></a>
-        <a class="btn btn-default" onclick="Player.play()"><span class="fa fa-fw fa-play" title="Go to main menu"></span></a>
-        <a class="btn btn-default" onclick="Player.pause()"><span class="fa fa-fw fa-stop" title="Library"></span></a>
-        <a class="btn btn-default" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Go to main menu"></span></a>
-      </div>
-    </div>
-
-    <div class="col-xs-6 text-right">
-      <div class="btn-group">
-        <!-- <a class="btn btn-default" href="#" data-toggle="modal" data-target="#addToLibraryModal"><span class="fa fa-fw fa-bookmark" title="Add (batch)"></span></a> -->
-        <a class="btn btn-default" onclick="Nav.goto('nowplaying')"><span class="fa fa-fw fa-youtube-play"></span></a>
-        <a class="btn btn-default" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-cogs"></span></a>
-      </div>
-
-  </div>
 </partial>

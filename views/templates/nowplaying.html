@@ -1,16 +1,9 @@
-<link rel="stylesheet" href="../assets/css/nowplaying.css">
-<link rel="stylesheet" href="../assets/css/player.css">
-<script>
-  var Renderer = require('../renderer');
-  var Nav = require('../renderer/nav');
-  var Player = require('../lib/player');
-  var NowPlaying = require('../renderer/nowplaying');
-  var Playlist = require('../lib/playlist');
-</script>
+<link rel="stylesheet" href="../css/nowplaying.css">
+<link rel="stylesheet" href="../css/player.css">
 
-<script>window.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');</script>
-<script src="../assets/js/jquery.mousewheel.js"></script>
 <template>
+
+  <script src="js/nowplaying.js"></script>
 
   <div class="navContent bg solid" id="nowplaying">
     <div class="inner">
@@ -92,13 +85,3 @@
 
 
 </template>
-
-<script>
-$(document).ready(function () {
-  Player.ensureWavesurfer();
-  // Player.next();
-  Player.loadByIndex('active');
-
-  NowPlaying.init();
-});
-</script>

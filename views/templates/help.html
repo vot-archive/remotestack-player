@@ -1,15 +1,5 @@
-<script>
-var fse = require('fs-extra');
-
-var packageObj = fse.readJsonSync(__dirname + '/../package.json');
-var version = packageObj.version || '';
-
-$(document).ready(function () {
-  $('#versionTag').text(version);
-});
-</script>
-
 <template>
+  <script src="js/help.js"></script>
 
   <div class="navContent bg solid" id="help">
     <div class="inner padding-10">
@@ -85,5 +75,4 @@ $(document).ready(function () {
 
     </div>
   </div>
-
 </template>
