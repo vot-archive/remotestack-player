@@ -55,6 +55,11 @@ function packOne (platform, callback) {
     archCode = 'x64';
     icon = rootdir + '/views/icons/player-256.png';
   }
+  if (platform === 'linux-arm') {
+    platformCode = 'linux';
+    archCode = 'armv7l';
+    icon = rootdir + '/views/icons/linkpad-256.png';
+  }
 
   if (!platformCode) {
     return console.log('Provide correct platform (mac, win or linux)');
@@ -93,7 +98,7 @@ function packOne (platform, callback) {
 
 
 function pack(targets) {
-  var allTargets = ['mac', 'win', 'linux'];
+  var allTargets = ['mac', 'win', 'linux', 'linux-arm'];
   var buildTargets = targets ? targets.split(',') : allTargets;
   buildTargets = buildTargets.filter(function (tg) {
     return allTargets.indexOf(tg) !== -1;
