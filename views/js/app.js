@@ -1,17 +1,18 @@
-window.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');
 require('../renderer/imports')
-var Nav = require('../renderer/nav');
-var UI = require('../renderer/ui');
+require('./js/preferences')
+
+window.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');
+
 var fse = require('fs-extra');
 
-
-
+var Nav = require('../renderer/nav');
+var UI = require('../renderer/ui');
 var Renderer = require('../renderer');
-var Player = require('../lib/player');
 var NowPlaying = require('../renderer/nowplaying');
+var Player = require('../lib/player');
 var Playlist = require('../lib/playlist');
 
-require('./js/preferences')
+
 
 var RS = {};
 
@@ -21,6 +22,10 @@ RS.updateAppVersionInfo = function () {
 
   $('#versionTag').text(version);
 };
+
+RS.displayNotification = function (text) {
+  $('#notifications').text(text).fadeIn(250).delay(3000).fadeOut(1000);
+}
 
 $(document).ready(function () {
   Player.ensureWavesurfer();

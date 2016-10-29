@@ -3,6 +3,7 @@ var Utils = require('rs-base/utils');
 var Playlist = require('../lib/playlist');
 var PlaylistsModel = require('../models/playlists');
 var fs = require('fs-extra');
+var renderer = require('./render');
 
 // var ignoredFilenames = ['.DS_Store', 'desktop.ini'].map(function (i) {return i.toLowerCase()});
 // var ignoredExtensions = ['jpg', 'jpeg', 'png', 'gif', 'zip', 'rar'].map(function (i) {return i.toLowerCase()});
@@ -65,19 +66,7 @@ var NowPlaying = {
 
     var markup = '';
     if (Array.isArray(list)) {
-      // recursively add markup
-      var index = 0;
-      list.forEach(function (i) {
-        if (i) {
-          var classname = i.active ? 'active' : '';
-          markup += '<li class="' + classname + '" ondblclick="Player.loadByIndex(' + index + ');">';
-          markup += '<span class="delete pull-right" onclick="Playlist.deleteByIndex(' + index + ')"> <i class="fa fa-fw fa-trash-o"></i> </span>';
-          markup += '<span class="title">' + Playlist.getDisplayTitle(i) + '</span>';
-          markup += '<span class="url">' +  i.url + '</span>';
-          markup += '</li>';
-          index++;
-        }
-      });
+      markup = renderer.renderPartial('playlist', {playlist: list});
     }
     if (markup === '') {
       markup = '<p class="padding-10 small text-center well subtle"><strong>Tip:</strong><br> To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.</p>'
@@ -99,15 +88,7 @@ var NowPlaying = {
     Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
 
     if (currentTrack) {
-      markup = '<table>';
-      _.forEach(Object.keys(currentTrack), function (i) {
-        markup += '<tr>';
-          markup += '<th width="80">' + i + '</th>';
-          var data = currentTrack[i];
-          markup += '<td>' + (typeof data === 'object' ? '<pre>' + JSON.stringify(data, null, 2) + '</pre>': data) + '</td>';
-        markup += '</tr>';
-      });
-      markup += '</table>';
+      markup = renderer.renderPartial('trackinfo', {currentTrack: currentTrack});
     }
 
     container.html(markup);
@@ -140,7 +121,7 @@ var NowPlaying = {
 
         _self.populatePlaylist();
         var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
-        _self.displayNotification(message);
+        RS.displayNotification(message);
       }
       return false;
     }
@@ -153,7 +134,7 @@ var NowPlaying = {
       if (inputEl.val()) {
         Playlist.add({url: inputEl.val(), source: 'youtube', type: 'audio'});
         _self.populatePlaylist();
-        _self.displayNotification('Track added');
+        RS.displayNotification('Track added');
         inputEl.val('');
         return true;
       }
@@ -169,10 +150,6 @@ var NowPlaying = {
         addURLToPlaylist();
       }
     });
-  },
-  displayNotification: function displayNotification(text) {
-    $('#notifications').text(text).show();
-    $('#notifications').fadeOut(3000);
   },
   bindShortcuts: function bindShortcuts () {
     var _self = this;

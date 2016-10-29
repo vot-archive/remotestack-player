@@ -1,0 +1,12 @@
+<table>
+
+  <% _.each(Object.keys(currentTrack), function(i) { %>
+    <tr>
+      <th width="80"><%- i %></th>
+      <td>
+        <%- (typeof currentTrack[i] === 'object' ? '<pre>' + JSON.stringify(currentTrack[i], null, 2) + '</pre>' : currentTrack[i]) %>
+      </td>
+    </tr>
+  <% }); %>
+
+</table>
