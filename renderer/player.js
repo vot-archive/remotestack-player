@@ -1,11 +1,11 @@
-const ytdl = require('../lib/parsers/ytdl');
+const ytdl = require('rs-base/resolvers/lib/ytdl');
 const cache = require('../lib/cache');
 const playlistLib = require('../lib/playlist');
 var PreferencesModel = require('../models/preferences');
 // var PlaylistsModel = require('../models/playlists');
 var _ = require('lodash');
 // var fs = require('fs-extra');
-var Utils = require('../lib/utils');
+var Utils = require('rs-base/utils');
 var NowPlaying = require('./nowplaying');
 
 function ensureWavesurfer() {

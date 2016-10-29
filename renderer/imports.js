@@ -1,4 +1,4 @@
-const Utils = require('../lib/utils');
+const Utils = require('rs-base/utils');
 var PreferencesModel = require('../models/preferences');
 
 function populatePartials () {

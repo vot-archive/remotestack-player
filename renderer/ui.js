@@ -1,6 +1,6 @@
 const _ = require('lodash');
 var PreferencesModel = require('../models/preferences');
-const Utils = require('../lib/utils');
+const Utils = require('rs-base/utils');
 const Nav = require('../renderer/nav');
 
 Utils.log('settingsPath: ', PreferencesModel.getLocation());

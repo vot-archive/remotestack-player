@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var Utils = require('../lib/utils');
+var Utils = require('rs-base/utils');
 var Playlist = require('../lib/playlist');
 var PlaylistsModel = require('../models/playlists');
 var fs = require('fs-extra');

@@ -4,7 +4,7 @@ const shell = electron.shell;
 const path = require('path');
 const os = require('os');
 
-const Utils = require('../lib/utils');
+const Utils = require('rs-base/utils');
 
 var Nav = {
   init: function () {
