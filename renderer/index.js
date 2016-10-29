@@ -1,12 +1,5 @@
-const electron = require('electron');
-
-const Utils = require('../lib/utils');
-
-const ipcEmitters = require('./lib/ipcEmitters');
-const windowFn = require('./lib/windowFn');
-// const windowMenu = require('./lib/windowMenu');
-//
-// windowMenu.initialise();
+const ipcEmitters = require('../lib/ipcEmitters');
+const windowFn = require('../lib/windowFn');
 
 module.exports = {
   windowMinimizeFn: windowFn.minimizeFn,

@@ -7,12 +7,10 @@ var rootdir = path.join(__dirname, '..');
 var ignoreList = [
   'dist',
   'scripts',
-  'builder.json',
   '.git',
   '.gitignore',
   'app.log',
-  '.DS_Store',
-  'playlist.json'
+  '.DS_Store'
 ];
 
 /**
