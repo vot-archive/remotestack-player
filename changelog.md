@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.20
+
+* No new features
+* Code structure and modularity improvements
+* Small bug fixes
+
+
 ## 0.0.19
 
 * UI updates: fixed layering for Linux/Windows
