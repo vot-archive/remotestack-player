@@ -1,13 +1,10 @@
-var imports = require('../renderer/imports')
-require('./js/preferences')
-
-
-var fse = require('fs-extra');
-
+var imports = require('../renderer/imports');
 var Nav = require('../renderer/nav');
+var fse = require('fs-extra');
 var UI = require('../renderer/ui');
 var Player = require('../renderer/player');
 var Playlist = require('../lib/playlist');
+require('./js/preferences')
 
 var packageObj = fse.readJsonSync(__dirname + '/../package.json');
 var appVersion = packageObj.version || '';
