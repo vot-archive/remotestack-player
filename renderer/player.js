@@ -1,5 +1,5 @@
 const ytdl = require('rs-base/resolvers/lib/ytdl');
-const cache = require('../lib/cache');
+const cache = require('rs-base/lib/filecache');
 const playlistLib = require('../lib/playlist');
 var PreferencesModel = require('../models/preferences');
 // var PlaylistsModel = require('../models/playlists');
