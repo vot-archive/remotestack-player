@@ -18,6 +18,8 @@ function ensureWavesurfer() {
       progressColor: '#ffa100',
 
       barWidth: 1,
+      cursorWidth: 0,
+
       height: 40,
       // width: 600,
       normalize: true,

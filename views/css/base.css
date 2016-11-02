@@ -139,8 +139,8 @@ label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
 #wContainer.dark .bg.cloudy {background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.55) 100%); color: #EFEFEF}
 #wContainer.dark .bg.solid {background: linear-gradient(to bottom, #404040 0px, #101010 120px); color: #EFEFEF}
 /*#wContainer.dark .bg h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: #EFEFEF; text-shadow: none}*/
-#wContainer.dark .bg ul.list li {background: #222; color: #eee}
-#wContainer.dark .bg ul.list li:nth-child(2n) {background: #2e2e2e}
+#wContainer.dark .bg ul.list li {background: #171717; color: #eee}
+#wContainer.dark .bg ul.list li:nth-child(2n) {background: #101010}
 #wContainer.dark a {color: #cedef3}
 #wContainer.dark hr {#wContainer.light hr {border-top-color: #bbb}}
 
