@@ -5,6 +5,7 @@ var UI = require('../renderer/ui');
 var Player = require('../renderer/player');
 var Playlist = require('../lib/playlist');
 require('./js/preferences')
+var Renderer = require('../renderer/index');
 
 var packageObj = fse.readJsonSync(__dirname + '/../package.json');
 var appVersion = packageObj.version || '';
@@ -16,6 +17,11 @@ RS.version = appVersion;
 RS.displayNotification = function (text) {
   $('#notifications').text(text).fadeIn(250).delay(3000).fadeOut(1000);
 };
+
+RS.renderPartial = function (partial, data) {
+  // console.log('RS.renderPartial called with', partial, data);
+  return imports.renderPartial(partial, data);
+}
 
 $(document).ready(function () {
   imports.resolveUIPreferences();

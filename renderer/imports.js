@@ -32,7 +32,7 @@ function resolveUIPreferences () {
 function loadAppTemplates (data) {
   data = data || {};
   var templates = [
-    'nowplaying', 'preferences', 'status', 'help'
+    'nowplaying', 'status', /*'preferences', 'help'*/
   ];
 
   _.forEach(templates, function (item) {
@@ -42,6 +42,11 @@ function loadAppTemplates (data) {
 
   // var modalsMarkup = renderer.renderPartial('modals', {});
   // $('#modals').append(modalsMarkup);
+}
+
+
+function renderPartial (partial, data) {
+  return renderer.renderPartial(partial, data);
 }
 
 /**
@@ -54,3 +59,4 @@ function loadAppTemplates (data) {
 
 module.exports.resolveUIPreferences = resolveUIPreferences;
 module.exports.loadAppTemplates = loadAppTemplates;
+module.exports.renderPartial = renderPartial;
