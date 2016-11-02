@@ -14,7 +14,7 @@ var UI = {
     var _self = this;
     Utils.log('bindShortcuts called');
 
-    $('.togglePlaylistBtn').click(function () {
+    $('*[data-toggle=playlist]').click(function () {
       // resize window
       _self.togglePlaylist();
     });

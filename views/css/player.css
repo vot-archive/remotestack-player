@@ -14,8 +14,8 @@
 #wContainer .bg, #wContainer .bg #rsPlayerControls .playercontrol {color: #525252}
 #wContainer.dark .bg, #wContainer.dark .bg #rsPlayerControls .playercontrol {color: white}
 
-.playercontrol .fa-fw {font-size: 14px}
-.playercontrol.big .fa-fw {font-size: 20px}
+.playerCtl .fa-fw {font-size: 14px}
+.playerCtl.big .fa-fw {font-size: 20px}
 
 
 

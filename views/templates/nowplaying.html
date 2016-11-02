@@ -15,39 +15,42 @@
         <div id="waveform"></div>
 
         <div id="rsPlayerControls">
-          <div style="width: 20%; float: left; text-align: left">
-            <div>
-              <!-- <a class="playercontrol" onclick=""><span class="fa fa-fw fa-random" title="No shuffling yet // TODO"></span></a> -->
-              <!-- <a class="playercontrol" onclick=""><span class="fa fa-fw fa-repeat" title="Currently repeat is always on // TODO"></span></a> -->
-              <!-- <a class="playercontrol" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a> -->
-              <!-- <a class="playercontrol" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-thumb-tack"></span></a> -->
-              <a class="playercontrol togglePlaylistBtn" onclick="return false;"><span class="fa fa-fw fa-list"></span></a>
-            </div>
+          <div style="width:70px; float: left; text-align: left; padding-top: 4px">
+            <!-- <a class="playerCtl" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a> -->
+            <!-- <a class="playerCtl" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-thumb-tack"></span></a> -->
+            <a class="playerCtl active" data-toggle="playlist" onclick="return false;"><span class="fa fa-fw fa-list"></span></a>
+            <a class="playerCtl" onclick="alert('Repeat switch not implemented yet.'); return false;"><span class="fa fa-fw fa-repeat"></span></a>
+            <a class="playerCtl" onclick="alert('Shuffle switch not implemented yet.'); return false;"><span class="fa fa-fw fa-random"></span></a>
           </div>
 
-          <div style="width: 20%; float: right; text-align: right">
+          <div style="width:70px; float: right; text-align: right">
             <input type="range" min="0" max="100" value="100" oninput="Player.setVolume(this)" id="rsPlayerVolume"
             style=" margin-top:5px" title="Volume" tabindex="-1">
           </div>
 
 
-          <a class="playercontrol big" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
-          <a class="playercontrol big" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
-          <a class="playercontrol big" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
+          <a class="playerCtl big" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
+          <a class="playerCtl big" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
+          <a class="playerCtl big" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
         </div>
 
       </div>
 
       <div id="rsPlayerBrowser">
+        <!--
         <div class="playbackCtls">
           <a onclick="alert('Repeat switch not implemented yet.'); return false;"><span class="fa fa-fw fa-repeat"></span></a>
           <a onclick="alert('Shuffle switch not implemented yet.'); return false;"><span class="fa fa-fw fa-random"></span></a>
         </div>
+        -->
 
         <ul class="tabs">
           <li class="active" data-tab-destination="nowplaying-playlist">Playlist</li>
           <li data-tab-destination="nowplaying-add">Add URL</li>
           <!-- <li data-tab-destination="nowplaying-trackinfo">Track info</li> -->
+
+          <li data-tab-destination="preferences">Preferences</li>
+          <li data-tab-destination="help">Help</li>
         </ul>
 
         <div class="tabContent" rel="nowplaying-playlist">
@@ -60,14 +63,26 @@
             <input type="text" value="" placeholder="URL" id="urlinput" />
             <button class="btn btn-sm btn-default">Add</button>
           </div>
-
-          <!-- <p class="padding-10 small text-center well subtle"><strong>Tip:</strong><br/> To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.</p> -->
         </div>
 
         <div class="tabContent" rel="nowplaying-trackinfo">
           <div class="padding-0-10">
             <h2>Track info</h2>
             <div id="nowplaying-trackinfo"></div>
+          </div>
+        </div>
+
+        <div class="tabContent" rel="preferences">
+          <div class="padding-0-10">
+            <h2>Preferences</h2>
+            PARTIAL HERE PLEASE
+          </div>
+        </div>
+
+        <div class="tabContent" rel="help">
+          <div class="padding-0-10">
+            <h2>Help</h2>
+            PARTIAL HERE PLEASE
           </div>
         </div>
 
