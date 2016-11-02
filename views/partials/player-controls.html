@@ -1,0 +1,34 @@
+<div class="rsPlayerControlsGroup padding-10">
+  <div id="rsPlayerCurrent">
+
+    <span id="currentArtist"></span>
+
+    <div class="pull-right" id="timeContainer">
+      <span class="timeElapsed">00:00</span><span class="timeSeparator">/</span><span class="timeTotal">00:00</span>
+    </div>
+    <span id="currentTitle"></span>
+  </div>
+
+  <div id="waveform"></div>
+
+  <div id="rsPlayerControls">
+    <div style="width:70px; float: left; text-align: left; padding-top: 4px">
+      <!-- <a class="playerCtl" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a> -->
+      <!-- <a class="playerCtl" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-thumb-tack"></span></a> -->
+      <a class="playerCtl active" data-toggle="playlist" onclick="return false;"><span class="fa fa-fw fa-list"></span></a>
+      <a class="playerCtl" onclick="alert('Repeat switch not implemented yet.'); return false;"><span class="fa fa-fw fa-repeat"></span></a>
+      <a class="playerCtl" onclick="alert('Shuffle switch not implemented yet.'); return false;"><span class="fa fa-fw fa-random"></span></a>
+    </div>
+
+    <div style="width:70px; float: right; text-align: right">
+      <input type="range" min="0" max="100" value="100" oninput="Player.setVolume(this)" id="rsPlayerVolume"
+      style=" margin-top:5px" title="Volume" tabindex="-1">
+    </div>
+
+
+    <a class="playerCtl big" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
+    <a class="playerCtl big" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
+    <a class="playerCtl big" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
+  </div>
+
+</div>
