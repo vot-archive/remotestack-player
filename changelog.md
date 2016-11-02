@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.22
+
+* Repeat and Shuffle
+
+
+
 ## 0.0.21
 
 * More UI tweaks

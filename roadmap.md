@@ -1,12 +1,11 @@
 # Roadmap
 
 ## Next features
-* Repeat and Shuffle
-* Default ytdl to audio formats
+* Default remote sources to audio formats; video on request
 * UI: Custom range inputs
 * UI: Selectable and sortable items in playlist
 * UI: Right click menu on playlist items
-* UI: Improved adding of items
+* UI: Improve adding of URLs
 * New common adapter to support webaudio and webvideo
 * Support for FLAC
 * Split playlist into separate settings file and clean up entries (not all metadata is needed)
