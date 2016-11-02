@@ -4,9 +4,9 @@
   <% _.each(playlist, function(i) { %>
     <% var classname = i.active ? 'active' : ''; %>
 
-    <li class="<%- classname %>" ondblclick="Player.loadByIndex(<%- index %>);">
-    <span class="delete pull-right" onclick="Playlist.deleteByIndex(<%- index %>)"> <i class="fa fa-fw fa-trash-o"></i> </span>
-    <span class="title"><%- Playlist.getDisplayTitle(i) %></span>
+    <li class="<%- classname %>" ondblclick="RS.Player.loadByIndex(<%- index %>);">
+    <span class="delete pull-right" onclick="RS.Playlist.deleteByIndex(<%- index %>)"> <i class="fa fa-fw fa-trash-o"></i> </span>
+    <span class="title"><%- RS.Playlist.getDisplayTitle(i) %></span>
     <span class="url"><%- i.url %></span>
     </li>
     <% index++; %>

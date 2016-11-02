@@ -10,7 +10,7 @@
 #rsPlayerCurrent {margin-top:0; font-size: 0.95em}
 #rsPlayerTime {float: right; font-size: 0.9em}
 
-#wContainer .playerCtl {color: #AAA}
+#wContainer .playerCtl {color: #AAA; /*text-shadow: 0 1px 0 white;*/}
 #wContainer.dark .playerCtl {color: #555}
 
 #wContainer .bg, #wContainer .playerCtl.active {color: #525252}

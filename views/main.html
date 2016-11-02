@@ -12,13 +12,13 @@
     <div id="wHeader">
 
         <div class="windowCtls">
-          <i class="fa fa-times fa-fw" aria-hidden="true" onclick="Renderer.appQuitFn()"></i>
-          <i class="fa fa-minus fa-fw" aria-hidden="true" onclick="Renderer.windowMinimizeFn()"></i>
-          <i class="fa fa-plus fa-fw" aria-hidden="true" onclick="Renderer.windowMaximizeFn()"></i>
+          <i class="fa fa-times fa-fw" aria-hidden="true" onclick="RS.App.appQuitFn()"></i>
+          <i class="fa fa-minus fa-fw" aria-hidden="true" onclick="RS.App.windowMinimizeFn()"></i>
+          <i class="fa fa-plus fa-fw" aria-hidden="true" onclick="RS.App.windowMaximizeFn()"></i>
 
-          <!-- <span class="windowCtl btnClose" onclick="Renderer.windowCloseFn()"></span>
-          <span class="windowCtl btnMinimize" onclick="Renderer.windowMinimizeFn()"></span>
-          <span class="windowCtl btnMaximize" onclick="Renderer.windowMaximizeFn()"></span> -->
+          <!-- <span class="windowCtl btnClose" onclick="RS.App.windowCloseFn()"></span>
+          <span class="windowCtl btnMinimize" onclick="RS.App.windowMinimizeFn()"></span>
+          <span class="windowCtl btnMaximize" onclick="RS.App.windowMaximizeFn()"></span> -->
         </div>
 
         <div class="navigationCtls hide">
@@ -30,7 +30,10 @@
     </div>
 
     <div class="containerBody">
-        <div class="mainContent" id="wBody"></div>
+        <div class="mainContent" id="wBody">
+          <rsTemplate data-name="nowplaying"></rsTemplate>
+          <rsTemplate data-name="status"></rsTemplate>
+        </div>
     </div>
   </div>
 

@@ -1,5 +1,4 @@
 const _ = require('lodash');
-const Utils = require('rs-base/utils');
 const ytdl = require('rs-base/resolvers/lib/ytdl');
 const cache = require('rs-base/lib/filecache');
 const PlaylistLib = require('../lib/playlist');
@@ -8,8 +7,8 @@ const PlaylistsModel = require('../models/playlists');
 const renderer = require('../renderer/render');
 
 function ensureWavesurfer() {
-  if (Player.wavesurferObject) {
-    return Player.wavesurferObject;
+  if (RS.Player.wavesurferObject) {
+    return RS.Player.wavesurferObject;
   }
 
   var wavesurfer = WaveSurfer.create({
@@ -38,19 +37,19 @@ function ensureWavesurfer() {
   });
 
   wavesurfer.on('ready', function () {
-    Utils.log('Track ready');
+    RS.Utils.log('Track ready');
     // wavesurfer.empty();
     wavesurfer.drawBuffer();
-    Player.applyVolumeSetting();
-    Player.updateTrackTime();
-    Player.populatePlaylist();
+    RS.Player.applyVolumeSetting();
+    RS.Player.updateTrackTime();
+    RS.Player.populatePlaylist();
 
-    if (Player.playing) {
+    if (RS.Player.playing) {
       wavesurfer.play();
     }
 
     $(window).resize(function() {
-      // Utils.log('Window resize');
+      // RS.Utils.log('Window resize');
       wavesurfer.drawBuffer();
     });
   });
@@ -58,28 +57,28 @@ function ensureWavesurfer() {
 
 
   wavesurfer.on('audioprocess', function () {
-    Player.updateTrackTime();
+    RS.Player.updateTrackTime();
   });
 
   wavesurfer.on('play', function () {
-    // Utils.log('Play event');
-    Player.setPlayButton(false);
+    // RS.Utils.log('Play event');
+    RS.Player.setPlayButton(false);
   });
   wavesurfer.on('pause', function () {
-    // Utils.log('Pause event');
-    Player.setPlayButton(true);
+    // RS.Utils.log('Pause event');
+    RS.Player.setPlayButton(true);
   });
 
   wavesurfer.on('finish', function () {
-    Utils.log('Track finished');
-    // Player.wavesurferObject.destroy();
-    // Player.wavesurferObject = null;
-    Player.updateTrackTime(true);
-    Player.next();
-    Player.play();
+    RS.Utils.log('Track finished');
+    // RS.Player.wavesurferObject.destroy();
+    // RS.Player.wavesurferObject = null;
+    RS.Player.updateTrackTime(true);
+    RS.Player.next();
+    RS.Player.play();
   });
 
-  Player.wavesurferObject = wavesurfer;
+  RS.Player.wavesurferObject = wavesurfer;
 }
 
 function _interpretPlaylistItem (item, cb) {
@@ -90,7 +89,7 @@ function _interpretPlaylistItem (item, cb) {
 
   if (item.source === 'youtube') {
     return ytdl(item.url, function (err, info) {
-      // Utils.log('resolved info:', info);
+      // RS.Utils.log('resolved info:', info);
       if (err || !info) {
         item.playbackUrl = false;
       } else {
@@ -138,28 +137,28 @@ var Player = {
   },
 
   play: function play (state) {
-    Utils.log('play(' + state + ')');
+    RS.Utils.log('play(' + state + ')');
     var _self = this;
     var audioTag = _self.getElement();
     if (!audioTag) {
-      Utils.log('Player.play: No audio element present');
+      RS.Utils.log('RS.Player.play: No audio element present');
       return;
     }
 
     // state = state || audioTag.paused || true;
-    Utils.log('state:', state)
+    RS.Utils.log('state:', state)
 
     if (typeof state !== 'boolean') {
-      Utils.log('audioTag.paused:', audioTag.paused)
+      RS.Utils.log('audioTag.paused:', audioTag.paused)
       state = audioTag.paused || false;
     }
 
     if (state) {
-      Utils.log('Playing');
+      RS.Utils.log('Playing');
       audioTag.play();
       _self.setPlayButton(false);
     } else {
-      Utils.log('Pausing');
+      RS.Utils.log('Pausing');
       audioTag.pause();
       _self.setPlayButton(true);
     }
@@ -174,7 +173,7 @@ var Player = {
     console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
     var nextTrack = playlist[nextTrackIndex];
 
-    Utils.log('>>Prev track:', nextTrack);
+    RS.Utils.log('>>Prev track:', nextTrack);
 
     this.load(nextTrack);
     this.play(playState);
@@ -187,7 +186,7 @@ var Player = {
     console.log('nextTrack', nextTrackIndex +1, 'out of', playlist.length);
     var nextTrack = playlist[nextTrackIndex];
 
-    Utils.log('>>Next track:', nextTrack);
+    RS.Utils.log('>>Next track:', nextTrack);
 
     this.load(nextTrack);
     this.play(playState);
@@ -195,7 +194,7 @@ var Player = {
 
   setPlayButton: function setPlayButton (state) {
     this.playing = state;
-    $('.playerCtl .fa.fa-play, .playerCtl .fa.fa-pause').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
+    $('.playerCtl#WSPlay .fa, .playerCtl#WSPlay .fa').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
   },
 
   // TODO: Support setVolume('+5') syntax
@@ -224,7 +223,7 @@ var Player = {
   },
 
   applyVolumeSetting: function () {
-    Utils.log('setting volume to', this.volume)
+    RS.Utils.log('setting volume to', this.volume)
     this.ensureWavesurfer().setVolume(this.volume / 100);
     $('#rsPlayerVolume').val(this.volume);
   },
@@ -243,28 +242,28 @@ var Player = {
       currTime = this.ensureWavesurfer().getCurrentTime();
       duration = this.ensureWavesurfer().getDuration();
 
-      currTime = Utils.formatSecondsAsTime(currTime);
-      duration = Utils.formatSecondsAsTime(duration);
+      currTime = RS.Utils.formatSecondsAsTime(currTime);
+      duration = RS.Utils.formatSecondsAsTime(duration);
     }
 
-    // Utils.log('updateCurrentTime', currTime, duration);
+    // RS.Utils.log('updateCurrentTime', currTime, duration);
 
     currTimeDiv.text(currTime);
     durationDiv.text(duration);
   },
 
   loadByIndex: function loadByIndex (index) {
-    Utils.log('loadByIndex', index);
+    RS.Utils.log('loadByIndex', index);
     if (index === 'active') {
       index = PlaylistLib.setActive('active');
     }
     index = PlaylistLib.setActive(index);
-    Utils.log('index', index);
+    RS.Utils.log('index', index);
 
     return this.load(PlaylistLib.get()[index]);
   },
   load: function load (source) {
-    console.log('hit populatePlaylist from Player.load')
+    console.log('hit populatePlaylist from RS.Player.load')
     var _self = this;
     _self.populatePlaylist();
     if (!source) {
@@ -273,7 +272,7 @@ var Player = {
     // if (source.source === 'file') {
     //   var filestat = fs.statSync(source.url);
     //   if (!filestat.isFile()) {
-    //     Utils.log(source.url, 'is not a file');
+    //     RS.Utils.log(source.url, 'is not a file');
     //     return;
     //   }
     // }
@@ -286,7 +285,7 @@ var Player = {
     var wavesurferObject = _self.wavesurferObject;
 
     function executeWavesurferLoad (finalPath, trackdata) {
-      Utils.log('>> finalPath', finalPath);
+      RS.Utils.log('>> finalPath', finalPath);
       wavesurferObject.load(finalPath);
 
       var artist = _.get(trackdata, 'resolved.meta.canonical.artist', '');
@@ -300,11 +299,11 @@ var Player = {
       $('#currentTitle').text(title).removeClass('animated pulse');
       $('#waveform').css('visibility', 'visible');
 
-      Utils.log('Playlist entry resolved', artist, title);
+      RS.Utils.log('Playlist entry resolved', artist, title);
     }
 
     _interpretPlaylistItem(source, function (trackdata) {
-      Utils.log('>> _interpretPlaylistItem returned', _.omit(trackdata, 'raw'));
+      RS.Utils.log('>> _interpretPlaylistItem returned', _.omit(trackdata, 'raw'));
       _self.populateTrackinfo();
 
       if (trackdata.source === 'file') {
@@ -324,7 +323,7 @@ var Player = {
     var _self = this;
     PlaylistsModel.removeAllListeners('default.playlist');
     var list = PlaylistLib.get();
-    Utils.log('populatePlaylist', _.map(list, 'url'));
+    RS.Utils.log('populatePlaylist', _.map(list, 'url'));
 
 
     var markup = '';
@@ -348,7 +347,7 @@ var Player = {
     var playlist = PlaylistLib.get();
     var currentTrack = playlist[activeIndex];
     var markup = '';
-    Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
+    RS.Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
 
     if (currentTrack) {
       markup = renderer.renderPartial('trackinfo', {currentTrack: currentTrack});
@@ -359,7 +358,7 @@ var Player = {
 
   bindShortcuts: function bindShortcuts () {
     const _self = this;
-    Utils.log('bindShortcuts called');
+    RS.Utils.log('bindShortcuts called');
     $(document).on('keydown', function(e) {
       var tag = e.target.tagName.toLowerCase();
 
@@ -370,7 +369,7 @@ var Player = {
 
       // play/pause
       if (e.which === 32) {
-        // Utils.log('space hit');
+        // RS.Utils.log('space hit');
         _self.ensureWavesurfer().playPause();
         return e.preventDefault();
       }
@@ -379,14 +378,14 @@ var Player = {
 
       // track +5s
       if (e.which === 37) {
-        // Utils.log('arrow left hit');
+        // RS.Utils.log('arrow left hit');
         _self.ensureWavesurfer().skipBackward();
         return e.preventDefault();
       }
 
       // track -5s
       if (e.which === 39) {
-        // Utils.log('arrow right hit');
+        // RS.Utils.log('arrow right hit');
         _self.ensureWavesurfer().skipForward();
         return e.preventDefault();
       }
@@ -395,14 +394,14 @@ var Player = {
 
       // vol up
       if (e.which === 38) {
-        // Utils.log('arrow up hit');
+        // RS.Utils.log('arrow up hit');
         _self.setVolume(_self.volume + 5);
         return e.preventDefault();
       }
 
       // vol down
       if (e.which === 40) {
-        // Utils.log('arrow down hit');
+        // RS.Utils.log('arrow down hit');
         _self.setVolume(_self.volume - 5);
         return e.preventDefault();
       }
@@ -411,14 +410,14 @@ var Player = {
 
       // prev song
       if (!(e.ctrlKey || e.metaKey) && e.which === 188) {
-        // Utils.log('< hit');
+        // RS.Utils.log('< hit');
         _self.prev();
         return e.preventDefault();
       }
 
       // next song
       if (!(e.ctrlKey || e.metaKey) && e.which === 190) {
-        // Utils.log('> hit');
+        // RS.Utils.log('> hit');
         _self.next();
         return e.preventDefault();
       }

@@ -3,7 +3,6 @@ var PreferencesModel = require('../models/preferences');
 const Utils = require('rs-base/utils');
 const FileUtils = require('rs-base/utils/files');
 const Nav = require('../renderer/nav');
-const Player = require('./player');
 
 Utils.log('settingsPath: ', PreferencesModel.getLocation());
 Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
@@ -21,11 +20,11 @@ var UI = {
     });
 
     $('*[data-toggle=repeat]').click(function () {
-      Player.toggleRepeat();
+      RS.Player.toggleRepeat();
     });
 
     $('*[data-toggle=shuffle]').click(function () {
-      Player.toggleShuffle();
+      RS.Player.toggleShuffle();
     });
 
 
@@ -112,10 +111,10 @@ var UI = {
         var allFiles = FileUtils.unfoldFiles(f.path);
 
         _.each(allFiles, function (file) {
-          Playlist.add({url: file, source: 'file', type: 'audio'});
+          RS.Playlist.add({url: file, source: 'file', type: 'audio'});
         })
 
-        Player.populatePlaylist();
+        RS.Player.populatePlaylist();
         var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
         RS.displayNotification(message);
       }
@@ -128,8 +127,8 @@ var UI = {
 
     function addURLToPlaylist () {
       if (inputEl.val()) {
-        Playlist.add({url: inputEl.val(), source: 'youtube', type: 'audio'});
-        Player.populatePlaylist();
+        RS.Playlist.add({url: inputEl.val(), source: 'youtube', type: 'audio'});
+        RS.Player.populatePlaylist();
         RS.displayNotification('Track added');
         inputEl.val('');
         return true;

@@ -13,22 +13,20 @@
 
   <div id="rsPlayerControls">
     <div style="width:70px; float: left; text-align: left; padding-top: 4px">
-      <!-- <a class="playerCtl" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a> -->
-      <!-- <a class="playerCtl" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-thumb-tack"></span></a> -->
-      <a class="playerCtl" data-toggle="playlist"><span class="fa fa-fw fa-list"></span></a>
+      <a class="playerCtl" data-toggle="playlist"><span class="fa fa-fw fa-bars"></span></a>
       <a class="playerCtl" data-toggle="repeat"><span class="fa fa-fw fa-repeat"></span></a>
       <a class="playerCtl" data-toggle="shuffle"><span class="fa fa-fw fa-random"></span></a>
     </div>
 
     <div style="width:70px; float: right; text-align: right">
-      <input type="range" min="0" max="100" value="100" oninput="Player.setVolume(this)" id="rsPlayerVolume"
+      <input type="range" min="0" max="100" value="100" oninput="RS.Player.setVolume(this)" id="rsPlayerVolume"
       style=" margin-top:5px" title="Volume" tabindex="-1">
     </div>
 
 
-    <a class="playerCtl big active" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
+    <a class="playerCtl big active" onclick="RS.Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
     <a class="playerCtl big active" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
-    <a class="playerCtl big active" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
+    <a class="playerCtl big active" onclick="RS.Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
   </div>
 
 </div>

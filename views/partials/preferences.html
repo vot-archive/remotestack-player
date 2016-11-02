@@ -1,6 +1,6 @@
 <label class="settings-item">
   <span class="pull-right">
-    <select name="ui.theme" onchange="handleInputChange(this)">
+    <select name="ui.theme" onchange="RS.Preferences.handleInputChange(this)">
       <option value="light">Light</option>
       <option value="dark">Dark</option>
     </select>
@@ -10,7 +10,7 @@
 
 <label class="settings-item">
   <span class="pull-right">
-    <input type="checkbox" value="ui.showFullPath" onchange="handleCheckboxChange(this)" />
+    <input type="checkbox" value="ui.showFullPath" onchange="RS.Preferences.handleCheckboxChange(this)" />
   </span>
   <strong>Show full path in playlist</strong>
 </label>

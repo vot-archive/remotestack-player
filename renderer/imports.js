@@ -1,5 +1,4 @@
 var _ = require('lodash');
-const Utils = require('rs-base/utils');
 var PreferencesModel = require('../models/preferences');
 var renderer = require('../renderer/render');
 
@@ -11,7 +10,7 @@ function resolveUIPreferences () {
   if (!theme) {
     theme = 'light';
   }
-  Utils.log('adding syle class class:', theme);
+  RS.Utils.log('adding syle class class:', theme);
   $('#wContainer').addClass(theme);
 
 
@@ -33,14 +32,17 @@ function resolveUIPreferences () {
  */
 function loadAppTemplates (data) {
   data = data || {};
-  var templates = [
-    'nowplaying', 'status', /*'preferences', 'help'*/
-  ];
 
-  _.forEach(templates, function (item) {
-    var markup = renderer.renderTemplate(item, data);
-    $('#wBody').append(markup);
+  var templateTags = $('rsTemplate');
+  _.forEach(templateTags, function (tag) {
+    var template = $(tag).data('name');
+
+    console.log('processing template tag:', template);
+    var markup = renderer.renderTemplate(template, data);
+    $(tag).after(markup);
+    $(tag).remove();
   })
+
 
   // var modalsMarkup = renderer.renderPartial('modals', {});
   // $('#modals').append(modalsMarkup);
