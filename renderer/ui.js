@@ -2,7 +2,8 @@ const _ = require('lodash');
 var PreferencesModel = require('../models/preferences');
 const Utils = require('rs-base/utils');
 const FileUtils = require('rs-base/utils/files');
-const Nav = require('../renderer/nav');
+const Nav = require('./nav');
+const PlaylistLib = require('../lib/playlist');
 
 Utils.log('settingsPath: ', PreferencesModel.getLocation());
 Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
@@ -20,12 +21,24 @@ var UI = {
     });
 
     $('*[data-toggle=repeat]').click(function () {
-      RS.Player.toggleRepeat();
+      var newVal = RS.Player.toggleRepeat();
+      if (newVal) {
+        $('*[data-toggle=repeat]').addClass('active');
+      } else {
+        $('*[data-toggle=repeat]').removeClass('active');
+      }
     });
 
     $('*[data-toggle=shuffle]').click(function () {
-      RS.Player.toggleShuffle();
+      var newVal = RS.Player.toggleShuffle();
+      if (newVal) {
+        $('*[data-toggle=shuffle]').addClass('active');
+      } else {
+        $('*[data-toggle=shuffle]').removeClass('active');
+      }
     });
+
+
 
 
 
@@ -184,6 +197,35 @@ var UI = {
       window.resizeTo(currentWidth, playlistThresholds[0])
       $('*[data-toggle=playlist]').removeClass('active');
     }
+  },
+
+  initialiseButtonStates: function () {
+    var playlistActive = $(window).height() > 128+1;
+    var repeatActive = PlaylistLib.getRepeat();
+    var shuffleActive = PlaylistLib.getShuffle();
+
+    if (playlistActive) {
+      $('*[data-toggle=playlist]').addClass('active');
+    } else {
+      $('*[data-toggle=playlist]').removeClass('active');
+    }
+
+    if (repeatActive) {
+      $('*[data-toggle=repeat]').addClass('active');
+    } else {
+      $('*[data-toggle=repeat]').removeClass('active');
+    }
+
+    if (shuffleActive) {
+      $('*[data-toggle=shuffle]').addClass('active');
+    } else {
+      $('*[data-toggle=shuffle]').removeClass('active');
+    }
+
+    console.log('playlistActive', playlistActive);
+    console.log('repeatActive', repeatActive);
+    console.log('shuffleActive', shuffleActive);
+
   }
 
 };

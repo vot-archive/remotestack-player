@@ -442,10 +442,14 @@ var Player = {
   },
 
   toggleRepeat: function () {
-    console.log('Repeat switch not implemented yet.');
+    var initial = PlaylistLib.getRepeat();
+    PlaylistLib.setRepeat(!initial);
+    return !initial;
   },
   toggleShuffle: function () {
-    console.log('Shuffle switch not implemented yet.');
+    var initial = PlaylistLib.getShuffle();
+    PlaylistLib.setShuffle(!initial);
+    return !initial;
   },
 
 };

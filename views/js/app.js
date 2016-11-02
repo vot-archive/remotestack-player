@@ -37,6 +37,7 @@ var RS = {};
   RS.Preferences = PreferencesUI;
   RS.Nav = Nav;
   RS.Utils = Utils;
+  RS.devices = {};
 
   // Moving stuff out of renderer/index
   const ipcEmitters = require('../lib/ipcEmitters');
@@ -71,6 +72,8 @@ var RS = {};
     UI.bindURLInput('urlinput');
     UI.bindTabs('rsPlayerBrowser');
 
+    UI.initialiseButtonStates();
+
     PreferencesUI.assignCheckboxDefaults();
     PreferencesUI.assignInputDefaults();
 
@@ -78,10 +81,8 @@ var RS = {};
 
     navigator.mediaDevices.enumerateDevices()
     .then(function(devices) {
-      devices.forEach(function(device) {
-        console.log(device.kind + ": " + device.label + " id = " + device.deviceId);
-      });
-      RS.devices = devices.filter(function (d) {return d.kind === 'audiooutput'});
+      RS.devices.audioOut = devices.filter(function (d) {return d.kind === 'audiooutput'});
+      RS.devices.audioIn = devices.filter(function (d) {return d.kind === 'audioinput'});
     })
     .catch(function(err) {
       console.log(err.name + ": " + err.message);
