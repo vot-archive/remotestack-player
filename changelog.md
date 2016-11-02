@@ -1,10 +1,18 @@
 # Changelog
 
+## 0.0.21
+
+* More UI tweaks
+* Improved templating, binds and layer separation
+
+
+
 ## 0.0.20
 
 * No new features
 * Code structure and modularity improvements
 * Small bug fixes
+
 
 
 ## 0.0.19

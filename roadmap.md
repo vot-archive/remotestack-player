@@ -7,7 +7,6 @@
 * UI: Selectable and sortable items in playlist
 * UI: Right click menu on playlist items
 * UI: Improved adding of items
-* UI: Fix up draggable areas for Linux/Windows
 * New common adapter to support webaudio and webvideo
 * Support for FLAC
 * Split playlist into separate settings file and clean up entries (not all metadata is needed)
