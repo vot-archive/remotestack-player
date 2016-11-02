@@ -438,7 +438,15 @@ var Player = {
       }
     });
 
-  }
+  },
+
+  toggleRepeat: function () {
+    console.log('Repeat switch not implemented yet.');
+  },
+  toggleShuffle: function () {
+    console.log('Shuffle switch not implemented yet.');
+  },
+
 };
 
 module.exports = Player;

@@ -3,6 +3,7 @@ var PreferencesModel = require('../models/preferences');
 const Utils = require('rs-base/utils');
 const FileUtils = require('rs-base/utils/files');
 const Nav = require('../renderer/nav');
+const Player = require('./player');
 
 Utils.log('settingsPath: ', PreferencesModel.getLocation());
 Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
@@ -18,6 +19,16 @@ var UI = {
       // resize window
       _self.togglePlaylist();
     });
+
+    $('*[data-toggle=repeat]').click(function () {
+      Player.toggleRepeat();
+    });
+
+    $('*[data-toggle=shuffle]').click(function () {
+      Player.toggleShuffle();
+    });
+
+
 
     $(document).on('keydown', function(e) {
       var tag = e.target.tagName.toLowerCase();
@@ -161,7 +172,7 @@ var UI = {
       return;
     }
 
-    // add 35 as a third step and always size forward
+    // TODO add 35 as a third step and always size forward
 
     var playlistThresholds = [128, 420];
     var shouldShow = $(window).height() < playlistThresholds[0]+1;
@@ -169,8 +180,10 @@ var UI = {
 
     if (shouldShow) {
       window.resizeTo(currentWidth, playlistThresholds[1])
+      $('*[data-toggle=playlist]').addClass('active');
     } else {
       window.resizeTo(currentWidth, playlistThresholds[0])
+      $('*[data-toggle=playlist]').removeClass('active');
     }
   }
 
