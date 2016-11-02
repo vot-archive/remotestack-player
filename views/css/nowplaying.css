@@ -34,8 +34,8 @@
 
 
 /*#wContainer.light .bg #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #D5D5D5 0%, #EBEBEB 100%)}*/
-#wContainer.light .bg #rsPlayerBrowser .tabs li {color: #AAA}
-#wContainer.light .bg #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; color: #777}
+#wContainer.light .bg #rsPlayerBrowser .tabs li {color: #999}
+#wContainer.light .bg #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; color: #404040}
 
 /*#wContainer.dark .bg #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #111 0%, #1f1f1f 100%)}*/
 #wContainer.dark .bg #rsPlayerBrowser .tabs li {color: #ccc}

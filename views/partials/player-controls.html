@@ -15,9 +15,9 @@
     <div style="width:70px; float: left; text-align: left; padding-top: 4px">
       <!-- <a class="playerCtl" onclick="Nav.goto('preferences')"><span class="fa fa-fw fa-sliders"></span></a> -->
       <!-- <a class="playerCtl" onclick="Renderer.ipc.togglePlayer()"><span class="fa fa-fw fa-thumb-tack"></span></a> -->
-      <a class="playerCtl active" data-toggle="playlist" onclick="return false;"><span class="fa fa-fw fa-list"></span></a>
-      <a class="playerCtl" onclick="alert('Repeat switch not implemented yet.'); return false;"><span class="fa fa-fw fa-repeat"></span></a>
-      <a class="playerCtl" onclick="alert('Shuffle switch not implemented yet.'); return false;"><span class="fa fa-fw fa-random"></span></a>
+      <a class="playerCtl" data-toggle="playlist" onclick="return false;"><span class="fa fa-fw fa-list"></span></a>
+      <a class="playerCtl" data-toggle="repeat" onclick="alert('Repeat switch not implemented yet.'); return false;"><span class="fa fa-fw fa-repeat"></span></a>
+      <a class="playerCtl" data-toggle="shuffle" onclick="alert('Shuffle switch not implemented yet.'); return false;"><span class="fa fa-fw fa-random"></span></a>
     </div>
 
     <div style="width:70px; float: right; text-align: right">
@@ -26,9 +26,9 @@
     </div>
 
 
-    <a class="playerCtl big" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
-    <a class="playerCtl big" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
-    <a class="playerCtl big" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
+    <a class="playerCtl big active" onclick="Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
+    <a class="playerCtl big active" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
+    <a class="playerCtl big active" onclick="Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
   </div>
 
 </div>

@@ -14,15 +14,17 @@ function resolveUIPreferences () {
   Utils.log('adding syle class class:', theme);
   $('#wContainer').addClass(theme);
 
-  var showFooter = PreferencesModel.get('ui.showFooter');
-  console.log('showFooter', showFooter);
-  if (typeof showFooter === 'undefined') {
-    showFooter = true;
-    PreferencesModel.set('ui.showFooter', true);
+
+
+  var showFullPath = PreferencesModel.get('ui.showFullPath');
+  console.log('showFullPath', showFullPath);
+  if (typeof showFullPath === 'undefined') {
+    showFullPath = false;
+    PreferencesModel.set('ui.showFullPath', false);
   }
 
-  if (!showFooter) {
-    $('#wFooter').addClass('hide');
+  if (showFullPath) {
+    $('#wContainer').addClass('showFullPath');
   }
 }
 
