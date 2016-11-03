@@ -39,6 +39,21 @@ var UI = {
     });
 
 
+    $('*[data-toggle=window-close]').click(function () {
+      RS.Window.close();
+    });
+
+    $('*[data-toggle=window-minimise]').click(function () {
+      RS.Window.minimise();
+    });
+
+    $('*[data-toggle=window-maximise]').click(function () {
+      RS.Window.maximise();
+    });
+
+    $('*[data-toggle=window-app-quit]').click(function () {
+      RS.Window.appQuit();
+    });
 
 
 

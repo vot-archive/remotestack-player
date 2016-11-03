@@ -1,0 +1,21 @@
+/* Window controls */
+#wHeader {width: 100%; height: 30px; top: 0; left: 0; position: fixed; z-index: 9;  -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
+#wCtls {position: fixed; top: 8px; left: 8px;}
+
+/* Generic style */
+.windowCtl .generic {color: #999; margin-right: -2px; z-index: 99; -webkit-app-region: no-drag}
+.windowCtl .generic:active, .windowCtl .generic:hover {color: #565656}
+.windowCtl .generic.fa-minus {top: 2px; position: relative;}
+
+/* Mac style */
+.windowCtl .mac {display: inline-block; width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
+.windowCtl .mac.btnClose {background: #ff3b47; border-color: #f0121d}
+.windowCtl .mac.btnMinimize {background: #ffbf00; border-color: #e69e12}
+.windowCtl .mac.btnMaximize {background: #00d742; border-color: #12b728}
+.windowCtl .mac.btnClose:active {background: #c5343c; border-color: #9a242c}
+.windowCtl .mac.btnMinimize:active {background: #c39109; border-color: #a68028}
+.windowCtl .mac.btnMaximize:active {background: #129b36; border-color: #2e7c42}
+
+
+/*.windowCtl .generic {display: none}*/
+.windowCtl .mac {display: none}

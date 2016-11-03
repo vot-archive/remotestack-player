@@ -1,7 +1,4 @@
 (function(global) {
-var RS = {};
-
-
   var imports = require('../renderer/imports');
   var Nav = require('../renderer/nav');
   var fse = require('fs-extra');
@@ -10,13 +7,16 @@ var RS = {};
   var Playlist = require('../lib/playlist');
   var PreferencesUI = require('./js/preferences');
   var Utils = require('rs-base/utils');
+  var ipcEmitters = require('../lib/ipcEmitters');
+  var windowCtl = require('../lib/windowCtl');
 
   var packageObj = fse.readJsonSync(__dirname + '/../package.json');
   var appVersion = packageObj.version || '';
 
-
+  var RS = {};
 
   RS.version = appVersion;
+
   RS.displayNotification = function (text) {
     $('#notifications').text(text).fadeIn(250).delay(3000).fadeOut(1000);
   };
@@ -37,18 +37,10 @@ var RS = {};
   RS.Preferences = PreferencesUI;
   RS.Nav = Nav;
   RS.Utils = Utils;
-  RS.devices = {};
+  RS.Window = windowCtl;
+  RS.IPC = ipcEmitters;
 
-  // Moving stuff out of renderer/index
-  const ipcEmitters = require('../lib/ipcEmitters');
-  const windowFn = require('../lib/windowFn');
-  RS.App = {
-    windowMinimizeFn: windowFn.minimizeFn,
-    windowMaximizeFn: windowFn.maximizeFn,
-    windowCloseFn: windowFn.closeFn,
-    appQuitFn: windowFn.appQuitFn,
-    ipc: ipcEmitters
-  };
+  RS.devices = {};
 
   global.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');
   global.RS = RS;
