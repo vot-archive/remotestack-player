@@ -2,14 +2,69 @@ const _ = require('lodash');
 var PreferencesModel = require('../models/preferences');
 const Utils = require('rs-base/utils');
 const FileUtils = require('rs-base/utils/files');
-const Nav = require('./nav');
 const PlaylistLib = require('../lib/playlist');
+const electron = require('electron');
+const shell = electron.shell;
+const MarkupRenderer = require('./markup');
+
 
 Utils.log('settingsPath: ', PreferencesModel.getLocation());
 Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
 
 var UI = {
   isInitialised: false,
+
+  /**
+   * Resolves theme and user preferences
+   */
+  resolveUIPreferences: function resolveUIPreferences () {
+    var theme = PreferencesModel.get('ui.theme');
+    if (!theme) {
+      theme = 'light';
+    }
+    RS.Utils.log('adding syle class class:', theme);
+    $('#wContainer').addClass(theme);
+
+
+
+    var showFullPath = PreferencesModel.get('ui.showFullPath');
+    console.log('showFullPath', showFullPath);
+    if (typeof showFullPath === 'undefined') {
+      showFullPath = false;
+      PreferencesModel.set('ui.showFullPath', false);
+    }
+
+    if (showFullPath) {
+      $('#wContainer').addClass('showFullPath');
+    }
+  },
+
+
+  /**
+   * Renders templates and partials and loads them into DOM
+   */
+  loadAppTemplates: function loadAppTemplates (data) {
+    var _self = this;
+    data = data || {};
+
+    var templateTags = $('rsTemplate');
+    _.forEach(templateTags, function (tag) {
+      var template = $(tag).data('name');
+
+      console.log('processing template tag:', template);
+      var markup = _self.renderTemplate(template, data);
+      $(tag).after(markup);
+      $(tag).remove();
+    })
+
+
+    // var modalsMarkup = renderer.renderPartial('modals', {});
+    // $('#modals').append(modalsMarkup);
+  },
+
+
+  renderPartial: MarkupRenderer.renderPartial,
+  renderTemplate: MarkupRenderer.renderTemplate,
 
   bindShortcuts: function bindShortcuts () {
     var _self = this;
@@ -241,8 +296,78 @@ var UI = {
     console.log('repeatActive', repeatActive);
     console.log('shuffleActive', shuffleActive);
 
-  }
+  },
 
+  handleExternalLinks: function () {
+    const links = document.querySelectorAll('a[href]');
+
+    Array.prototype.forEach.call(links, function (link) {
+      var url = link.getAttribute('href');
+      Utils.log('Caught a click to' + url);
+
+      if (url.indexOf('http') === 0) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault()
+          shell.openExternal(url);
+        });
+      }
+
+      if (url.indexOf('file') === 0) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault()
+          url = url.replace('file://', '');
+
+
+          const app = electron.app || electron.remote.app;
+          const userData = app.getPath('userData');
+          // const tmpdir = os.tmpdir();
+          // url = url.replace('$$TMPDIR', tmpdir);
+          url = url.replace('$$USERDATA', userData);
+
+
+          // shell.showItemInFolder(url);
+          shell.openItem(url);
+        });
+      }
+    })
+  },
+
+  //
+  // PREFERENCES
+  //
+  handlePreferencesCheckboxChange: function handlePreferencesCheckboxChange(input) {
+    var key = $(input).val();
+    var isChecked = $(input).is(':checked');
+    console.log('setting', key, 'to', isChecked);
+    PreferencesModel.set(key, !!isChecked);
+    window.location = window.location;
+  },
+
+  handlePreferencesInputChange: function handlePreferencesInputChange(input) {
+    var key = $(input).attr('name');
+    var value = $(input).val();
+    PreferencesModel.set(key, value);
+    window.location = window.location;
+  },
+
+  assignPreferencesCheckboxDefaults: function assignPreferencesCheckboxDefaults() {
+    $('.settings-item input[type="checkbox"]').each(function () {
+      var key = $(this).val();
+      var isChecked = PreferencesModel.get(key) || false;
+      $(this).prop('checked', isChecked);
+    });
+  },
+
+  assignPreferencesInputDefaults: function assignPreferencesInputDefaults() {
+    $('.settings-item input, .settings-item select').each(function () {
+      if ($(this).attr('type') === 'checkbox') {
+        return;
+      }
+      var key = $(this).attr('name');
+      var value = PreferencesModel.get(key) || false;
+      $(this).val(value);
+    });
+  }
 };
 
 module.exports = UI;

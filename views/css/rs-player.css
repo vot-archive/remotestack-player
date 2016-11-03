@@ -178,3 +178,5 @@
 .playerCtl .fa,
 #rsPlayerBrowser .tabs li
 {-webkit-transition: color 100ms linear}
+
+.navContent {display: block}

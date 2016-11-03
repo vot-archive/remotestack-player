@@ -4,7 +4,7 @@ const cache = require('rs-base/lib/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
 const PlaylistsModel = require('../models/playlists');
-const renderer = require('../renderer/render');
+const MarkupRenderer = require('../renderer/markup');
 
 function ensureWavesurfer() {
   if (RS.Player.wavesurferObject) {
@@ -25,7 +25,6 @@ function ensureWavesurfer() {
       normalize: true,
       scrollParent: false,
       skipLength: 5
-
   });
 
   $('#WSPlay').off();
@@ -330,10 +329,10 @@ var Player = {
 
     var markup = '';
     if (Array.isArray(list)) {
-      markup = renderer.renderPartial('playlist', {playlist: list});
+      markup = MarkupRenderer.renderPartial('playlist', {playlist: list});
     }
     if (markup.trim() === '') {
-      markup = renderer.renderPartial('playlist-empty');
+      markup = MarkupRenderer.renderPartial('playlist-empty');
     }
     $('#nowplaying-playlist').html(markup);
     _self.populateTrackinfo();
@@ -352,7 +351,7 @@ var Player = {
     RS.Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
 
     if (currentTrack) {
-      markup = renderer.renderPartial('trackinfo', {currentTrack: currentTrack});
+      markup = MarkupRenderer.renderPartial('trackinfo', {currentTrack: currentTrack});
     }
 
     container.html(markup);
