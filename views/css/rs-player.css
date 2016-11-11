@@ -180,3 +180,7 @@
 {-webkit-transition: color 100ms linear}
 
 .navContent {display: block}
+
+#rsPlayerBrowser .tabs li.pull-right {
+  padding: 9px 3px;
+}

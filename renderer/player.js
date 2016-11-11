@@ -324,16 +324,9 @@ var Player = {
     var _self = this;
     PlaylistsModel.removeAllListeners('default.playlist');
     var list = PlaylistLib.get();
-    RS.Utils.log('populatePlaylist', _.map(list, 'url'));
+    // RS.Utils.log('populatePlaylist', _.map(list, 'url'));
 
-
-    var markup = '';
-    if (Array.isArray(list)) {
-      markup = MarkupRenderer.renderPartial('playlist', {playlist: list});
-    }
-    if (markup.trim() === '') {
-      markup = MarkupRenderer.renderPartial('playlist-empty');
-    }
+    var markup = MarkupRenderer.renderPartial('playlist', {playlist: list});
     $('#nowplaying-playlist').html(markup);
     _self.populateTrackinfo();
 

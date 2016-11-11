@@ -8,12 +8,10 @@ const shell = electron.shell;
 const MarkupRenderer = require('./markup');
 
 
-Utils.log('settingsPath: ', PreferencesModel.getLocation());
-Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
+// Utils.log('settingsPath: ', PreferencesModel.getLocation());
+// Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
 
 var UI = {
-  isInitialised: false,
-
   /**
    * Resolves theme and user preferences
    */
@@ -56,10 +54,6 @@ var UI = {
       $(tag).after(markup);
       $(tag).remove();
     })
-
-
-    // var modalsMarkup = renderer.renderPartial('modals', {});
-    // $('#modals').append(modalsMarkup);
   },
 
 

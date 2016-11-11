@@ -1,14 +1,27 @@
+  <% if (!playlist || !playlist.length) { %>
 
-  <% var index = 0; %>
+    <p class="padding-10 small text-center well subtle">
+      <strong>Tip:</strong><br />
+      To add files from your disk simply drag them onto the&nbsp;player&nbsp;window.
+    </p>
 
-  <% _.each(playlist, function(i) { %>
-    <% var classname = i.active ? 'active' : ''; %>
+  <% } else { %>
 
-    <li class="<%- classname %>" ondblclick="RS.Player.loadByIndex(<%- index %>);">
-    <span class="delete pull-right" onclick="RS.Playlist.deleteByIndex(<%- index %>)"> <i class="fa fa-fw fa-trash-o"></i> </span>
-    <span class="title"><%- RS.Playlist.getDisplayTitle(i) %></span>
-    <span class="url"><%- i.url %></span>
-    </li>
-    <% index++; %>
+    <% var index = 0; %>
 
-  <% }); %>
+    <% _.each(playlist, function(i) { %>
+      <% var classname = i.active ? 'active' : ''; %>
+
+      <li class="<%- classname %>"
+        data-index="<%- index %>"
+        ondblclick="RS.Player.playByIndex(<%- index %>);"
+        oncontextmenu="RS.showContextMenu(this)">
+        <span class="delete pull-right" onclick="RS.Playlist.deleteByIndex(<%- index %>)"> <i class="fa fa-fw fa-trash-o"></i> </span>
+        <span class="title"><%- RS.Playlist.getDisplayTitle(i) %></span>
+        <span class="url"><%- i.url %></span>
+      </li>
+      <% index++; %>
+
+    <% }); %>
+
+  <% } %>
