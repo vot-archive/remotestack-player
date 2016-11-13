@@ -1,4 +1,5 @@
 (function(global) {
+  var os = require('os');
   var fse = require('fs-extra');
   var UI = require('../renderer/ui');
   var Player = require('../renderer/player');
@@ -12,6 +13,8 @@
 
   var RS = {};
 
+  RS.platform = os.type().toLowerCase();
+  UI.mousewheelMultiplier = RS.platform === 'darwin' ? 0.5 : 1.5;
   RS.version = appVersion;
 
   RS.displayNotification = function (text) {

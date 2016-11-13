@@ -12,6 +12,7 @@ const MarkupRenderer = require('./markup');
 // Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
 
 var UI = {
+  mousewheelMultiplier: 1,
   /**
    * Resolves theme and user preferences
    */

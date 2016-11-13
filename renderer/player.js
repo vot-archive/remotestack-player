@@ -427,7 +427,7 @@ var Player = {
     $('#waveform').mousewheel(function(event) {
       var offset = event.deltaX || event.deltaY;
       if (offset) {
-        _self.ensureWavesurfer().skip(offset/3);
+        _self.ensureWavesurfer().skip(offset * (RS.UI.mousewheelMultiplier || 1));
       }
     });
 
