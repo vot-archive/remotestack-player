@@ -135,16 +135,30 @@ var UI = {
       // TODO Ctrl/Cmd + Alt + E (69)    EQ
       // TODO Ctrl/Cmd + Alt + V (XX)    Video
 
-      // Ctrl/Cmd + Alt + P (80)
-      // if (e.altKey && (e.ctrlKey || e.metaKey) && (e.which === 80)) {
+      // E (69)
+      // P (80)
+      // R (82)
+      // S (83)
 
-      // Just P (80)
+      // Ctrl/Cmd + Alt: (e.altKey && (e.ctrlKey || e.metaKey))
+
+
       if (e.which === 80) {
         Utils.log('P hit');
-        if ($('.navContent.active').attr('id') === 'nowplaying') {
-          _self.togglePlaylist();
-          return e.preventDefault();
-        }
+        _self.togglePlaylist();
+        return e.preventDefault();
+      }
+
+      if (e.which === 82 && !(e.ctrlKey || e.metaKey)) {
+        Utils.log('R hit');
+        RS.Player.toggleRepeat();
+        return e.preventDefault();
+      }
+
+      if (e.which === 83) {
+        Utils.log('S hit');
+        RS.Player.toggleShuffle();
+        return e.preventDefault();
       }
     });
   },
@@ -242,11 +256,11 @@ var UI = {
     $('ul.tabs li:first', container).trigger('click');
   },
   togglePlaylist: function togglePlaylist () {
-    var activeId = $('.mainContent .navContent.active').attr('id');
-    var isActive = activeId === 'nowplaying';
-    if (!isActive) {
-      return;
-    }
+    // var activeId = $('.mainContent .navContent.active').attr('id');
+    // var isActive = activeId === 'nowplaying';
+    // if (!isActive) {
+    //   return;
+    // }
 
     // TODO add 35 as a third step and always size forward
 
