@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.24
+
+* Preferences for window controls
+
+
+
 ## 0.0.23
 
 * Improved messaging

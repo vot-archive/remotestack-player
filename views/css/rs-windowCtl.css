@@ -22,7 +22,7 @@
 
 
 /* PREFERENCES */
-#wCtls.right {position: fixed; top: 8px; left: auto; right: 8px}
+#wCtls.right {position: fixed; left: auto; right: 8px}
 #wCtls.right .windowCtl {float: right}
 
 
