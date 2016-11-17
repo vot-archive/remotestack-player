@@ -21,8 +21,25 @@ var UI = {
     if (!theme) {
       theme = 'light';
     }
-    RS.Utils.log('adding syle class class:', theme);
+    RS.Utils.log('adding style class:', theme);
     $('#wContainer').addClass(theme);
+
+
+
+    var wCtlPos = PreferencesModel.get('ui.windowCtlPosition');
+    if (!wCtlPos) {
+      wCtlPos = 'left';
+    }
+    RS.Utils.log('adding wCtl class:', wCtlPos);
+    $('#wCtls').addClass(wCtlPos);
+
+
+    var wCtlStyle = PreferencesModel.get('ui.windowCtlStyle');
+    if (!wCtlStyle) {
+      wCtlStyle = 'left';
+    }
+    RS.Utils.log('adding wCtl class:', wCtlStyle);
+    $('#wCtls').addClass(wCtlStyle);
 
 
 

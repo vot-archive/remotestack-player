@@ -8,7 +8,7 @@
 .windowCtl .generic.fa-minus {top: 2px; position: relative;}
 
 /* Mac style */
-.windowCtl .mac {display: inline-block; width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
+.windowCtl .mac {width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
 .windowCtl .mac.btnClose {background: #ff3b47; border-color: #f0121d}
 .windowCtl .mac.btnMinimize {background: #ffbf00; border-color: #e69e12}
 .windowCtl .mac.btnMaximize {background: #00d742; border-color: #12b728}
@@ -17,5 +17,15 @@
 .windowCtl .mac.btnMaximize:active {background: #129b36; border-color: #2e7c42}
 
 
-/*.windowCtl .generic {display: none}*/
-.windowCtl .mac {display: none}
+.windowCtl .fa, .playerCtl .fa {-webkit-transition: color 100ms linear}
+
+
+
+/* PREFERENCES */
+#wCtls.right {position: fixed; top: 8px; left: auto; right: 8px}
+#wCtls.right .windowCtl {float: right}
+
+
+.windowCtl i {display: none}
+#wCtls.generic .windowCtl i.generic {display: inline-block;}
+#wCtls.mac .windowCtl i.mac {display: inline-block;}

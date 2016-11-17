@@ -1,3 +1,4 @@
+<!-- Theme -->
 <label class="settings-item">
   <span class="pull-right">
     <select name="ui.theme" onchange="RS.UI.handlePreferencesInputChange(this)">
@@ -8,6 +9,29 @@
   <strong>Theme</strong>
 </label>
 
+<!-- Window controls position -->
+<label class="settings-item">
+  <span class="pull-right">
+    <select name="ui.windowCtlPosition" onchange="RS.UI.handlePreferencesInputChange(this)">
+      <option value="left">Left</option>
+      <option value="right">Right</option>
+    </select>
+  </span>
+  <strong>Window controls position</strong>
+</label>
+
+<!-- Window controls style -->
+<label class="settings-item">
+  <span class="pull-right">
+    <select name="ui.windowCtlStyle" onchange="RS.UI.handlePreferencesInputChange(this)">
+      <option value="generic">Generic</option>
+      <option value="mac">Mac</option>
+    </select>
+  </span>
+  <strong>Window controls style</strong>
+</label>
+
+<!-- Show full path -->
 <label class="settings-item">
   <span class="pull-right">
     <input type="checkbox" value="ui.showFullPath" onchange="RS.UI.handlePreferencesCheckboxChange(this)" />
@@ -15,6 +39,7 @@
   <strong>Show full path in playlist</strong>
 </label>
 
+<!-- Open app data -->
 <label class="settings-item">
   <span class="pull-right">
     <!-- <a href="file://$$TMPDIR" class="btn btn-xs btn-default">Open tmp folder</a> -->
