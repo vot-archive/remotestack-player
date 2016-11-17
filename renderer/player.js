@@ -300,7 +300,6 @@ var Player = {
     function executeWavesurferLoad (finalPath, trackdata) {
       RS.Utils.log('>> finalPath', finalPath);
       $('#waveform').css('visibility', 'hidden');
-      $('#waveform-loading').show();
 
       wavesurferObject.load(finalPath);
 
@@ -321,9 +320,12 @@ var Player = {
     // }
 
     // reset track info
-    $('#currentArtist').text('Loading').addClass('animated pulse');
+    $('#currentArtist').text('').addClass('animated pulse');
     $('#currentTitle').text(source.url).addClass('animated pulse');
+
+    $('#waveform-loading').text('RESOLVING').show();
     $('#waveform').css('visibility', 'hidden');
+
     // reset time
     _self.updateTrackTime(true);
 
@@ -334,7 +336,15 @@ var Player = {
 
     _interpretPlaylistItem(source, function (trackdata) {
       RS.Utils.log('>> _interpretPlaylistItem returned', _.omit(trackdata, 'raw'));
+
+      if (trackdata.source === 'youtube' && !trackdata.playbackUrl) {
+        RS.Utils.log('ERR! empty playbackUrl, stopping', _.omit(trackdata, 'raw'));
+        $('#waveform-loading').text('ERROR').show();
+        return false;
+      }
       _self.populateTrackinfo();
+      $('#waveform-loading').text('BUFFERING').show();
+
 
       updateCurrentTrack(trackdata);
 
@@ -465,15 +475,42 @@ var Player = {
   },
 
   toggleRepeat: function () {
+    var _self = this;
     var initial = PlaylistLib.getRepeat();
-    PlaylistLib.setRepeat(!initial);
-    return !initial;
+    var newVal = !initial;
+    PlaylistLib.setRepeat(newVal);
+    _self.lightUpToggleRepeat();
+    return newVal;
   },
   toggleShuffle: function () {
+    var _self = this;
     var initial = PlaylistLib.getShuffle();
-    PlaylistLib.setShuffle(!initial);
-    return !initial;
+    var newVal = !initial;
+    PlaylistLib.setShuffle(newVal);
+    _self.lightUpToggleShuffle();
+    return newVal;
   },
+
+
+  lightUpToggleRepeat: function () {
+    var value = PlaylistLib.getRepeat();
+
+    if (value) {
+      $('*[data-toggle=repeat]').addClass('active');
+    } else {
+      $('*[data-toggle=repeat]').removeClass('active');
+    }
+  },
+
+  lightUpToggleShuffle:  function () {
+    var value = PlaylistLib.getShuffle();
+
+    if (value) {
+      $('*[data-toggle=shuffle]').addClass('active');
+    } else {
+      $('*[data-toggle=shuffle]').removeClass('active');
+    }
+  }
 
 };
 

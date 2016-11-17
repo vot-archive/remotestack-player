@@ -50,6 +50,9 @@
     Player.loadByIndex('active');
     Player.bindShortcuts();
 
+    Player.lightUpToggleRepeat();
+    Player.lightUpToggleShuffle();
+
     UI.bindShortcuts();
     UI.preventDragRedirections();
 

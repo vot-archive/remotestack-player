@@ -71,21 +71,11 @@ var UI = {
     });
 
     $('*[data-toggle=repeat]').click(function () {
-      var newVal = RS.Player.toggleRepeat();
-      if (newVal) {
-        $('*[data-toggle=repeat]').addClass('active');
-      } else {
-        $('*[data-toggle=repeat]').removeClass('active');
-      }
+      RS.Player.toggleRepeat();
     });
 
     $('*[data-toggle=shuffle]').click(function () {
-      var newVal = RS.Player.toggleShuffle();
-      if (newVal) {
-        $('*[data-toggle=shuffle]').addClass('active');
-      } else {
-        $('*[data-toggle=shuffle]').removeClass('active');
-      }
+      RS.Player.toggleShuffle();
     });
 
 
@@ -312,7 +302,7 @@ var UI = {
 
     Array.prototype.forEach.call(links, function (link) {
       var url = link.getAttribute('href');
-      Utils.log('Caught a click to' + url);
+      Utils.log('Detected a link to "' + url + '"');
 
       if (url.indexOf('http') === 0) {
         link.addEventListener('click', function (e) {
