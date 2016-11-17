@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.23
+
+* Improved messaging
+* Storing Repeat and Shuffle as preferences
+* Extra key binds
+
+
+
 ## 0.0.22
 
 * Repeat and Shuffle
