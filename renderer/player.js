@@ -6,10 +6,11 @@ const PreferencesModel = require('../models/preferences');
 const PlaylistsModel = require('../models/playlists');
 const MarkupRenderer = require('../renderer/markup');
 
-function ensureWavesurfer() {
+function ensureWavesurfer(opts) {
   if (RS.Player.wavesurferObject) {
     return RS.Player.wavesurferObject;
   }
+  opts = opts || {};
 
   var wavesurfer = WaveSurfer.create({
       container: '#waveform',
@@ -44,6 +45,18 @@ function ensureWavesurfer() {
     RS.Player.applyVolumeSetting();
     RS.Player.updateTrackTime();
     RS.Player.populatePlaylist();
+
+    // postEvent
+    function onreadyFn () {
+      $('#waveform').css('visibility', 'visible');
+      $('#waveform-loading').hide();
+    }
+    if (typeof opts.onready === 'function') {
+      opts.onready();
+    } else {
+      onreadyFn();
+    }
+
 
     if (RS.Player.playing) {
       wavesurfer.play();
@@ -266,7 +279,36 @@ var Player = {
   load: function load (source) {
     console.log('hit populatePlaylist from RS.Player.load')
     var _self = this;
+
+
+    // updateCurrentTrack
+    function updateCurrentTrack (trackdata) {
+      var artist = _.get(trackdata, 'resolved.meta.canonical.artist', '');
+      var title = _.get(trackdata, 'resolved.meta.canonical.title', '');
+
+      if (!artist.length || !title.length) {
+        title = PlaylistLib.getDisplayTitle(trackdata);
+      }
+
+      $('#currentArtist').text(artist).removeClass('animated pulse');
+      $('#currentTitle').text(title).removeClass('animated pulse');
+
+      RS.Utils.log('Playlist entry resolved', artist, title);
+    }
+
+    // executeWavesurferLoad
+    function executeWavesurferLoad (finalPath, trackdata) {
+      RS.Utils.log('>> finalPath', finalPath);
+      $('#waveform').css('visibility', 'hidden');
+      $('#waveform-loading').show();
+
+      wavesurferObject.load(finalPath);
+
+    }
+
+    // populatePlaylist
     _self.populatePlaylist();
+
     if (!source) {
       return;
     }
@@ -277,35 +319,24 @@ var Player = {
     //     return;
     //   }
     // }
+
+    // reset track info
     $('#currentArtist').text('Loading').addClass('animated pulse');
     $('#currentTitle').text(source.url).addClass('animated pulse');
     $('#waveform').css('visibility', 'hidden');
     // reset time
     _self.updateTrackTime(true);
+
+    // initialise wavesurfer
     _self.ensureWavesurfer();
     var wavesurferObject = _self.wavesurferObject;
 
-    function executeWavesurferLoad (finalPath, trackdata) {
-      RS.Utils.log('>> finalPath', finalPath);
-      wavesurferObject.load(finalPath);
-
-      var artist = _.get(trackdata, 'resolved.meta.canonical.artist', '');
-      var title = _.get(trackdata, 'resolved.meta.canonical.title', '');
-
-      if (!artist.length || !title.length) {
-        title = PlaylistLib.getDisplayTitle(trackdata);
-      }
-
-      $('#currentArtist').text(artist).removeClass('animated pulse');
-      $('#currentTitle').text(title).removeClass('animated pulse');
-      $('#waveform').css('visibility', 'visible');
-
-      RS.Utils.log('Playlist entry resolved', artist, title);
-    }
 
     _interpretPlaylistItem(source, function (trackdata) {
       RS.Utils.log('>> _interpretPlaylistItem returned', _.omit(trackdata, 'raw'));
       _self.populateTrackinfo();
+
+      updateCurrentTrack(trackdata);
 
       if (trackdata.source === 'file') {
         return executeWavesurferLoad(trackdata.url, trackdata);
