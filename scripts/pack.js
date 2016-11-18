@@ -1,4 +1,5 @@
 const path = require('path');
+const fse = require('fs-extra');
 const exec = require('child_process').exec;
 const async = require('async');
 const clarg = require('clarg')();
@@ -92,8 +93,41 @@ function packOne (platform, callback) {
     if (stdout) console.log('[pack ' + platform + ']', stdout);
     if (stderr) console.log('[pack ' + platform + ']', stderr);
 
-    callback();
+    postPackOne(platform, callback);
   });
+}
+
+function postPackOne(platform, callback) {
+  // todo: rename dirs here
+  var nameIn;
+  var nameOut;
+  var version = require('../package.json').version;
+
+  if (platform === 'mac') {
+    nameIn = 'RemoteStack Player-darwin-x64';
+    nameOut = 'RemoteStack-Player-' + version + '-mac';
+  }
+  if (platform === 'win') {
+    nameIn = 'RemoteStack Player-win32-ia32';
+    nameOut = 'RemoteStack-Player-' + version + '-win';
+  }
+  if (platform === 'linux') {
+    nameIn = 'RemoteStack Player-linux-x64';
+    nameOut = 'RemoteStack-Player-' + version + '-linux';
+  }
+  if (platform === 'linux-arm') {
+    nameIn = 'RemoteStack Player-linux-armv7l';
+    nameOut = 'RemoteStack-Player-' + version + '-linux-arm';
+  }
+
+  if (nameIn && nameOut) {
+    console.log('Renaming:', nameIn, '->', nameOut);
+    nameIn = path.join(rootdir, 'dist', nameIn);
+    nameOut = path.join(rootdir, 'dist', nameOut);
+    fse.renameSync(nameIn, nameOut);
+
+    callback();
+  }
 }
 
 
