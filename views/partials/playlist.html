@@ -12,7 +12,8 @@
     <% _.each(playlist, function(i) { %>
       <% var classname = i.active ? 'active' : ''; %>
 
-      <li class="<%- classname %>"
+      <li id="<%- i.id %>"
+        class="<%- classname %>"
         data-index="<%- index %>"
         ondblclick="RS.Player.loadByIndex(<%- index %>);"
         oncontextmenu="RS.showContextMenu(this)">
@@ -25,3 +26,25 @@
     <% }); %>
 
   <% } %>
+<script>
+
+function getPlaylistOrder () {
+  return $('#nowplaying-playlist').sortable('toArray');
+}
+
+function savePlaylistOrder (newOrder) {
+  RS.Playlist.saveSort(newOrder);
+}
+
+$(document).ready(function () {
+  $('#nowplaying-playlist').sortable({
+    axis: 'y',
+    stop: function(event, ui) {
+      var newOrder = getPlaylistOrder();
+      savePlaylistOrder(newOrder);
+    }
+  });
+
+
+})
+</script>

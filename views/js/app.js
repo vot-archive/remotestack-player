@@ -19,8 +19,6 @@
       console.log(err);
     }
     if (!err && data) {
-      console.log(data);
-
       if (data.needsUpdate) {
         $('#updateNotice').show().html('Version ' + data.newest + ' available. <a href="' + data.url + '" class="btn btn-xs btn-default">Update</a>');
 
