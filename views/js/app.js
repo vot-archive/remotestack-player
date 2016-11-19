@@ -1,17 +1,35 @@
 (function(global) {
-  var os = require('os');
-  var fse = require('fs-extra');
-  var UI = require('../renderer/ui');
-  var Player = require('../renderer/player');
-  var Playlist = require('../lib/playlist');
-  var Utils = require('rs-base/utils');
-  var ipcEmitters = require('../lib/ipcEmitters');
-  var windowCtl = require('../lib/windowCtl');
+  const os = require('os');
+  const fse = require('fs-extra');
+  const UI = require('../renderer/ui');
+  const Player = require('../renderer/player');
+  const Playlist = require('../lib/playlist');
+  const Utils = require('rs-base/utils');
+  const ipcEmitters = require('../lib/ipcEmitters');
+  const windowCtl = require('../lib/windowCtl');
+  const checkForUpdates = require('./js/checkForUpdates');
 
-  var packageObj = fse.readJsonSync(__dirname + '/../package.json');
-  var appVersion = packageObj.version || '';
+  const packageObj = fse.readJsonSync(__dirname + '/../package.json');
+  const appVersion = packageObj.version || '';
 
-  var RS = {};
+  const RS = {};
+
+  checkForUpdates(function (err, data) {
+    if (err) {
+      console.log(err);
+    }
+    if (!err && data) {
+      console.log(data);
+
+      if (data.needsUpdate) {
+        $('#updateNotice').show().html('Version ' + data.newest + ' available. <a href="' + data.url + '" class="btn btn-xs btn-default">Update</a>');
+
+        UI.handleExternalLinks($('#updateNotice a'));
+      }
+    }
+  })
+
+
 
   RS.platform = os.type().toLowerCase();
   UI.mousewheelMultiplier = RS.platform === 'darwin' ? 0.5 : 1.5;

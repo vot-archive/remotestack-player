@@ -314,8 +314,8 @@ var UI = {
 
   },
 
-  handleExternalLinks: function () {
-    const links = document.querySelectorAll('a[href]');
+  handleExternalLinks: function (link) {
+    const links = link || document.querySelectorAll('a[href]');
 
     Array.prototype.forEach.call(links, function (link) {
       var url = link.getAttribute('href');
