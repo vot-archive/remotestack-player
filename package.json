@@ -1,6 +1,6 @@
 {
   "name": "remotestack-player",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "description": "RemoteStack Player app",
   "main": "main.js",
   "scripts": {

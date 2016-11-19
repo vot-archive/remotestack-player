@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.25
+
+* Defaults for window controls to fix missing buttons
+* Added new version notifications
+* Layering fix
+
+
 ## 0.0.24
 
 * Preferences for window controls
