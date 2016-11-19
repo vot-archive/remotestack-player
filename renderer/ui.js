@@ -36,7 +36,7 @@ var UI = {
 
     var wCtlStyle = PreferencesModel.get('ui.windowCtlStyle');
     if (!wCtlStyle) {
-      wCtlStyle = 'left';
+      wCtlStyle = 'generic';
     }
     RS.Utils.log('adding wCtl class:', wCtlStyle);
     $('#wCtls').addClass(wCtlStyle);
