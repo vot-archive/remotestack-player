@@ -1,5 +1,5 @@
 /* Defaults */
-html, body, .wrap, .containerBody, .mainContent {height: 100%}
+html, body, .wrap, .containerBody, .sidebar, .mainContent {height: 100%}
 body {background: transparent; font-size: 12px}
 * {cursor: default}
 table.table {font-size: 1em}
@@ -50,6 +50,7 @@ ul.list li .primary {color: black; text-decoration: none}
 .containerBody {padding: 0 10px; position: fixed; top:0; bottom: 0; width: 100%; overflow: hidden; -webkit-user-select: none}
 .containerBody {background: transparent}
 .containerBody ul.list {margin: 0 -10px}
+.selectable {-webkit-user-select: all}
 
 
 
@@ -77,6 +78,7 @@ body {/*-webkit-app-region: drag;*/ -webkit-user-select: none; cursor: default}
 h1, h2, h3, h4, h5 {font-weight: 300; margin: 0; text-decoration: none}
 h1 {font-weight: 100}
 h2 {font-size: 22px}
+h3 {font-size: 18px}
 h1 > * {font-weight: inherit !important}
 h1 strong {font-weight: 300 !important}
 h2 strong, h3 strong, h4 strong, h5 strong {font-weight: 400}
@@ -89,14 +91,6 @@ a, a:hover, a:focus {text-decoration: none; outline: none}
 
 hr {margin: 5px 0}
 
-
-@media screen and (max-height: 125px) {
-  .wrap .containerFooter {bottom: -20px}
-}
-
-@media screen and (max-height: 130px) {
-  #rsPlayerBrowser {visibility: hidden}
-}
 
 
 #wContainer .list .url {display:none}
