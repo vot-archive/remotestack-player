@@ -11,11 +11,11 @@
 #rsPlayerCurrent #timeContainer {font-weight: 200; font-size: 0.95em}
 
 
-#wContainer.dark .bg #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
-.rsPlayerControlsGroup, #wContainer.dark .bg .rsPlayerControlsGroup {color: #fff}
+#wContainer.dark .navContent #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
+.rsPlayerControlsGroup, #wContainer.dark .navContent .rsPlayerControlsGroup {color: #fff}
 
-#wContainer .bg .rsPlayerControlsGroup {color: #5a5a5a}
-#wContainer .bg #rsPlayerControls .btn-default {color: #5a5a5a}
+#wContainer .navContent .rsPlayerControlsGroup {color: #5a5a5a}
+#wContainer .navContent #rsPlayerControls .btn-default {color: #5a5a5a}
 .rsPlayerControlsGroup {padding: 0 10px}
 
 #rsPlayerBrowser {position:fixed; top: 120px; width: 100%}
@@ -32,13 +32,13 @@
 
 
 
-/*#wContainer.light .bg #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #D5D5D5 0%, #EBEBEB 100%)}*/
-#wContainer.light .bg #rsPlayerBrowser .tabs li {color: #999}
-#wContainer.light .bg #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; color: #404040}
+/*#wContainer.light .navContent #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #D5D5D5 0%, #EBEBEB 100%)}*/
+#wContainer.light .navContent #rsPlayerBrowser .tabs li {color: #999}
+#wContainer.light .navContent #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; color: #404040}
 
-/*#wContainer.dark .bg #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #111 0%, #1f1f1f 100%)}*/
-#wContainer.dark .bg #rsPlayerBrowser .tabs li {color: #ccc}
-#wContainer.dark .bg #rsPlayerBrowser .tabs li.active {color: #eee}
+/*#wContainer.dark .navContent #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #111 0%, #1f1f1f 100%)}*/
+#wContainer.dark .navContent #rsPlayerBrowser .tabs li {color: #ccc}
+#wContainer.dark .navContent #rsPlayerBrowser .tabs li.active {color: #eee}
 
 
 
@@ -52,7 +52,7 @@
 .urlentry input {color: #333; border-style: solid; border-width: 0 0 1px 0; border-color: #aaa; padding: 6px; text-align: left}
 .urlentry input:hover, .urlentry input:active, .urlentry input:focus, .urlentry button:hover, .urlentry button:active, .urlentry button:focus {outline: none; border-color: #ffa100}
 
-.bg ul.list li.active .title {color: #cc7f2a}
+.navContent ul.list li.active .title {color: #cc7f2a}
 
 #notifications {position: absolute; z-index: 11; top: 40px; width: 90%; margin: 0 5%; padding: 15px 10px; max-height: 70px; text-align: center; overflow: hidden; display: none;
   background: #fff; font-weight: 300; font-size: 12px; line-height: 14px; color: #777; border: 1px solid #f90; box-shadow: 0 0 70px #888}
@@ -88,8 +88,8 @@
 #wContainer .playerCtl {color: #AAA; /*text-shadow: 0 1px 0 white;*/}
 #wContainer.dark .playerCtl {color: #555}
 
-#wContainer .bg, #wContainer .playerCtl.active {color: #525252}
-#wContainer.dark .bg, #wContainer.dark .playerCtl.active {color: white}
+#wContainer .navContent, #wContainer .playerCtl.active {color: #525252}
+#wContainer.dark .navContent, #wContainer.dark .playerCtl.active {color: white}
 
 .playerCtl .fa-fw {font-size: 14px}
 .playerCtl.big .fa-fw {font-size: 20px}
