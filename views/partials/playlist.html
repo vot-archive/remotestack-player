@@ -26,25 +26,18 @@
     <% }); %>
 
   <% } %>
+
 <script>
-
-function getPlaylistOrder () {
-  return $('#nowplaying-playlist').sortable('toArray');
-}
-
-function savePlaylistOrder (newOrder) {
-  RS.Playlist.saveSort(newOrder);
-}
-
 $(document).ready(function () {
   $('#nowplaying-playlist').sortable({
     axis: 'y',
+    placeholder: 'placeholder',
+    forcePlaceholderSize: true,
+    revert: 150,
     stop: function(event, ui) {
-      var newOrder = getPlaylistOrder();
-      savePlaylistOrder(newOrder);
+      var newOrder = RS.Playlist.readPlaylistOrderFromUI();
+      RS.Playlist.saveSort(newOrder);
     }
   });
-
-
 })
 </script>

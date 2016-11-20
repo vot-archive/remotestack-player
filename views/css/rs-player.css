@@ -186,3 +186,6 @@
 #rsPlayerBrowser .tabs li.pull-right {
   padding: 9px 3px;
 }
+
+
+.list .placeholder {height: 28px; background: #555 !important; border: 1px solid #999; padding:0; display: block;}
