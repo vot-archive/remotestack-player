@@ -78,6 +78,9 @@ var UI = {
   renderPartial: MarkupRenderer.renderPartial,
   renderTemplate: MarkupRenderer.renderTemplate,
 
+  /**
+   * Binds all data binds and shortcuts
+   */
   bindShortcuts: function bindShortcuts () {
     var _self = this;
     Utils.log('bindShortcuts called');
@@ -220,29 +223,53 @@ var UI = {
       return false;
     }
   },
+
+  /**
+   * New URL input binding
+   button.data('addUrlId')
+   */
   bindURLInput: function bindURLInput(id) {
     const _self = this;
-    const inputEl = $('#' + (id || 'urlinput'));
+    // let inputEl = $('#' + (id || 'urlinput'));
 
-    function addURLToPlaylist () {
-      if (inputEl.val()) {
-        RS.Playlist.add({url: inputEl.val(), source: 'youtube', type: 'audio'});
-        RS.Player.populatePlaylist();
-        RS.displayNotification('Track added');
+    function addURLToPlaylist (inputEl) {
+      var urls = inputEl.val().split('\n');
+      if (urls && urls.length) {
+        _.each(urls, function (url) {
+          url = url.trim();
+          if (url.length) {
+            RS.Playlist.add({url: url, source: 'youtube', type: 'audio'});
+          }
+        })
+
+        $('.modal').modal('hide');
         inputEl.val('');
+
+        RS.displayNotification(urls.length > 1? 'Tracks added' : 'Track added');
+        RS.Player.populatePlaylist();
         return true;
       }
     }
 
-    $('.urlentry .btn').on('click', function () {
-      addURLToPlaylist();
+    $('*[data-toggle=addurl]').click(function () {
+      console.log('clicked on addurl toggle');
+      var inputEl = $('#' + $(this).data('addurlInput'));
+      addURLToPlaylist(inputEl);
     });
 
-    inputEl.on('keydown', function (e) {
-      if (e.which === 13) {
-        e.preventDefault();
-        addURLToPlaylist();
-      }
+    var urlInputs = [];
+
+    $('*[data-addurl-input]').each(function () {
+      // urlInputs.push($(this).data('addurlInput'));
+      var inputId = $(this).data('addurlInput');
+      var inputEl = $('#' + inputId);
+
+      inputEl.on('keydown', function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.which === 13) {
+          e.preventDefault();
+          addURLToPlaylist(inputEl);
+        }
+      });
     });
   },
   bindTabs: function bindTabs (containerId) {
@@ -254,6 +281,9 @@ var UI = {
 
     $('li', tabs).click(function () {
       var destination = $(this).data('tabDestination');
+      if (!destination) {
+        return;
+      }
       $('li', tabs).removeClass('active');
       $(this).addClass('active');
       console.log('tabDestination', destination);

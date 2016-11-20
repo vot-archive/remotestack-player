@@ -107,6 +107,7 @@ code.key {font-family: inherit; font-weight: 500; padding: 2px 5px;}
 
 table.spaced th {padding: 3px 1px;}
 label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
+label.settings-item select {width:80px}
 
 /*
  * LIGHT THEME
