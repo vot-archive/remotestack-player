@@ -7,6 +7,8 @@ const electron = require('electron');
 const shell = electron.shell;
 const MarkupRenderer = require('./markup');
 
+const webFrame = electron.webFrame;
+webFrame.setZoomLevelLimits(1, 1);
 
 // Utils.log('settingsPath: ', PreferencesModel.getLocation());
 // Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
