@@ -65,6 +65,16 @@ function ensureWavesurfer(opts) {
     $(window).resize(function() {
       // RS.Utils.log('Window resize');
       wavesurfer.drawBuffer();
+
+      var openModals = $('.modal.in');
+      if (openModals.length) {
+        var modalsMinHeight = 400;
+        var height = $(document).height();
+        if (height < modalsMinHeight) {
+          $('.modal').modal('hide');
+        }
+      }
+
     });
   });
 
