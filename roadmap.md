@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Next features
+* Multiple playlists + feeds
 * UI: Improve adding of URLs (modal)
 * Data flow: Default remote sources to audio formats; video on request
 * UI: Custom range inputs
