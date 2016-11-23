@@ -105,21 +105,33 @@ body.dark .navContent, body.dark .playerCtl.active {color: white}
 #waveform wave {overflow: hidden !important}
 /*#waveform {bottom: -20px; position: fixed; width: 100%; margin: 0 -10px;}*/
 
+/*#waveform, #waveform * {-webkit-transition: all 100ms ease}*/
+#waveform, #waveform * {
+  transition-property: margin-top, height;
+  transition-duration: 100ms, 50ms;
+  transition-delay: 20ms, 10ms;
+}
+
 @media screen and (max-height: 115px) {
+  #rsPlayerControls {display: none}
+}
+
+@media screen and (max-height: 100px) {
   #waveform {height: 30px;}
   #waveform > * {margin-top: -5px;}
 }
 
-@media screen and (max-height: 100px) {
+@media screen and (max-height: 70px) {
   #waveform {height: 20px;}
   #waveform > * {margin-top: -10px;}
 }
 
-@media screen and (max-height: 90px) {
+/*@media screen and (max-height: 70px) {
   #waveform {height: 10px;}
   #waveform > * {margin-top: -15px;}
-}
-@media screen and (max-height: 80px) {
+}*/
+
+@media screen and (max-height: 55px) {
   #waveform {height: 4px; margin-top: 2px}
   #waveform > * {margin-top: -18px;}
   /*#waveform {display: none}*/
