@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.27
+
+* Updated URL updating, nav strip
+* Small UI fixes
+
+
+
 ## 0.0.26
 
 * Sortable playlist
