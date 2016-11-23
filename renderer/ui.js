@@ -249,6 +249,10 @@ var UI = {
 
         RS.displayNotification(urls.length > 1? 'Tracks added' : 'Track added');
         RS.Player.populatePlaylist();
+
+        // Back to playlist
+        $('.tabs li[data-tab-destination=playlist]').click();
+
         return true;
       }
     }
