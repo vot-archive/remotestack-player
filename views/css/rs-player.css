@@ -11,10 +11,10 @@
 #rsPlayerCurrent #timeContainer {font-weight: 200; font-size: 0.95em}
 
 
-#wContainer.dark .navContent #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
-.rsPlayerControlsGroup, #wContainer.dark .navContent .rsPlayerControlsGroup {color: #fff}
+body.dark .navContent #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
+body.dark .navContent .rsPlayerControlsGroup {color: #fff}
+body.light .navContent .rsPlayerControlsGroup {color: #5a5a5a}
 
-#wContainer .navContent .rsPlayerControlsGroup {color: #5a5a5a}
 #wContainer .navContent #rsPlayerControls .btn-default {color: #5a5a5a}
 .rsPlayerControlsGroup {padding: 0 10px}
 
@@ -32,13 +32,16 @@
 
 
 
-/*#wContainer.light .navContent #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #D5D5D5 0%, #EBEBEB 100%)}*/
-#wContainer.light .navContent #rsPlayerBrowser .tabs li {color: #999}
-#wContainer.light .navContent #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; color: #404040}
 
-/*#wContainer.dark .navContent #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #111 0%, #1f1f1f 100%)}*/
-#wContainer.dark .navContent #rsPlayerBrowser .tabs li {color: #ccc}
-#wContainer.dark .navContent #rsPlayerBrowser .tabs li.active {color: #eee}
+/*body.light .navContent #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #D5D5D5 0%, #EBEBEB 100%)}*/
+body.light .navContent #rsPlayerBrowser .tabs {background: rgba(195, 195, 195, 0.35); box-shadow: inset 0 1px 1px #BBB; border-bottom: 1px solid #c3c3c3;}
+body.light .navContent #rsPlayerBrowser .tabs li {color: #999}
+body.light .navContent #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; color: #404040}
+
+/*body.dark .navContent #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #111 0%, #1f1f1f 100%)}*/
+body.dark .navContent #rsPlayerBrowser .tabs {background: rgb(16, 16, 16); box-shadow: inset 0 1px 1px #101010; border-bottom: 1px solid #171717}
+body.dark .navContent #rsPlayerBrowser .tabs li {color: #ccc}
+body.dark .navContent #rsPlayerBrowser .tabs li.active {color: #eee}
 
 
 
@@ -85,11 +88,11 @@
 #rsPlayerCurrent {margin-top:0; font-size: 0.95em}
 #rsPlayerTime {float: right; font-size: 0.9em}
 
-#wContainer .playerCtl {color: #AAA; /*text-shadow: 0 1px 0 white;*/}
-#wContainer.dark .playerCtl {color: #555}
+body .playerCtl {color: #AAA; /*text-shadow: 0 1px 0 white;*/}
+body.dark .playerCtl {color: #555}
 
-#wContainer .navContent, #wContainer .playerCtl.active {color: #525252}
-#wContainer.dark .navContent, #wContainer.dark .playerCtl.active {color: white}
+body .navContent, body .playerCtl.active {color: #525252}
+body.dark .navContent, body.dark .playerCtl.active {color: white}
 
 .playerCtl .fa-fw {font-size: 14px}
 .playerCtl.big .fa-fw {font-size: 20px}
@@ -201,7 +204,6 @@ textarea#urlinput {width: 100%; height:100px; resize:none; outline: none}
 
 
 .modal-content {
-  background: #efefef;
   margin-top: 149px;
   border-radius: 0 0 4px 4px;
 }
@@ -225,3 +227,10 @@ textarea#urlinput {width: 100%; height:100px; resize:none; outline: none}
 .modal-backdrop.in {
   opacity: 0.35;
 }
+
+
+
+body.light .modal-content {background: #efefef;}
+body.dark .modal-content {background: #222; color: #ccc;}
+body .list .url {display:none}
+body.showFullPath .list .url {display:block}

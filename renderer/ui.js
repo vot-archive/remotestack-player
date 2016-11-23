@@ -24,7 +24,7 @@ var UI = {
       theme = 'light';
     }
     RS.Utils.log('adding style class:', theme);
-    $('#wContainer').addClass(theme);
+    $('body').addClass(theme);
 
 
 
@@ -53,7 +53,7 @@ var UI = {
     }
 
     if (showFullPath) {
-      $('#wContainer').addClass('showFullPath');
+      $('body').addClass('showFullPath');
     }
   },
 
@@ -414,6 +414,22 @@ var UI = {
       var key = $(this).attr('name');
       var value = PreferencesModel.get(key) || false;
       $(this).val(value);
+    });
+  },
+
+
+  showContextMenu: function (ev) {
+    console.log($(ev).attr('id'));
+    // $('.context').contextmenu();
+
+    $.contextMenu({
+      selector: "#nowplaying-playlist li",
+      // define the elements of the menu
+      items: {
+        foo: {name: "Foo", callback: function(key, opt){ alert("Foo!"); }},
+        bar: {name: "Bar", callback: function(key, opt){ alert("Bar!") }}
+      }
+      // there's more, have a look at the demos and docs...
     });
   }
 };

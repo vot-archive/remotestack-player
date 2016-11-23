@@ -93,8 +93,6 @@ hr {margin: 5px 0}
 
 
 
-#wContainer .list .url {display:none}
-#wContainer.showFullPath .list .url {display:block}
 
 .well.subtle {margin: 30px auto 20px; max-width: 280px;}
 code.key {font-family: inherit; font-weight: 500; padding: 2px 5px;}
@@ -108,20 +106,20 @@ label.settings-item select {width:80px}
  */
 
 
-#wContainer.light .navContent {background: linear-gradient(to bottom, #fafafa 0px, #dadada 120px); color: black}
-#wContainer.light .navContent.cloudy {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.7) 0%, rgba(239, 239, 239, 0.23) 100%); color: black}
-#wContainer.light h1, #wContainer.light h2, #wContainer.light h3 {color: #3E3D3D; /*text-shadow: 0px 1px 1px #cecece;*/}
-#wContainer.light hr {border-top-color: #bbb}
+body.light .navContent {background: linear-gradient(to bottom, #fafafa 0px, #dadada 120px); color: black}
+body.light .navContent.cloudy {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.7) 0%, rgba(239, 239, 239, 0.23) 100%); color: black}
+body.light h1, body.light h2, body.light h3 {color: #3E3D3D; /*text-shadow: 0px 1px 1px #cecece;*/}
+body.light hr {border-top-color: #bbb}
 
-/*#wContainer.light .navContent h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}*/
-#wContainer.light .containerFooter a {color: #4c4c4c}
-#wContainer.light .containerFooter a span.fa-active{color: #d22}
+/*body.light .navContent h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}*/
+body.light .containerFooter a {color: #4c4c4c}
+body.light .containerFooter a span.fa-active{color: #d22}
 
-#wContainer.light .navContent ul.list li {background: #f3f0f0; color: black}
-#wContainer.light .navContent ul.list li:nth-child(2n) {background: #e8e7e7}
-#wContainer.light .subtle {color: #5a5a5a}
-#wContainer.light .well.subtle {background: rgba(255,255,255,0.4)}
-#wContainer.light code.key {color: #5a5a5a}
+body.light .navContent ul.list li {background: #f3f0f0; color: black}
+body.light .navContent ul.list li:nth-child(2n) {background: #e8e7e7}
+body.light .subtle {color: #5a5a5a}
+body.light .well.subtle {background: rgba(255,255,255,0.4)}
+body.light code.key {color: #5a5a5a}
 
 
 
@@ -129,19 +127,19 @@ label.settings-item select {width:80px}
  * DARK THEME
  */
 
-#wContainer.dark .navContent {background: linear-gradient(to bottom, #404040 0px, #101010 120px); color: #EFEFEF}
-#wContainer.dark .navContent.cloudy {background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.55) 100%); color: #EFEFEF}
-/*#wContainer.dark .navContent h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: #EFEFEF; text-shadow: none}*/
-#wContainer.dark .navContent ul.list li {background: #171717; color: #eee}
-#wContainer.dark .navContent ul.list li:nth-child(2n) {background: #101010}
-#wContainer.dark a {color: #cedef3}
-#wContainer.dark hr {#wContainer.light hr {border-top-color: #bbb}}
+body.dark .navContent {background: linear-gradient(to bottom, #404040 0px, #101010 120px); color: #EFEFEF}
+body.dark .navContent.cloudy {background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.55) 100%); color: #EFEFEF}
+/*body.dark .navContent h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: #EFEFEF; text-shadow: none}*/
+body.dark .navContent ul.list li {background: #171717; color: #eee}
+body.dark .navContent ul.list li:nth-child(2n) {background: #101010}
+body.dark a {color: #cedef3}
+body.dark hr {body.light hr {border-top-color: #bbb}}
 
 
-#wContainer.dark .containerFooter {background: #1f1f1f; border-top-color: #333;}
-#wContainer.dark .containerFooter a {color: #4c4c4c}
-#wContainer.dark .containerFooter a span.fa-active{color: #d22}
-#wContainer.dark .btn-default {background-color: #222; color: #efefef;}
-#wContainer.dark .subtle {color: #797979}
-#wContainer.dark .well.subtle {background: rgba(0,0,0,0.15)}
-#wContainer.dark code.key {color: #4c4c4c}
+body.dark .containerFooter {background: #1f1f1f; border-top-color: #333;}
+body.dark .containerFooter a {color: #4c4c4c}
+body.dark .containerFooter a span.fa-active{color: #d22}
+body.dark .btn-default {background-color: #222; color: #efefef;}
+body.dark .subtle {color: #797979}
+body.dark .well.subtle {background: rgba(0,0,0,0.15)}
+body.dark code.key {color: #4c4c4c}
