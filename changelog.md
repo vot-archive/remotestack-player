@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.28
+
+* Updated height-bound responsiveness
+
+
+
 ## 0.0.27
 
 * Updated URL updating, nav strip
