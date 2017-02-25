@@ -1,4 +1,4 @@
-var BaseModelJSON = require('rs-base/lib/BaseModelJSON');
+var BaseModelJSON = require('rs-base/electron/BaseModelJSON');
 var PreferencesModel;
 
 // var dataRoot = process.env.userData;

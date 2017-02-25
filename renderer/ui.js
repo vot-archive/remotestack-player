@@ -1,7 +1,7 @@
 const _ = require('lodash');
 var PreferencesModel = require('../models/preferences');
 const Utils = require('rs-base/utils');
-const FileUtils = require('rs-base/utils/files');
+const FileUtils = require('rs-base/utils/fileutils');
 const PlaylistLib = require('../lib/playlist');
 const electron = require('electron');
 const shell = electron.shell;
@@ -201,27 +201,28 @@ var UI = {
       holder = document.getElementById(id || 'filedrag');
     }
 
-    holder.ondragover = () => {
-      return false;
-    }
-    holder.ondragleave = holder.ondragend = () => {
+    holder.ondragover = holder.ondragleave = holder.ondragend = () => {
       return false;
     }
     holder.ondrop = (e) => {
-      e.preventDefault();
       console.log(e);
+      e.preventDefault();
+      var allFiles = [];
+
       for (let f of e.dataTransfer.files) {
         var filepath = f.path;
-        var allFiles = FileUtils.unfoldFiles(f.path);
+        var filesBatch = FileUtils.unfoldFiles(f.path);
+        allFiles = allFiles.concat(filesBatch);
 
-        _.each(allFiles, function (file) {
+        _.each(filesBatch, function (file) {
           RS.Playlist.add({url: file, source: 'file', type: 'audio'});
         })
 
         RS.Player.populatePlaylist();
-        var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
-        RS.displayNotification(message);
       }
+
+      var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
+      RS.displayNotification(message);
       return false;
     }
   },

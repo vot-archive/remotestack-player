@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const ytdl = require('rs-base/resolvers/lib/ytdl');
-const cache = require('rs-base/lib/filecache');
+const cache = require('rs-base/electron/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
 const PlaylistsModel = require('../models/playlists');
