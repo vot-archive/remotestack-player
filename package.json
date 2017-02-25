@@ -20,6 +20,6 @@
     "glob": "^7.0.6",
     "lodash": "^4.15.0",
     "request": "^2.74.0",
-    "rs-base": "file:../rs-base"
+    "remotestack": "file:../remotestack"
   }
 }

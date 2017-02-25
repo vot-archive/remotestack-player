@@ -15,7 +15,7 @@ app.setPath('userData', newUserDataPath);
 // const GlobalShortcuts = require('./lib/globalShortcuts');
 const WindowManager = require('./lib/windowManager');
 const StreamManager = require('./lib/streamManager');
-const Utils = require('rs-base/utils');
+const Utils = require('remotestack/utils');
 
 function initialise () {
   // Utils.log.rotatelog();

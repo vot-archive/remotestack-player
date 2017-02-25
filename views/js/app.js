@@ -4,7 +4,7 @@
   const UI = require('../renderer/ui');
   const Player = require('../renderer/player');
   const Playlist = require('../lib/playlist');
-  const Utils = require('rs-base/utils');
+  const Utils = require('remotestack/utils');
   const ipcEmitters = require('../lib/ipcEmitters');
   const windowCtl = require('../lib/windowCtl');
   const checkForUpdates = require('./js/checkForUpdates');
