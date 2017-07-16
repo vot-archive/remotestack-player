@@ -15,18 +15,11 @@ app.setPath('userData', newUserDataPath);
 // const GlobalShortcuts = require('./lib/globalShortcuts');
 const WindowManager = require('./lib/windowManager');
 const StreamManager = require('./lib/streamManager');
-const Utils = require('remotestack/utils');
+const Utils = require('./lib/utils');
 
 function initialise () {
   // Utils.log.rotatelog();
-  var welcomeBlock = [
-    '\x1b[33m',
-    '#####################################',
-    '######## RemoteStack Player #########',
-    '#####################################',
-    '\x1b[0m'
-  ];
-  Utils.log(welcomeBlock.join('\n'));
+  Utils.log('\x1b[33m' + '### RemoteStack Player' + '\x1b[0m');
   Utils.log('userdata:', app.getPath('userData'));
 
   WindowManager.ensure('main', {template: 'main', windowOpts: WindowManager.presets.main});

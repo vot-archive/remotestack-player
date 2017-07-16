@@ -1,4 +1,4 @@
-var BaseModelJSON = require('remotestack/electron/BaseModelJSON');
+var BaseModelJSON = require('../lib/electron/BaseModelJSON');
 var Playlists;
 
 // var dataRoot = process.env.userData;

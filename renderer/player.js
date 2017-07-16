@@ -1,6 +1,6 @@
 const _ = require('lodash');
-const ytdl = require('remotestack/resolvers/lib/ytdl');
-const cache = require('remotestack/electron/filecache');
+const ytdl = require('../lib/resolvers/lib/ytdl');
+const cache = require('../lib/electron/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
 const PlaylistsModel = require('../models/playlists');
@@ -247,7 +247,7 @@ var Player = {
   },
 
   applyVolumeSetting: function () {
-    RS.Utils.log('setting volume to', this.volume)
+    // RS.Utils.log('setting volume to', this.volume)
     this.ensureWavesurfer().setVolume(this.volume / 100);
     $('#rsPlayerVolume').val(this.volume);
   },
