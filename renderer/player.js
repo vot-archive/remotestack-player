@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const ytdl = require('../lib/resolvers/lib/ytdl');
+const urlgent = require('../lib/urlgent');
 const cache = require('../lib/electron/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
@@ -112,14 +112,15 @@ function _interpretPlaylistItem (item, cb) {
   }
 
   if (item.source === 'youtube') {
-    return ytdl(item.url, function (err, info) {
+    return urlgent(item.url, function (err, info) {
       // RS.Utils.log('resolved info:', info);
       if (err || !info) {
         item.playbackUrl = false;
       } else {
-        item.playbackUrl = info.preferredFormat.url;
+        item.playbackUrl = info.ytdl.preferredFormat.url;
+        // item.title = item.canonical.title;
       }
-      item.raw = info;
+      // item.raw = info;
 
       PlaylistLib.update({url: item.url}, item);
       cache.setJSON('meta-resolved', item.url, item);

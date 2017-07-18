@@ -10,6 +10,7 @@
 * Renderer: New common adapter to support webaudio and webvideo
 * Clean up playlist and resolutions (not all metadata is needed)
 * All UI to be data tag + event driven
+* ffmpeg for export conversions
 
 
 ## Known issues

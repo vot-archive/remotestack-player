@@ -8,7 +8,7 @@
     "pack": "node ./scripts/pack.js"
   },
   "author": "Vot Z <http://vot-z.com>",
-  "license": "",
+  "license": "MIT",
   "devDependencies": {
     "clarg": "0.0.3",
     "electron": "1.6.11",
@@ -20,11 +20,6 @@
     "glob": "^7.0.6",
     "lodash": "^4.16.4",
     "request": "^2.76.0",
-
-    "cheerio": "^0.22.0",
-    "mongoid-js": "^1.0.6",
-    "unfluff": "^1.1.0",
-    "uuid": "^2.0.3",
-    "youtube-dl": "^1.11.1"
+    "uuid": "^2.0.3"
   }
 }
