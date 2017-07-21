@@ -117,14 +117,14 @@ function _interpretPlaylistItem (item, cb) {
       if (err || !info) {
         item.playbackUrl = false;
       } else {
-        item.playbackUrl = info.ytdl.preferredFormat.url;
-        // item.title = item.canonical.title;
+        item.playbackUrl = info.canonical.preferred.url;
+        item.title = info.canonical.title;
       }
       // item.raw = info;
 
       PlaylistLib.update({url: item.url}, item);
       cache.setJSON('meta-resolved', item.url, item);
-      console.log('playlist updated');
+      // console.log('playlist updated');
       return cb(item);
     });
   }
