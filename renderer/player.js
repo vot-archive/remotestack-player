@@ -117,8 +117,8 @@ function _interpretPlaylistItem (item, cb) {
       if (err || !info) {
         item.playbackUrl = false;
       } else {
-        item.playbackUrl = info.canonical.preferred.url;
-        item.title = info.canonical.title;
+        item.playbackUrl = (info.media.audio.url || info.media.video.url);
+        item.title = info.title;
       }
       // item.raw = info;
 
