@@ -5,7 +5,6 @@
   const Player = require('../renderer/player');
   const Playlist = require('../lib/playlist');
   const Utils = require('../lib/utils');
-  const ipcEmitters = require('../lib/ipcEmitters');
   const windowCtl = require('../lib/windowCtl');
   const checkForUpdates = require('./js/checkForUpdates');
 
@@ -53,7 +52,6 @@
   RS.UI = UI;
   RS.Utils = Utils;
   RS.Window = windowCtl;
-  RS.IPC = ipcEmitters;
 
   global.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');
   global.RS = RS;
