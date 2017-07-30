@@ -1,8 +1,23 @@
 {
+  "extends": "eslint:recommended",
   "parserOptions": {
     "sourceType": "module"
   },
   "rules": {
-    "semi": 2
+    "semi": 2,
+    "no-console": 0
+  },
+  "globals": {
+      "$": true,
+      "console": true,
+      "document": true,
+      "RS": true,
+      "require": true,
+      "process": true,
+      "__dirname": true,
+      "window": true,
+      "module": true,
+      "WaveSurfer": true,
+      "alert": true
   }
 }

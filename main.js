@@ -4,7 +4,7 @@ const electron = require('electron');
 const app = electron.app;
 
 // set custom user data location
-var appDataPath = app.getPath('appData');
+// var appDataPath = app.getPath('appData');
 // var newUserDataPath = appDataPath + '/RemoteStackPlayer';
 // app.setPath('userData', newUserDataPath);
 

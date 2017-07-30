@@ -8,13 +8,15 @@ var renderers = {};
  * Generic lodash renderer
  */
 function render (template, data) {
+  var renderer;
+
   if (!renderers[template]) {
     var templateMarkup = fse.readFileSync(template);
-    var renderer = _.template(templateMarkup);
+    renderer = _.template(templateMarkup);
     // cache
     renderers[template] = renderer;
   } else {
-    var renderer = renderers[template];
+    renderer = renderers[template];
   }
 
   return renderer(data);

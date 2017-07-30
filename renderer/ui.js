@@ -193,7 +193,6 @@ var UI = {
   * Functions below migrated from NowPlaying
   */
   bindFiledrag: function bindFiledrag(id) {
-    const _self = this;
     let holder;
     if (!id) {
       holder = document;
@@ -204,13 +203,12 @@ var UI = {
     holder.ondragover = holder.ondragleave = holder.ondragend = () => {
       return false;
     };
-    holder.ondrop = (e) => {
+    holder.ondrop = function (e) {
       console.log(e);
       e.preventDefault();
       var allFiles = [];
 
       for (let f of e.dataTransfer.files) {
-        var filepath = f.path;
         var filesBatch = FileUtils.unfoldFiles(f.path);
         allFiles = allFiles.concat(filesBatch);
 
@@ -231,10 +229,7 @@ var UI = {
    * New URL input binding
    button.data('addUrlId')
    */
-  bindURLInput: function bindURLInput(id) {
-    const _self = this;
-    // let inputEl = $('#' + (id || 'urlinput'));
-
+  bindURLInput: function bindURLInput() {
     function addURLToPlaylist (inputEl) {
       var urls = inputEl.val().split('\n');
       if (urls && urls.length) {
@@ -264,10 +259,7 @@ var UI = {
       addURLToPlaylist(inputEl);
     });
 
-    var urlInputs = [];
-
     $('*[data-addurl-input]').each(function () {
-      // urlInputs.push($(this).data('addurlInput'));
       var inputId = $(this).data('addurlInput');
       var inputEl = $('#' + inputId);
 
@@ -424,18 +416,18 @@ var UI = {
 
 
   showContextMenu: function (ev) {
-    console.log($(ev).attr('id'));
+    console.log('showContextMenu', $(ev).attr('id'));
     // $('.context').contextmenu();
 
-    $.contextMenu({
-      selector: "#nowplaying-playlist li",
-      // define the elements of the menu
-      items: {
-        foo: {name: "Foo", callback: function(key, opt){ alert("Foo!"); }},
-        bar: {name: "Bar", callback: function(key, opt){ alert("Bar!"); }}
-      }
-      // there's more, have a look at the demos and docs...
-    });
+    // $.contextMenu({
+    //   selector: "#nowplaying-playlist li",
+    //   // define the elements of the menu
+    //   items: {
+    //     foo: {name: "Foo", callback: function(key, opt){ alert("Foo!"); }},
+    //     bar: {name: "Bar", callback: function(key, opt){ alert("Bar!"); }}
+    //   }
+    //   // there's more, have a look at the demos and docs...
+    // });
   }
 };
 

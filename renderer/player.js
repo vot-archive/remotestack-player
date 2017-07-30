@@ -133,17 +133,6 @@ function _interpretPlaylistItem (item, cb) {
   return cb(item);
 }
 
-function _getPlaylistItem (item, cb) {
-  var key = item.playbackUrl;
-  var cached = cache.getFile('item', key);
-  if (cached) {
-    return cb(cached);
-  }
-  cache.fetchFile(key, function (filepath) {
-    return filepath;
-  });
-}
-
 var Player = {
   // state
   // queue: PlaylistsModel.get('default.playlist'),
@@ -308,7 +297,7 @@ var Player = {
     }
 
     // executeWavesurferLoad
-    function executeWavesurferLoad (finalPath, trackdata) {
+    function executeWavesurferLoad (finalPath) {
       RS.Utils.log('>> finalPath', finalPath);
       $('#waveform').css('visibility', 'hidden');
 
@@ -382,7 +371,7 @@ var Player = {
     $('#nowplaying-playlist').html(markup);
     _self.populateTrackinfo();
 
-    PlaylistsModel.once('default.playlist', evt => {
+    PlaylistsModel.once('default.playlist', function () {
       console.log('Playlist changed, refreshing');
       _self.populatePlaylist();
     });
