@@ -7,6 +7,7 @@
   const Utils = require('../lib/utils');
   const windowCtl = require('../lib/windowCtl');
   const checkForUpdates = require('./js/checkForUpdates');
+  const ipcEmitter = require('../lib/ipc/emitter');
 
   const packageObj = fse.readJsonSync(__dirname + '/../package.json');
   const appVersion = packageObj.version || '';
@@ -24,7 +25,7 @@
         UI.handleExternalLinks($('#updateNotice a'));
       }
     }
-  })
+  });
 
 
 
@@ -39,19 +40,22 @@
   RS.renderPartial = function (partial, data) {
     console.log('RS.renderPartial called with', partial, data);
     return UI.renderPartial(partial, data);
-  }
+  };
 
   RS.renderTemplate = function (template, data) {
     data.appVersion = appVersion;
     console.log('RS.renderTemplate called with', template, data);
     return UI.renderTemplate(template, data);
-  }
+  };
 
   RS.Playlist = Playlist;
   RS.Player = Player;
   RS.UI = UI;
   RS.Utils = Utils;
   RS.Window = windowCtl;
+  RS.IPCEmitter = ipcEmitter;
+
+  RS.showContextMenu = RS.UI.showContextMenu;
 
   global.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');
   global.RS = RS;
@@ -79,19 +83,7 @@
 
     UI.assignPreferencesCheckboxDefaults();
     UI.assignPreferencesInputDefaults();
-
-    // enumerate devices
-    // navigator.mediaDevices.enumerateDevices()
-    // .then(function(devices) {
-    //   RS.devices = {
-    //     audioOut: devices.filter(function (d) {return d.kind === 'audiooutput'}),
-    //     audioIn: devices.filter(function (d) {return d.kind === 'audioinput'})
-    //   };
-    // })
-    // .catch(function(err) {
-    //   console.log(err.name + ": " + err.message);
-    // });
   });
 
 
-}(window))
+}(window));

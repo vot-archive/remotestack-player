@@ -80,7 +80,7 @@ function packOne (platform, callback) {
   ];
 
   ignoreList.forEach(function (i) {
-    args.push('--ignore=' + i)
+    args.push('--ignore=' + i);
   });
 
   var cmd = 'node ' + args.join(' ');
@@ -138,7 +138,7 @@ function pack(targets) {
     return allTargets.indexOf(tg) !== -1;
   });
   if (!buildTargets.length) {
-    console.log('No valid target platforms specified.\nSupported platforms are "mac", "win" and "linux".')
+    console.log('No valid target platforms specified.\nSupported platforms are "mac", "win" and "linux".');
     process.exit(1);
   }
   console.log('Target platforms:', buildTargets.join(', '), '\n');

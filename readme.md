@@ -17,4 +17,4 @@ Start the application with Electron: `electron main.js`.
 
 (If you don't have Electron installed on your system: `npm install electron -g`.)
 
-To see logs on Mac: `tail -f ~/Library/Application\ Support/RemoteStack/Player/app.log`.
+To see logs on Mac: `tail -f ~/Library/Application\ Support/RemoteStackPlayer/app.log`.

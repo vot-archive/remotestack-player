@@ -5,30 +5,21 @@ const app = electron.app;
 
 // set custom user data location
 var appDataPath = app.getPath('appData');
-var newUserDataPath = appDataPath + '/RemoteStack/Player';
-
-app.setPath('userData', newUserDataPath);
-// process.env.userData = newUserDataPath;
-// global.userDataDir = newUserDataPath;
-// global.getGlobal('userDataDir')
+// var newUserDataPath = appDataPath + '/RemoteStackPlayer';
+// app.setPath('userData', newUserDataPath);
 
 // const GlobalShortcuts = require('./lib/globalShortcuts');
 const WindowManager = require('./lib/windowManager');
 const Utils = require('./lib/utils');
 
-function initialise () {
+function start () {
   // Utils.log.rotatelog();
-  Utils.log('\x1b[33m' + '### RemoteStack Player' + '\x1b[0m');
   Utils.log('userdata:', app.getPath('userData'));
-
-  WindowManager.ensure('main', {template: 'main', windowOpts: WindowManager.presets.main});
   // GlobalShortcuts.registerAll();
 
-  // register IPC listeners
-  // require('./lib/ipcListeners');
+  WindowManager.create('main');
+  require('./lib/ipc/listeners/main');
 }
-
-
 
 function preQuitRoutine () {
   Utils.log('preQuitRoutine');
@@ -46,9 +37,7 @@ function preQuitRoutine () {
   app.quit();
 }
 
-
-
-// Quit when all WindowManager are closed.
+// Quit when all windows are closed.
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') {
     app.quit();
@@ -56,12 +45,9 @@ app.on('window-all-closed', function () {
 });
 
 app.on('will-quit', preQuitRoutine);
-
-// This method will be called when Electron has finished
-app.on('ready', initialise);
+app.on('ready', start);
 
 app.on('activate', function () {
-  // Utils.log('app.activate emitted - application brought back from taskbar', this should probably ensure the main window exists and give it focus');
-  WindowManager.ensure('main', {template: 'main', windowOpts: WindowManager.presets.main});
-  WindowManager.instances['main'].show();
+  // app brought back from taskbar: ensure the main window exists and give it focus
+  WindowManager.create('main').show();
 });

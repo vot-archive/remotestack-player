@@ -31,7 +31,7 @@ function ensureWavesurfer(opts) {
   $('#WSPlay').off();
   $('#WSPlay').on('click', function () {
     wavesurfer.playPause();
-  })
+  });
 
   wavesurfer.on('error', function (e) {
     console.log('wavesurfer error', e);
@@ -141,7 +141,7 @@ function _getPlaylistItem (item, cb) {
   }
   cache.fetchFile(key, function (filepath) {
     return filepath;
-  })
+  });
 }
 
 var Player = {
@@ -171,10 +171,10 @@ var Player = {
     }
 
     // state = state || audioTag.paused || true;
-    RS.Utils.log('state:', state)
+    RS.Utils.log('state:', state);
 
     if (typeof state !== 'boolean') {
-      RS.Utils.log('audioTag.paused:', audioTag.paused)
+      RS.Utils.log('audioTag.paused:', audioTag.paused);
       state = audioTag.paused || false;
     }
 
@@ -242,7 +242,7 @@ var Player = {
     if (vol < 0) vol = 0;
     if (this.volume !== vol) {
       this.volume = vol;
-      PreferencesModel.set('settings.volume', vol)
+      PreferencesModel.set('settings.volume', vol);
       this.applyVolumeSetting();
     }
   },
@@ -288,7 +288,7 @@ var Player = {
     return this.load(PlaylistLib.get()[index]);
   },
   load: function load (source) {
-    console.log('hit populatePlaylist from RS.Player.load')
+    console.log('hit populatePlaylist from RS.Player.load');
     var _self = this;
 
 
@@ -383,7 +383,7 @@ var Player = {
     _self.populateTrackinfo();
 
     PlaylistsModel.once('default.playlist', evt => {
-      console.log('Playlist changed, refreshing')
+      console.log('Playlist changed, refreshing');
       _self.populatePlaylist();
     });
   },

@@ -73,7 +73,7 @@ var UI = {
       var markup = _self.renderTemplate(template, data);
       $(tag).after(markup);
       $(tag).remove();
-    })
+    });
   },
 
 
@@ -203,7 +203,7 @@ var UI = {
 
     holder.ondragover = holder.ondragleave = holder.ondragend = () => {
       return false;
-    }
+    };
     holder.ondrop = (e) => {
       console.log(e);
       e.preventDefault();
@@ -216,7 +216,7 @@ var UI = {
 
         _.each(filesBatch, function (file) {
           RS.Playlist.add({url: file, source: 'file', type: 'audio'});
-        })
+        });
 
         RS.Player.populatePlaylist();
       }
@@ -224,7 +224,7 @@ var UI = {
       var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
       RS.displayNotification(message);
       return false;
-    }
+    };
   },
 
   /**
@@ -243,7 +243,7 @@ var UI = {
           if (url.length) {
             RS.Playlist.add({url: url, source: 'youtube', type: 'audio'});
           }
-        })
+        });
 
         $('.modal').modal('hide');
         inputEl.val('');
@@ -314,10 +314,10 @@ var UI = {
     var currentWidth = $(window).width();
 
     if (shouldShow) {
-      window.resizeTo(currentWidth, playlistThresholds[1])
+      window.resizeTo(currentWidth, playlistThresholds[1]);
       $('*[data-toggle=playlist]').addClass('active');
     } else {
-      window.resizeTo(currentWidth, playlistThresholds[0])
+      window.resizeTo(currentWidth, playlistThresholds[0]);
       $('*[data-toggle=playlist]').removeClass('active');
     }
   },
@@ -360,14 +360,14 @@ var UI = {
 
       if (url.indexOf('http') === 0) {
         link.addEventListener('click', function (e) {
-          e.preventDefault()
+          e.preventDefault();
           shell.openExternal(url);
         });
       }
 
       if (url.indexOf('file') === 0) {
         link.addEventListener('click', function (e) {
-          e.preventDefault()
+          e.preventDefault();
           url = url.replace('file://', '');
 
 
@@ -382,7 +382,7 @@ var UI = {
           shell.openItem(url);
         });
       }
-    })
+    });
   },
 
   //
@@ -432,7 +432,7 @@ var UI = {
       // define the elements of the menu
       items: {
         foo: {name: "Foo", callback: function(key, opt){ alert("Foo!"); }},
-        bar: {name: "Bar", callback: function(key, opt){ alert("Bar!") }}
+        bar: {name: "Bar", callback: function(key, opt){ alert("Bar!"); }}
       }
       // there's more, have a look at the demos and docs...
     });
