@@ -19,6 +19,9 @@ var UI = {
    * Resolves theme and user preferences
    */
   resolveUIPreferences: function resolveUIPreferences () {
+    $('body').removeClass();
+    $('#wCtls').removeClass();
+
     var theme = PreferencesModel.get('ui.theme');
     if (!theme) {
       theme = 'light';
@@ -270,27 +273,7 @@ var UI = {
       });
     });
   },
-  bindTabs: function bindTabs (containerId) {
-    $('.tabContent', container).hide();
 
-    var container = $('#' + containerId);
-    var tabs = $('ul.tabs', container);
-    // var content = $('.tabContent', container);
-
-    $('li', tabs).click(function () {
-      var destination = $(this).data('tabDestination');
-      if (!destination) {
-        return;
-      }
-      $('li', tabs).removeClass('active');
-      $(this).addClass('active');
-      console.log('tabDestination', destination);
-      $('.tabContent', container).hide();
-      $('.tabContent[rel=' + destination + ']', container).show();
-    });
-
-    // $('ul.tabs li:first', container).trigger('click');
-  },
   togglePlaylist: function togglePlaylist () {
     // var activeId = $('.mainContent .navContent.active').attr('id');
     // var isActive = activeId === 'nowplaying';
