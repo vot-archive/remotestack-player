@@ -61,24 +61,23 @@ var UI = {
   /**
    * Renders templates and partials and loads them into DOM
    */
-  loadAppTemplates: function loadAppTemplates (data) {
+  renderPartialTags: function renderPartialTags (data) {
     var _self = this;
     data = data || {};
 
-    var templateTags = $('rsTemplate');
-    _.forEach(templateTags, function (tag) {
-      var template = $(tag).data('name');
+    var partialTags = $('partial');
+    _.forEach(partialTags, function (tag) {
+      var view = $(tag).data('view');
 
-      console.log('processing template tag:', template);
-      var markup = _self.renderTemplate(template, data);
+      console.log('processing partial:', view);
+      var markup = _self.render('partials/' + view, data);
       $(tag).after(markup);
       $(tag).remove();
     });
   },
 
 
-  renderPartial: MarkupRenderer.renderPartial,
-  renderTemplate: MarkupRenderer.renderTemplate,
+  render: MarkupRenderer.render,
 
   /**
    * Binds all data binds and shortcuts
@@ -290,7 +289,7 @@ var UI = {
       $('.tabContent[rel=' + destination + ']', container).show();
     });
 
-    $('ul.tabs li:first', container).trigger('click');
+    // $('ul.tabs li:first', container).trigger('click');
   },
   togglePlaylist: function togglePlaylist () {
     // var activeId = $('.mainContent .navContent.active').attr('id');
@@ -417,17 +416,6 @@ var UI = {
 
   showContextMenu: function (ev) {
     console.log('showContextMenu', $(ev).attr('id'));
-    // $('.context').contextmenu();
-
-    // $.contextMenu({
-    //   selector: "#nowplaying-playlist li",
-    //   // define the elements of the menu
-    //   items: {
-    //     foo: {name: "Foo", callback: function(key, opt){ alert("Foo!"); }},
-    //     bar: {name: "Bar", callback: function(key, opt){ alert("Bar!"); }}
-    //   }
-    //   // there's more, have a look at the demos and docs...
-    // });
   }
 };
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Settings</title>
+</head>
+<body>
+
+  <!-- Theme -->
+  <label class="settings-item">
+    <span class="pull-right">
+      <select name="ui.theme" onchange="RS.UI.handlePreferencesInputChange(this)">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </span>
+    <strong>Theme</strong>
+  </label>
+
+  <!-- Window controls position -->
+  <label class="settings-item">
+    <span class="pull-right">
+      <select name="ui.windowCtlPosition" onchange="RS.UI.handlePreferencesInputChange(this)">
+        <option value="left">Left</option>
+        <option value="right">Right</option>
+      </select>
+    </span>
+    <strong>Window controls position</strong>
+  </label>
+
+  <!-- Window controls style -->
+  <label class="settings-item">
+    <span class="pull-right">
+      <select name="ui.windowCtlStyle" onchange="RS.UI.handlePreferencesInputChange(this)">
+        <option value="generic">Generic</option>
+        <option value="mac">Mac</option>
+      </select>
+    </span>
+    <strong>Window controls style</strong>
+  </label>
+
+  <!-- Show full path -->
+  <label class="settings-item">
+    <span class="pull-right">
+      <input type="checkbox" value="ui.showFullPath" onchange="RS.UI.handlePreferencesCheckboxChange(this)" />
+    </span>
+    <strong>Show full path in playlist</strong>
+  </label>
+
+  <!-- Open app data -->
+  <label class="settings-item">
+    <span class="pull-right">
+      <!-- <a href="file://$$TMPDIR" class="btn btn-xs btn-default">Open tmp folder</a> -->
+      <a href="file://$$USERDATA" class="btn btn-xs btn-default">Open app data folder</a>
+    </span>
+    <strong>Data storage</strong>
+  </label>
+
+  <br /><br />
+
+
+  <assets style="display: none">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/rs-base.css">
+    <link rel="stylesheet" href="css/rs-windowCtl.css">
+    <link rel="stylesheet" href="css/rs-player.css">
+
+    <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script src="js/app.js"></script>
+
+    <link rel="icon" type="image/png" href="icons/player-256.png">
+    <link rel="apple-touch-icon" href="icons/player-256.png">
+
+  </assets>
+
+</body>
+</html>

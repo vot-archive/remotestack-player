@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Help</title>
+</head>
+<body>
+
+
+  <div class="text-center" style="padding: 15px 0 25px">
+    <!-- <img src="icons/player-64.png" style="padding: 0 0 10px"> -->
+
+    <h2><strong>RemoteStack</strong> Player</h2>
+    <small class="subtle">(Alpha build <%- RS.version %>)</small>
+
+    <div id="updateNotice"></div>
+  </div>
+
+  <h5>Keyboard shortcuts: Player control</h5>
+  <hr />
+
+  <table class="spaced">
+    <tr>
+      <th width="100"><code class="key">Space</code></th>
+      <td>Play/Pause</td>
+    </tr>
+    <tr>
+      <th><code class="key">&darr;</code> and <code class="key">&uarr;</code></th>
+      <td>-/+ Volume</td>
+    </tr>
+    <tr>
+      <th><code class="key">&larr;</code> and <code class="key">&rarr;</code></th>
+      <td>-/+5 seconds</td>
+    </tr>
+    <tr>
+      <th><code class="key">,<!-- (&lt;) --></code> and <code class="key">.<!-- (&gt;) --></code></th>
+      <td>Previous/Next track</td>
+    </tr>
+    <tr>
+      <th><code class="key">P</code></th>
+      <td>Show/hide playlist</td>
+    </tr>
+    <tr>
+      <th><code class="key">R</code></th>
+      <td>Repeat playlist</td>
+    </tr>
+    <tr>
+      <th><code class="key">S</code></th>
+      <td>Shuffle playlist</td>
+    </tr>
+  </table>
+
+
+  <br /><br />
+  <h5>Controls</h5>
+  <hr />
+
+  <p>Mouse scroll and clicks in waveform area can be used to navigate the current track's progress.
+    Mouse scroll handler is also registered on volume control.</p>
+
+  <p>You can start with adding a track to an empty playlist.
+    Just drag a file from your hard drive and drop it in the playlist area.</p>
+
+  <p>In addition to that you can also add various online links to play them.
+    You can simply add a link to a video on YouTube or a track on Soundcloud
+    by pasting the link directly into the player.</p>
+
+  <br /><br /><br />
+
+  <assets style="display: none">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/rs-base.css">
+    <link rel="stylesheet" href="css/rs-windowCtl.css">
+    <link rel="stylesheet" href="css/rs-player.css">
+
+    <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script src="js/app.js"></script>
+
+    <link rel="icon" type="image/png" href="icons/player-256.png">
+    <link rel="apple-touch-icon" href="icons/player-256.png">
+
+  </assets>
+
+</body>
+</html>

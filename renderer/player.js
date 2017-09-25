@@ -367,7 +367,7 @@ var Player = {
     var list = PlaylistLib.get();
     // RS.Utils.log('populatePlaylist', _.map(list, 'url'));
 
-    var markup = MarkupRenderer.renderPartial('playlist', {playlist: list});
+    var markup = MarkupRenderer.render('partials/playlist', {playlist: list});
     $('#nowplaying-playlist').html(markup);
     _self.populateTrackinfo();
 
@@ -385,7 +385,7 @@ var Player = {
     RS.Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
 
     if (currentTrack) {
-      markup = MarkupRenderer.renderPartial('trackinfo', {currentTrack: currentTrack});
+      markup = MarkupRenderer.render('partials/trackinfo', {currentTrack: currentTrack});
     }
 
     container.html(markup);

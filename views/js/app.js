@@ -37,15 +37,9 @@
     $('#notifications').text(text).fadeIn(250).delay(3000).fadeOut(1000);
   };
 
-  RS.renderPartial = function (partial, data) {
-    console.log('RS.renderPartial called with', partial, data);
-    return UI.renderPartial(partial, data);
-  };
-
-  RS.renderTemplate = function (template, data) {
-    data.appVersion = appVersion;
-    console.log('RS.renderTemplate called with', template, data);
-    return UI.renderTemplate(template, data);
+  RS.render = function (view, data) {
+    console.log('RS.render called with', view, data);
+    return UI.render(view, data);
   };
 
   RS.Playlist = Playlist;
@@ -62,7 +56,7 @@
 
   $(document).ready(function () {
     UI.resolveUIPreferences();
-    UI.loadAppTemplates({appVersion: appVersion});
+    UI.renderPartialTags({appVersion: appVersion});
 
     Player.ensureWavesurfer();
     Player.loadByIndex('active');
