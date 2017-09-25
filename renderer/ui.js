@@ -382,16 +382,15 @@ var UI = {
   handlePreferencesCheckboxChange: function handlePreferencesCheckboxChange(input) {
     var key = $(input).val();
     var isChecked = $(input).is(':checked');
-    console.log('setting', key, 'to', isChecked);
-    PreferencesModel.set(key, !!isChecked);
-    window.location = window.location;
+    RS.IPCEmitter('update-setting', {key: key, value: isChecked});
   },
 
   handlePreferencesInputChange: function handlePreferencesInputChange(input) {
     var key = $(input).attr('name');
     var value = $(input).val();
-    PreferencesModel.set(key, value);
-    window.location = window.location;
+    // PreferencesModel.set(key, value);
+    // window.location = window.location;
+    RS.IPCEmitter('update-setting', {key: key, value: value});
   },
 
   assignPreferencesCheckboxDefaults: function assignPreferencesCheckboxDefaults() {

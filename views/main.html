@@ -8,66 +8,41 @@
 <body>
 
   <div id="wContainer" class="wrap">
-    <div id="wHeader">
-
-        <div id="wCtls">
-          <a href="#" class="windowCtl" data-toggle="window-app-quit">
-            <i class="generic fa fa-times fa-fw"></i>
-            <i class="mac btnClose"></i>
-          </a>
-
-          <a href="#" class="windowCtl" data-toggle="window-minimise">
-            <i class="generic fa fa-minus fa-fw"></i>
-            <i class="mac btnMinimize"></i>
-          </a>
-
-          <a href="#" class="windowCtl" data-toggle="window-maximise">
-            <i class="generic fa fa-plus fa-fw"></i>
-            <i class="mac btnMaximize"></i>
-          </a>
-        </div>
-
-    </div>
+    <partial data-view="window-controls"></partial>
 
     <div class="containerBody">
-        <div class="mainContent" id="wBody">
-          <div class="navContent" id="nowplaying">
-            <div class="inner">
-              <div id="notifications"></div>
-              <div id="waveform-loading"></div>
+      <div class="mainContent" id="wBody">
+        <div class="navContent" id="nowplaying">
+          <div class="inner">
+            <div id="notifications"></div>
+            <div id="waveform-loading"></div>
 
-              <partial data-view="player-controls"></partial>
+            <partial data-view="player-controls"></partial>
 
-              <div id="rsPlayerBrowser">
+            <ul id="windowTriggers">
+              <li onclick="RS.IPCEmitter('show-window', 'add')">
+                Add
+              </li>
 
-                <ul class="tabs">
-                    <li onclick="RS.IPCEmitter('show-window', 'add')">
-                      Add
-                    </li>
+              <li onclick="RS.IPCEmitter('show-window', 'settings')">
+                Settings
+              </li>
 
-                    <li onclick="RS.IPCEmitter('show-window', 'settings')">
-                      Settings
-                      <!-- <i class="fa fa-fw fa-cogs"></i> -->
-                    </li>
+              <li onclick="RS.IPCEmitter('show-window', 'help')">
+                Help
+              </li>
+            </ul>
 
-                    <li onclick="RS.IPCEmitter('show-window', 'help')">
-                      Help
-                      <!-- <i class="fa fa-fw fa-info"></i> -->
-                    </li>
-                </ul>
-
-                <!-- <div id="nowplaying-trackinfo"></div> -->
-                <ul class="list" id="nowplaying-playlist"></ul>
-              </div>
-
+            <div id="rsPlayerBrowser">
+              <ul class="list" id="nowplaying-playlist"></ul>
             </div>
-          </div>
 
+          </div>
         </div>
+
+      </div>
     </div>
   </div>
-
-  <!-- <rsTemplate data-name="modal-addUrl"></rsTemplate> -->
 
 
   <assets style="display: none">

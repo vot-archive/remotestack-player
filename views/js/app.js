@@ -55,15 +55,17 @@
   global.RS = RS;
 
   $(document).ready(function () {
-    UI.resolveUIPreferences();
     UI.renderPartialTags({appVersion: appVersion});
+    UI.resolveUIPreferences();
 
-    Player.ensureWavesurfer();
-    Player.loadByIndex('active');
-    Player.bindShortcuts();
+    if ($('#waveform').length) {
+      Player.ensureWavesurfer();
+      Player.loadByIndex('active');
+      Player.bindShortcuts();
 
-    Player.lightUpToggleRepeat();
-    Player.lightUpToggleShuffle();
+      Player.lightUpToggleRepeat();
+      Player.lightUpToggleShuffle();
+    }
 
     UI.bindShortcuts();
     UI.preventDragRedirections();

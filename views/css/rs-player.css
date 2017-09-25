@@ -22,29 +22,29 @@ body.light .navContent .rsPlayerControlsGroup {color: #5a5a5a}
 #rsPlayerBrowser h2 {margin-top: 0}
 .list .url {display: block;font-size: 0.85em; opacity: 0.7; height: 12px; overflow: hidden}
 
-#rsPlayerBrowser .tabs {height: 30px; display: block; margin: 0; padding: 0}
-#rsPlayerBrowser .tabs li {display: inline-block; font-size: 12px; line-height: 12px; padding: 9px 8px;}
-#rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; padding-bottom: 7px;}
+#windowTriggers {height: 30px; display: block; margin: 0; padding: 0}
+#windowTriggers li {display: inline-block; font-size: 12px; line-height: 12px; padding: 9px 8px;}
+#windowTriggers li.active {border-bottom: 1px solid #ffa100; padding-bottom: 7px;}
 
-#rsPlayerBrowser .tabContent {position: fixed; top: 150px; bottom: 0; width:100%; overflow: hidden; overflow-y: auto;}
+#rsPlayerBrowser {position: fixed; top: 150px; bottom: 0; width:100%; overflow: hidden; overflow-y: auto;}
 .containerBody #rsPlayerBrowser ul.list {margin: 0}
 .containerBody #rsPlayerBrowser ul.list li .title{height: 16px; display: list-item; overflow: hidden;}
 
 
 
 
-/*body.light .navContent #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #D5D5D5 0%, #EBEBEB 100%)}*/
-body.light .navContent #rsPlayerBrowser .tabs {background: rgba(195, 195, 195, 0.35); box-shadow: inset 0 1px 1px #BBB; border-bottom: 1px solid #c3c3c3;}
-body.light .navContent #rsPlayerBrowser .tabs li {color: #AAA}
-body.light .navContent #rsPlayerBrowser .tabs li.active {border-bottom: 1px solid #ffa100; color: #404040}
+/*body.light .navContent #windowTriggers {background: linear-gradient(to bottom, #D5D5D5 0%, #EBEBEB 100%)}*/
+body.light .navContent #windowTriggers {background: rgba(195, 195, 195, 0.35); box-shadow: inset 0 1px 1px #BBB; border-bottom: 1px solid #c3c3c3;}
+body.light .navContent #windowTriggers li {color: #AAA}
+body.light .navContent #windowTriggers li.active {border-bottom: 1px solid #ffa100; color: #404040}
 
-/*body.dark .navContent #rsPlayerBrowser .tabs {background: linear-gradient(to bottom, #111 0%, #1f1f1f 100%)}*/
-body.dark .navContent #rsPlayerBrowser .tabs {background: rgb(16, 16, 16); box-shadow: inset 0 1px 1px #101010; border-bottom: 1px solid #171717}
-body.dark .navContent #rsPlayerBrowser .tabs li {color: #999}
-body.dark .navContent #rsPlayerBrowser .tabs li.active {color: #eee}
+/*body.dark .navContent #windowTriggers {background: linear-gradient(to bottom, #111 0%, #1f1f1f 100%)}*/
+body.dark .navContent #windowTriggers {background: rgb(16, 16, 16); box-shadow: inset 0 1px 1px #101010; border-bottom: 1px solid #171717}
+body.dark .navContent #windowTriggers li {color: #999}
+body.dark .navContent #windowTriggers li.active {color: #eee}
 
 
-#rsPlayerBrowser .tabs li {text-transform: uppercase; font-weight: 200; letter-spacing: 1px}
+#windowTriggers li {text-transform: uppercase; font-weight: 200; letter-spacing: 1px}
 
 
 .filedrag {padding: 15px; margin: 5px; border: 3px solid; color: rgba(0,0,0,0.4); font-size: 14px; font-weight: 700; text-align: center; display: block; background: rgba(255,255,255,0.2);}
@@ -196,14 +196,9 @@ body.dark .navContent, body.dark .playerCtl.active {color: white}
 #wCtls {-webkit-transition: position 100ms linear}
 .windowCtl .fa, .playerCtl .fa {-webkit-transition: color 100ms linear}
 
-#rsPlayerBrowser .tabs li {-webkit-transition: color 100ms linear}
+#windowTriggers li {-webkit-transition: color 100ms linear}
 
 .navContent {display: block}
-
-#rsPlayerBrowser .tabs li.pull-right {
-  padding: 9px 3px;
-}
-
 
 .list .placeholder {height: 28px; background: #555 !important; border: 1px solid #999; padding:0; display: block;}
 .modal-content {margin-top:100px}
