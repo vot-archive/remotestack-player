@@ -6,6 +6,8 @@ const app = electron.app;
 const WindowManager = require('./lib/windowManager');
 const Utils = require('./lib/utils');
 
+Utils.log.rotatelog();
+
 function start () {
   Utils.log('userdata:', app.getPath('userData'));
 
