@@ -9,9 +9,13 @@ function isNewer(newest) {
   let va = appVersion.split('.');
   let vb = newest.split('.');
 
-  if (va[0] < vb[0]) return true;
-  if (va[1] < vb[1]) return true;
-  if (va[2] < vb[2]) return true;
+  if (va[0] < vb[0]) {
+    return true;
+  } else if (va[0] == vb[0] && va[1] < vb[1]) {
+    return true;
+  } else if (va[1] == vb[1] && va[2] < vb[2]) {
+    return true;
+  }
 
   return false;
 }
@@ -22,10 +26,8 @@ function checkForUpdates (callback) {
     return;
   }
 
-  const uri = 'http://remotestack.com/versions.json'
+  const uri = 'http://remotestack.com/versions.json';
   request.get({uri: uri}, function (err, response, body) {
-    // console.log({err});
-    // console.log({response});
 
     let newest;
     let url;
