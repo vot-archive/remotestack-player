@@ -1,20 +1,30 @@
 # RemoteStack Player
 
-A simple cross-platform audio player.
+Open-source cross-platform audio player.
+
+![RemoteStack Player Screenshot](https://remotestack.com/player/screen-main.png)
 
 
-## Quick start
+## Download
 
-You can download a packaged app for your system from
-http://remotestack.com/dist-alpha/player/.
-
-Unpack and use.
+You can download a portable zip for your system from
+[remotestack.com/player](https://remotestack.com/player/).
 
 
-## Development
+## Features
 
-Start the application with Electron: `electron main.js`.
+* Waveform-based seeking
+* Mixed online/local playlist
+* Themes and responsive design
+* Caching to reduce consumed bandwidth
+* Plays music from YouTube and other services
+* Works on Windows, Mac and Linux
 
-(If you don't have Electron installed on your system: `npm install electron -g`.)
 
-To see logs on Mac: `tail -f ~/Library/Application\ Support/RemoteStackPlayer/app.log`.
+## Dev machine setup
+
+1) Clone this repo (`git clone https://github.com/vot/remotestack-player`)
+
+2) Install dependencies (`npm install`)
+
+3) Start the application with `npm start`
