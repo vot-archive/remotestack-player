@@ -11,7 +11,7 @@ Utils.log.rotatelog();
 function start () {
   Utils.log('userdata:', app.getPath('userData'));
 
-  WindowManager.create('main');
+  WindowManager.create('player');
   require('./lib/ipc/listeners/main');
 }
 
@@ -36,5 +36,5 @@ app.on('ready', start);
 
 app.on('activate', function () {
   // app brought back from taskbar: ensure the main window exists and give it focus
-  WindowManager.create('main').show();
+  WindowManager.create('player').show();
 });

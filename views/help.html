@@ -9,10 +9,8 @@
 
 <div class="container-fluid">
   <div class="text-center" style="padding: 15px 0 25px">
-    <!-- <img src="icons/player-64.png" style="padding: 0 0 10px"> -->
-
     <h2><strong>RemoteStack</strong> Player</h2>
-    <small class="subtle">(Alpha build <%- RS.version %>)</small>
+    <small class="subtle">(<partial data-view="app-version"></partial>)</small>
 
     <div id="updateNotice"></div>
   </div>
@@ -70,21 +68,17 @@
 </div>
 
   <assets style="display: none">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-
+    <link rel="icon" type="image/png" href="icons/player-256.png">
+    <link rel="apple-touch-icon" href="icons/player-256.png">
+    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
     <link rel="stylesheet" href="css/rs-base.css">
     <link rel="stylesheet" href="css/rs-windowCtl.css">
     <link rel="stylesheet" href="css/rs-player.css">
+    <script>window.$ = window.jQuery = require('./js/libs/jquery-2.2.4.min.js');</script>
 
-    <script>window.$ = window.jQuery = require('./assets/js/jquery-2.2.4.min.js');</script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
+    <!-- specific to window -->
     <script src="js/app.js"></script>
-
-    <link rel="icon" type="image/png" href="icons/player-256.png">
-    <link rel="apple-touch-icon" href="icons/player-256.png">
-
+    <script src="js/help.js"></script>
   </assets>
 
 </body>

@@ -6,7 +6,6 @@
   const Playlist = require('../lib/playlist');
   const Utils = require('../lib/utils');
   const windowCtl = require('../lib/windowCtl');
-  const checkForUpdates = require('./js/checkForUpdates');
   const ipcEmitter = require('../lib/ipc/emitter');
 
   const packageObj = fse.readJsonSync(__dirname + '/../package.json');
@@ -14,28 +13,9 @@
 
   const RS = {};
 
-  checkForUpdates(function (err, data) {
-    if (err) {
-      console.log(err);
-    }
-    if (!err && data) {
-      if (data.needsUpdate) {
-        $('#updateNotice').show().html('Version ' + data.newest + ' available. <a href="' + data.url + '" class="btn btn-xs btn-default">Update</a>');
-
-        UI.handleExternalLinks($('#updateNotice a'));
-      }
-    }
-  });
-
-
-
   RS.platform = os.type().toLowerCase();
-  UI.mousewheelMultiplier = RS.platform === 'darwin' ? 0.5 : 1.5;
   RS.version = appVersion;
-
-  RS.displayNotification = function (text) {
-    $('#notifications').text(text).fadeIn(250).delay(3000).fadeOut(1000);
-  };
+  UI.mousewheelMultiplier = RS.platform === 'darwin' ? 0.5 : 1.5;
 
   RS.render = function (view, data) {
     console.log('RS.render called with', view, data);
@@ -51,35 +31,5 @@
 
   RS.showContextMenu = RS.UI.showContextMenu;
 
-  global.WaveSurfer = require('./assets/js/wavesurfer/wavesurfer.min.js');
   global.RS = RS;
-
-  $(document).ready(function () {
-    UI.renderPartialTags({appVersion: appVersion});
-    UI.resolveUIPreferences();
-
-    if ($('#waveform').length) {
-      Player.ensureWavesurfer();
-      Player.loadByIndex('active');
-      Player.bindShortcuts();
-
-      Player.lightUpToggleRepeat();
-      Player.lightUpToggleShuffle();
-    }
-
-    UI.bindShortcuts();
-    UI.preventDragRedirections();
-
-    UI.bindFiledrag();
-    UI.bindURLInput('urlinput');
-    UI.bindTabs('rsPlayerBrowser');
-
-    UI.initialiseButtonStates();
-    UI.handleExternalLinks();
-
-    UI.assignPreferencesCheckboxDefaults();
-    UI.assignPreferencesInputDefaults();
-  });
-
-
 }(window));

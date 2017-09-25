@@ -26,7 +26,7 @@ body.light .navContent .rsPlayerControlsGroup {color: #5a5a5a}
 #windowTriggers li {display: inline-block; font-size: 12px; line-height: 12px; padding: 9px 8px;}
 #windowTriggers li.active {border-bottom: 1px solid #ffa100; padding-bottom: 7px;}
 
-#rsPlayerBrowser {position: fixed; top: 150px; bottom: 0; width:100%; overflow: hidden; overflow-y: auto;}
+#rsPlayerBrowser {position: fixed; top: 145px; bottom: 0; width:100%; overflow: hidden; overflow-y: auto;}
 .containerBody #rsPlayerBrowser ul.list {margin: 0}
 .containerBody #rsPlayerBrowser ul.list li .title{height: 16px; display: list-item; overflow: hidden;}
 
