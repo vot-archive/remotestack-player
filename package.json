@@ -9,7 +9,7 @@
     "pack": "node ./scripts/pack.js"
   },
   "author": "Vot Z <http://vot-z.com>",
-  "license": "MIT",
+  "license": "GPL",
   "devDependencies": {
     "clarg": "0.0.3",
     "electron": "1.6.11",
