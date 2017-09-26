@@ -19,6 +19,9 @@ var UI = {
    * Resolves theme and user preferences
    */
   resolveUIPreferences: function resolveUIPreferences () {
+    $('body').removeClass();
+    $('#wCtls').removeClass();
+
     var theme = PreferencesModel.get('ui.theme');
     if (!theme) {
       theme = 'light';
@@ -61,24 +64,23 @@ var UI = {
   /**
    * Renders templates and partials and loads them into DOM
    */
-  loadAppTemplates: function loadAppTemplates (data) {
+  renderPartialTags: function renderPartialTags (data) {
     var _self = this;
     data = data || {};
 
-    var templateTags = $('rsTemplate');
-    _.forEach(templateTags, function (tag) {
-      var template = $(tag).data('name');
+    var partialTags = $('partial');
+    _.forEach(partialTags, function (tag) {
+      var view = $(tag).data('view');
 
-      console.log('processing template tag:', template);
-      var markup = _self.renderTemplate(template, data);
+      console.log('processing partial:', view);
+      var markup = _self.render('partials/' + view, data);
       $(tag).after(markup);
       $(tag).remove();
-    })
+    });
   },
 
 
-  renderPartial: MarkupRenderer.renderPartial,
-  renderTemplate: MarkupRenderer.renderTemplate,
+  render: MarkupRenderer.render,
 
   /**
    * Binds all data binds and shortcuts
@@ -193,7 +195,6 @@ var UI = {
   * Functions below migrated from NowPlaying
   */
   bindFiledrag: function bindFiledrag(id) {
-    const _self = this;
     let holder;
     if (!id) {
       holder = document;
@@ -203,20 +204,19 @@ var UI = {
 
     holder.ondragover = holder.ondragleave = holder.ondragend = () => {
       return false;
-    }
-    holder.ondrop = (e) => {
+    };
+    holder.ondrop = function (e) {
       console.log(e);
       e.preventDefault();
       var allFiles = [];
 
       for (let f of e.dataTransfer.files) {
-        var filepath = f.path;
         var filesBatch = FileUtils.unfoldFiles(f.path);
         allFiles = allFiles.concat(filesBatch);
 
         _.each(filesBatch, function (file) {
           RS.Playlist.add({url: file, source: 'file', type: 'audio'});
-        })
+        });
 
         RS.Player.populatePlaylist();
       }
@@ -224,82 +224,9 @@ var UI = {
       var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
       RS.displayNotification(message);
       return false;
-    }
+    };
   },
 
-  /**
-   * New URL input binding
-   button.data('addUrlId')
-   */
-  bindURLInput: function bindURLInput(id) {
-    const _self = this;
-    // let inputEl = $('#' + (id || 'urlinput'));
-
-    function addURLToPlaylist (inputEl) {
-      var urls = inputEl.val().split('\n');
-      if (urls && urls.length) {
-        _.each(urls, function (url) {
-          url = url.trim();
-          if (url.length) {
-            RS.Playlist.add({url: url, source: 'youtube', type: 'audio'});
-          }
-        })
-
-        $('.modal').modal('hide');
-        inputEl.val('');
-
-        RS.displayNotification(urls.length > 1? 'Tracks added' : 'Track added');
-        RS.Player.populatePlaylist();
-
-        // Back to playlist
-        $('.tabs li[data-tab-destination=playlist]').click();
-
-        return true;
-      }
-    }
-
-    $('*[data-toggle=addurl]').click(function () {
-      console.log('clicked on addurl toggle');
-      var inputEl = $('#' + $(this).data('addurlInput'));
-      addURLToPlaylist(inputEl);
-    });
-
-    var urlInputs = [];
-
-    $('*[data-addurl-input]').each(function () {
-      // urlInputs.push($(this).data('addurlInput'));
-      var inputId = $(this).data('addurlInput');
-      var inputEl = $('#' + inputId);
-
-      inputEl.on('keydown', function (e) {
-        if ((e.ctrlKey || e.metaKey) && e.which === 13) {
-          e.preventDefault();
-          addURLToPlaylist(inputEl);
-        }
-      });
-    });
-  },
-  bindTabs: function bindTabs (containerId) {
-    $('.tabContent', container).hide();
-
-    var container = $('#' + containerId);
-    var tabs = $('ul.tabs', container);
-    // var content = $('.tabContent', container);
-
-    $('li', tabs).click(function () {
-      var destination = $(this).data('tabDestination');
-      if (!destination) {
-        return;
-      }
-      $('li', tabs).removeClass('active');
-      $(this).addClass('active');
-      console.log('tabDestination', destination);
-      $('.tabContent', container).hide();
-      $('.tabContent[rel=' + destination + ']', container).show();
-    });
-
-    $('ul.tabs li:first', container).trigger('click');
-  },
   togglePlaylist: function togglePlaylist () {
     // var activeId = $('.mainContent .navContent.active').attr('id');
     // var isActive = activeId === 'nowplaying';
@@ -314,10 +241,10 @@ var UI = {
     var currentWidth = $(window).width();
 
     if (shouldShow) {
-      window.resizeTo(currentWidth, playlistThresholds[1])
+      window.resizeTo(currentWidth, playlistThresholds[1]);
       $('*[data-toggle=playlist]').addClass('active');
     } else {
-      window.resizeTo(currentWidth, playlistThresholds[0])
+      window.resizeTo(currentWidth, playlistThresholds[0]);
       $('*[data-toggle=playlist]').removeClass('active');
     }
   },
@@ -360,14 +287,14 @@ var UI = {
 
       if (url.indexOf('http') === 0) {
         link.addEventListener('click', function (e) {
-          e.preventDefault()
+          e.preventDefault();
           shell.openExternal(url);
         });
       }
 
       if (url.indexOf('file') === 0) {
         link.addEventListener('click', function (e) {
-          e.preventDefault()
+          e.preventDefault();
           url = url.replace('file://', '');
 
 
@@ -382,7 +309,7 @@ var UI = {
           shell.openItem(url);
         });
       }
-    })
+    });
   },
 
   //
@@ -391,16 +318,15 @@ var UI = {
   handlePreferencesCheckboxChange: function handlePreferencesCheckboxChange(input) {
     var key = $(input).val();
     var isChecked = $(input).is(':checked');
-    console.log('setting', key, 'to', isChecked);
-    PreferencesModel.set(key, !!isChecked);
-    window.location = window.location;
+    RS.IPCEmitter('update-setting', {key: key, value: isChecked});
   },
 
   handlePreferencesInputChange: function handlePreferencesInputChange(input) {
     var key = $(input).attr('name');
     var value = $(input).val();
-    PreferencesModel.set(key, value);
-    window.location = window.location;
+    // PreferencesModel.set(key, value);
+    // window.location = window.location;
+    RS.IPCEmitter('update-setting', {key: key, value: value});
   },
 
   assignPreferencesCheckboxDefaults: function assignPreferencesCheckboxDefaults() {
@@ -424,18 +350,7 @@ var UI = {
 
 
   showContextMenu: function (ev) {
-    console.log($(ev).attr('id'));
-    // $('.context').contextmenu();
-
-    $.contextMenu({
-      selector: "#nowplaying-playlist li",
-      // define the elements of the menu
-      items: {
-        foo: {name: "Foo", callback: function(key, opt){ alert("Foo!"); }},
-        bar: {name: "Bar", callback: function(key, opt){ alert("Bar!") }}
-      }
-      // there's more, have a look at the demos and docs...
-    });
+    console.log('showContextMenu', $(ev).attr('id'));
   }
 };
 

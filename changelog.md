@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0 - First open release
+
+* Licensed under GPL
+* Removed a lot of unused code
+* Simplified templating system
+* Consolidated code in one repository
+* Switched to remote resolver for higher reliability
+* Stopped fetching redundant video data - just audio
+* Split interface into multiple windows
+* Applying settings without restarting app
+
+
+
 ## 0.0.28
 
 * Updated height-bound responsiveness

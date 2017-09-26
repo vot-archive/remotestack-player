@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Add</title>
+</head>
+<body>
+
+
+  <!-- Modal -->
+  <div class="modal-header">
+    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+    <h4 class="modal-title" id="myModalLabel">Add URLs</h4>
+  </div>
+
+  <div class="modal-body">
+    <!-- <input type="text" value="" placeholder="URL" id="urlinput" /> -->
+    <textarea placeholder="URLs" id="urlinput"></textarea>
+
+    <p class="small text-center subtle">Various online services are supported. You can add multiple entries at once (each on a new line).</p>
+    <p class="small text-center subtle">Tip: you can add with <code>Ctrl/Cmd</code> + <code>Enter</code>.</p>
+  </div>
+
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button> -->
+    <button type="button" class="btn btn-sm btn-warning" data-toggle="addurl" data-addurl-input="urlinput">Add</button>
+  </div>
+
+
+  <assets style="display: none">
+    <link rel="icon" type="image/png" href="icons/player-256.png">
+    <link rel="apple-touch-icon" href="icons/player-256.png">
+    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
+    <link rel="stylesheet" href="css/rs-base.css">
+    <link rel="stylesheet" href="css/rs-windowCtl.css">
+    <link rel="stylesheet" href="css/rs-player.css">
+    <script>window.$ = window.jQuery = require('./js/libs/jquery-2.2.4.min.js');</script>
+
+    <!-- specific to window -->
+    <script src="js/app.js"></script>
+    <script src="js/add.js"></script>
+  </assets>
+
+</body>
+</html>

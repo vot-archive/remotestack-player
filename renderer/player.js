@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const ytdl = require('../lib/resolvers/lib/ytdl');
+const urlgent = require('../lib/urlgent');
 const cache = require('../lib/electron/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
@@ -31,7 +31,7 @@ function ensureWavesurfer(opts) {
   $('#WSPlay').off();
   $('#WSPlay').on('click', function () {
     wavesurfer.playPause();
-  })
+  });
 
   wavesurfer.on('error', function (e) {
     console.log('wavesurfer error', e);
@@ -112,35 +112,25 @@ function _interpretPlaylistItem (item, cb) {
   }
 
   if (item.source === 'youtube') {
-    return ytdl(item.url, function (err, info) {
+    return urlgent(item.url, function (err, info) {
       // RS.Utils.log('resolved info:', info);
       if (err || !info) {
         item.playbackUrl = false;
       } else {
-        item.playbackUrl = info.preferredFormat.url;
+        item.playbackUrl = (info.media.audio.url || info.media.video.url);
+        item.title = info.title;
       }
-      item.raw = info;
+      // item.raw = info;
 
       PlaylistLib.update({url: item.url}, item);
       cache.setJSON('meta-resolved', item.url, item);
-      console.log('playlist updated');
+      // console.log('playlist updated');
       return cb(item);
     });
   }
 
   // cache.setJSON('meta-resolved', item.url, item);
   return cb(item);
-}
-
-function _getPlaylistItem (item, cb) {
-  var key = item.playbackUrl;
-  var cached = cache.getFile('item', key);
-  if (cached) {
-    return cb(cached);
-  }
-  cache.fetchFile(key, function (filepath) {
-    return filepath;
-  })
 }
 
 var Player = {
@@ -170,10 +160,10 @@ var Player = {
     }
 
     // state = state || audioTag.paused || true;
-    RS.Utils.log('state:', state)
+    RS.Utils.log('state:', state);
 
     if (typeof state !== 'boolean') {
-      RS.Utils.log('audioTag.paused:', audioTag.paused)
+      RS.Utils.log('audioTag.paused:', audioTag.paused);
       state = audioTag.paused || false;
     }
 
@@ -241,7 +231,7 @@ var Player = {
     if (vol < 0) vol = 0;
     if (this.volume !== vol) {
       this.volume = vol;
-      PreferencesModel.set('settings.volume', vol)
+      PreferencesModel.set('settings.volume', vol);
       this.applyVolumeSetting();
     }
   },
@@ -287,7 +277,7 @@ var Player = {
     return this.load(PlaylistLib.get()[index]);
   },
   load: function load (source) {
-    console.log('hit populatePlaylist from RS.Player.load')
+    console.log('hit populatePlaylist from RS.Player.load');
     var _self = this;
 
 
@@ -307,7 +297,7 @@ var Player = {
     }
 
     // executeWavesurferLoad
-    function executeWavesurferLoad (finalPath, trackdata) {
+    function executeWavesurferLoad (finalPath) {
       RS.Utils.log('>> finalPath', finalPath);
       $('#waveform').css('visibility', 'hidden');
 
@@ -377,12 +367,12 @@ var Player = {
     var list = PlaylistLib.get();
     // RS.Utils.log('populatePlaylist', _.map(list, 'url'));
 
-    var markup = MarkupRenderer.renderPartial('playlist', {playlist: list});
+    var markup = MarkupRenderer.render('partials/playlist', {playlist: list});
     $('#nowplaying-playlist').html(markup);
     _self.populateTrackinfo();
 
-    PlaylistsModel.once('default.playlist', evt => {
-      console.log('Playlist changed, refreshing')
+    PlaylistsModel.once('default.playlist', function () {
+      console.log('Playlist changed, refreshing');
       _self.populatePlaylist();
     });
   },
@@ -395,7 +385,7 @@ var Player = {
     RS.Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
 
     if (currentTrack) {
-      markup = MarkupRenderer.renderPartial('trackinfo', {currentTrack: currentTrack});
+      markup = MarkupRenderer.render('partials/trackinfo', {currentTrack: currentTrack});
     }
 
     container.html(markup);
