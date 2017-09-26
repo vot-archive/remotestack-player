@@ -1,5 +1,8 @@
 # RemoteStack Player
 
+[![Current release](https://img.shields.io/github/release/vot/remotestack-player.svg)]()
+[![Downloads on Github](https://img.shields.io/github/downloads/vot/remotestack-player/total.svg)]()
+
 Open-source cross-platform audio player.
 
 ![RemoteStack Player Screenshot](https://remotestack.com/player/screen-main.png)
