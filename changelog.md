@@ -9,6 +9,7 @@
 * Switched to remote resolver for higher reliability
 * Stopped fetching redundant video data - just audio
 * Split interface into multiple windows
+* Applying settings without restarting app
 
 
 

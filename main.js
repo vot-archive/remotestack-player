@@ -16,9 +16,10 @@ function start () {
 }
 
 function preQuitRoutine () {
-  Utils.log('preQuitRoutine');
   Object.keys(WindowManager.instances).map(function (i) {
-    WindowManager.instances[i].hide();
+    if (WindowManager.instances[i] && WindowManager.instances[i].close) {
+      WindowManager.instances[i].close();
+    }
   });
 
   app.quit();

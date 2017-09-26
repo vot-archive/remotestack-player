@@ -227,53 +227,6 @@ var UI = {
     };
   },
 
-  /**
-   * New URL input binding
-   button.data('addUrlId')
-   */
-  bindURLInput: function bindURLInput() {
-    function addURLToPlaylist (inputEl) {
-      var urls = inputEl.val().split('\n');
-      if (urls && urls.length) {
-        _.each(urls, function (url) {
-          url = url.trim();
-          if (url.length) {
-            RS.Playlist.add({url: url, source: 'youtube', type: 'audio'});
-          }
-        });
-
-        $('.modal').modal('hide');
-        inputEl.val('');
-
-        RS.displayNotification(urls.length > 1? 'Tracks added' : 'Track added');
-        RS.Player.populatePlaylist();
-
-        // Back to playlist
-        $('.tabs li[data-tab-destination=playlist]').click();
-
-        return true;
-      }
-    }
-
-    $('*[data-toggle=addurl]').click(function () {
-      console.log('clicked on addurl toggle');
-      var inputEl = $('#' + $(this).data('addurlInput'));
-      addURLToPlaylist(inputEl);
-    });
-
-    $('*[data-addurl-input]').each(function () {
-      var inputId = $(this).data('addurlInput');
-      var inputEl = $('#' + inputId);
-
-      inputEl.on('keydown', function (e) {
-        if ((e.ctrlKey || e.metaKey) && e.which === 13) {
-          e.preventDefault();
-          addURLToPlaylist(inputEl);
-        }
-      });
-    });
-  },
-
   togglePlaylist: function togglePlaylist () {
     // var activeId = $('.mainContent .navContent.active').attr('id');
     // var isActive = activeId === 'nowplaying';
