@@ -1,4 +1,4 @@
-(function(global) {
+(function() {
   const UI = require('../renderer/ui');
   const _ = require('lodash');
 
@@ -44,4 +44,4 @@
   });
 
 
-}(window));
+}());
