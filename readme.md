@@ -1,4 +1,4 @@
-# ![RemoteStack Player - Open-source cross-platform audio player.](https://remotestack.com/player/gh-splash.png)
+![RemoteStack Player - Open-source cross-platform audio player.](https://remotestack.com/player/gh-splash.png)
 
 ![Current release](https://img.shields.io/github/release/vot/remotestack-player.svg)
 ![Downloads on Github](https://img.shields.io/github/downloads/vot/remotestack-player/total.svg)
