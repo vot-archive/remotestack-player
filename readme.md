@@ -1,11 +1,12 @@
 [![RemoteStack Player - Open-source cross-platform audio player.](https://remotestack.com/player/gh-splash.png)](https://remotestack.com/player)
 
-[![Current release](https://img.shields.io/github/release/vot/remotestack-player.svg)](https://github.com/vot/remotestack-player/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/vot/remotestack-player/total.svg)](https://github.com/vot/remotestack-player/releases/latest)
 [![Issues](https://img.shields.io/github/issues/vot/remotestack-player.svg)](https://github.com/vot/remotestack-player/issues)
 [![Build status](https://img.shields.io/circleci/project/github/vot/remotestack-player/master.svg)](https://circleci.com/gh/vot/remotestack-player/tree/master)
+[![Current release](https://img.shields.io/github/release/vot/remotestack-player.svg)](https://github.com/vot/remotestack-player/releases/latest)
+[![GPL-2.0 License](https://img.shields.io/badge/license-GPL--2.0-blue.svg)](https://spdx.org/licenses/GPL-2.0)
 
-
+ 
 ## Features
 
 * Mixed online/local playlist
