@@ -9,6 +9,8 @@ jobs:
       - image: circleci/node:7.10
 
     steps:
+      - run: sudo apt-get install wine -y
+
       - checkout
 
       # Download and cache dependencies
@@ -25,12 +27,14 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}-{{ arch }}
 
       - run: npm run lint
-      - run: npm run pack -- --targets mac,linux
+      - run: npm run pack -- --targets mac,linux,win
 
       - run: tar czf ./dist/RemoteStack-Player-linux.tar.gz ./dist/RemoteStack-Player-linux
       - run: tar czf ./dist/RemoteStack-Player-mac.tar.gz ./dist/RemoteStack-Player-mac
+      - run: tar czf ./dist/RemoteStack-Player-win.tar.gz ./dist/RemoteStack-Player-win
       - run: rm -r ./dist/RemoteStack-Player-linux
       - run: rm -r ./dist/RemoteStack-Player-mac
+      - run: rm -r ./dist/RemoteStack-Player-win
 
       - store_artifacts:
           path: ./dist
