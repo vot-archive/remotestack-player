@@ -5,9 +5,12 @@ jobs:
       - image: circleci/node:7.10
 
     steps:
-      - run: sudo dpkg --add-architecture i386 && sudo apt-get update
-      - run: sudo apt-get install wine32 -y
-      - run: sudo ln -s /usr/bin/wine32 /usr/bin/wine
+      - run:
+          name: Install Wine
+          command: |
+            sudo dpkg --add-architecture i386 && sudo apt-get update
+            sudo apt-get install wine32 -y
+            sudo ln -s /usr/bin/wine32 /usr/bin/wine
 
       - checkout
 
@@ -24,14 +27,38 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm run lint
-      - run: npm run pack -- --targets linux,mac,win
 
-      - run: tar czf ./dist/RemoteStack-Player-linux-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./dist/RemoteStack-Player-linux
-      - run: tar czf ./dist/RemoteStack-Player-mac-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./dist/RemoteStack-Player-mac
-      - run: cd dist && tar czf ./RemoteStack-Player-win-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
-      - run: rm -r ./dist/RemoteStack-Player-linux
-      - run: rm -r ./dist/RemoteStack-Player-mac
-      - run: rm -r ./dist/RemoteStack-Player-win
+      - run:
+          name: Build app for Linux
+          command: |
+            npm run pack -- --targets linux
+            cd dist && tar czf ./RemoteStack-Player-linux-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-linux
+            rm -r ./dist/RemoteStack-Player-linux
+
+      - run:
+          name: Build app for Mac
+          command: |
+            npm run pack -- --targets mac
+            cd dist && tar czf ./RemoteStack-Player-mac-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-mac
+            rm -r ./dist/RemoteStack-Player-mac
+
+      - run:
+          name: Build app for Windows
+          command: |
+            npm run pack -- --targets win
+            cd dist && tar czf ./RemoteStack-Player-win-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
+            rm -r ./dist/RemoteStack-Player-win
+
+
+      # - run: npm run pack -- --targets linux,mac,win
+      #
+      # - run: cd dist && tar czf ./RemoteStack-Player-linux-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-linux
+      # - run: cd dist && tar czf ./RemoteStack-Player-mac-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-mac
+      # - run: cd dist && tar czf ./RemoteStack-Player-win-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
+      #
+      # - run: rm -r ./dist/RemoteStack-Player-linux
+      # - run: rm -r ./dist/RemoteStack-Player-mac
+      # - run: rm -r ./dist/RemoteStack-Player-win
 
       - store_artifacts:
           path: ./dist
