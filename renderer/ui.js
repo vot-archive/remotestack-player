@@ -1,11 +1,13 @@
+'use strict';
+
 const _ = require('lodash');
-var PreferencesModel = require('../models/preferences');
+const PreferencesModel = require('../models/preferences');
 const Utils = require('../lib/utils');
 const FileUtils = require('../lib/utils/fileutils');
 const PlaylistLib = require('../lib/playlist');
 const electron = require('electron');
-const shell = electron.shell;
 const MarkupRenderer = require('./markup');
+const shell = electron.shell;
 
 const webFrame = electron.webFrame;
 webFrame.setZoomLevelLimits(1, 1);
@@ -13,16 +15,16 @@ webFrame.setZoomLevelLimits(1, 1);
 // Utils.log('settingsPath: ', PreferencesModel.getLocation());
 // Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
 
-var UI = {
+const UI = {
   mousewheelMultiplier: 1,
   /**
    * Resolves theme and user preferences
    */
-  resolveUIPreferences: function resolveUIPreferences () {
+  resolveUIPreferences: function resolveUIPreferences() {
     $('body').removeClass();
     $('#wCtls').removeClass();
 
-    var theme = PreferencesModel.get('ui.theme');
+    let theme = PreferencesModel.get('ui.theme');
     if (!theme) {
       theme = 'light';
     }
@@ -31,7 +33,7 @@ var UI = {
 
 
 
-    var wCtlPos = PreferencesModel.get('ui.windowCtlPosition');
+    let wCtlPos = PreferencesModel.get('ui.windowCtlPosition');
     if (!wCtlPos) {
       wCtlPos = 'left';
     }
@@ -39,7 +41,7 @@ var UI = {
     $('#wCtls').addClass(wCtlPos);
 
 
-    var wCtlStyle = PreferencesModel.get('ui.windowCtlStyle');
+    let wCtlStyle = PreferencesModel.get('ui.windowCtlStyle');
     if (!wCtlStyle) {
       wCtlStyle = 'generic';
     }
@@ -48,7 +50,7 @@ var UI = {
 
 
 
-    var showFullPath = PreferencesModel.get('ui.showFullPath');
+    let showFullPath = PreferencesModel.get('ui.showFullPath');
     console.log('showFullPath', showFullPath);
     if (typeof showFullPath === 'undefined') {
       showFullPath = false;
@@ -64,16 +66,16 @@ var UI = {
   /**
    * Renders templates and partials and loads them into DOM
    */
-  renderPartialTags: function renderPartialTags (data) {
-    var _self = this;
+  renderPartialTags: function renderPartialTags(data) {
+    const self = this;
     data = data || {};
 
-    var partialTags = $('partial');
+    const partialTags = $('partial');
     _.forEach(partialTags, function (tag) {
-      var view = $(tag).data('view');
+      const view = $(tag).data('view');
 
       console.log('processing partial:', view);
-      var markup = _self.render('partials/' + view, data);
+      const markup = self.render('partials/' + view, data);
       $(tag).after(markup);
       $(tag).remove();
     });
@@ -85,13 +87,13 @@ var UI = {
   /**
    * Binds all data binds and shortcuts
    */
-  bindShortcuts: function bindShortcuts () {
-    var _self = this;
+  bindShortcuts: function bindShortcuts() {
+    const self = this;
     Utils.log('bindShortcuts called');
 
     $('*[data-toggle=playlist]').click(function () {
       // resize window
-      _self.togglePlaylist();
+      self.togglePlaylist();
     });
 
     $('*[data-toggle=repeat]').click(function () {
@@ -121,8 +123,8 @@ var UI = {
 
 
 
-    $(document).on('keydown', function(e) {
-      var tag = e.target.tagName.toLowerCase();
+    $(document).on('keydown', function (e) {
+      const tag = e.target.tagName.toLowerCase();
       if (tag === 'input' || tag === 'textarea') {
         return;
       }
@@ -160,40 +162,42 @@ var UI = {
 
       if (e.which === 80) {
         Utils.log('P hit');
-        _self.togglePlaylist();
-        return e.preventDefault();
+        self.togglePlaylist();
+        e.preventDefault();
+        return;
       }
 
       if (e.which === 82 && !(e.ctrlKey || e.metaKey)) {
         Utils.log('R hit');
         RS.Player.toggleRepeat();
-        return e.preventDefault();
+        e.preventDefault();
+        return;
       }
 
       if (e.which === 83) {
         Utils.log('S hit');
         RS.Player.toggleShuffle();
-        return e.preventDefault();
+        e.preventDefault();
       }
     });
   },
 
 
   preventDragRedirections: function preventDragRedirections() {
-    document.addEventListener('dragover',function(event){
+    document.addEventListener('dragover', function (event) {
       event.preventDefault();
       return false;
-    },false);
+    }, false);
 
-    document.addEventListener('drop',function(event){
+    document.addEventListener('drop', function (event) {
       event.preventDefault();
       return false;
-    },false);
+    }, false);
   },
 
- /**
-  * Functions below migrated from NowPlaying
-  */
+  /**
+   * Functions below migrated from NowPlaying
+   */
   bindFiledrag: function bindFiledrag(id) {
     let holder;
     if (!id) {
@@ -202,43 +206,44 @@ var UI = {
       holder = document.getElementById(id || 'filedrag');
     }
 
-    holder.ondragover = holder.ondragleave = holder.ondragend = () => {
+    holder.ondragover = holder.ondragleave = holder.ondragend = function onDragFinish() {
       return false;
     };
+
     holder.ondrop = function (e) {
       console.log(e);
       e.preventDefault();
-      var allFiles = [];
+      let allFiles = [];
 
-      for (let f of e.dataTransfer.files) {
-        var filesBatch = FileUtils.unfoldFiles(f.path);
+      for (const f of e.dataTransfer.files) {
+        const filesBatch = FileUtils.unfoldFiles(f.path);
         allFiles = allFiles.concat(filesBatch);
 
         _.each(filesBatch, function (file) {
-          RS.Playlist.add({url: file, source: 'file', type: 'audio'});
+          RS.Playlist.add({ url: file, source: 'file', type: 'audio' });
         });
 
         RS.Player.populatePlaylist();
       }
 
-      var message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
+      const message = allFiles.length > 1 ? 'Tracks added' : 'Track added';
       RS.displayNotification(message);
       return false;
     };
   },
 
-  togglePlaylist: function togglePlaylist () {
-    // var activeId = $('.mainContent .navContent.active').attr('id');
-    // var isActive = activeId === 'nowplaying';
+  togglePlaylist: function togglePlaylist() {
+    // let activeId = $('.mainContent .navContent.active').attr('id');
+    // let isActive = activeId === 'nowplaying';
     // if (!isActive) {
     //   return;
     // }
 
     // TODO add 35 as a third step and always size forward
 
-    var playlistThresholds = [128, 420];
-    var shouldShow = $(window).height() < playlistThresholds[0]+1;
-    var currentWidth = $(window).width();
+    const playlistThresholds = [128, 420];
+    const shouldShow = $(window).height() < playlistThresholds[0] + 1;
+    const currentWidth = $(window).width();
 
     if (shouldShow) {
       window.resizeTo(currentWidth, playlistThresholds[1]);
@@ -249,10 +254,10 @@ var UI = {
     }
   },
 
-  initialiseButtonStates: function () {
-    var playlistActive = $(window).height() > 128+1;
-    var repeatActive = PlaylistLib.getRepeat();
-    var shuffleActive = PlaylistLib.getShuffle();
+  initialiseButtonStates: function initialiseButtonStates() {
+    const playlistActive = $(window).height() > 128 + 1;
+    const repeatActive = PlaylistLib.getRepeat();
+    const shuffleActive = PlaylistLib.getShuffle();
 
     if (playlistActive) {
       $('*[data-toggle=playlist]').addClass('active');
@@ -275,25 +280,24 @@ var UI = {
     console.log('playlistActive', playlistActive);
     console.log('repeatActive', repeatActive);
     console.log('shuffleActive', shuffleActive);
-
   },
 
-  handleExternalLinks: function (link) {
+  handleExternalLinks: function handleExternalLinks(link) {
     const links = link || document.querySelectorAll('a[href]');
 
-    Array.prototype.forEach.call(links, function (link) {
-      var url = link.getAttribute('href');
+    Array.prototype.forEach.call(links, function (l) {
+      let url = l.getAttribute('href');
       Utils.log('Detected a link to "' + url + '"');
 
       if (url.indexOf('http') === 0) {
-        link.addEventListener('click', function (e) {
+        l.addEventListener('click', function (e) {
           e.preventDefault();
           shell.openExternal(url);
         });
       }
 
       if (url.indexOf('file') === 0) {
-        link.addEventListener('click', function (e) {
+        l.addEventListener('click', function (e) {
           e.preventDefault();
           url = url.replace('file://', '');
 
@@ -316,23 +320,23 @@ var UI = {
   // PREFERENCES
   //
   handlePreferencesCheckboxChange: function handlePreferencesCheckboxChange(input) {
-    var key = $(input).val();
-    var isChecked = $(input).is(':checked');
-    RS.IPCEmitter('update-setting', {key: key, value: isChecked});
+    const key = $(input).val();
+    const isChecked = $(input).is(':checked');
+    RS.IPCEmitter('update-setting', { key, value: isChecked });
   },
 
   handlePreferencesInputChange: function handlePreferencesInputChange(input) {
-    var key = $(input).attr('name');
-    var value = $(input).val();
+    const key = $(input).attr('name');
+    const value = $(input).val();
     // PreferencesModel.set(key, value);
     // window.location = window.location;
-    RS.IPCEmitter('update-setting', {key: key, value: value});
+    RS.IPCEmitter('update-setting', { key, value });
   },
 
   assignPreferencesCheckboxDefaults: function assignPreferencesCheckboxDefaults() {
     $('.settings-item input[type="checkbox"]').each(function () {
-      var key = $(this).val();
-      var isChecked = PreferencesModel.get(key) || false;
+      const key = $(this).val();
+      const isChecked = PreferencesModel.get(key) || false;
       $(this).prop('checked', isChecked);
     });
   },
@@ -342,16 +346,16 @@ var UI = {
       if ($(this).attr('type') === 'checkbox') {
         return;
       }
-      var key = $(this).attr('name');
-      var value = PreferencesModel.get(key) || false;
+      const key = $(this).attr('name');
+      const value = PreferencesModel.get(key) || false;
       $(this).val(value);
     });
   },
 
 
-  showContextMenu: function (ev) {
+  showContextMenu: function showContextMenu(ev) {
     console.log('showContextMenu', $(ev).attr('id'));
-  }
+  },
 };
 
 module.exports = UI;

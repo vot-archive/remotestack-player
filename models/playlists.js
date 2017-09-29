@@ -1,11 +1,13 @@
-var BaseModelJSON = require('../lib/electron/BaseModelJSON');
-var Playlists;
+'use strict';
 
-// var dataRoot = process.env.userData;
+const BaseModelJSON = require('../lib/electron/BaseModelJSON');
+let Playlists;
+
+// let dataRoot = process.env.userData;
 const electron = require('electron');
 const app = electron.app || electron.remote.app;
 const dataRoot = app.getPath('userData');
-var filename = dataRoot + '/Playlists.json';
+const filename = dataRoot + '/Playlists.json';
 
 console.log('Playlists storing at ' + filename);
 

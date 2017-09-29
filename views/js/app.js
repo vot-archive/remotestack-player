@@ -1,4 +1,6 @@
-(function(global) {
+'use strict';
+
+(function (global) {
   const os = require('os');
   const fse = require('fs-extra');
   const UI = require('../renderer/ui');

@@ -1,18 +1,21 @@
-var _ = require('lodash');
-var fse = require('fs-extra');
+'use strict';
+
+const _ = require('lodash');
+const fse = require('fs-extra');
+const path = require('path');
 
 // Cache the template renderers
-var renderers = {};
+const renderers = {};
 
 /**
  * Generic lodash renderer
  */
-function render (template, data) {
-  var renderer;
+function render(template, data) {
+  let renderer;
 
   if (!renderers[template]) {
-    var filename = __dirname + '/../views/' + template + '.html';
-    var templateMarkup = fse.readFileSync(filename);
+    const filename = path.join(__dirname, '/../views/' + template + '.html');
+    const templateMarkup = fse.readFileSync(filename);
     renderer = _.template(templateMarkup);
     // cache
     renderers[template] = renderer;

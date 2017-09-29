@@ -1,24 +1,26 @@
+'use strict';
+
 const path = require('path');
 const fse = require('fs-extra');
 const exec = require('child_process').exec;
 const async = require('async');
 const clarg = require('clarg')();
-var rootdir = path.join(__dirname, '..');
+const rootdir = path.join(__dirname, '..');
 
-var ignoreList = [
+const ignoreList = [
   'dist',
   'scripts',
   '.git',
   '.gitignore',
   'app.log',
-  '.DS_Store'
+  '.DS_Store',
 ];
 
 /**
  * Clean the dist folder
  */
-function clean (active, callback) {
-  var dir = rootdir + '/dist';
+function clean(active, callback) {
+  const dir = rootdir + '/dist';
 
   if (!active) {
     return callback();
@@ -40,10 +42,12 @@ function clean (active, callback) {
 /**
  * Pack the app for a single platform
  */
-function packOne (platform, callback) {
+function packOne(platform, callback) {
   console.log('Packaging app for', platform);
 
-  var platformCode, archCode, icon;
+  let platformCode,
+    archCode,
+    icon;
 
   if (platform === 'mac') {
     platformCode = 'darwin';
@@ -63,14 +67,14 @@ function packOne (platform, callback) {
   if (platform === 'linux-arm') {
     platformCode = 'linux';
     archCode = 'armv7l';
-    icon = rootdir + '/views/icons/linkpad-256.png';
+    icon = rootdir + '/views/icons/player-256.png';
   }
 
   if (!platformCode) {
     return console.log('Provide correct platform (mac, win or linux)');
   }
 
-  var args = [
+  const args = [
     rootdir + '/node_modules/electron-packager/cli.js',
     rootdir,
     '"RemoteStack Player"',
@@ -80,14 +84,14 @@ function packOne (platform, callback) {
     '--platform=' + platformCode,
     '--asar=true',
     '--arch=' + archCode,
-    '--icon=' + icon
+    '--icon=' + icon,
   ];
 
   ignoreList.forEach(function (i) {
     args.push('--ignore=' + i);
   });
 
-  var cmd = 'node ' + args.join(' ');
+  const cmd = 'node ' + args.join(' ');
   exec(cmd, function (e, stdout, stderr) {
     if (e instanceof Error) {
       console.error(e);
@@ -103,8 +107,8 @@ function packOne (platform, callback) {
 
 function postPackOne(platform, callback) {
   // todo: rename dirs here
-  var nameIn;
-  var nameOut;
+  let nameIn;
+  let nameOut;
 
   if (platform === 'mac') {
     nameIn = 'RemoteStack Player-darwin-x64';
@@ -133,10 +137,9 @@ function postPackOne(platform, callback) {
   }
 }
 
-
 function pack(targets, cleanDist) {
-  var allTargets = ['mac', 'win', 'linux', 'linux-arm'];
-  var buildTargets = targets ? targets.split(',') : allTargets;
+  const allTargets = ['mac', 'win', 'linux', 'linux-arm'];
+  let buildTargets = targets ? targets.split(',') : allTargets;
   buildTargets = buildTargets.filter(function (tg) {
     return allTargets.indexOf(tg) !== -1;
   });
@@ -157,6 +160,6 @@ function pack(targets, cleanDist) {
 }
 
 
-var targets = clarg.opts.t || clarg.opts.targets;
-var cleanDist = !!(clarg.opts.c || clarg.opts.clean);
+const targets = clarg.opts.t || clarg.opts.targets;
+const cleanDist = !!(clarg.opts.c || clarg.opts.clean);
 pack(targets, cleanDist);

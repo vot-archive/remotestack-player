@@ -1,6 +1,8 @@
-(function() {
+'use strict';
+
+(function () {
   const UI = require('../renderer/ui');
-  $(document).ready(function () {
+  $(document).ready(() => {
     UI.resolveUIPreferences();
     UI.preventDragRedirections();
     UI.handleExternalLinks();
