@@ -63,7 +63,7 @@ function packOne(platform, callback) {
   if (platform === 'linux-arm') {
     platformCode = 'linux';
     archCode = 'armv7l';
-    icon = rootdir + '/views/icons/linkpad-256.png';
+    icon = rootdir + '/views/icons/player-256.png';
   }
 
   if (!platformCode) {
@@ -103,25 +103,24 @@ function packOne(platform, callback) {
 
 function postPackOne(platform, callback) {
   // todo: rename dirs here
-  const version = require('../package.json').version;
   let nameIn;
   let nameOut;
 
   if (platform === 'mac') {
     nameIn = 'RemoteStack Player-darwin-x64';
-    nameOut = 'RemoteStack-Player-' + version + '-mac';
+    nameOut = 'RemoteStack-Player-mac';
   }
   if (platform === 'win') {
     nameIn = 'RemoteStack Player-win32-ia32';
-    nameOut = 'RemoteStack-Player-' + version + '-win';
+    nameOut = 'RemoteStack-Player-win';
   }
   if (platform === 'linux') {
     nameIn = 'RemoteStack Player-linux-x64';
-    nameOut = 'RemoteStack-Player-' + version + '-linux';
+    nameOut = 'RemoteStack-Player-linux';
   }
   if (platform === 'linux-arm') {
     nameIn = 'RemoteStack Player-linux-armv7l';
-    nameOut = 'RemoteStack-Player-' + version + '-linux-arm';
+    nameOut = 'RemoteStack-Player-linux-arm';
   }
 
   if (nameIn && nameOut) {
