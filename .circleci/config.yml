@@ -29,7 +29,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}-{{ arch }}
 
       - run: npm run lint
-      - run: DISPLAY=:0.0 npm run pack -- --targets mac,linux,win
+      - run: WINEARCH=win32 DISPLAY=:0.0 npm run pack -- --targets mac,linux,win
 
       - run: tar czf ./dist/RemoteStack-Player-linux.tar.gz ./dist/RemoteStack-Player-linux
       - run: tar czf ./dist/RemoteStack-Player-mac.tar.gz ./dist/RemoteStack-Player-mac
