@@ -1,7 +1,3 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
@@ -15,10 +11,9 @@ jobs:
 
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}-{{ arch }}
+          - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
       - run: npm install
@@ -26,16 +21,16 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}-{{ arch }}
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: npm run lint
-      - run: WINEARCH=win32 DISPLAY=:0.0 npm run pack -- --targets win
+      - run: npm run pack -- --targets linux,mac,win
 
-      # - run: tar czf ./dist/RemoteStack-Player-linux.tar.gz ./dist/RemoteStack-Player-linux
-      # - run: tar czf ./dist/RemoteStack-Player-mac.tar.gz ./dist/RemoteStack-Player-mac
-      - run: cd dist && tar czf ./RemoteStack-Player-win-$(echo $CIRCLE_BRANCH)-$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
-      # - run: rm -r ./dist/RemoteStack-Player-linux
-      # - run: rm -r ./dist/RemoteStack-Player-mac
+      - run: tar czf ./dist/RemoteStack-Player-linux-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./dist/RemoteStack-Player-linux
+      - run: tar czf ./dist/RemoteStack-Player-mac-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./dist/RemoteStack-Player-mac
+      - run: cd dist && tar czf ./RemoteStack-Player-win-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
+      - run: rm -r ./dist/RemoteStack-Player-linux
+      - run: rm -r ./dist/RemoteStack-Player-mac
       - run: rm -r ./dist/RemoteStack-Player-win
 
       - store_artifacts:
