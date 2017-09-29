@@ -42,7 +42,7 @@ function clean(active, callback) {
 /**
  * Pack the app for a single platform
  */
-function packOne(platform, callback) {
+function buildSingleTarget(platform, callback) {
   console.log('Packaging app for', platform);
 
   let platformCode,
@@ -101,11 +101,11 @@ function packOne(platform, callback) {
     if (stdout) console.log('[pack ' + platform + ']', stdout);
     if (stderr) console.log('[pack ' + platform + ']', stderr);
 
-    postPackOne(platform, callback);
+    postBuildSingleTarget(platform, callback);
   });
 }
 
-function postPackOne(platform, callback) {
+function postBuildSingleTarget(platform, callback) {
   // todo: rename dirs here
   let nameIn;
   let nameOut;
@@ -137,7 +137,7 @@ function postPackOne(platform, callback) {
   }
 }
 
-function pack(targets, cleanDist) {
+function buildMultiple(targets, cleanDist) {
   const allTargets = ['mac', 'win', 'linux', 'linux-arm'];
   let buildTargets = targets ? targets.split(',') : allTargets;
   buildTargets = buildTargets.filter(function (tg) {
@@ -151,7 +151,7 @@ function pack(targets, cleanDist) {
 
   clean(cleanDist, function () {
     async.eachSeries(buildTargets, function (i, cb) {
-      packOne(i, cb);
+      buildSingleTarget(i, cb);
     }, function () {
       console.log('All done.');
       process.exit(0);
@@ -162,4 +162,4 @@ function pack(targets, cleanDist) {
 
 const targets = clarg.opts.t || clarg.opts.targets;
 const cleanDist = !!(clarg.opts.c || clarg.opts.clean);
-pack(targets, cleanDist);
+buildMultiple(targets, cleanDist);

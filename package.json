@@ -6,10 +6,11 @@
   "scripts": {
     "start": "electron .",
     "lint": "eslint .",
-    "pack": "node ./scripts/pack.js"
+    "build": "node ./scripts/build.js"
   },
   "author": "Vot Z <http://vot-z.com>",
-  "license": "GPL",
+  "repository": "https://github.com/vot/remotestack-player",
+  "license": "GPL-2.0",
   "dependencies": {
     "async": "^2.1.2",
     "clarg": "0.0.3",

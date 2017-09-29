@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Build app for Linux
           command: |
-            npm run pack -- --targets linux
+            npm run build -- --targets linux
             cd dist
             tar czf ./RemoteStack-Player-linux-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-linux
             rm -r ./RemoteStack-Player-linux
@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Build app for Mac
           command: |
-            npm run pack -- --targets mac
+            npm run build -- --targets mac
             cd dist
             tar czf ./RemoteStack-Player-mac-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-mac
             rm -r ./RemoteStack-Player-mac
@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Build app for Windows
           command: |
-            npm run pack -- --targets win
+            npm run build -- --targets win
             cd dist
             tar czf ./RemoteStack-Player-win-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
             rm -r ./RemoteStack-Player-win
