@@ -1,0 +1,36 @@
+{
+  "extends": "airbnb-base",
+  "parserOptions": {
+    "sourceType": "browser"
+  },
+  "rules": {
+    "semi": 2,
+    "no-console": 0,
+    "import/no-unresolved": 0,
+    "import/newline-after-import": 0,
+    "prefer-template": 0,
+    "one-var": 0,
+    "one-var-declaration-per-line": 0,
+    "function-paren-newline": 0,
+    "prefer-destructuring": 0,
+    "no-multiple-empty-lines": 0,
+    "global-require": 0,
+    "no-param-reassign": 0,
+    "prefer-arrow-callback": 0,
+    "no-plusplus": 0,
+    "no-path-concat": 0
+  },
+  "globals": {
+    "$": true,
+    "console": true,
+    "document": true,
+    "RS": true,
+    "require": true,
+    "process": true,
+    "__dirname": true,
+    "window": true,
+    "module": true,
+    "WaveSurfer": true,
+    "alert": true
+  }
+}

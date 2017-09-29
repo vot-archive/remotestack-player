@@ -8,18 +8,19 @@ const Utils = require('./lib/utils');
 
 Utils.log.rotatelog();
 
-function start () {
+function start() {
   Utils.log('userdata:', app.getPath('userData'));
 
   WindowManager.create('player');
   require('./lib/ipc/listeners/main');
 }
 
-function preQuitRoutine () {
+function preQuitRoutine() {
   Object.keys(WindowManager.instances).map(function (i) {
     if (WindowManager.instances[i] && WindowManager.instances[i].close) {
       WindowManager.instances[i].close();
     }
+    return null;
   });
 
   app.quit();

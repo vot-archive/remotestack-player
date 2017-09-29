@@ -1,3 +1,5 @@
+'use strict';
+
 const request = require('request');
 const fse = require('fs-extra');
 const _ = require('lodash');

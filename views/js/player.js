@@ -1,14 +1,20 @@
-(function(global) {
+'use strict';
+
+(function (global) {
   const UI = require('../renderer/ui');
   const Player = require('../renderer/player');
 
-  RS.displayNotification = function (text) {
-    $('#notifications').text(text).fadeIn(250).delay(3000).fadeOut(1000);
+  RS.displayNotification = function displayNotification(text) {
+    $('#notifications')
+      .text(text)
+      .fadeIn(250)
+      .delay(3000)
+      .fadeOut(1000);
   };
 
   global.WaveSurfer = require('./js/libs/wavesurfer/wavesurfer.min.js');
 
-  $(document).ready(function () {
+  $(document).ready(function mainWindowOnDocumentReady() {
     UI.renderPartialTags({});
     UI.resolveUIPreferences();
 
@@ -26,5 +32,4 @@
     UI.bindFiledrag();
     UI.initialiseButtonStates();
   });
-
 }(window));
