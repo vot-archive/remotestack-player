@@ -1,8 +1,8 @@
 ![RemoteStack Player - Open-source cross-platform audio player.](https://remotestack.com/player/gh-splash.png)
 
-![Current release](https://img.shields.io/github/release/vot/remotestack-player.svg)
-![Downloads on Github](https://img.shields.io/github/downloads/vot/remotestack-player/total.svg)
-
+[![Current release](https://img.shields.io/github/release/vot/remotestack-player.svg)](https://github.com/vot/remotestack-player/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/vot/remotestack-player/total.svg)](https://github.com/vot/remotestack-player/releases/latest)
+[![Build status](https://img.shields.io/circleci/project/github/vot/remotestack-player/master.svg)](https://circleci.com/gh/vot/remotestack-player/tree/master)
 
 ## Download
 
