@@ -17,8 +17,12 @@ var ignoreList = [
 /**
  * Clean the dist folder
  */
-function clean (callback) {
+function clean (active, callback) {
   var dir = rootdir + '/dist';
+
+  if (!active) {
+    return callback();
+  }
 
   console.log('Removing dist dir:', dir);
   exec('rm -rf ' + dir, function (e, stdout, stderr) {
@@ -130,7 +134,7 @@ function postPackOne(platform, callback) {
 }
 
 
-function pack(targets) {
+function pack(targets, cleanDist) {
   var allTargets = ['mac', 'win', 'linux', 'linux-arm'];
   var buildTargets = targets ? targets.split(',') : allTargets;
   buildTargets = buildTargets.filter(function (tg) {
@@ -142,7 +146,7 @@ function pack(targets) {
   }
   console.log('Target platforms:', buildTargets.join(', '), '\n');
 
-  clean(function () {
+  clean(cleanDist, function () {
     async.eachSeries(buildTargets, function (i, cb) {
       packOne(i, cb);
     }, function () {
@@ -154,4 +158,5 @@ function pack(targets) {
 
 
 var targets = clarg.opts.t || clarg.opts.targets;
-pack(targets);
+var cleanDist = !!(clarg.opts.c || clarg.opts.clean);
+pack(targets, cleanDist);
