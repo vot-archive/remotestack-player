@@ -32,33 +32,25 @@ jobs:
           name: Build app for Linux
           command: |
             npm run pack -- --targets linux
-            cd dist && tar czf ./RemoteStack-Player-linux-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-linux
-            rm -r ./dist/RemoteStack-Player-linux
+            cd dist
+            tar czf ./RemoteStack-Player-linux-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-linux
+            rm -r ./RemoteStack-Player-linux
 
       - run:
           name: Build app for Mac
           command: |
             npm run pack -- --targets mac
-            cd dist && tar czf ./RemoteStack-Player-mac-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-mac
-            rm -r ./dist/RemoteStack-Player-mac
+            cd dist
+            tar czf ./RemoteStack-Player-mac-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-mac
+            rm -r ./RemoteStack-Player-mac
 
       - run:
           name: Build app for Windows
           command: |
             npm run pack -- --targets win
-            cd dist && tar czf ./RemoteStack-Player-win-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
-            rm -r ./dist/RemoteStack-Player-win
-
-
-      # - run: npm run pack -- --targets linux,mac,win
-      #
-      # - run: cd dist && tar czf ./RemoteStack-Player-linux-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-linux
-      # - run: cd dist && tar czf ./RemoteStack-Player-mac-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-mac
-      # - run: cd dist && tar czf ./RemoteStack-Player-win-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
-      #
-      # - run: rm -r ./dist/RemoteStack-Player-linux
-      # - run: rm -r ./dist/RemoteStack-Player-mac
-      # - run: rm -r ./dist/RemoteStack-Player-win
+            cd dist
+            tar czf ./RemoteStack-Player-win-b$(echo $CIRCLE_BUILD_NUM).tar.gz ./RemoteStack-Player-win
+            rm -r ./RemoteStack-Player-win
 
       - store_artifacts:
           path: ./dist
