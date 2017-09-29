@@ -10,6 +10,8 @@ jobs:
 
     steps:
       - run: sudo apt-get install wine -y
+      - run: sudo apt-get install Xvfb -y
+      - run: Xvfb :0 -screen 0 1024x768x16 &
 
       - checkout
 
@@ -27,7 +29,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}-{{ arch }}
 
       - run: npm run lint
-      - run: npm run pack -- --targets mac,linux,win
+      - run: DISPLAY=:0.0 npm run pack -- --targets mac,linux,win
 
       - run: tar czf ./dist/RemoteStack-Player-linux.tar.gz ./dist/RemoteStack-Player-linux
       - run: tar czf ./dist/RemoteStack-Player-mac.tar.gz ./dist/RemoteStack-Player-mac
