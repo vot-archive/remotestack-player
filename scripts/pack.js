@@ -101,23 +101,22 @@ function postPackOne(platform, callback) {
   // todo: rename dirs here
   var nameIn;
   var nameOut;
-  var version = require('../package.json').version;
 
   if (platform === 'mac') {
     nameIn = 'RemoteStack Player-darwin-x64';
-    nameOut = 'RemoteStack-Player-' + version + '-mac';
+    nameOut = 'RemoteStack-Player-mac';
   }
   if (platform === 'win') {
     nameIn = 'RemoteStack Player-win32-ia32';
-    nameOut = 'RemoteStack-Player-' + version + '-win';
+    nameOut = 'RemoteStack-Player-win';
   }
   if (platform === 'linux') {
     nameIn = 'RemoteStack Player-linux-x64';
-    nameOut = 'RemoteStack-Player-' + version + '-linux';
+    nameOut = 'RemoteStack-Player-linux';
   }
   if (platform === 'linux-arm') {
     nameIn = 'RemoteStack Player-linux-armv7l';
-    nameOut = 'RemoteStack-Player-' + version + '-linux-arm';
+    nameOut = 'RemoteStack-Player-linux-arm';
   }
 
   if (nameIn && nameOut) {

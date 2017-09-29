@@ -22,10 +22,15 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}-{{ arch }}
 
       - run: npm run lint
       - run: npm run pack -- --targets mac,linux
+
+      - run: tar czf ./dist/RemoteStack-Player-{{ .Branch }}-{{ .BuildNum }}-linux.tar.gz ./dist/RemoteStack-Player-linux
+      - run: tar czf ./dist/RemoteStack-Player-{{ .Branch }}-{{ .BuildNum }}-mac.tar.gz ./dist/RemoteStack-Player-mac
+      - run: rm -r ./dist/RemoteStack-Player-linux
+      - run: rm -r ./dist/RemoteStack-Player-mac
 
       - store_artifacts:
           path: ./dist
