@@ -12,7 +12,7 @@
       .fadeOut(1000);
   };
 
-  global.WaveSurfer = require('./js/libs/wavesurfer/wavesurfer.min.js');
+  global.WaveSurfer = require('./vendor/js/wavesurfer/wavesurfer.min.js');
 
   $(document).ready(function mainWindowOnDocumentReady() {
     UI.renderPartialTags({});

@@ -30,15 +30,19 @@
       const inputEl = $('#' + inputId);
 
       inputEl.on('keydown', function (e) {
-        if ((e.ctrlKey || e.metaKey) && e.which === 13) {
-          e.preventDefault();
-          processInputAndAdd(inputEl);
+        if (e.which === 13) {
+          if (!e.shiftKey) {
+            e.preventDefault();
+            processInputAndAdd(inputEl);
+          }
         }
       });
     });
   }
 
   $(document).ready(function () {
+    UI.renderPartialTags({});
+    UI.resolveUIPreferences();
     UI.bindShortcuts();
     UI.preventDragRedirections();
     bindURLInput();

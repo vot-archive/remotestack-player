@@ -1,2 +1,2 @@
-views/js/libs/**
+views/vendor/js/**
 checkForUpdates.js
