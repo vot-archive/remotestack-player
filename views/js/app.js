@@ -4,7 +4,7 @@
   const os = require('os');
   const fse = require('fs-extra');
   const UI = require('../renderer/ui');
-  const Player = require('../renderer/player');
+  const Playback = require('../renderer/playback');
   const Playlist = require('../lib/playlist');
   const Utils = require('../lib/utils');
   const windowCtl = require('../lib/windowCtl');
@@ -26,7 +26,7 @@
   };
 
   RS.Playlist = Playlist;
-  RS.Player = Player;
+  RS.Playback = Playback;
   RS.UI = UI;
   RS.Utils = Utils;
   RS.Window = windowCtl;
@@ -35,4 +35,8 @@
   RS.showContextMenu = RS.UI.showContextMenu;
 
   global.RS = RS;
+
+  UI.renderPartialTags({ appVersion });
+  UI.handleExternalLinks();
+  UI.preventDragRedirections();
 }(window));

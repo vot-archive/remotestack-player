@@ -157,7 +157,6 @@
 .navContent {display: block}
 
 .list .placeholder {height: 28px; background: #555 !important; border: 1px solid #999; padding:0; display: block;}
-textarea#urlinput {width: 100%; height:100px; resize:none; outline: none}
 
 @media screen and (max-height: 130px) {
   #rsPlayerBrowser {visibility: hidden}

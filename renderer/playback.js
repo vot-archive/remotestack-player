@@ -9,8 +9,8 @@ const PlaylistsModel = require('../models/playlists');
 const MarkupRenderer = require('../renderer/markup');
 
 function ensureWavesurfer(opts) {
-  if (RS.Player.wavesurferObject) {
-    return RS.Player.wavesurferObject;
+  if (RS.Playback.wavesurferObject) {
+    return RS.Playback.wavesurferObject;
   }
   opts = opts || {};
 
@@ -44,9 +44,9 @@ function ensureWavesurfer(opts) {
     RS.Utils.log('Track ready');
     // wavesurfer.empty();
     wavesurfer.drawBuffer();
-    RS.Player.applyVolumeSetting();
-    RS.Player.updateTrackTime();
-    RS.Player.populatePlaylist();
+    RS.Playback.applyVolumeSetting();
+    RS.Playback.updateTrackTime();
+    RS.Playback.populatePlaylist();
 
     // postEvent
     function onreadyFn() {
@@ -60,7 +60,7 @@ function ensureWavesurfer(opts) {
     }
 
 
-    if (RS.Player.playing) {
+    if (RS.Playback.playing) {
       wavesurfer.play();
     }
 
@@ -82,28 +82,28 @@ function ensureWavesurfer(opts) {
 
 
   wavesurfer.on('audioprocess', function wavesurferOnAudioprocess() {
-    RS.Player.updateTrackTime();
+    RS.Playback.updateTrackTime();
   });
 
   wavesurfer.on('play', function wavesurferOnPlay() {
     // RS.Utils.log('Play event');
-    RS.Player.setPlayButton(false);
+    RS.Playback.setPlayButton(false);
   });
   wavesurfer.on('pause', function wavesurferOnPause() {
     // RS.Utils.log('Pause event');
-    RS.Player.setPlayButton(true);
+    RS.Playback.setPlayButton(true);
   });
 
   wavesurfer.on('finish', function wavesurferOnFinish() {
     RS.Utils.log('Track finished');
-    // RS.Player.wavesurferObject.destroy();
-    // RS.Player.wavesurferObject = null;
-    RS.Player.updateTrackTime(true);
-    RS.Player.next();
-    RS.Player.play();
+    // RS.Playback.wavesurferObject.destroy();
+    // RS.Playback.wavesurferObject = null;
+    RS.Playback.updateTrackTime(true);
+    RS.Playback.next();
+    RS.Playback.play();
   });
 
-  RS.Player.wavesurferObject = wavesurfer;
+  RS.Playback.wavesurferObject = wavesurfer;
   return wavesurfer;
 }
 
@@ -135,7 +135,7 @@ function interpretPlaylistItem(item, cb) {
   return cb(item);
 }
 
-const Player = {
+const PlaybackLib = {
   // state
   // queue: PlaylistsModel.get('default.playlist'),
   queue: PlaylistLib.get(),
@@ -157,7 +157,7 @@ const Player = {
     const self = this;
     const audioTag = self.getElement();
     if (!audioTag) {
-      RS.Utils.log('RS.Player.play: No audio element present');
+      RS.Utils.log('RS.Playback.play: No audio element present');
       return;
     }
 
@@ -279,7 +279,7 @@ const Player = {
     return this.load(PlaylistLib.get()[index]);
   },
   load: function load(source) {
-    console.log('hit populatePlaylist from RS.Player.load');
+    console.log('hit populatePlaylist from RS.Playback.load');
     const self = this;
 
 
@@ -390,79 +390,8 @@ const Player = {
     container.html(markup);
   },
 
-  bindShortcuts: function bindShortcuts() {
+  bindMousewheel: function bindMousewheel() {
     const self = this;
-    RS.Utils.log('bindShortcuts called');
-    $(document).on('keydown', function onKeyDown(e) {
-      const tag = e.target.tagName.toLowerCase();
-
-      if (tag === 'input' || tag === 'textarea') {
-        return;
-      }
-
-
-      // play/pause
-      if (e.which === 32) {
-        // RS.Utils.log('space hit');
-        self.ensureWavesurfer().playPause();
-        e.preventDefault();
-        return;
-      }
-
-
-
-      // track +5s
-      if (e.which === 37) {
-        // RS.Utils.log('arrow left hit');
-        self.ensureWavesurfer().skipBackward();
-        e.preventDefault();
-        return;
-      }
-
-      // track -5s
-      if (e.which === 39) {
-        // RS.Utils.log('arrow right hit');
-        self.ensureWavesurfer().skipForward();
-        e.preventDefault();
-        return;
-      }
-
-
-
-      // vol up
-      if (e.which === 38) {
-        // RS.Utils.log('arrow up hit');
-        self.setVolume(self.volume + 5);
-        e.preventDefault();
-        return;
-      }
-
-      // vol down
-      if (e.which === 40) {
-        // RS.Utils.log('arrow down hit');
-        self.setVolume(self.volume - 5);
-        e.preventDefault();
-        return;
-      }
-
-
-
-      // prev song
-      if (!(e.ctrlKey || e.metaKey) && e.which === 188) {
-        // RS.Utils.log('< hit');
-        self.prev();
-        e.preventDefault();
-        return;
-      }
-
-      // next song
-      if (!(e.ctrlKey || e.metaKey) && e.which === 190) {
-        // RS.Utils.log('> hit');
-        self.next();
-        e.preventDefault();
-      }
-    });
-
     $('#rsPlayerVolume').mousewheel(function onVolumeMouseWheel(event) {
       const offset = event.deltaX || event.deltaY;
       const newVal = parseInt($('#rsPlayerVolume').val(), 10) + offset;
@@ -477,44 +406,6 @@ const Player = {
     });
   },
 
-  toggleRepeat: function toggleRepeat() {
-    const self = this;
-    const initial = PlaylistLib.getRepeat();
-    const newVal = !initial;
-    PlaylistLib.setRepeat(newVal);
-    self.lightUpToggleRepeat();
-    return newVal;
-  },
-  toggleShuffle: function toggleShuffle() {
-    const self = this;
-    const initial = PlaylistLib.getShuffle();
-    const newVal = !initial;
-    PlaylistLib.setShuffle(newVal);
-    self.lightUpToggleShuffle();
-    return newVal;
-  },
-
-
-  lightUpToggleRepeat: function lightUpToggleRepeat() {
-    const value = PlaylistLib.getRepeat();
-
-    if (value) {
-      $('*[data-toggle=repeat]').addClass('active');
-    } else {
-      $('*[data-toggle=repeat]').removeClass('active');
-    }
-  },
-
-  lightUpToggleShuffle: function lightUpToggleShuffle() {
-    const value = PlaylistLib.getShuffle();
-
-    if (value) {
-      $('*[data-toggle=shuffle]').addClass('active');
-    } else {
-      $('*[data-toggle=shuffle]').removeClass('active');
-    }
-  },
-
 };
 
-module.exports = Player;
+module.exports = PlaybackLib;

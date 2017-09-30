@@ -3,11 +3,8 @@
 (function () {
   const UI = require('../renderer/ui');
   const checkForUpdates = require('./js/checkForUpdates');
-  const appVersion = RS.version || '';
 
   $(document).ready(function () {
-    UI.renderPartialTags({ appVersion });
-
     checkForUpdates(function (err, data) {
       if (err) {
         console.log(err);

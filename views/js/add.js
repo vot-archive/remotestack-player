@@ -41,10 +41,6 @@
   }
 
   $(document).ready(function () {
-    UI.renderPartialTags({});
-    UI.resolveUIPreferences();
-    UI.bindShortcuts();
-    UI.preventDragRedirections();
     bindURLInput();
   });
 }());
