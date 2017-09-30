@@ -132,5 +132,5 @@ label.settings-item select {width:80px}
 #wCtls.mac .windowCtl i.mac {display: inline-block;}
 
 
-textarea#urlinput {width: 100%; height:150px; resize:none; outline: none}
-#urlAddBtn {width: 100%; height:70px; margin:40px 0}
+textarea#urlinput {width: 100%; height:100px; resize:none; outline: none}
+#urlAddBtn {width: 100%; height:70px; margin:15px 0}
