@@ -6,7 +6,7 @@ const cache = require('../lib/electron/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
 
-function ensureWavesurfer(opts) {
+function getWavesurfer(opts) {
   if (RS.Playback.wavesurferObject) {
     return RS.Playback.wavesurferObject;
   }
@@ -144,7 +144,7 @@ const PlaybackLib = {
   playing: false,
   waveformObject: null,
 
-  ensureWavesurfer,
+  getWavesurfer,
   // methods
   getElement: function getElement() {
     return $('#rsPlayerAudioContainer audio')[0];
@@ -233,7 +233,7 @@ const PlaybackLib = {
 
   applyVolumeSetting: function applyVolumeSetting() {
     // RS.Utils.log('setting volume to', this.volume)
-    this.ensureWavesurfer().setVolume(this.volume / 100);
+    this.getWavesurfer().setVolume(this.volume / 100);
     $('#rsPlayerVolume').val(this.volume);
   },
 
@@ -281,7 +281,7 @@ const PlaybackLib = {
       RS.Utils.log('>> finalPath', finalPath);
       $('#waveform').css('visibility', 'hidden');
 
-      wavesurferObject.load(finalPath);
+      self.wavesurferObject.load(finalPath);
     }
 
     // populatePlaylist
@@ -304,8 +304,7 @@ const PlaybackLib = {
     RS.PlayerWindow.updateTrackTime(true);
 
     // initialise wavesurfer
-    self.ensureWavesurfer();
-    const wavesurferObject = self.wavesurferObject;
+    self.getWavesurfer();
 
 
     interpretPlaylistItem(source, function interpretPlaylistItemCb(trackdata) {

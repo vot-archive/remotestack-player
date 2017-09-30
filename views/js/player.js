@@ -121,8 +121,8 @@
       let duration = '----';
 
       if (wavesurferObject && !clear) {
-        currTime = PlaybackLib.ensureWavesurfer().getCurrentTime();
-        duration = PlaybackLib.ensureWavesurfer().getDuration();
+        currTime = PlaybackLib.getWavesurfer().getCurrentTime();
+        duration = PlaybackLib.getWavesurfer().getDuration();
 
         currTime = RS.Utils.formatSecondsAsTime(currTime);
         duration = RS.Utils.formatSecondsAsTime(duration);
@@ -181,7 +181,7 @@
         // play/pause
         if (e.which === 32) {
           // RS.Utils.log('space hit');
-          PlaybackLib.ensureWavesurfer().playPause();
+          PlaybackLib.getWavesurfer().playPause();
           e.preventDefault();
           return;
         }
@@ -189,7 +189,7 @@
         // track +5s
         if (e.which === 37) {
           // RS.Utils.log('arrow left hit');
-          PlaybackLib.ensureWavesurfer().skipBackward();
+          PlaybackLib.getWavesurfer().skipBackward();
           e.preventDefault();
           return;
         }
@@ -197,7 +197,7 @@
         // track -5s
         if (e.which === 39) {
           // RS.Utils.log('arrow right hit');
-          PlaybackLib.ensureWavesurfer().skipForward();
+          PlaybackLib.getWavesurfer().skipForward();
           e.preventDefault();
           return;
         }
@@ -281,7 +281,7 @@
       $('#waveform').mousewheel(function onWaveformMouseWheel(event) {
         const offset = event.deltaX || event.deltaY;
         if (offset) {
-          PlaybackLib.ensureWavesurfer().skip(offset * (RS.UI.mousewheelMultiplier || 1));
+          PlaybackLib.getWavesurfer().skip(offset * (RS.UI.mousewheelMultiplier || 1));
         }
       });
     },
@@ -294,7 +294,7 @@
     RS.PlayerWindow = PlayerWindow;
 
     if ($('#waveform').length) {
-      PlaybackLib.ensureWavesurfer();
+      PlaybackLib.getWavesurfer();
       PlaybackLib.loadByIndex('active');
       PlayerWindow.bindMousewheel();
     }
