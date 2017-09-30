@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+const os = require('os');
 const PreferencesModel = require('../models/preferences');
 const Utils = require('../lib/utils');
 const FileUtils = require('../lib/utils/fileutils');
@@ -13,9 +14,10 @@ webFrame.setZoomLevelLimits(1, 1);
 
 // Utils.log('settingsPath: ', PreferencesModel.getLocation());
 // Utils.log('settings:     ', JSON.stringify(_.omit(PreferencesModel.get(), 'streams'), null, 2));
+const platform = os.type().toLowerCase();
 
 const UI = {
-  mousewheelMultiplier: 1,
+  mousewheelMultiplier: platform === 'darwin' ? 0.5 : 1.5,
   /**
    * Resolves theme and user preferences
    */
@@ -90,19 +92,19 @@ const UI = {
     Utils.log('bindWCtlShortcuts called');
 
     $('*[data-toggle=window-close]').click(function () {
-      RS.Window.close();
+      RS.WindowCtl.close();
     });
 
     $('*[data-toggle=window-minimise]').click(function () {
-      RS.Window.minimise();
+      RS.WindowCtl.minimise();
     });
 
     $('*[data-toggle=window-maximise]').click(function () {
-      RS.Window.maximise();
+      RS.WindowCtl.maximise();
     });
 
     $('*[data-toggle=window-app-quit]').click(function () {
-      RS.Window.appQuit();
+      RS.WindowCtl.appQuit();
     });
   },
 

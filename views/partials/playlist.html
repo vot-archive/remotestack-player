@@ -16,7 +16,7 @@
         class="<%- classname %>"
         data-index="<%- index %>"
         ondblclick="RS.Playback.loadByIndex(<%- index %>);"
-        oncontextmenu="RS.showContextMenu(this)">
+        oncontextmenu="RS.UI.showContextMenu(this)">
         <span class="delete pull-right" onclick="RS.Playlist.deleteByIndex(<%- index %>)"> <i class="fa fa-fw fa-trash-o"></i> </span>
         <span class="title"><%- RS.Playlist.getDisplayTitle(i) %></span>
         <span class="url"><%- i.url %></span>

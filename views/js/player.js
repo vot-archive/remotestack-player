@@ -1,7 +1,6 @@
 'use strict';
 
 (function (global) {
-  const UI = require('../renderer/ui');
   const PlaybackLib = require('../renderer/playback');
   const PlaylistLib = require('../lib/playlist');
   const Utils = require('../lib/utils');
@@ -215,7 +214,7 @@
 
 
   $(document).ready(function mainWindowOnDocumentReady() {
-    UI.resolveUIPreferences();
+    RS.UI.resolveUIPreferences();
     RS.PlayerWindow = PlayerWindow;
 
     if ($('#waveform').length) {
@@ -227,8 +226,8 @@
     PlayerWindow.lightUpToggleRepeat();
     PlayerWindow.lightUpToggleShuffle();
 
-    UI.bindWCtl();
-    UI.bindFiledrag();
+    RS.UI.bindWCtl();
+    RS.UI.bindFiledrag();
     RS.PlayerWindow.bindPlayerShortcuts();
     RS.PlayerWindow.initialiseButtonStates();
   });

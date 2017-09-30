@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  const UI = require('../renderer/ui');
   const checkForUpdates = require('./js/checkForUpdates');
 
   $(document).ready(function () {
@@ -13,7 +12,7 @@
         if (data.needsUpdate) {
           $('#updateNotice').show().html('Version ' + data.newest + ' available. <a href="' + data.url + '" class="btn btn-xs btn-default">Update</a>');
 
-          UI.handleExternalLinks($('#updateNotice a'));
+          RS.UI.handleExternalLinks($('#updateNotice a'));
         }
       }
     });
