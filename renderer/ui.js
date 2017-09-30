@@ -87,7 +87,6 @@ const UI = {
    * Binds all data binds and shortcuts
    */
   bindWCtl: function bindWCtl() {
-    const self = this;
     Utils.log('bindWCtlShortcuts called');
 
     $('*[data-toggle=window-close]').click(function () {

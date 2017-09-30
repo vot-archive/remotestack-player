@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  const UI = require('../renderer/ui');
   const _ = require('lodash');
 
   function processInputAndAdd(inputEl) {
