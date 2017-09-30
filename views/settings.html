@@ -52,12 +52,12 @@
     <strong>Show full path in playlist</strong>
   </label>
 
-  <!-- Open app data -->
+  <!-- Developer mode -->
   <label class="settings-item">
     <span class="pull-right">
-      <a href="file://$$USERDATA" class="btn btn-xs btn-default">Open app data folder</a>
+      <input type="checkbox" value="app.enableDeveloperMode" onchange="RS.UI.handlePreferencesCheckboxChange(this)" />
     </span>
-    <strong>Data storage</strong>
+    <strong>Developer mode (requires restart)</strong>
   </label>
 
   <br /><br />

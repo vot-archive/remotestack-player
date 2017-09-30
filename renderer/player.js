@@ -202,7 +202,7 @@ const Player = {
     const nextTrack = playlist[nextTrackIndex];
     console.log((nextTrackIndex + 1), 'out of', playlist.length);
 
-    RS.Utils.log('>>Next track:', nextTrack);
+    // RS.Utils.log('>>Next track:', nextTrack);
 
     this.load(nextTrack);
     this.play(playState);
@@ -336,7 +336,7 @@ const Player = {
 
 
     interpretPlaylistItem(source, function interpretPlaylistItemCb(trackdata) {
-      RS.Utils.log('>> interpretPlaylistItem returned', _.omit(trackdata, 'raw'));
+      RS.Utils.log('>> interpretPlaylistItem returned'); // , _.omit(trackdata, 'raw'));
 
       if (trackdata.source === 'youtube' && !trackdata.playbackUrl) {
         RS.Utils.log('ERR! empty playbackUrl, stopping', _.omit(trackdata, 'raw'));
@@ -381,7 +381,7 @@ const Player = {
     const playlist = PlaylistLib.get();
     const currentTrack = playlist[activeIndex];
     let markup = '';
-    RS.Utils.log('populateTrackinfo', JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
+    RS.Utils.log('populateTrackinfo'); // , JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
 
     if (currentTrack) {
       markup = MarkupRenderer.render('partials/trackinfo', { currentTrack });

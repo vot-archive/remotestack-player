@@ -11,7 +11,7 @@
         url = url.trim();
         if (url.length) {
           const dataToAdd = { url, source: 'youtube', type: 'audio' };
-          RS.IPCEmitter('add-to-playlist', dataToAdd);
+          RS.sendIpcMessage('add-to-playlist', dataToAdd);
           inputEl.val('');
         }
       });

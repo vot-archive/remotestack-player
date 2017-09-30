@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron .",
     "lint": "eslint .",
+    "log": "tail -f ~/Library/Application\\ Support/RemoteStackPlayer/app.log",
     "build": "node ./scripts/build.js"
   },
   "author": "Vot Z <http://vot-z.com>",

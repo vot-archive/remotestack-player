@@ -322,7 +322,7 @@ const UI = {
   handlePreferencesCheckboxChange: function handlePreferencesCheckboxChange(input) {
     const key = $(input).val();
     const isChecked = $(input).is(':checked');
-    RS.IPCEmitter('update-setting', { key, value: isChecked });
+    RS.sendIpcMessage('update-setting', { key, value: isChecked });
   },
 
   handlePreferencesInputChange: function handlePreferencesInputChange(input) {
@@ -330,7 +330,7 @@ const UI = {
     const value = $(input).val();
     // PreferencesModel.set(key, value);
     // window.location = window.location;
-    RS.IPCEmitter('update-setting', { key, value });
+    RS.sendIpcMessage('update-setting', { key, value });
   },
 
   assignPreferencesCheckboxDefaults: function assignPreferencesCheckboxDefaults() {

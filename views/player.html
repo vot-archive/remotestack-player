@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>RemoteStack Player</title>
+  <title>Player</title>
 </head>
 <body>
 
@@ -20,15 +20,15 @@
             <partial data-view="player-controls"></partial>
 
             <ul id="windowTriggers">
-              <li onclick="RS.IPCEmitter('show-window', 'add')">
+              <li onclick="RS.sendIpcMessage('show-window', 'add')">
                 Add
               </li>
 
-              <li onclick="RS.IPCEmitter('show-window', 'settings')">
+              <li onclick="RS.sendIpcMessage('show-window', 'settings')">
                 Settings
               </li>
 
-              <li onclick="RS.IPCEmitter('show-window', 'help')">
+              <li onclick="RS.sendIpcMessage('show-window', 'help')">
                 Help
               </li>
             </ul>

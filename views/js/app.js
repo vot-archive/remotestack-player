@@ -8,7 +8,8 @@
   const Playlist = require('../lib/playlist');
   const Utils = require('../lib/utils');
   const windowCtl = require('../lib/windowCtl');
-  const ipcEmitter = require('../lib/ipc/emitter');
+  const electron = require('electron');
+  const sendIpcMessage = electron.ipcRenderer.send;
 
   const packageObj = fse.readJsonSync(__dirname + '/../package.json');
   const appVersion = packageObj.version || '';
@@ -29,7 +30,7 @@
   RS.UI = UI;
   RS.Utils = Utils;
   RS.Window = windowCtl;
-  RS.IPCEmitter = ipcEmitter;
+  RS.sendIpcMessage = sendIpcMessage;
 
   RS.showContextMenu = RS.UI.showContextMenu;
 
