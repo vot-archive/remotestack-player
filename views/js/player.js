@@ -105,6 +105,34 @@
       }
     },
 
+
+    setPlayButton: function setPlayButton(state) {
+      PlaybackLib.playing = state;
+      $('.playerCtl#WSPlay .fa, .playerCtl#WSPlay .fa').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
+    },
+
+    updateTrackTime: function updateTrackTime(clear) {
+      const currTimeDiv = $('.timeElapsed');
+      const durationDiv = $('.timeTotal');
+      const wavesurferObject = PlaybackLib.wavesurferObject;
+
+      let currTime = '----';
+      let duration = '----';
+
+      if (wavesurferObject && !clear) {
+        currTime = PlaybackLib.ensureWavesurfer().getCurrentTime();
+        duration = PlaybackLib.ensureWavesurfer().getDuration();
+
+        currTime = RS.Utils.formatSecondsAsTime(currTime);
+        duration = RS.Utils.formatSecondsAsTime(duration);
+      }
+
+      // RS.Utils.log('updateCurrentTime', currTime, duration);
+
+      currTimeDiv.text(currTime);
+      durationDiv.text(duration);
+    },
+
     bindPlayerShortcuts: function bindPlayerShortcuts() {
       const self = this;
       $('*[data-toggle=playlist]').click(function () {

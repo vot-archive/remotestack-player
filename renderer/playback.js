@@ -45,8 +45,8 @@ function ensureWavesurfer(opts) {
     // wavesurfer.empty();
     wavesurfer.drawBuffer();
     RS.Playback.applyVolumeSetting();
-    RS.Playback.updateTrackTime();
     RS.Playback.populatePlaylist();
+    RS.PlayerWindow.updateTrackTime();
 
     // postEvent
     function onreadyFn() {
@@ -82,23 +82,23 @@ function ensureWavesurfer(opts) {
 
 
   wavesurfer.on('audioprocess', function wavesurferOnAudioprocess() {
-    RS.Playback.updateTrackTime();
+    RS.PlayerWindow.updateTrackTime();
   });
 
   wavesurfer.on('play', function wavesurferOnPlay() {
     // RS.Utils.log('Play event');
-    RS.Playback.setPlayButton(false);
+    RS.PlayerWindow.setPlayButton(false);
   });
   wavesurfer.on('pause', function wavesurferOnPause() {
     // RS.Utils.log('Pause event');
-    RS.Playback.setPlayButton(true);
+    RS.PlayerWindow.setPlayButton(true);
   });
 
   wavesurfer.on('finish', function wavesurferOnFinish() {
     RS.Utils.log('Track finished');
     // RS.Playback.wavesurferObject.destroy();
     // RS.Playback.wavesurferObject = null;
-    RS.Playback.updateTrackTime(true);
+    RS.PlayerWindow.updateTrackTime(true);
     RS.Playback.next();
     RS.Playback.play();
   });
@@ -140,7 +140,7 @@ const PlaybackLib = {
   // queue: PlaylistsModel.get('default.playlist'),
   queue: PlaylistLib.get(),
 
-  volume: PreferencesModel.get('settings.volume') || 100,
+  volume: PreferencesModel.get('settings.volume') || 30, // don't start on full volume
   loopOne: false,
   loopAll: false,
   playing: false,
@@ -172,11 +172,11 @@ const PlaybackLib = {
     if (state) {
       RS.Utils.log('Playing');
       audioTag.play();
-      self.setPlayButton(false);
+      RS.PlaybackWindow.setPlayButton(false);
     } else {
       RS.Utils.log('Pausing');
       audioTag.pause();
-      self.setPlayButton(true);
+      RS.PlaybackWindow.setPlayButton(true);
     }
 
     self.updatePositionMax(self.getElement());
@@ -187,7 +187,7 @@ const PlaybackLib = {
     const playState = this.playing;
     const nextTrackIndex = PlaylistLib.setActive('prev');
     const nextTrack = playlist[nextTrackIndex];
-    console.log((nextTrackIndex + 1), 'out of', playlist.length);
+    console.log((nextTrackIndex + 1) + ' out of ' + playlist.length);
 
     RS.Utils.log('>>Prev track:', nextTrack);
 
@@ -200,17 +200,12 @@ const PlaybackLib = {
     const playState = this.playing;
     const nextTrackIndex = PlaylistLib.setActive('next');
     const nextTrack = playlist[nextTrackIndex];
-    console.log((nextTrackIndex + 1), 'out of', playlist.length);
+    console.log((nextTrackIndex + 1) + ' out of ' + playlist.length);
 
     // RS.Utils.log('>>Next track:', nextTrack);
 
     this.load(nextTrack);
     this.play(playState);
-  },
-
-  setPlayButton: function setPlayButton(state) {
-    this.playing = state;
-    $('.playerCtl#WSPlay .fa, .playerCtl#WSPlay .fa').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
   },
 
   // TODO: Support setVolume('+5') syntax
@@ -244,30 +239,6 @@ const PlaybackLib = {
     $('#rsPlayerVolume').val(this.volume);
   },
 
-
-  updateTrackTime: function updateTrackTime(clear) {
-    const self = this;
-    const currTimeDiv = $('.timeElapsed');
-    const durationDiv = $('.timeTotal');
-    const wavesurferObject = self.wavesurferObject;
-
-    let currTime = '----';
-    let duration = '----';
-
-    if (wavesurferObject && !clear) {
-      currTime = this.ensureWavesurfer().getCurrentTime();
-      duration = this.ensureWavesurfer().getDuration();
-
-      currTime = RS.Utils.formatSecondsAsTime(currTime);
-      duration = RS.Utils.formatSecondsAsTime(duration);
-    }
-
-    // RS.Utils.log('updateCurrentTime', currTime, duration);
-
-    currTimeDiv.text(currTime);
-    durationDiv.text(duration);
-  },
-
   loadByIndex: function loadByIndex(index) {
     RS.Utils.log('loadByIndex', index);
     if (index === 'active') {
@@ -298,6 +269,15 @@ const PlaybackLib = {
       RS.Utils.log('Playlist entry resolved', artist, title);
     }
 
+    function resetCurrentTrackInfo() {
+      // reset track info
+      $('#currentArtist').text('').addClass('animated pulse');
+      $('#currentTitle').text(source.url).addClass('animated pulse');
+
+      $('#waveform-loading').text('RESOLVING').show();
+      $('#waveform').css('visibility', 'hidden');
+    }
+
     // executeWavesurferLoad
     function executeWavesurferLoad(finalPath) {
       RS.Utils.log('>> finalPath', finalPath);
@@ -320,15 +300,10 @@ const PlaybackLib = {
     //   }
     // }
 
-    // reset track info
-    $('#currentArtist').text('').addClass('animated pulse');
-    $('#currentTitle').text(source.url).addClass('animated pulse');
-
-    $('#waveform-loading').text('RESOLVING').show();
-    $('#waveform').css('visibility', 'hidden');
+    resetCurrentTrackInfo();
 
     // reset time
-    self.updateTrackTime(true);
+    RS.PlayerWindow.updateTrackTime(true);
 
     // initialise wavesurfer
     self.ensureWavesurfer();
