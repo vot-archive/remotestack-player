@@ -132,9 +132,12 @@ const UI = {
       holder = document.getElementById(id || 'filedrag');
     }
 
-    holder.ondragover = holder.ondragleave = holder.ondragend = function onDragFinish() {
+    function onDragHandler() {
       return false;
-    };
+    }
+    holder.ondragover = onDragHandler;
+    holder.ondragleave = onDragHandler;
+    holder.ondragend = onDragHandler;
 
     holder.ondrop = function (e) {
       console.log(e);
@@ -149,7 +152,7 @@ const UI = {
           RS.Playlist.add({ url: file, source: 'file', type: 'audio' });
         });
 
-        RS.Playback.populatePlaylist();
+        RS.PlayerWindow.populatePlaylist();
       }
 
       const message = allFiles.length > 1 ? 'Tracks added' : 'Track added';

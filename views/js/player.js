@@ -3,6 +3,7 @@
 (function (global) {
   const PlaybackLib = require('../renderer/playback');
   const PlaylistLib = require('../lib/playlist');
+  const PlaylistsModel = require('../models/playlists');
   const Utils = require('../lib/utils');
 
   RS.displayNotification = function displayNotification(text) {
@@ -237,6 +238,53 @@
         }
       });
     },
+
+
+    populatePlaylist: function populatePlaylist() {
+      const self = this;
+      PlaylistsModel.removeAllListeners('default.playlist');
+      const list = PlaylistLib.get();
+      // RS.Utils.log('populatePlaylist', _.map(list, 'url'));
+
+      const markup = RS.UI.render('partials/playlist', { playlist: list });
+      $('#nowplaying-playlist').html(markup);
+      self.populateTrackinfo();
+
+      PlaylistsModel.once('default.playlist', function () {
+        console.log('Playlist changed, refreshing');
+        self.populatePlaylist();
+      });
+    },
+
+    populateTrackinfo: function populateTrackinfo() {
+      const container = $('#nowplaying-trackinfo');
+      const activeIndex = PlaylistLib.getActive();
+      const playlist = PlaylistLib.get();
+      const currentTrack = playlist[activeIndex];
+      let markup = '';
+      RS.Utils.log('populateTrackinfo'); // , JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
+
+      if (currentTrack) {
+        markup = RS.UI.render('partials/trackinfo', { currentTrack });
+      }
+
+      container.html(markup);
+    },
+
+    bindMousewheel: function bindMousewheel() {
+      $('#rsPlayerVolume').mousewheel(function onVolumeMouseWheel(event) {
+        const offset = event.deltaX || event.deltaY;
+        const newVal = parseInt($('#rsPlayerVolume').val(), 10) + offset;
+        PlaybackLib.setVolume(newVal);
+      });
+
+      $('#waveform').mousewheel(function onWaveformMouseWheel(event) {
+        const offset = event.deltaX || event.deltaY;
+        if (offset) {
+          PlaybackLib.ensureWavesurfer().skip(offset * (RS.UI.mousewheelMultiplier || 1));
+        }
+      });
+    },
   };
 
 
@@ -248,11 +296,11 @@
     if ($('#waveform').length) {
       PlaybackLib.ensureWavesurfer();
       PlaybackLib.loadByIndex('active');
-      PlaybackLib.bindMousewheel();
+      PlayerWindow.bindMousewheel();
     }
 
-    PlayerWindow.lightUpToggleRepeat();
-    PlayerWindow.lightUpToggleShuffle();
+    RS.PlayerWindow.lightUpToggleRepeat();
+    RS.PlayerWindow.lightUpToggleShuffle();
 
     RS.UI.bindWCtl();
     RS.UI.bindFiledrag();

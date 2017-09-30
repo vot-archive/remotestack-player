@@ -5,8 +5,6 @@ const urlgent = require('../lib/urlgent');
 const cache = require('../lib/electron/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
-const PlaylistsModel = require('../models/playlists');
-const MarkupRenderer = require('../renderer/markup');
 
 function ensureWavesurfer(opts) {
   if (RS.Playback.wavesurferObject) {
@@ -45,7 +43,7 @@ function ensureWavesurfer(opts) {
     // wavesurfer.empty();
     wavesurfer.drawBuffer();
     RS.Playback.applyVolumeSetting();
-    RS.Playback.populatePlaylist();
+    RS.PlayerWindow.populatePlaylist();
     RS.PlayerWindow.updateTrackTime();
 
     // postEvent
@@ -287,7 +285,7 @@ const PlaybackLib = {
     }
 
     // populatePlaylist
-    self.populatePlaylist();
+    RS.PlayerWindow.populatePlaylist();
 
     if (!source) {
       return;
@@ -318,7 +316,7 @@ const PlaybackLib = {
         $('#waveform-loading').text('ERROR').show();
         return false;
       }
-      self.populateTrackinfo();
+      RS.PlayerWindow.populateTrackinfo();
       $('#waveform-loading').text('BUFFERING').show();
 
 
@@ -332,52 +330,6 @@ const PlaybackLib = {
         // let finalPath = filepath || trackdata.url;
         return executeWavesurferLoad(filepath || trackdata.playbackUrl, trackdata);
       });
-    });
-  },
-
-  populatePlaylist: function populatePlaylist() {
-    const self = this;
-    PlaylistsModel.removeAllListeners('default.playlist');
-    const list = PlaylistLib.get();
-    // RS.Utils.log('populatePlaylist', _.map(list, 'url'));
-
-    const markup = MarkupRenderer.render('partials/playlist', { playlist: list });
-    $('#nowplaying-playlist').html(markup);
-    self.populateTrackinfo();
-
-    PlaylistsModel.once('default.playlist', function () {
-      console.log('Playlist changed, refreshing');
-      self.populatePlaylist();
-    });
-  },
-  populateTrackinfo: function populateTrackinfo() {
-    const container = $('#nowplaying-trackinfo');
-    const activeIndex = PlaylistLib.getActive();
-    const playlist = PlaylistLib.get();
-    const currentTrack = playlist[activeIndex];
-    let markup = '';
-    RS.Utils.log('populateTrackinfo'); // , JSON.stringify(_.omit(currentTrack, 'raw'), null, 2));
-
-    if (currentTrack) {
-      markup = MarkupRenderer.render('partials/trackinfo', { currentTrack });
-    }
-
-    container.html(markup);
-  },
-
-  bindMousewheel: function bindMousewheel() {
-    const self = this;
-    $('#rsPlayerVolume').mousewheel(function onVolumeMouseWheel(event) {
-      const offset = event.deltaX || event.deltaY;
-      const newVal = parseInt($('#rsPlayerVolume').val(), 10) + offset;
-      self.setVolume(newVal);
-    });
-
-    $('#waveform').mousewheel(function onWaveformMouseWheel(event) {
-      const offset = event.deltaX || event.deltaY;
-      if (offset) {
-        self.ensureWavesurfer().skip(offset * (RS.UI.mousewheelMultiplier || 1));
-      }
     });
   },
 
