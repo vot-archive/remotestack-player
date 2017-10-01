@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.1
+
+* Fixed bug where last item on the list would never stop playing (last song repeat)
+* Removed log rotation (now it's just one log files for app's last lifecycle only)
+* Added developer mode as a setting
+* Improved window management
+* Added Circle CI and Code Climate integrations
+* Stricter linter profile
+* Updated dependencies
+
+
+
 ## 0.1.0 - First open release
 
 * Licensed under GPL
