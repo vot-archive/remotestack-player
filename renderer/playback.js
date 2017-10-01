@@ -6,11 +6,10 @@ const cache = require('../lib/electron/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
 
-function getWavesurfer(opts) {
-  if (RS.Playback.wavesurferObject) {
-    return RS.Playback.wavesurferObject;
+function getWavesurfer() {
+  if (RS.Playback.wavesurfer) {
+    return RS.Playback.wavesurfer;
   }
-  opts = opts || {};
 
   const wavesurfer = WaveSurfer.create({
     container: '#waveform',
@@ -51,14 +50,10 @@ function getWavesurfer(opts) {
       $('#waveform').css('visibility', 'visible');
       $('#waveform-loading').hide();
     }
-    if (typeof opts.onready === 'function') {
-      opts.onready();
-    } else {
-      onreadyFn();
-    }
+    onreadyFn();
 
 
-    if (RS.Playback.playing) {
+    if (RS.Playback.isPlaying()) {
       wavesurfer.play();
     }
 
@@ -83,25 +78,29 @@ function getWavesurfer(opts) {
     RS.PlayerWindow.updateTrackTime();
   });
 
+  wavesurfer.on('seek', function wavesurferOnSeek() {
+    RS.PlayerWindow.updateTrackTime();
+  });
+
   wavesurfer.on('play', function wavesurferOnPlay() {
     // RS.Utils.log('Play event');
-    RS.PlayerWindow.setPlayButton(false);
+    RS.Playback.isPlaying(true);
+    RS.PlayerWindow.setPlayButton(true);
   });
+
   wavesurfer.on('pause', function wavesurferOnPause() {
     // RS.Utils.log('Pause event');
-    RS.PlayerWindow.setPlayButton(true);
+    RS.Playback.isPlaying(false);
+    RS.PlayerWindow.setPlayButton(false);
   });
 
   wavesurfer.on('finish', function wavesurferOnFinish() {
     RS.Utils.log('Track finished');
-    // RS.Playback.wavesurferObject.destroy();
-    // RS.Playback.wavesurferObject = null;
     RS.PlayerWindow.updateTrackTime(true);
     RS.Playback.next();
-    RS.Playback.play();
   });
 
-  RS.Playback.wavesurferObject = wavesurfer;
+  RS.Playback.wavesurfer = wavesurfer;
   return wavesurfer;
 }
 
@@ -136,7 +135,7 @@ function interpretPlaylistItem(item, cb) {
 const PlaybackLib = {
   // state
   // queue: PlaylistsModel.get('default.playlist'),
-  queue: PlaylistLib.get(),
+  // queue: PlaylistLib.get(),
 
   volume: PreferencesModel.get('settings.volume') || 30, // don't start on full volume
   loopOne: false,
@@ -150,60 +149,31 @@ const PlaybackLib = {
     return $('#rsPlayerAudioContainer audio')[0];
   },
 
-  play: function play(state) {
-    RS.Utils.log('play(' + state + ')');
-    const self = this;
-    const audioTag = self.getElement();
-    if (!audioTag) {
-      RS.Utils.log('RS.Playback.play: No audio element present');
-      return;
+  isPlaying: function isPlaying(value) {
+    if (typeof value === 'boolean') {
+      this.playing = value;
+      return null;
     }
-
-    // state = state || audioTag.paused || true;
-    RS.Utils.log('state:', state);
-
-    if (typeof state !== 'boolean') {
-      RS.Utils.log('audioTag.paused:', audioTag.paused);
-      state = audioTag.paused || false;
-    }
-
-    if (state) {
-      RS.Utils.log('Playing');
-      audioTag.play();
-      RS.PlaybackWindow.setPlayButton(false);
-    } else {
-      RS.Utils.log('Pausing');
-      audioTag.pause();
-      RS.PlaybackWindow.setPlayButton(true);
-    }
-
-    self.updatePositionMax(self.getElement());
+    return this.playing;
   },
+
 
   prev: function prev() {
     const playlist = PlaylistLib.get();
-    const playState = this.playing;
-    const nextTrackIndex = PlaylistLib.setActive('prev');
-    const nextTrack = playlist[nextTrackIndex];
-    console.log((nextTrackIndex + 1) + ' out of ' + playlist.length);
-
-    RS.Utils.log('>>Prev track:', nextTrack);
-
-    this.load(nextTrack);
-    this.play(playState);
+    const newTrackIndex = PlaylistLib.setActive('prev');
+    if (typeof newTrackIndex === 'number') {
+      const nextTrack = playlist[newTrackIndex];
+      this.load(nextTrack);
+    }
   },
 
   next: function next() {
     const playlist = PlaylistLib.get();
-    const playState = this.playing;
-    const nextTrackIndex = PlaylistLib.setActive('next');
-    const nextTrack = playlist[nextTrackIndex];
-    console.log((nextTrackIndex + 1) + ' out of ' + playlist.length);
-
-    // RS.Utils.log('>>Next track:', nextTrack);
-
-    this.load(nextTrack);
-    this.play(playState);
+    const newTrackIndex = PlaylistLib.setActive('next');
+    if (typeof newTrackIndex === 'number') {
+      const nextTrack = playlist[newTrackIndex];
+      this.load(nextTrack);
+    }
   },
 
   // TODO: Support setVolume('+5') syntax
@@ -245,12 +215,13 @@ const PlaybackLib = {
     index = PlaylistLib.setActive(index);
     RS.Utils.log('index', index);
 
-    return this.load(PlaylistLib.get()[index]);
+    return PlaybackLib.load(PlaylistLib.get()[index]);
   },
+
   load: function load(source) {
     console.log('hit populatePlaylist from RS.Playback.load');
     const self = this;
-
+    const currentPlayState = this.isPlaying();
 
     // updateCurrentTrack
     function updateCurrentTrack(trackdata) {
@@ -281,7 +252,12 @@ const PlaybackLib = {
       RS.Utils.log('>> finalPath', finalPath);
       $('#waveform').css('visibility', 'hidden');
 
-      self.wavesurferObject.load(finalPath);
+      self.wavesurfer.load(finalPath);
+      if (currentPlayState) {
+        // self.wavesurfer.on('ready');
+        RS.Utils.log('it was playing and should do now');
+        self.wavesurfer.play();
+      }
     }
 
     // populatePlaylist
@@ -290,13 +266,6 @@ const PlaybackLib = {
     if (!source) {
       return;
     }
-    // if (source.source === 'file') {
-    //   let filestat = fs.statSync(source.url);
-    //   if (!filestat.isFile()) {
-    //     RS.Utils.log(source.url, 'is not a file');
-    //     return;
-    //   }
-    // }
 
     resetCurrentTrackInfo();
 
@@ -307,7 +276,7 @@ const PlaybackLib = {
     self.getWavesurfer();
 
 
-    interpretPlaylistItem(source, function interpretPlaylistItemCb(trackdata) {
+    interpretPlaylistItem(source, function (trackdata) {
       RS.Utils.log('>> interpretPlaylistItem returned'); // , _.omit(trackdata, 'raw'));
 
       if (trackdata.source === 'youtube' && !trackdata.playbackUrl) {

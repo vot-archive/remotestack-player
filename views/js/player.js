@@ -4,6 +4,7 @@
   const PlaybackLib = require('../renderer/playback');
   const PlaylistLib = require('../lib/playlist');
   const PlaylistsModel = require('../models/playlists');
+  const PreferencesModel = require('../models/preferences');
   const Utils = require('../lib/utils');
 
   RS.displayNotification = function displayNotification(text) {
@@ -18,6 +19,26 @@
   global.WaveSurfer = require('./vendor/js/wavesurfer/wavesurfer.min.js');
 
   const PlayerWindow = {
+
+    /**
+     * Getters and setters for shuffle and repeat
+     */
+    setShuffle: function setShuffle(bool) {
+      const newVal = !!bool;
+      PreferencesModel.set('playlist.shuffle', newVal);
+    },
+    getShuffle: function getShuffle() {
+      return PreferencesModel.get('playlist.shuffle') || false;
+    },
+
+    setRepeat: function setRepeat(bool) {
+      const newVal = !!bool;
+      PreferencesModel.set('playlist.repeat', newVal);
+    },
+    getRepeat: function getRepeat() {
+      return PreferencesModel.get('playlist.repeat') || false;
+    },
+
     togglePlaylist: function togglePlaylist() {
       // let activeId = $('.mainContent .navContent.active').attr('id');
       // let isActive = activeId === 'nowplaying';
@@ -42,8 +63,8 @@
 
     initialiseButtonStates: function initialiseButtonStates() {
       const playlistActive = $(window).height() > 120 + 1;
-      const repeatActive = PlaylistLib.getRepeat();
-      const shuffleActive = PlaylistLib.getShuffle();
+      const repeatActive = this.getRepeat();
+      const shuffleActive = this.getShuffle();
 
       if (playlistActive) {
         $('*[data-toggle=playlist]').addClass('active');
@@ -69,25 +90,23 @@
     },
 
     toggleRepeat: function toggleRepeat() {
-      const self = this;
-      const initial = PlaylistLib.getRepeat();
+      const initial = this.getRepeat();
       const newVal = !initial;
-      PlaylistLib.setRepeat(newVal);
-      self.lightUpToggleRepeat();
+      this.setRepeat(newVal);
+      this.lightUpToggleRepeat();
       return newVal;
     },
     toggleShuffle: function toggleShuffle() {
-      const self = this;
-      const initial = PlaylistLib.getShuffle();
+      const initial = this.getShuffle();
       const newVal = !initial;
-      PlaylistLib.setShuffle(newVal);
-      self.lightUpToggleShuffle();
+      this.setShuffle(newVal);
+      this.lightUpToggleShuffle();
       return newVal;
     },
 
 
     lightUpToggleRepeat: function lightUpToggleRepeat() {
-      const value = PlaylistLib.getRepeat();
+      const value = this.getRepeat();
 
       if (value) {
         $('*[data-toggle=repeat]').addClass('active');
@@ -97,7 +116,7 @@
     },
 
     lightUpToggleShuffle: function lightUpToggleShuffle() {
-      const value = PlaylistLib.getShuffle();
+      const value = this.getShuffle();
 
       if (value) {
         $('*[data-toggle=shuffle]').addClass('active');
@@ -107,20 +126,26 @@
     },
 
 
+    /**
+     * Sets the play/pause button to indicate what its currently bound action
+     *
+     * @param {boolean} state Current playback state (is it actively playing)
+     * true = currently playing (display pause symbol on button)
+     * false = currently paused (display play symbol on button)
+     */
     setPlayButton: function setPlayButton(state) {
-      PlaybackLib.playing = state;
-      $('.playerCtl#WSPlay .fa, .playerCtl#WSPlay .fa').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'play' : 'pause'));
+      $('.playerCtl#WSPlay .fa, .playerCtl#WSPlay .fa').removeClass('fa-play fa-pause').addClass('fa-' + (state ? 'pause' : 'play'));
     },
 
     updateTrackTime: function updateTrackTime(clear) {
       const currTimeDiv = $('.timeElapsed');
       const durationDiv = $('.timeTotal');
-      const wavesurferObject = PlaybackLib.wavesurferObject;
+      const wavesurfer = PlaybackLib.wavesurfer;
 
       let currTime = '----';
       let duration = '----';
 
-      if (wavesurferObject && !clear) {
+      if (wavesurfer && !clear) {
         currTime = PlaybackLib.getWavesurfer().getCurrentTime();
         duration = PlaybackLib.getWavesurfer().getDuration();
 
