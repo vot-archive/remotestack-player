@@ -1,6 +1,6 @@
 /* Defaults */
 html, body, .wrap, .containerBody, .sidebar, .mainContent {height: 100%}
-body {background: transparent; font-size: 12px}
+body {background: #eee; font-size: 12px}
 * {cursor: default}
 table.table {font-size: 1em}
 
@@ -8,13 +8,10 @@ table.table {font-size: 1em}
 .padding-10 {padding:10px}
 .padding-0-10 {padding:0 10px}
 
-input.urlviewer {width: 100%; background: none; border: none}
-
 .well {background-color: rgba(66, 66, 66, 0.85); border: 1px solid rgba(0, 0, 0, 0.3)}
 .well a {color: white}
 
 .wrap {padding: 0; margin: 0}
-.entry-url {display: block; font-size: 0.8em; font-weight: bold}
 
 /* List group */
 .list-group-item {background-color: transparent; border: none; color: #555}
@@ -68,7 +65,6 @@ ul.list li .primary {color: black; text-decoration: none}
 
 
 
-/* NEW WINDOW CONCEPT */
 body {/*-webkit-app-region: drag;*/ -webkit-user-select: none; cursor: default}
 
 
@@ -101,45 +97,40 @@ table.spaced th {padding: 3px 1px;}
 label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
 label.settings-item select {width:80px}
 
-/*
- * LIGHT THEME
- */
 
 
-body.light .navContent {background: linear-gradient(to bottom, #fafafa 0px, #dadada 120px); color: black}
-body.light .navContent.cloudy {background: linear-gradient(to bottom, rgba(239, 239, 239, 0.7) 0%, rgba(239, 239, 239, 0.23) 100%); color: black}
-body.light h1, body.light h2, body.light h3 {color: #3E3D3D; /*text-shadow: 0px 1px 1px #cecece;*/}
-body.light hr {border-top-color: #bbb}
+/* Window controls */
+#wHeader {width: 100%; height: 30px; top: 0; left: 0; position: fixed; z-index: 9;  -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
+#wCtls {position: fixed; top: 8px; left: 8px;}
 
-/*body.light .navContent h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}*/
-body.light .containerFooter a {color: #4c4c4c}
-body.light .containerFooter a span.fa-active{color: #d22}
+/* Generic style */
+.windowCtl .generic {color: #999; margin-right: -2px; z-index: 99; -webkit-app-region: no-drag}
+.windowCtl .generic:active, .windowCtl .generic:hover {color: #565656}
+.windowCtl .generic.fa-minus {top: 2px; position: relative;}
 
-body.light .navContent ul.list li {background: #f3f0f0; color: black}
-body.light .navContent ul.list li:nth-child(2n) {background: #e8e7e7}
-body.light .subtle {color: #5a5a5a}
-body.light .well.subtle {background: rgba(255,255,255,0.4)}
-body.light code.key {color: #5a5a5a}
-
-
-
-/*
- * DARK THEME
- */
-
-body.dark .navContent {background: linear-gradient(to bottom, #404040 0px, #101010 120px); color: #EFEFEF}
-body.dark .navContent.cloudy {background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.55) 100%); color: #EFEFEF}
-/*body.dark .navContent h2 {background: linear-gradient(to bottom, #444 0%, #111 100%); color: #EFEFEF; text-shadow: none}*/
-body.dark .navContent ul.list li {background: #171717; color: #eee}
-body.dark .navContent ul.list li:nth-child(2n) {background: #101010}
-body.dark a {color: #cedef3}
-body.dark hr {body.light hr {border-top-color: #bbb}}
+/* Mac style */
+.windowCtl .mac {width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
+.windowCtl .mac.btnClose {background: #ff3b47; border-color: #f0121d}
+.windowCtl .mac.btnMinimize {background: #ffbf00; border-color: #e69e12}
+.windowCtl .mac.btnMaximize {background: #00d742; border-color: #12b728}
+.windowCtl .mac.btnClose:active {background: #c5343c; border-color: #9a242c}
+.windowCtl .mac.btnMinimize:active {background: #c39109; border-color: #a68028}
+.windowCtl .mac.btnMaximize:active {background: #129b36; border-color: #2e7c42}
 
 
-body.dark .containerFooter {background: #1f1f1f; border-top-color: #333;}
-body.dark .containerFooter a {color: #4c4c4c}
-body.dark .containerFooter a span.fa-active{color: #d22}
-body.dark .btn-default {background-color: #222; color: #efefef;}
-body.dark .subtle {color: #797979}
-body.dark .well.subtle {background: rgba(0,0,0,0.15)}
-body.dark code.key {color: #4c4c4c}
+.windowCtl .fa, .playerCtl .fa {-webkit-transition: color 100ms linear}
+
+
+
+/* Position */
+#wCtls.right {position: fixed; left: auto; right: 8px}
+#wCtls.right .windowCtl {float: right}
+
+/* Styling */
+.windowCtl i {display: none}
+#wCtls.generic .windowCtl i.generic {display: inline-block;}
+#wCtls.mac .windowCtl i.mac {display: inline-block;}
+
+
+textarea#urlinput {width: 100%; height:100px; resize:none; outline: none}
+#urlAddBtn {width: 100%; height:70px; margin:15px 0}

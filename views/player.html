@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>RemoteStack Player</title>
+  <title>Player</title>
 </head>
 <body>
 
@@ -20,15 +20,15 @@
             <partial data-view="player-controls"></partial>
 
             <ul id="windowTriggers">
-              <li onclick="RS.IPCEmitter('show-window', 'add')">
+              <li onclick="RS.sendIpcMessage('show-window', 'add')">
                 Add
               </li>
 
-              <li onclick="RS.IPCEmitter('show-window', 'settings')">
+              <li onclick="RS.sendIpcMessage('show-window', 'settings')">
                 Settings
               </li>
 
-              <li onclick="RS.IPCEmitter('show-window', 'help')">
+              <li onclick="RS.sendIpcMessage('show-window', 'help')">
                 Help
               </li>
             </ul>
@@ -48,19 +48,19 @@
   <assets style="display: none">
     <link rel="icon" type="image/png" href="icons/player-256.png">
     <link rel="apple-touch-icon" href="icons/player-256.png">
-    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
-    <link rel="stylesheet" href="css/rs-base.css">
-    <link rel="stylesheet" href="css/rs-windowCtl.css">
-    <link rel="stylesheet" href="css/rs-player.css">
+    <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/player.css">
+    <link rel="stylesheet" href="css/themes.css">
 
-    <script>window.$ = window.jQuery = require('./js/libs/jquery-2.2.4.min.js');</script>
+    <script>window.$ = window.jQuery = require('./vendor/js/jquery-2.2.4.min.js');</script>
 
     <!-- specific to window -->
-    <link rel="stylesheet" href="css/libs/font-awesome.min.css">
-    <link rel="stylesheet" href="css/libs/animate.css">
-    <script src="js/libs/bootstrap.min.js"></script>
-    <script src="js/libs/jquery-ui.js"></script>
-    <script src="js/libs/jquery.mousewheel.js"></script>
+    <link rel="stylesheet" href="vendor/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/css/animate.css">
+    <script src="vendor/js/bootstrap.min.js"></script>
+    <script src="vendor/js/jquery-ui.js"></script>
+    <script src="vendor/js/jquery.mousewheel.js"></script>
 
     <script src="js/app.js"></script>
     <script src="js/player.js"></script>

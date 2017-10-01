@@ -6,13 +6,13 @@ const app = electron.app;
 const WindowManager = require('./lib/windowManager');
 const Utils = require('./lib/utils');
 
-Utils.log.rotatelog();
+Utils.log.clearlog();
 
 function start() {
   Utils.log('userdata:', app.getPath('userData'));
 
-  WindowManager.create('player');
-  require('./lib/ipc/listeners/main');
+  WindowManager.show('player');
+  require('./lib/ipc/main');
 }
 
 function preQuitRoutine() {
@@ -38,5 +38,5 @@ app.on('ready', start);
 
 app.on('activate', function () {
   // app brought back from taskbar: ensure the main window exists and give it focus
-  WindowManager.create('player').show();
+  WindowManager.show('player');
 });

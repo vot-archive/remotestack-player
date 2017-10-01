@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  const UI = require('../renderer/ui');
   const _ = require('lodash');
 
   function processInputAndAdd(inputEl) {
@@ -11,7 +10,7 @@
         url = url.trim();
         if (url.length) {
           const dataToAdd = { url, source: 'youtube', type: 'audio' };
-          RS.IPCEmitter('add-to-playlist', dataToAdd);
+          RS.sendIpcMessage('add-to-playlist', dataToAdd);
           inputEl.val('');
         }
       });
@@ -30,17 +29,18 @@
       const inputEl = $('#' + inputId);
 
       inputEl.on('keydown', function (e) {
-        if ((e.ctrlKey || e.metaKey) && e.which === 13) {
-          e.preventDefault();
-          processInputAndAdd(inputEl);
+        if (e.which === 13) {
+          if (!e.shiftKey) {
+            e.preventDefault();
+            processInputAndAdd(inputEl);
+          }
         }
       });
     });
   }
 
   $(document).ready(function () {
-    UI.bindShortcuts();
-    UI.preventDragRedirections();
     bindURLInput();
+    $('#urlinput').focus();
   });
 }());

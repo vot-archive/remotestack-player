@@ -18,19 +18,16 @@
     "no-param-reassign": 0,
     "prefer-arrow-callback": 0,
     "no-plusplus": 0,
-    "no-path-concat": 0
+    "no-path-concat": 0,
+    "func-names": 0
   },
   "globals": {
     "$": true,
-    "console": true,
-    "document": true,
     "RS": true,
+    "document": true,
     "require": true,
     "process": true,
     "__dirname": true,
-    "window": true,
-    "module": true,
-    "WaveSurfer": true,
-    "alert": true
+    "window": true
   }
 }

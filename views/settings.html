@@ -11,7 +11,7 @@
   <!-- Theme -->
   <label class="settings-item">
     <span class="pull-right">
-      <select name="ui.theme" onchange="RS.UI.handlePreferencesInputChange(this)">
+      <select name="ui.theme" onchange="RS.SettingsWindow.handlePreferencesInputChange(this)">
         <option></option>
         <option value="light">Light</option>
         <option value="dark">Dark</option>
@@ -23,7 +23,7 @@
   <!-- Window controls position -->
   <label class="settings-item">
     <span class="pull-right">
-      <select name="ui.windowCtlPosition" onchange="RS.UI.handlePreferencesInputChange(this)">
+      <select name="ui.windowCtlPosition" onchange="RS.SettingsWindow.handlePreferencesInputChange(this)">
         <option></option>
         <option value="left">Left</option>
         <option value="right">Right</option>
@@ -35,7 +35,7 @@
   <!-- Window controls style -->
   <label class="settings-item">
     <span class="pull-right">
-      <select name="ui.windowCtlStyle" onchange="RS.UI.handlePreferencesInputChange(this)">
+      <select name="ui.windowCtlStyle" onchange="RS.SettingsWindow.handlePreferencesInputChange(this)">
         <option></option>
         <option value="generic">Generic</option>
         <option value="mac">Mac</option>
@@ -47,17 +47,17 @@
   <!-- Show full path -->
   <label class="settings-item">
     <span class="pull-right">
-      <input type="checkbox" value="ui.showFullPath" onchange="RS.UI.handlePreferencesCheckboxChange(this)" />
+      <input type="checkbox" value="ui.showFullPath" onchange="RS.SettingsWindow.handlePreferencesCheckboxChange(this)" />
     </span>
     <strong>Show full path in playlist</strong>
   </label>
 
-  <!-- Open app data -->
+  <!-- Developer mode -->
   <label class="settings-item">
     <span class="pull-right">
-      <a href="file://$$USERDATA" class="btn btn-xs btn-default">Open app data folder</a>
+      <input type="checkbox" value="app.enableDeveloperMode" onchange="RS.SettingsWindow.handlePreferencesCheckboxChange(this)" />
     </span>
-    <strong>Data storage</strong>
+    <strong>Developer mode (requires restart)</strong>
   </label>
 
   <br /><br />
@@ -68,11 +68,10 @@
   <assets style="display: none">
     <link rel="icon" type="image/png" href="icons/player-256.png">
     <link rel="apple-touch-icon" href="icons/player-256.png">
-    <link rel="stylesheet" href="css/libs/bootstrap.min.css">
-    <link rel="stylesheet" href="css/rs-base.css">
-    <link rel="stylesheet" href="css/rs-windowCtl.css">
-    <link rel="stylesheet" href="css/rs-player.css">
-    <script>window.$ = window.jQuery = require('./js/libs/jquery-2.2.4.min.js');</script>
+    <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <script>window.$ = window.jQuery = require('./vendor/js/jquery-2.2.4.min.js');</script>
 
     <!-- specific to window -->
     <script src="js/app.js"></script>

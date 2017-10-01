@@ -1,13 +1,9 @@
 'use strict';
 
 (function () {
-  const UI = require('../renderer/ui');
   const checkForUpdates = require('./js/checkForUpdates');
-  const appVersion = RS.version || '';
 
   $(document).ready(function () {
-    UI.renderPartialTags({ appVersion });
-
     checkForUpdates(function (err, data) {
       if (err) {
         console.log(err);
@@ -16,7 +12,7 @@
         if (data.needsUpdate) {
           $('#updateNotice').show().html('Version ' + data.newest + ' available. <a href="' + data.url + '" class="btn btn-xs btn-default">Update</a>');
 
-          UI.handleExternalLinks($('#updateNotice a'));
+          RS.UI.handleExternalLinks($('#updateNotice a'));
         }
       }
     });

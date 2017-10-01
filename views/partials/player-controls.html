@@ -19,14 +19,14 @@
     </div>
 
     <div style="width:70px; float: right; text-align: right">
-      <input type="range" min="0" max="100" value="100" oninput="RS.Player.setVolume(this)" id="rsPlayerVolume"
+      <input type="range" min="0" max="100" value="100" oninput="RS.Playback.setVolume(this)" id="rsPlayerVolume"
       style=" margin-top:5px" title="Volume" tabindex="-1"  onfocus="this.blur();">
     </div>
 
 
-    <a class="playerCtl big active" onclick="RS.Player.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
+    <a class="playerCtl big active" onclick="RS.Playback.prev()"><span class="fa fa-fw fa-step-backward" title="Previous"></span></a>
     <a class="playerCtl big active" id="WSPlay"><span class="fa fa-fw fa-play" title="Play"></span></a>
-    <a class="playerCtl big active" onclick="RS.Player.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
+    <a class="playerCtl big active" onclick="RS.Playback.next()"><span class="fa fa-fw fa-step-forward" title="Next"></span></a>
   </div>
 
 </div>

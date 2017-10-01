@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron .",
     "lint": "eslint .",
+    "log": "tail -f ~/Library/Application\\ Support/RemoteStackPlayer/app.log",
     "build": "node ./scripts/build.js"
   },
   "author": "Vot Z <http://vot-z.com>",
@@ -16,7 +17,6 @@
     "clarg": "0.0.3",
     "electron": "1.7.8",
     "fs-extra": "^4.0.2",
-    "glob": "^7.1.2",
     "lodash": "^4.17.4",
     "request": "^2.83.0",
     "uuid": "^3.1.0"
