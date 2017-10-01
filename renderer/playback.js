@@ -5,13 +5,14 @@ const urlgent = require('../lib/urlgent');
 const cache = require('../lib/electron/filecache');
 const PlaylistLib = require('../lib/playlist');
 const PreferencesModel = require('../models/preferences');
+const Wavesurfer = require('../views/vendor/js/wavesurfer/wavesurfer.min');
 
 function getWavesurfer() {
   if (RS.Playback.wavesurfer) {
     return RS.Playback.wavesurfer;
   }
 
-  const wavesurfer = WaveSurfer.create({
+  const wavesurfer = Wavesurfer.create({
     container: '#waveform',
 
     waveColor: '#847c71',

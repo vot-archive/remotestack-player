@@ -1,6 +1,6 @@
 'use strict';
 
-(function (global) {
+(function () {
   const PlaybackLib = require('../renderer/playback');
   const PlaylistLib = require('../lib/playlist');
   const PlaylistsModel = require('../models/playlists');
@@ -15,8 +15,6 @@
       .delay(3000)
       .fadeOut(1000);
   };
-
-  global.WaveSurfer = require('./vendor/js/wavesurfer/wavesurfer.min.js');
 
   const PlayerWindow = {
 
@@ -332,4 +330,4 @@
     RS.PlayerWindow.bindPlayerShortcuts();
     RS.PlayerWindow.initialiseButtonStates();
   });
-}(window));
+}());

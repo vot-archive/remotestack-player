@@ -23,15 +23,11 @@
   },
   "globals": {
     "$": true,
-    "console": true,
-    "document": true,
     "RS": true,
+    "document": true,
     "require": true,
     "process": true,
     "__dirname": true,
-    "window": true,
-    "module": true,
-    "WaveSurfer": true,
-    "alert": true
+    "window": true
   }
 }
