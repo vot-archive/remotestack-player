@@ -206,6 +206,9 @@
         // track +5s
         if (e.which === 37) {
           // RS.Utils.log('arrow left hit');
+          if (e.ctrlKey || e.metaKey) {
+            PlaybackLib.next();
+          }
           PlaybackLib.getWavesurfer().skipBackward();
           e.preventDefault();
           return;
@@ -214,6 +217,9 @@
         // track -5s
         if (e.which === 39) {
           // RS.Utils.log('arrow right hit');
+          if (e.ctrlKey || e.metaKey) {
+            PlaybackLib.prev();
+          }
           PlaybackLib.getWavesurfer().skipForward();
           e.preventDefault();
           return;
@@ -237,21 +243,6 @@
           // RS.displayNotification('Volume set to ' + newVolume);
           e.preventDefault();
           return;
-        }
-
-        // prev song
-        if (!(e.ctrlKey || e.metaKey) && e.which === 188) {
-          // RS.Utils.log('< hit');
-          PlaybackLib.prev();
-          e.preventDefault();
-          return;
-        }
-
-        // next song
-        if (!(e.ctrlKey || e.metaKey) && e.which === 190) {
-          // RS.Utils.log('> hit');
-          PlaybackLib.next();
-          e.preventDefault();
         }
       });
     },
