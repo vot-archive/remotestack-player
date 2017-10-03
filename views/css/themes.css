@@ -10,8 +10,8 @@ body.light h1, body.light h2, body.light h3 {color: #3E3D3D; /*text-shadow: 0px 
 body.light hr {border-top-color: #bbb}
 
 /*body.light .navContent h2 {background: linear-gradient(to bottom, #EFEFEF 0%, #D5D5D5 100%)}*/
-body.light .containerFooter a {color: #4c4c4c}
-body.light .containerFooter a span.fa-active{color: #d22}
+/*body.light .containerFooter a {color: #4c4c4c}*/
+/*body.light .containerFooter a span.fa-active{color: #d22}*/
 
 body.light .navContent ul.list li {background: #f3f0f0; color: black}
 body.light .navContent ul.list li:nth-child(2n) {background: #e8e7e7}
@@ -34,9 +34,9 @@ body.dark a {color: #cedef3}
 body.dark hr {body.light hr {border-top-color: #bbb}}
 
 
-body.dark .containerFooter {background: #1f1f1f; border-top-color: #333;}
-body.dark .containerFooter a {color: #4c4c4c}
-body.dark .containerFooter a span.fa-active{color: #d22}
+/*body.dark .containerFooter {background: #1f1f1f; border-top-color: #333;}*/
+/*body.dark .containerFooter a {color: #4c4c4c}*/
+/*body.dark .containerFooter a span.fa-active{color: #d22}*/
 body.dark .btn-default {background-color: #222; color: #efefef;}
 body.dark .subtle {color: #797979}
 body.dark .well.subtle {background: rgba(0,0,0,0.15)}

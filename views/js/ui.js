@@ -2,11 +2,11 @@
 
 const _ = require('lodash');
 const os = require('os');
-const PreferencesModel = require('../models/preferences');
-const Utils = require('../lib/utils');
-const FileUtils = require('../lib/utils/fileutils');
+const PreferencesModel = require('../../models/preferences');
+const Utils = require('../../lib/utils');
+const FileUtils = require('../../lib/utils/fileutils');
 const electron = require('electron');
-const MarkupRenderer = require('./markup');
+const MarkupRenderer = require('../../renderer/markup');
 const shell = electron.shell;
 
 const webFrame = electron.webFrame;
@@ -23,7 +23,7 @@ const UI = {
    */
   resolveUIPreferences: function resolveUIPreferences() {
     $('body').removeClass();
-    $('#wCtls').removeClass();
+    $('#windowCtl').removeClass();
 
     let theme = PreferencesModel.get('ui.theme');
     if (!theme) {
@@ -39,7 +39,7 @@ const UI = {
       wCtlPos = 'left';
     }
     RS.Utils.log('adding wCtl class:', wCtlPos);
-    $('#wCtls').addClass(wCtlPos);
+    $('#windowCtl').addClass(wCtlPos);
 
 
     let wCtlStyle = PreferencesModel.get('ui.windowCtlStyle');
@@ -47,7 +47,7 @@ const UI = {
       wCtlStyle = 'generic';
     }
     RS.Utils.log('adding wCtl class:', wCtlStyle);
-    $('#wCtls').addClass(wCtlStyle);
+    $('#windowCtl').addClass(wCtlStyle);
 
 
 

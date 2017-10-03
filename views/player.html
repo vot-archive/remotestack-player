@@ -7,39 +7,20 @@
 </head>
 <body>
 
-  <div id="wContainer" class="wrap">
+  <div id="playerContainer">
     <partial data-view="window-controls"></partial>
 
-    <div class="containerBody">
-      <div class="mainContent" id="wBody">
-        <div class="navContent" id="nowplaying">
-          <div class="inner">
-            <div id="notifications"></div>
-            <div id="waveform-loading"></div>
+    <div id="playerBody">
+      <div class="navContent">
+        <div id="notifications"></div>
+        <div id="waveform-loading"></div>
 
-            <partial data-view="player-controls"></partial>
+        <partial data-view="player-controls"></partial>
+        <partial data-view="player-menu"></partial>
 
-            <ul id="windowTriggers">
-              <li onclick="RS.sendIpcMessage('show-window', 'add')">
-                Add
-              </li>
-
-              <li onclick="RS.sendIpcMessage('show-window', 'settings')">
-                Settings
-              </li>
-
-              <li onclick="RS.sendIpcMessage('show-window', 'help')">
-                Help
-              </li>
-            </ul>
-
-            <div id="rsPlayerBrowser">
-              <ul class="list" id="nowplaying-playlist"></ul>
-            </div>
-
-          </div>
+        <div id="playlistContainer">
+          <ul class="list"></ul>
         </div>
-
       </div>
     </div>
   </div>

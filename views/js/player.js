@@ -38,12 +38,6 @@
     },
 
     togglePlaylist: function togglePlaylist() {
-      // let activeId = $('.mainContent .navContent.active').attr('id');
-      // let isActive = activeId === 'nowplaying';
-      // if (!isActive) {
-      //   return;
-      // }
-
       // TODO add 35 as a third step and always size forward
 
       const playlistThresholds = [120, 420];
@@ -270,7 +264,7 @@
       // RS.Utils.log('populatePlaylist', _.map(list, 'url'));
 
       const markup = RS.UI.render('partials/playlist', { playlist: list });
-      $('#nowplaying-playlist').html(markup);
+      $('#playlistContainer .list').html(markup);
       self.populateTrackinfo();
 
       PlaylistsModel.once('default.playlist', function () {

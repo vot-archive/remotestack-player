@@ -1,17 +1,37 @@
 /* Defaults */
-html, body, .wrap, .containerBody, .sidebar, .mainContent {height: 100%}
-body {background: #eee; font-size: 12px}
+html, body, #playerBody {height: 100%}
+body {background: #eee; font-size: 12px; -webkit-user-select: none; cursor: default}
 * {cursor: default}
-table.table {font-size: 1em}
 
-.padding-5 {padding:5px}
-.padding-10 {padding:10px}
-.padding-0-10 {padding:0 10px}
+body {/*-webkit-app-region: drag;*/ }
+
+h1, h2, h3, h4, h5 {font-weight: 300; margin: 0; text-decoration: none}
+h1 {font-weight: 100}
+h2 {font-size: 22px}
+h3 {font-size: 18px}
+h1 > * {font-weight: inherit !important}
+h1 strong {font-weight: 300 !important}
+h2 strong, h3 strong, h4 strong, h5 strong {font-weight: 400}
+
+label {font-weight: 400}
+
+a {text-decoration: none; color: #23527C}
+a:hover {color: #153C5D}
+a, a:hover, a:focus {text-decoration: none; outline: none}
+
+hr {margin: 5px 0}
 
 .well {background-color: rgba(66, 66, 66, 0.85); border: 1px solid rgba(0, 0, 0, 0.3)}
 .well a {color: white}
+.well.subtle {margin: 30px auto 20px; max-width: 280px;}
 
-.wrap {padding: 0; margin: 0}
+code.key {font-family: inherit; font-weight: 500; padding: 2px 5px;}
+
+table.table {font-size: 1em}
+table.spaced th {padding: 3px 1px;}
+label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
+label.settings-item select {width:80px}
+.padding-10 {padding:10px}
 
 /* List group */
 .list-group-item {background-color: transparent; border: none; color: #555}
@@ -30,106 +50,39 @@ ul.list li:nth-child(2n) {background:#f5f5f5}
 /*ul.list li:last-child {margin-bottom:20px; }*/
 
 ul.list li.group-name {color: black; background: #ccc; font-weight: bold}
-
 ul.list li .primary {color: black; text-decoration: none}
-
-/* Navigation: Active screen */
-.navContent {display: none; height: 100%}
-.navContent.active {display: block}
-
-
-.navContent {overflow: hidden; overflow-y: auto}
-.navContent#nowplaying {overflow-y: hidden}
-
-/* Navigation */
-/*.nav>li>a:focus, .nav>li>a:hover {background-color: #E7E7E7; color: #169bb9;}*/
-
-.containerBody {padding: 0 10px; position: fixed; top:0; bottom: 0; width: 100%; overflow: hidden; -webkit-user-select: none}
-.containerBody {background: transparent}
-.containerBody ul.list {margin: 0 -10px}
-.selectable {-webkit-user-select: all}
-
-
-
-/* Backgrounds */
-/*.navContent {background: rgba(50, 50, 50, 0.3)}*/
-.navContent {background: rgba(100, 40, 80, 0.4)}
-
-/* Sidebar */
-.sidebar {width:140px;position:fixed;left:-140px}
-.mainContent {position:fixed;left:0;right:0}
-
-/* Add footer */
-.wrap .containerBody {bottom: 20px; width: 100%}
-.wrap .containerFooter {position: fixed; bottom: 0; height:20px; width: 100%; padding: 0 5px; background: #D5D5D5; border-top: 1px solid #b6b4b6;}
-
-
-
-body {/*-webkit-app-region: drag;*/ -webkit-user-select: none; cursor: default}
-
-
-/*
- * COMMON STYLING
- */
-h1, h2, h3, h4, h5 {font-weight: 300; margin: 0; text-decoration: none}
-h1 {font-weight: 100}
-h2 {font-size: 22px}
-h3 {font-size: 18px}
-h1 > * {font-weight: inherit !important}
-h1 strong {font-weight: 300 !important}
-h2 strong, h3 strong, h4 strong, h5 strong {font-weight: 400}
-
-label {font-weight: 400}
-
-a {text-decoration: none; color: #23527C}
-a:hover {color: #153C5D}
-a, a:hover, a:focus {text-decoration: none; outline: none}
-
-hr {margin: 5px 0}
-
-
-
-
-.well.subtle {margin: 30px auto 20px; max-width: 280px;}
-code.key {font-family: inherit; font-weight: 500; padding: 2px 5px;}
-
-table.spaced th {padding: 3px 1px;}
-label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
-label.settings-item select {width:80px}
-
 
 
 /* Window controls */
-#wHeader {width: 100%; height: 30px; top: 0; left: 0; position: fixed; z-index: 9;  -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
-#wCtls {position: fixed; top: 8px; left: 8px;}
+#windowCtlContainer {width: 100%; height: 30px; top: 0; left: 0; position: fixed; z-index: 9;  -webkit-app-region: drag; -webkit-user-select: none; cursor: default}
+#windowCtl {position: fixed; top: 8px; left: 8px;}
 
 /* Generic style */
-.windowCtl .generic {color: #999; margin-right: -2px; z-index: 99; -webkit-app-region: no-drag}
-.windowCtl .generic:active, .windowCtl .generic:hover {color: #565656}
-.windowCtl .generic.fa-minus {top: 2px; position: relative;}
+.ctl .generic {color: #999; margin-right: -2px; z-index: 99; -webkit-app-region: no-drag}
+.ctl .generic:active, .ctl .generic:hover {color: #565656}
+.ctl .generic.fa-minus {top: 2px; position: relative;}
 
 /* Mac style */
-.windowCtl .mac {width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
-.windowCtl .mac.btnClose {background: #ff3b47; border-color: #f0121d}
-.windowCtl .mac.btnMinimize {background: #ffbf00; border-color: #e69e12}
-.windowCtl .mac.btnMaximize {background: #00d742; border-color: #12b728}
-.windowCtl .mac.btnClose:active {background: #c5343c; border-color: #9a242c}
-.windowCtl .mac.btnMinimize:active {background: #c39109; border-color: #a68028}
-.windowCtl .mac.btnMaximize:active {background: #129b36; border-color: #2e7c42}
+.ctl .mac {width: 12px; height:12px; margin-right: 5px; border-radius: 10px; border: 1px solid #ccc; -webkit-app-region: no-drag}
+.ctl .mac.btnClose {background: #ff3b47; border-color: #f0121d}
+.ctl .mac.btnMinimize {background: #ffbf00; border-color: #e69e12}
+.ctl .mac.btnMaximize {background: #00d742; border-color: #12b728}
+.ctl .mac.btnClose:active {background: #c5343c; border-color: #9a242c}
+.ctl .mac.btnMinimize:active {background: #c39109; border-color: #a68028}
+.ctl .mac.btnMaximize:active {background: #129b36; border-color: #2e7c42}
 
 
-.windowCtl .fa, .playerCtl .fa {-webkit-transition: color 100ms linear}
-
+.ctl .fa, .playerCtl .fa {-webkit-transition: color 100ms linear}
 
 
 /* Position */
-#wCtls.right {position: fixed; left: auto; right: 8px}
-#wCtls.right .windowCtl {float: right}
+#windowCtl.right {position: fixed; left: auto; right: 8px}
+#windowCtl.right .ctl {float: right}
 
 /* Styling */
-.windowCtl i {display: none}
-#wCtls.generic .windowCtl i.generic {display: inline-block;}
-#wCtls.mac .windowCtl i.mac {display: inline-block;}
+.ctl i {display: none}
+#windowCtl.generic .ctl i.generic {display: inline-block;}
+#windowCtl.mac .ctl i.mac {display: inline-block;}
 
 
 textarea#urlinput {width: 100%; height:100px; resize:none; outline: none}
