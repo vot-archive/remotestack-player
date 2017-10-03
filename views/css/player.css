@@ -1,4 +1,4 @@
-.navContent {height: 100%; overflow-y: hidden}
+#playerBody {height: 100%; overflow-y: hidden}
 
 #playerBody {padding: 0; position: fixed; top:0; bottom: 0; width: 100%; overflow: hidden; -webkit-user-select: none}
 #playerBody {background: transparent}
@@ -24,7 +24,7 @@
 #rsPlayerCurrent #timeContainer {font-weight: 200; font-size: 0.95em}
 
 
-.navContent #rsPlayerControls .btn-default {color: #5a5a5a}
+#playerBody #rsPlayerControls .btn-default {color: #5a5a5a}
 .rsPlayerControlsGroup {padding: 0 10px; height: 95px}
 
 #playlistContainer {position:fixed; top: 120px; width: 100%}
@@ -53,7 +53,7 @@
 .urlentry input {color: #333; border-style: solid; border-width: 0 0 1px 0; border-color: #aaa; padding: 6px; text-align: left}
 .urlentry input:hover, .urlentry input:active, .urlentry input:focus, .urlentry button:hover, .urlentry button:active, .urlentry button:focus {outline: none; border-color: #ffa100}
 
-.navContent ul.list li.active .title {color: #cc7f2a}
+#playerBody ul.list li.active .title {color: #cc7f2a}
 
 #notifications {position: absolute; z-index: 11; top: 40px; width: 90%; margin: 0 5%; padding: 15px 10px; max-height: 70px; text-align: center; overflow: hidden; display: none;
   background: #fff; font-weight: 300; font-size: 12px; line-height: 14px; color: #777; border: 1px solid #f90; box-shadow: 0 0 70px #888}
@@ -137,7 +137,7 @@
 
 
 
-.navContent {padding-top: 25px;}
+#playerBody {padding-top: 25px;}
 
 
 /*.mainContent {background: #333}*/
@@ -157,7 +157,7 @@
 
 @media screen and (max-height: 100px) {
   #windowCtl {top: -30px}
-  .navContent {padding-top: 10px}
+  #playerBody {padding-top: 10px}
   .timeTotal, .timeSeparator {display: none}
 }
 
@@ -166,7 +166,7 @@
 
 #windowTriggers li {-webkit-transition: color 100ms linear}
 
-.navContent {display: block}
+#playerBody {display: block}
 
 .list .placeholder {height: 28px; background: #555 !important; border: 1px solid #999; padding:0; display: block;}
 
