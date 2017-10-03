@@ -3,15 +3,13 @@ html, body, #playerBody {height: 100%}
 body {background: #eee; font-size: 12px; -webkit-user-select: none; cursor: default}
 * {cursor: default}
 
-body {/*-webkit-app-region: drag;*/ }
-
-h1, h2, h3, h4, h5 {font-weight: 300; margin: 0; text-decoration: none}
+h1, h2, h3 {margin: 0; text-decoration: none}
 h1 {font-weight: 100}
-h2 {font-size: 22px}
-h3 {font-size: 18px}
-h1 > * {font-weight: inherit !important}
-h1 strong {font-weight: 300 !important}
-h2 strong, h3 strong, h4 strong, h5 strong {font-weight: 400}
+h2, h3 {font-weight: 300}
+h1 {font-size: 26px}
+h2 {font-size: 16px}
+h1 strong {font-weight: 300}
+h2 strong {font-weight: 400}
 
 label {font-weight: 400}
 
@@ -25,12 +23,8 @@ hr {margin: 5px 0}
 .well a {color: white}
 .well.subtle {margin: 30px auto 20px; max-width: 280px;}
 
-code.key {font-family: inherit; font-weight: 500; padding: 2px 5px;}
+code {font-family: inherit; font-weight: 500; padding: 2px 5px;}
 
-table.table {font-size: 1em}
-table.spaced th {padding: 3px 1px;}
-label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
-label.settings-item select {width:80px}
 .padding-10 {padding:10px}
 
 /* List group */
@@ -85,5 +79,15 @@ ul.list li .primary {color: black; text-decoration: none}
 #windowCtl.mac .ctl i.mac {display: inline-block;}
 
 
+
+/* Helper window styles */
+table.table {font-size: 1em}
+table.spaced th {padding: 3px 1px;}
+label.settings-item {display:block; width: 100%; padding: 10px 0 10px}
+label.settings-item select {width:80px}
+
 textarea#urlinput {width: 100%; height:100px; resize:none; outline: none}
 #urlAddBtn {width: 100%; height:70px; margin:15px 0}
+
+#updateNotice {display:none; border: 1px solid #aaa; background: #f7f5ec; border-radius: 5px; font-size: 11px; font-weight: 700; margin: 10px 0 -5px; padding: 10px 5px}
+#updateNotice a {font-size: 11px; margin-top: -3px; float: right}
