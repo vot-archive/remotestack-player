@@ -2,7 +2,6 @@
 
 #playerBody {padding: 0; position: fixed; top:0; bottom: 0; width: 100%; overflow: hidden; -webkit-user-select: none}
 #playerBody {background: transparent}
-.selectable {-webkit-user-select: all}
 #playerContainer {padding: 0; margin: 0}
 
 #rsPlayerControls {margin-top: 10px; text-align: center}
@@ -27,30 +26,12 @@
 #windowTriggers li.active {border-bottom: 1px solid #ffa100; padding-bottom: 7px;}
 
 #playlistContainer {position: fixed; top: 150px; bottom: 0; width:100%; overflow: hidden; overflow-y: auto;}
-/*#playlistContainer ul.list {margin: 0}*/
-/*#playlistContainer ul.list li .title{height: 16px; display: list-item; overflow: hidden;}*/
-
-
-.filedrag {padding: 15px; margin: 5px; border: 3px solid; color: rgba(0,0,0,0.4); font-size: 14px; font-weight: 700; text-align: center; display: block; background: rgba(255,255,255,0.2);}
-.filedrag:hover, .filedrag:active, .filedrag:focus {color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.6)}
-
-.urlentry {margin: 5px auto; max-width: 500px; text-align: center}
-.urlentry input {border-radius: 5px; padding: 8px 15px;width: 65%;}
-.urlentry button {border-radius: 5px; width: 60px;}
-
-.urlentry input {color: #333; border-style: solid; border-width: 0 0 1px 0; border-color: #aaa; padding: 6px; text-align: left}
-.urlentry input:hover, .urlentry input:active, .urlentry input:focus, .urlentry button:hover, .urlentry button:active, .urlentry button:focus {outline: none; border-color: #ffa100}
-
 #playerBody ul.list li.active .title {color: #cc7f2a}
 
 #notifications {position: absolute; z-index: 11; top: 40px; width: 90%; margin: 0 5%; padding: 15px 10px; max-height: 70px; text-align: center; overflow: hidden; display: none;
   background: #fff; font-weight: 300; font-size: 12px; line-height: 14px; color: #777; border: 1px solid #f90; box-shadow: 0 0 70px #888}
 
 #waveform-loading {position: absolute;z-index: 10;top: 60px; width: 90%;margin: 0 5%;padding: 0;text-align: center;overflow: hidden;display: none;font-weight: 500;font-size: 10px;line-height: 14px;color: #999;}
-
-#nowplaying-trackinfo th {vertical-align: top;}
-#nowplaying-trackinfo pre {font-size:0.7em}
-
 
 /* Background */
 #rsPlayerControls {margin-top: 5px; text-align: center;-webkit-app-region: no-drag;}
@@ -104,15 +85,6 @@
 
 
 #playerBody {padding-top: 25px;}
-
-/*.mainContent {background: #333}*/
-
-.homeMenu {width: 200px; text-align: center; display: inline-block; margin: 30px 0 20px; background: rgba(0,0,0,0.6); border-radius: 7px; padding: 4px; box-shadow: inset 0 2px 3px rgba(0,0,0,0.5);}
-.homeMenu a {border: 1px solid rgba(140, 140, 140, 0.4); color: white; display: block; padding: 10px; border-radius: 5px; margin-bottom: 3px}
-
-.homeMenu a {background: rgba(120, 120, 120, 0.65); color: #ddd;}
-.homeMenu a:focus, .homeMenu a:hover {background: rgba(255, 255, 255, 0.29); color: #e7e7e7;}
-
 
 @media screen and (max-height: 100px) {
   #windowCtl {top: -30px}

@@ -91,3 +91,8 @@ textarea#urlinput {width: 100%; height:100px; resize:none; outline: none}
 
 #updateNotice {display:none; border: 1px solid #aaa; background: #f7f5ec; border-radius: 5px; font-size: 11px; font-weight: 700; margin: 10px 0 -5px; padding: 10px 5px}
 #updateNotice a {font-size: 11px; margin-top: -3px; float: right}
+
+
+.selectable {-webkit-user-select: all}
+.filedrag {padding: 15px; margin: 5px; border: 3px solid; color: rgba(0,0,0,0.4); font-size: 14px; font-weight: 700; text-align: center; display: block; background: rgba(255,255,255,0.2);}
+.filedrag:hover, .filedrag:active, .filedrag:focus {color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.6)}
