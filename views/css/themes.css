@@ -3,12 +3,11 @@
  */
 body.light #playerBody {background: linear-gradient(to bottom, #fafafa 0px, #dadada 120px); color: black}
 body.light h1, body.light h2, body.light h3 {color: #3E3D3D; /*text-shadow: 0px 1px 1px #cecece;*/}
-body.light hr {border-top-color: #bbb}
 
 body.light #playerBody ul.list li {background: #f3f0f0; color: black}
 body.light #playerBody ul.list li:nth-child(2n) {background: #e8e7e7}
 body.light .subtle {color: #5a5a5a}
-body.light .well.subtle {background: rgba(255,255,255,0.4)}
+body.light .well {background: rgba(255,255,255,0.4)}
 body.light code {color: #5a5a5a}
 
 body.light #playerBody .rsPlayerControlsGroup {color: #5a5a5a}
@@ -28,11 +27,10 @@ body.dark #playerBody {background: linear-gradient(to bottom, #404040 0px, #1010
 body.dark #playerBody ul.list li {background: #171717; color: #eee}
 body.dark #playerBody ul.list li:nth-child(2n) {background: #101010}
 body.dark a {color: #cedef3}
-body.dark hr {body.light hr {border-top-color: #bbb}}
 
 body.dark .btn-default {background-color: #222; color: #efefef;}
 body.dark .subtle {color: #797979}
-body.dark .well.subtle {background: rgba(0,0,0,0.15)}
+body.dark .well {background: rgba(0,0,0,0.15)}
 body.dark code {color: #4c4c4c}
 
 body.dark #playerBody #rsPlayerControls .btn-default, #rsPlayerControls .btn-default {color: #fff}
