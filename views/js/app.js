@@ -2,7 +2,7 @@
 
 (function (global) {
   const electron = require('electron');
-  const UI = require('../renderer/ui');
+  const UI = require('./js/ui');
   const Playback = require('../renderer/playback');
   const Playlist = require('../lib/playlist');
   const Utils = require('../lib/utils');

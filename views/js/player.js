@@ -38,12 +38,6 @@
     },
 
     togglePlaylist: function togglePlaylist() {
-      // let activeId = $('.mainContent .navContent.active').attr('id');
-      // let isActive = activeId === 'nowplaying';
-      // if (!isActive) {
-      //   return;
-      // }
-
       // TODO add 35 as a third step and always size forward
 
       const playlistThresholds = [120, 420];
@@ -183,14 +177,14 @@
           Utils.log('P hit');
           self.togglePlaylist();
           e.preventDefault();
-          return;
+          // return;
         }
 
         if (e.which === 82 && !(e.ctrlKey || e.metaKey)) {
           Utils.log('R hit');
           self.toggleRepeat();
           e.preventDefault();
-          return;
+          // return;
         }
 
         if (e.which === 83) {
@@ -206,23 +200,29 @@
           // RS.Utils.log('space hit');
           PlaybackLib.getWavesurfer().playPause();
           e.preventDefault();
-          return;
+          // return;
         }
 
         // track +5s
         if (e.which === 37) {
           // RS.Utils.log('arrow left hit');
+          if (e.ctrlKey || e.metaKey) {
+            PlaybackLib.next();
+          }
           PlaybackLib.getWavesurfer().skipBackward();
           e.preventDefault();
-          return;
+          // return;
         }
 
         // track -5s
         if (e.which === 39) {
           // RS.Utils.log('arrow right hit');
+          if (e.ctrlKey || e.metaKey) {
+            PlaybackLib.prev();
+          }
           PlaybackLib.getWavesurfer().skipForward();
           e.preventDefault();
-          return;
+          // return;
         }
 
         // vol up
@@ -232,7 +232,7 @@
           PlaybackLib.setVolume(newVolume);
           // RS.displayNotification('Volume set to ' + newVolume);
           e.preventDefault();
-          return;
+          // return;
         }
 
         // vol down
@@ -242,22 +242,7 @@
           PlaybackLib.setVolume(newVolume);
           // RS.displayNotification('Volume set to ' + newVolume);
           e.preventDefault();
-          return;
-        }
-
-        // prev song
-        if (!(e.ctrlKey || e.metaKey) && e.which === 188) {
-          // RS.Utils.log('< hit');
-          PlaybackLib.prev();
-          e.preventDefault();
-          return;
-        }
-
-        // next song
-        if (!(e.ctrlKey || e.metaKey) && e.which === 190) {
-          // RS.Utils.log('> hit');
-          PlaybackLib.next();
-          e.preventDefault();
+          // return;
         }
       });
     },
@@ -270,7 +255,7 @@
       // RS.Utils.log('populatePlaylist', _.map(list, 'url'));
 
       const markup = RS.UI.render('partials/playlist', { playlist: list });
-      $('#nowplaying-playlist').html(markup);
+      $('#playlistContainer .list').html(markup);
       self.populateTrackinfo();
 
       PlaylistsModel.once('default.playlist', function () {
