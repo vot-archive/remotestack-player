@@ -177,14 +177,14 @@
           Utils.log('P hit');
           self.togglePlaylist();
           e.preventDefault();
-          return;
+          // return;
         }
 
         if (e.which === 82 && !(e.ctrlKey || e.metaKey)) {
           Utils.log('R hit');
           self.toggleRepeat();
           e.preventDefault();
-          return;
+          // return;
         }
 
         if (e.which === 83) {
@@ -200,7 +200,7 @@
           // RS.Utils.log('space hit');
           PlaybackLib.getWavesurfer().playPause();
           e.preventDefault();
-          return;
+          // return;
         }
 
         // track +5s
@@ -211,7 +211,7 @@
           }
           PlaybackLib.getWavesurfer().skipBackward();
           e.preventDefault();
-          return;
+          // return;
         }
 
         // track -5s
@@ -222,7 +222,7 @@
           }
           PlaybackLib.getWavesurfer().skipForward();
           e.preventDefault();
-          return;
+          // return;
         }
 
         // vol up
@@ -232,7 +232,7 @@
           PlaybackLib.setVolume(newVolume);
           // RS.displayNotification('Volume set to ' + newVolume);
           e.preventDefault();
-          return;
+          // return;
         }
 
         // vol down
@@ -242,7 +242,7 @@
           PlaybackLib.setVolume(newVolume);
           // RS.displayNotification('Volume set to ' + newVolume);
           e.preventDefault();
-          return;
+          // return;
         }
       });
     },

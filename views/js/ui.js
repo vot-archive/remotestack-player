@@ -143,8 +143,10 @@ const UI = {
       console.log(e);
       e.preventDefault();
       let allFiles = [];
+      const filesArray = e.dataTransfer.files;
 
-      for (const f of e.dataTransfer.files) {
+      for (let i = 0; i < filesArray.length; i++) {
+        const f = filesArray[i];
         const filesBatch = FileUtils.unfoldFiles(f.path);
         allFiles = allFiles.concat(filesBatch);
 
