@@ -3,7 +3,7 @@
 const electron = require('electron');
 const app = electron.app;
 
-const WindowManager = require('./lib/windowManager');
+const WindowManager = require('./lib/window/manager');
 const Utils = require('./lib/utils');
 
 Utils.log.clearlog();

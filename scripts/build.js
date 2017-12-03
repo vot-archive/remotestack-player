@@ -78,10 +78,10 @@ function buildSingleTarget(platform, callback) {
     rootdir + '/node_modules/electron-packager/cli.js',
     rootdir,
     '"RemoteStack Player"',
-    '--electron-version=1.7.8',
+    '--electron-version=1.7.9',
     '--out=dist',
     '--platform=' + platformCode,
-    '--asar=true',
+    '--asar',
     '--arch=' + archCode,
     '--icon=' + icon,
   ];

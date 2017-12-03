@@ -1,6 +1,6 @@
 {
   "name": "RemoteStackPlayer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "RemoteStack Player app",
   "main": "main.js",
   "scripts": {
@@ -13,18 +13,18 @@
   "repository": "https://github.com/vot/remotestack-player",
   "license": "GPL-2.0",
   "dependencies": {
-    "async": "^2.5.0",
-    "clarg": "0.0.3",
-    "electron": "1.7.8",
-    "fs-extra": "^4.0.2",
-    "lodash": "^4.17.4",
-    "request": "^2.83.0",
-    "uuid": "^3.1.0"
+    "async": "2.5.0",
+    "electron": "1.7.9",
+    "fs-extra": "4.0.2",
+    "lodash": "4.17.4",
+    "request": "2.83.0",
+    "uuid": "3.1.0"
   },
   "devDependencies": {
-    "electron-packager": "^9.1.0",
-    "eslint": "^4.8.0",
-    "eslint-config-airbnb-base": "^12.0.1",
-    "eslint-plugin-import": "^2.7.0"
+    "clarg": "0.0.3",
+    "electron-packager": "9.1.0",
+    "eslint": "4.8.0",
+    "eslint-config-airbnb-base": "12.0.1",
+    "eslint-plugin-import": "2.7.0"
   }
 }
