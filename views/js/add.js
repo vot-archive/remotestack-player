@@ -5,16 +5,18 @@
 
   function processInputAndAdd(inputEl) {
     const urls = inputEl.val().split('\n');
-    if (urls && urls.length) {
-      _.each(urls, function (url) {
-        url = url.trim();
-        if (url.length) {
-          const dataToAdd = { url, source: 'youtube', type: 'audio' };
-          RS.sendIpcMessage('add-to-playlist', dataToAdd);
-          inputEl.val('');
-        }
-      });
-    }
+    // if (urls && urls.length) {
+    const mappedUrls = _.filter(_.map(urls, (url) => {
+      url = url.trim();
+      if (url.length) {
+        return { url, source: 'youtube', type: 'audio' };
+      }
+      return null;
+    }));
+    inputEl.val('');
+    // }
+
+    RS.sendIpcMessage('add-to-playlist', mappedUrls);
   }
 
   function bindURLInput() {
