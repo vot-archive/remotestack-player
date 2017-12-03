@@ -41,8 +41,9 @@ body.showFullPath .list .url {display:block}
 #playlistContainer {position: fixed; top: 150px; bottom: 0; width:100%; overflow: hidden; overflow-y: auto;}
 #playerBody ul.list li.active .title {color: #cc7f2a}
 
-#notifications {position: absolute; z-index: 11; top: 40px; width: 90%; margin: 0 5%; padding: 15px 10px; max-height: 70px; text-align: center; overflow: hidden; display: none;
-  background: #fff; font-weight: 300; font-size: 12px; line-height: 14px; color: #777; border: 1px solid #f90; box-shadow: 0 0 70px #888}
+#notifications {position: absolute; z-index: 11; top: 0; width: 100%; padding: 5px 50px;
+  max-height: 70px; text-align: center; overflow: hidden; display: none;
+  font-size: 11px; line-height: 14px; color: #AAA}
 
 .playerCtl .fa-fw {font-size: 14px}
 .playerCtl.big .fa-fw {font-size: 20px}

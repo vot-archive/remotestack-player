@@ -6,7 +6,7 @@
   const Playback = require('../renderer/playback');
   const Playlist = require('../lib/playlist');
   const Utils = require('../lib/utils');
-  const WindowCtl = require('../lib/windowCtl');
+  const WindowCtl = require('../lib/window/ctl');
   const packageJson = require('../package.json');
 
   const sendIpcMessage = electron.ipcRenderer.send;

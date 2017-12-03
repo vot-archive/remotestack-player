@@ -7,13 +7,21 @@
   const PreferencesModel = require('../models/preferences');
   const Utils = require('../lib/utils');
 
-  RS.displayNotification = function displayNotification(text) {
-    $('#notifications')
-      .clearQueue()
-      .text(text)
-      .fadeIn(250)
-      .delay(3000)
-      .fadeOut(1000);
+  let notificationFadeTimeout;
+
+  RS.displayNotification = function displayNotification(text, time) {
+    time = typeof time === 'number' ? Math.floor(time) : 1500;
+    const $container = $('#notifications');
+
+    $container.text(text);
+
+    $container.stop().css('opacity', 1).show();
+
+    clearTimeout(notificationFadeTimeout);
+
+    notificationFadeTimeout = setTimeout(function () {
+      $container.fadeOut({ duration: 300, queue: false });
+    }, time);
   };
 
   const PlayerWindow = {
@@ -177,14 +185,12 @@
           Utils.log('P hit');
           self.togglePlaylist();
           e.preventDefault();
-          // return;
         }
 
         if (e.which === 82 && !(e.ctrlKey || e.metaKey)) {
           Utils.log('R hit');
           self.toggleRepeat();
           e.preventDefault();
-          // return;
         }
 
         if (e.which === 83) {
@@ -200,7 +206,6 @@
           // RS.Utils.log('space hit');
           PlaybackLib.getWavesurfer().playPause();
           e.preventDefault();
-          // return;
         }
 
         // track +5s
@@ -208,10 +213,10 @@
           // RS.Utils.log('arrow left hit');
           if (e.ctrlKey || e.metaKey) {
             PlaybackLib.next();
+          } else {
+            PlaybackLib.getWavesurfer().skipBackward();
           }
-          PlaybackLib.getWavesurfer().skipBackward();
           e.preventDefault();
-          // return;
         }
 
         // track -5s
@@ -219,10 +224,10 @@
           // RS.Utils.log('arrow right hit');
           if (e.ctrlKey || e.metaKey) {
             PlaybackLib.prev();
+          } else {
+            PlaybackLib.getWavesurfer().skipForward();
           }
-          PlaybackLib.getWavesurfer().skipForward();
           e.preventDefault();
-          // return;
         }
 
         // vol up
@@ -230,9 +235,8 @@
           // RS.Utils.log('arrow up hit');
           const newVolume = PlaybackLib.volume + 5;
           PlaybackLib.setVolume(newVolume);
-          // RS.displayNotification('Volume set to ' + newVolume);
+          RS.displayNotification('Volume: ' + newVolume, 800);
           e.preventDefault();
-          // return;
         }
 
         // vol down
@@ -240,9 +244,8 @@
           // RS.Utils.log('arrow down hit');
           const newVolume = PlaybackLib.volume - 5;
           PlaybackLib.setVolume(newVolume);
-          // RS.displayNotification('Volume set to ' + newVolume);
+          RS.displayNotification('Volume: ' + newVolume, 800);
           e.preventDefault();
-          // return;
         }
       });
     },
