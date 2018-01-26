@@ -15,7 +15,7 @@
   "dependencies": {
     "async": "2.5.0",
     "clarg": "0.0.3",
-    "electron": "1.7.9",
+    "electron": "1.7.11",
     "fs-extra": "4.0.2",
     "lodash": "4.17.4",
     "request": "2.83.0",
