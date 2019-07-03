@@ -7,7 +7,9 @@
     "start": "electron .",
     "lint": "eslint .",
     "log": "tail -f ~/Library/Application\\ Support/RemoteStackPlayer/app.log",
-    "build": "node ./scripts/build.js"
+    "build": "node ./scripts/build.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Vot Z <http://vot-z.com>",
   "repository": "https://github.com/vot/remotestack-player",
@@ -19,12 +21,14 @@
     "fs-extra": "4.0.2",
     "lodash": "4.17.11",
     "request": "2.84.0",
-    "uuid": "3.1.0"
+    "uuid": "3.1.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "electron-packager": "9.1.0",
     "eslint": "4.8.0",
     "eslint-config-airbnb-base": "12.0.1",
     "eslint-plugin-import": "2.7.0"
-  }
+  },
+  "snyk": true
 }
